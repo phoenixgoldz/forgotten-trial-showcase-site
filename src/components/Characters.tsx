@@ -68,14 +68,16 @@ const Characters = () => {
               className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 border-slate-600/50 overflow-hidden hover:border-slate-500 transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm animate-fade-in"
               style={{ animationDelay: `${index * 0.15}s` }}
             >
-              <div className="relative h-80 overflow-hidden">
-                <img 
-                  src={character.image} 
-                  alt={character.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t ${character.bgColor} opacity-60`}></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
+              <div className="relative overflow-hidden">
+                <div className="aspect-[4/5] flex items-center justify-center bg-gradient-to-br from-slate-700/50 to-slate-800/50">
+                  <img 
+                    src={character.image} 
+                    alt={character.name}
+                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className={`absolute inset-0 bg-gradient-to-t ${character.bgColor} opacity-40`}></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
                 
                 {/* Character Class Badge */}
                 <div className="absolute top-4 left-4">
