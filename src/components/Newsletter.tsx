@@ -43,11 +43,11 @@ const Newsletter = () => {
               <Mail className="w-8 h-8 text-ethereal-gold animate-pulse" />
             </div>
 
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center">
               Join the <span className="gradient-text">Adventure</span>
             </h3>
             
-            <p className="text-slate-300 mb-8 leading-relaxed">
+            <p className="text-slate-300 mb-8 leading-relaxed text-center">
               Be the first to know about development updates, character reveals, and exclusive behind-the-scenes content. No spam, just mystical updates!
             </p>
 
@@ -84,7 +84,7 @@ const Newsletter = () => {
               </div>
 
               {message && (
-                <div className={`flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 ${
+                <div className={`flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 text-center ${
                   status === 'success' ? 'text-verdant-glyph' : 'text-ember-flame'
                 }`}>
                   {status === 'success' ? (
@@ -97,7 +97,7 @@ const Newsletter = () => {
               )}
             </form>
 
-            <div className="mt-6 text-xs text-slate-400">
+            <div className="mt-6 text-xs text-slate-400 text-center">
               We respect your privacy. Unsubscribe at any time.
             </div>
           </div>

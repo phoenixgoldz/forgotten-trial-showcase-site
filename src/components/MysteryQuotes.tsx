@@ -81,13 +81,13 @@ const MysteryQuotes = () => {
               <Quote className="w-16 h-16 text-ethereal-gold/60 mx-auto mb-6 animate-pulse" />
             </div>
             
-            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-light text-white mb-8 leading-relaxed italic">
+            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-light text-white mb-8 leading-relaxed italic text-center">
               "{quote.text}"
             </blockquote>
             
             <div className="flex items-center justify-center space-x-4 mb-8">
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-ethereal-gold"></div>
-              <cite className="text-ethereal-gold font-medium not-italic">{quote.author}</cite>
+              <cite className="text-ethereal-gold font-medium not-italic text-center">{quote.author}</cite>
               <div className="h-px w-12 bg-gradient-to-l from-transparent to-ethereal-gold"></div>
             </div>
 

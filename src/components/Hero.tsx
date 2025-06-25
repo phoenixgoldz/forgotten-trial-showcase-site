@@ -81,15 +81,15 @@ const Hero = () => {
           </span>
         </div>
 
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in leading-tight">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in leading-tight text-center">
           The <span className="gradient-text animate-glow">Forgotten</span> Trial
         </h1>
         
-        <p className="text-lg md:text-xl lg:text-2xl text-slate-200 mb-4 animate-fade-in font-light drop-shadow-lg max-w-4xl mx-auto" style={{ animationDelay: "0.2s" }}>
+        <p className="text-lg md:text-xl lg:text-2xl text-slate-200 mb-4 animate-fade-in font-light drop-shadow-lg max-w-4xl mx-auto text-center" style={{ animationDelay: "0.2s" }}>
           A tactical fantasy RPG where every memory is a clue—and every playthrough is a new mystery.
         </p>
         
-        <p className="text-base md:text-lg text-slate-300 mb-12 max-w-3xl mx-auto animate-fade-in leading-relaxed drop-shadow-md" style={{ animationDelay: "0.4s" }}>
+        <p className="text-base md:text-lg text-slate-300 mb-12 max-w-3xl mx-auto animate-fade-in leading-relaxed drop-shadow-md text-center" style={{ animationDelay: "0.4s" }}>
           Awaken in a cursed dungeon with no memory. Discover your identity through tactical combat, 
           procedural exploration, and hand-crafted storytelling that adapts to your choices.
         </p>
@@ -112,7 +112,7 @@ const Hero = () => {
           </Button>
         </div>
 
-        <div className="animate-fade-in" style={{ animationDelay: "0.8s" }}>
+        <div className="animate-fade-in text-center" style={{ animationDelay: "0.8s" }}>
           <Button 
             variant="outline" 
             size="lg" 
