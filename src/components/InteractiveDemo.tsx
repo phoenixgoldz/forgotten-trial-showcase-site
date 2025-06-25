@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RotateCcw, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const InteractiveDemo = () => {
   const [selectedCharacter, setSelectedCharacter] = useState<string | null>(null);
@@ -149,41 +150,49 @@ const InteractiveDemo = () => {
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <button
+                <Button
                   onClick={() => choose('Solari')}
-                  className="group bg-gradient-to-br from-ember-flame/90 to-ethereal-gold/90 hover:from-ember-flame hover:to-ethereal-gold text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg shadow-ember-flame/25 hover:shadow-xl hover:shadow-ember-flame/30 transition-all duration-300 hover:scale-105 button-shine border border-ethereal-gold/30 hover:border-ethereal-gold/60"
+                  variant="ember"
+                  size="story"
+                  className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110"
                 >
-                  <span className="text-2xl mb-2 block group-hover:animate-pulse">☀️</span>
-                  <span className="font-cinzel">Solari</span>
-                  <p className="text-sm mt-1 opacity-90">The Sunweaver</p>
-                </button>
+                  <span className="text-3xl mb-3 block group-hover:animate-pulse">☀️</span>
+                  <span className="font-cinzel text-lg font-bold">Solari</span>
+                  <p className="text-sm mt-1 opacity-90 font-normal">The Sunweaver</p>
+                </Button>
                 
-                <button
+                <Button
                   onClick={() => choose('Tarrin')}
-                  className="group bg-gradient-to-br from-luminous-azure/90 to-mystic-blue/90 hover:from-luminous-azure hover:to-mystic-blue text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg shadow-luminous-azure/25 hover:shadow-xl hover:shadow-luminous-azure/30 transition-all duration-300 hover:scale-105 button-shine border border-luminous-azure/30 hover:border-luminous-azure/60"
+                  variant="azure"
+                  size="story"
+                  className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110"
                 >
-                  <span className="text-2xl mb-2 block group-hover:animate-pulse">⚡</span>
-                  <span className="font-cinzel">Tarrin</span>
-                  <p className="text-sm mt-1 opacity-90">The Stormblade</p>
-                </button>
+                  <span className="text-3xl mb-3 block group-hover:animate-pulse">⚡</span>
+                  <span className="font-cinzel text-lg font-bold">Tarrin</span>
+                  <p className="text-sm mt-1 opacity-90 font-normal">The Stormblade</p>
+                </Button>
                 
-                <button
+                <Button
                   onClick={() => choose('Wisp')}
-                  className="group bg-gradient-to-br from-verdant-glyph/90 to-ethereal-gold/80 hover:from-verdant-glyph hover:to-ethereal-gold text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg shadow-verdant-glyph/25 hover:shadow-xl hover:shadow-verdant-glyph/30 transition-all duration-300 hover:scale-105 button-shine border border-verdant-glyph/30 hover:border-verdant-glyph/60"
+                  variant="verdant"
+                  size="story"
+                  className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110"
                 >
-                  <span className="text-2xl mb-2 block group-hover:animate-pulse">🎵</span>
-                  <span className="font-cinzel">Wisp</span>
-                  <p className="text-sm mt-1 opacity-90">The Chronobard</p>
-                </button>
+                  <span className="text-3xl mb-3 block group-hover:animate-pulse">🎵</span>
+                  <span className="font-cinzel text-lg font-bold">Wisp</span>
+                  <p className="text-sm mt-1 opacity-90 font-normal">The Chronobard</p>
+                </Button>
                 
-                <button
+                <Button
                   onClick={() => choose('Kael')}
-                  className="group bg-gradient-to-br from-ancient-stone/90 to-mystic-blue/90 hover:from-ancient-stone hover:to-mystic-blue text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg shadow-ancient-stone/25 hover:shadow-xl hover:shadow-ancient-stone/30 transition-all duration-300 hover:scale-105 button-shine border border-ancient-stone/50 hover:border-ancient-stone/80"
+                  variant="mystic"
+                  size="story"
+                  className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110"
                 >
-                  <span className="text-2xl mb-2 block group-hover:animate-pulse">🌿</span>
-                  <span className="font-cinzel">Kael</span>
-                  <p className="text-sm mt-1 opacity-90">The Runic Warden</p>
-                </button>
+                  <span className="text-3xl mb-3 block group-hover:animate-pulse">🌿</span>
+                  <span className="font-cinzel text-lg font-bold">Kael</span>
+                  <p className="text-sm mt-1 opacity-90 font-normal">The Runic Warden</p>
+                </Button>
               </div>
             </div>
           ) : (
@@ -200,22 +209,26 @@ const InteractiveDemo = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 {choices.length > 0 && choices.map((choice, index) => (
-                  <button
+                  <Button
                     key={index}
                     onClick={() => continueStory(index)}
-                    className="bg-gradient-to-r from-ethereal-gold/90 to-ember-flame/90 hover:from-ethereal-gold hover:to-ember-flame text-mystic-blue hover:text-mystic-blue/90 px-6 py-3 rounded-xl font-semibold text-base shadow-lg shadow-ethereal-gold/25 hover:shadow-xl hover:shadow-ethereal-gold/30 transition-all duration-300 hover:scale-105 button-shine border border-ethereal-gold/40 hover:border-ethereal-gold/70 font-cinzel"
+                    variant="primary"
+                    size="story"
+                    className="font-cinzel hover:scale-110"
                   >
-                    {choice}
-                  </button>
+                    ✨ {choice}
+                  </Button>
                 ))}
                 
-                <button
+                <Button
                   onClick={restart}
-                  className="bg-gradient-to-r from-ancient-stone/90 to-mystic-blue/90 hover:from-ancient-stone hover:to-mystic-blue text-white px-6 py-3 rounded-xl font-semibold text-base shadow-lg shadow-ancient-stone/25 hover:shadow-xl hover:shadow-ancient-stone/30 transition-all duration-300 hover:scale-105 button-shine flex items-center justify-center border border-ancient-stone/40 hover:border-ancient-stone/70 font-cinzel"
+                  variant="secondary_trial"
+                  size="story"
+                  className="flex items-center justify-center font-cinzel hover:scale-110"
                 >
                   <RotateCcw className="w-4 h-4 mr-2" />
-                  Begin Anew
-                </button>
+                  🔄 Begin Anew
+                </Button>
               </div>
             </div>
           )}
