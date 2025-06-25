@@ -1,4 +1,3 @@
-
 import { Heart, ExternalLink, Coffee, Zap } from "lucide-react";
 
 const Footer = () => {
@@ -15,23 +14,23 @@ const Footer = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           <div className="mb-8 flex flex-col items-center">
-            {/* Phoenix Goldz Studios Logo */}
+            {/* PhoenixGold Game Studios Logo */}
             <div className="mb-6">
               <img 
                 src="/lovable-uploads/965e98d3-fb85-40c6-9263-e357de40fd59.png" 
-                alt="Phoenix Goldz Studios Logo"
+                alt="PhoenixGold Game Studios Logo"
                 className="w-32 h-32 mx-auto animate-float"
               />
             </div>
             
             <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 gradient-text text-center">
-              Phoenix Goldz Studios
+              PhoenixGold Game Studios
             </h3>
             <h4 className="text-xl md:text-2xl font-semibold text-ethereal-gold mb-4 text-center">
               The Forgotten Trial
             </h4>
             <p className="text-slate-400 text-lg leading-relaxed max-w-2xl mx-auto text-center">
-              A mysterious fantasy RPG crafted with passion by Phoenix Goldz Studios. 
+              A mysterious fantasy RPG crafted with passion by PhoenixGold Game Studios. 
               Follow our journey as we bring this unique adventure to life, one memory at a time.
             </p>
           </div>
@@ -83,7 +82,7 @@ const Footer = () => {
           
           <div className="pt-8 border-t border-ancient-stone/50">
             <p className="text-slate-500 text-sm flex items-center justify-center text-center">
-              © 2024 Phoenix Goldz Studios. All rights reserved. 
+              © 2024 PhoenixGold Game Studios. All rights reserved. 
               <span className="mx-2">•</span>
               Built with 
               <Heart className="w-4 h-4 mx-1 text-ember-flame animate-pulse" />
