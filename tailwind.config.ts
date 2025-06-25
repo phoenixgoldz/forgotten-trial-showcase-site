@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -73,7 +72,8 @@ export default {
 			},
 			fontFamily: {
 				'cinzel': ['Cinzel Decorative', 'serif'],
-				'sans': ['Inter', 'sans-serif']
+				'citizen': ['Citizen OT', 'sans-serif'],
+				'sans': ['Citizen OT', 'Inter', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

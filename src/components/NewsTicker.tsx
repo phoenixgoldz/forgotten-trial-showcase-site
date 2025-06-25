@@ -85,7 +85,7 @@ const NewsTicker = () => {
           <div className="flex-1 min-w-0">
             <button
               onClick={() => handleLinkClick(currentUpdate.link)}
-              className={`block text-sm font-medium transition-all duration-500 hover:text-ethereal-gold w-full text-center ${
+              className={`block text-sm font-medium transition-all duration-500 hover:text-ethereal-gold w-full text-center font-citizen ${
                 currentUpdate.type === 'kickstarter' ? 'text-verdant-glyph' :
                 currentUpdate.type === 'blog' ? 'text-ember-flame' : 'text-slate-200'
               }`}

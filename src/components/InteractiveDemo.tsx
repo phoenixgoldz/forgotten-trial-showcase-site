@@ -56,10 +56,10 @@ const InteractiveDemo = () => {
           )}
 
           <div className="mt-12 text-center">
-            <p className="text-gray-100 text-lg mb-2" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
+            <p className="text-gray-100 text-lg mb-2 font-citizen" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
               Experience a unique story every time you play.
             </p>
-            <p className="text-ethereal-gold font-medium" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
+            <p className="text-ethereal-gold font-medium font-citizen" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
               Your choices shape your destiny in The Forgotten Trial.
             </p>
           </div>

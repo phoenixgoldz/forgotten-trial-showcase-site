@@ -75,21 +75,21 @@ const Hero = () => {
       
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
         <div className="mb-6 animate-fade-in">
-          <span className="inline-flex items-center px-6 py-3 rounded-full bg-black/50 border border-ethereal-gold/70 text-ethereal-gold text-sm font-medium backdrop-blur-md glass-effect hover:bg-black/60 hover:border-ethereal-gold/90 transition-all duration-300 hover-scale">
+          <span className="inline-flex items-center px-6 py-3 rounded-full bg-black/50 border border-ethereal-gold/70 text-ethereal-gold text-sm font-medium backdrop-blur-md glass-effect hover:bg-black/60 hover:border-ethereal-gold/90 transition-all duration-300 hover-scale font-citizen">
             <Play className="w-4 h-4 mr-2 animate-pulse" />
             Now Live on Kickstarter
           </span>
         </div>
 
         <h1 className="font-cinzel text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in leading-tight text-center drop-shadow-2xl" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}>
-          The <span className="gradient-text animate-glow">Forgotten</span> Trial
+          The <span className="gradient-text">Forgotten</span> Trial
         </h1>
         
-        <p className="text-lg md:text-xl lg:text-2xl text-white mb-4 animate-fade-in font-light leading-tight max-w-4xl mx-auto text-center" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)', animationDelay: "0.2s" }}>
+        <p className="text-lg md:text-xl lg:text-2xl text-white mb-4 animate-fade-in font-light leading-tight max-w-4xl mx-auto text-center font-citizen" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)', animationDelay: "0.2s" }}>
           A tactical fantasy RPG where every memory is a clue—and every playthrough is a new mystery.
         </p>
         
-        <p className="text-base md:text-lg text-gray-100 mb-12 max-w-3xl mx-auto animate-fade-in leading-relaxed text-center" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.7)', animationDelay: "0.4s" }}>
+        <p className="text-base md:text-lg text-gray-100 mb-12 max-w-3xl mx-auto animate-fade-in leading-relaxed text-center font-citizen" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.7)', animationDelay: "0.4s" }}>
           Awaken in a cursed dungeon with no memory. Discover your identity through tactical combat, 
           procedural exploration, and hand-crafted storytelling that adapts to your choices.
         </p>
@@ -97,7 +97,7 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in mb-8" style={{ animationDelay: "0.6s" }}>
           <Button 
             size="lg" 
-            className="bg-gradient-to-r from-verdant-glyph to-luminous-azure hover:from-verdant-glyph/90 hover:to-luminous-azure/90 text-white font-semibold px-10 py-4 text-base rounded-full button-shine hover-scale shadow-xl hover:shadow-verdant-glyph/30 border border-verdant-glyph/30 hover:border-verdant-glyph/50 transition-all duration-300"
+            className="bg-gradient-to-r from-verdant-glyph to-luminous-azure hover:from-verdant-glyph/90 hover:to-luminous-azure/90 text-white font-semibold px-10 py-4 text-base rounded-full button-shine hover-scale shadow-xl hover:shadow-verdant-glyph/30 border border-verdant-glyph/30 hover:border-verdant-glyph/50 transition-all duration-300 font-citizen"
             onClick={() => window.open('https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial', '_blank')}
           >
             🎮 Back on Kickstarter
@@ -105,7 +105,7 @@ const Hero = () => {
           
           <Button 
             size="lg" 
-            className="bg-gradient-to-r from-ember-flame to-ethereal-gold hover:from-ember-flame/90 hover:to-ethereal-gold/90 text-white font-semibold px-10 py-4 text-base rounded-full button-shine hover-scale shadow-xl hover:shadow-ember-flame/30 border border-ember-flame/30 hover:border-ember-flame/50 transition-all duration-300"
+            className="bg-gradient-to-r from-ember-flame to-ethereal-gold hover:from-ember-flame/90 hover:to-ethereal-gold/90 text-white font-semibold px-10 py-4 text-base rounded-full button-shine hover-scale shadow-xl hover:shadow-ember-flame/30 border border-ember-flame/30 hover:border-ember-flame/50 transition-all duration-300 font-citizen"
             onClick={() => window.open('https://ko-fi.com/phoenixgoldzstudios', '_blank')}
           >
             ☕ Support on Ko-fi
@@ -116,7 +116,7 @@ const Hero = () => {
           <Button 
             variant="outline" 
             size="lg" 
-            className="border-2 border-ethereal-gold/70 text-ethereal-gold hover:bg-ethereal-gold/20 hover:border-ethereal-gold px-8 py-3 text-base rounded-full backdrop-blur-md glass-effect hover-scale transition-all duration-300 shadow-lg hover:shadow-ethereal-gold/20"
+            className="border-2 border-ethereal-gold/70 text-ethereal-gold hover:bg-ethereal-gold/20 hover:border-ethereal-gold px-8 py-3 text-base rounded-full backdrop-blur-md glass-effect hover-scale transition-all duration-300 shadow-lg hover:shadow-ethereal-gold/20 font-citizen"
             onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Discover the Mystery <ArrowDown className="ml-2 h-5 w-5 animate-bounce" />

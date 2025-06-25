@@ -61,7 +61,7 @@ const Footer = () => {
                 <div className="absolute -inset-2 bg-gradient-to-r from-transparent via-ethereal-gold/10 to-transparent animate-pulse"></div>
               </h4>
               
-              <p className="text-gray-100 text-xl leading-relaxed max-w-3xl mx-auto relative" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
+              <p className="text-gray-100 text-xl leading-relaxed max-w-3xl mx-auto relative font-citizen" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
                 A mysterious fantasy RPG crafted with passion and innovation. 
                 Follow our journey as we bring this unique adventure to life, one memory at a time.
                 <br />
@@ -78,7 +78,7 @@ const Footer = () => {
               href="https://ko-fi.com/phoenixgoldzstudios" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="group flex items-center bg-gradient-to-r from-ember-flame/20 to-ethereal-gold/20 hover:from-ember-flame/40 hover:to-ethereal-gold/40 px-8 py-4 rounded-2xl border border-ember-flame/30 hover:border-ember-flame/60 transition-all duration-300 hover:scale-110 backdrop-blur-sm"
+              className="group flex items-center bg-gradient-to-r from-ember-flame/20 to-ethereal-gold/20 hover:from-ember-flame/40 hover:to-ethereal-gold/40 px-8 py-4 rounded-2xl border border-ember-flame/30 hover:border-ember-flame/60 transition-all duration-300 hover:scale-110 backdrop-blur-sm font-citizen"
             >
               <Coffee className="w-6 h-6 mr-3 text-ember-flame group-hover:animate-bounce" />
               <span className="text-white text-lg font-semibold">Ko-fi Dev Blog</span>
@@ -92,7 +92,7 @@ const Footer = () => {
               href="https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="group flex items-center bg-gradient-to-r from-verdant-glyph/20 to-luminous-azure/20 hover:from-verdant-glyph/40 hover:to-luminous-azure/40 px-8 py-4 rounded-2xl border border-verdant-glyph/30 hover:border-verdant-glyph/60 transition-all duration-300 hover:scale-110 backdrop-blur-sm relative overflow-hidden"
+              className="group flex items-center bg-gradient-to-r from-verdant-glyph/20 to-luminous-azure/20 hover:from-verdant-glyph/40 hover:to-luminous-azure/40 px-8 py-4 rounded-2xl border border-verdant-glyph/30 hover:border-verdant-glyph/60 transition-all duration-300 hover:scale-110 backdrop-blur-sm relative overflow-hidden font-citizen"
             >
               <Zap className="w-6 h-6 mr-3 text-verdant-glyph group-hover:animate-pulse" />
               <span className="text-white text-lg font-semibold">Kickstarter Campaign</span>
@@ -120,8 +120,8 @@ const Footer = () => {
                 ].map((item, index) => (
                   <div key={index} className="group bg-ancient-stone/30 hover:bg-ancient-stone/50 px-6 py-4 rounded-xl border border-ancient-stone/40 hover:border-ethereal-gold/50 transition-all duration-300 hover:scale-105 cursor-default">
                     <div className="text-3xl mb-3 group-hover:animate-bounce">{item.icon}</div>
-                    <div className="text-white font-semibold mb-1">{item.title}</div>
-                    <div className="text-gray-300 text-sm">{item.desc}</div>
+                    <div className="text-white font-semibold mb-1 font-citizen">{item.title}</div>
+                    <div className="text-gray-300 text-sm font-citizen">{item.desc}</div>
                   </div>
                 ))}
               </div>
@@ -131,7 +131,7 @@ const Footer = () => {
           {/* Copyright Section with 2025 */}
           <div className="pt-8 border-t border-ancient-stone/30 relative">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-ethereal-gold/5 to-transparent"></div>
-            <p className="text-gray-300 text-lg flex items-center justify-center flex-wrap gap-2 relative z-10" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
+            <p className="text-gray-300 text-lg flex items-center justify-center flex-wrap gap-2 relative z-10 font-citizen" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
               <span className="flex items-center">
                 © 2025 PhoenixGold Game Studios. All rights reserved.
               </span>

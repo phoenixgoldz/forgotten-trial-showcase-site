@@ -112,7 +112,7 @@ const MysteryQuotes = () => {
             
             <div className="flex items-center justify-center space-x-4 mb-8">
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-ethereal-gold"></div>
-              <cite className="text-ethereal-gold font-medium not-italic text-center" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>{quote.author}</cite>
+              <cite className="text-ethereal-gold font-medium not-italic text-center font-citizen" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>{quote.author}</cite>
               <div className="h-px w-12 bg-gradient-to-l from-transparent to-ethereal-gold"></div>
             </div>
 

@@ -83,14 +83,14 @@ const Features = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
-            <span className="px-6 py-3 bg-gradient-to-r from-ethereal-gold/20 to-ember-flame/20 rounded-full text-ethereal-gold text-sm font-medium border border-ethereal-gold/40 backdrop-blur-sm hover:bg-ethereal-gold/30 hover:border-ethereal-gold/60 transition-all duration-300">
+            <span className="px-6 py-3 bg-gradient-to-r from-ethereal-gold/20 to-ember-flame/20 rounded-full text-ethereal-gold text-sm font-medium border border-ethereal-gold/40 backdrop-blur-sm hover:bg-ethereal-gold/30 hover:border-ethereal-gold/60 transition-all duration-300 font-citizen">
               Core Features
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 gradient-text drop-shadow-lg animate-glow">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 gradient-text drop-shadow-lg font-cinzel">
             Gameplay That Matters
           </h2>
-          <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+          <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md font-citizen">
             Experience a unique blend of tactical combat, procedural storytelling, and meaningful choices that shape your adventure
           </p>
         </div>
@@ -112,12 +112,12 @@ const Features = () => {
                 <div className={`inline-flex items-center justify-center w-18 h-18 rounded-2xl bg-gradient-to-r ${feature.color} mb-4 mx-auto text-3xl shadow-xl ${feature.shadowColor} group-hover:shadow-2xl group-hover:scale-110 transition-all duration-500 border border-white/20`}>
                   {feature.icon}
                 </div>
-                <CardTitle className="text-xl font-bold text-white group-hover:text-ethereal-gold transition-colors duration-500 drop-shadow-sm">
+                <CardTitle className="text-xl font-bold text-white group-hover:text-ethereal-gold transition-colors duration-500 drop-shadow-sm font-citizen">
                   {feature.title}
                 </CardTitle>
               </CardHeader>
               <CardContent className="relative z-10">
-                <CardDescription className="text-slate-200 text-base leading-relaxed group-hover:text-slate-100 transition-colors duration-500">
+                <CardDescription className="text-slate-200 text-base leading-relaxed group-hover:text-slate-100 transition-colors duration-500 font-citizen">
                   {feature.description}
                 </CardDescription>
               </CardContent>
@@ -127,7 +127,7 @@ const Features = () => {
 
         <div className="mt-16 text-center">
           <div className="inline-block p-8 bg-gradient-to-r from-ethereal-gold/15 to-ember-flame/15 rounded-2xl border border-ethereal-gold/30 backdrop-blur-md hover:bg-ethereal-gold/20 hover:border-ethereal-gold/50 transition-all duration-300 hover-scale shadow-lg">
-            <p className="text-white text-lg font-medium drop-shadow-sm">
+            <p className="text-white text-lg font-medium drop-shadow-sm font-citizen">
               🎯 Every feature designed to create memorable, meaningful experiences
             </p>
           </div>

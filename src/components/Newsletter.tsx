@@ -86,7 +86,7 @@ const Newsletter = () => {
               Join the <span className="gradient-text">Adventure</span>
             </h3>
             
-            <p className="text-gray-100 mb-8 leading-relaxed text-center" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}>
+            <p className="text-gray-100 mb-8 leading-relaxed text-center font-citizen" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}>
               Be the first to know about development updates, character reveals, and exclusive behind-the-scenes content. No spam, just mystical updates!
             </p>
 
@@ -98,7 +98,7 @@ const Newsletter = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
-                    className="bg-black/60 border-ancient-stone/80 text-white placeholder-gray-300 focus:border-ethereal-gold/80 focus:ring-ethereal-gold/30 h-12"
+                    className="bg-black/60 border-ancient-stone/80 text-white placeholder-gray-300 focus:border-ethereal-gold/80 focus:ring-ethereal-gold/30 h-12 font-citizen"
                     disabled={status === 'loading'}
                     aria-label="Email address"
                     autoComplete="email"
@@ -108,7 +108,7 @@ const Newsletter = () => {
                 <Button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="bg-gradient-to-r from-verdant-glyph to-luminous-azure hover:from-verdant-glyph/90 hover:to-luminous-azure/90 text-white font-semibold px-8 h-12 rounded-lg button-shine hover-scale shadow-lg hover:shadow-verdant-glyph/30 border border-verdant-glyph/30 hover:border-verdant-glyph/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="bg-gradient-to-r from-verdant-glyph to-luminous-azure hover:from-verdant-glyph/90 hover:to-luminous-azure/90 text-white font-semibold px-8 h-12 rounded-lg button-shine hover-scale shadow-lg hover:shadow-verdant-glyph/30 border border-verdant-glyph/30 hover:border-verdant-glyph/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 font-citizen"
                 >
                   {status === 'loading' ? (
                     <div className="flex items-center gap-2">
@@ -127,7 +127,7 @@ const Newsletter = () => {
               </div>
 
               {message && (
-                <div className={`flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 text-center animate-fade-in ${
+                <div className={`flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 text-center animate-fade-in font-citizen ${
                   status === 'success' ? 'text-verdant-glyph' : 'text-ember-flame'
                 }`} style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                   {status === 'success' ? (
@@ -140,7 +140,7 @@ const Newsletter = () => {
               )}
             </form>
 
-            <div className="mt-6 text-xs text-gray-300 text-center" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}>
+            <div className="mt-6 text-xs text-gray-300 text-center font-citizen" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}>
               We respect your privacy. Unsubscribe at any time. No spam, ever.
             </div>
           </div>
