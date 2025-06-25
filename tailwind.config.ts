@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// The Forgotten Trial Color Palette
+				'mystic-blue': '#1A1D3C',
+				'ethereal-gold': '#D4B56A',
+				'ancient-stone': '#44424D',
+				'luminous-azure': '#3E92CC',
+				'ember-flame': '#E97F3C',
+				'verdant-glyph': '#7EC850'
+			},
+			fontFamily: {
+				'cinzel': ['Cinzel Decorative', 'serif'],
+				'sans': ['Inter', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

@@ -1,8 +1,9 @@
+
 import { Heart, ExternalLink, Coffee, Zap } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-mystic-blue to-ancient-stone py-16 border-t border-ancient-stone/50 relative overflow-hidden">
+    <footer className="bg-gradient-to-br from-black to-ancient-stone py-16 border-t border-ancient-stone/50 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -23,13 +24,13 @@ const Footer = () => {
               />
             </div>
             
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 gradient-text text-center">
+            <h3 className="font-cinzel text-3xl md:text-4xl font-bold text-white mb-2 gradient-text text-center" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
               PhoenixGold Game Studios
             </h3>
-            <h4 className="text-xl md:text-2xl font-semibold text-ethereal-gold mb-4 text-center">
+            <h4 className="font-cinzel text-xl md:text-2xl font-semibold text-ethereal-gold mb-4 text-center" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
               The Forgotten Trial
             </h4>
-            <p className="text-slate-400 text-lg leading-relaxed max-w-2xl mx-auto text-center">
+            <p className="text-gray-200 text-lg leading-relaxed max-w-2xl mx-auto text-center" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}>
               A mysterious fantasy RPG crafted with passion by PhoenixGold Game Studios. 
               Follow our journey as we bring this unique adventure to life, one memory at a time.
             </p>
@@ -59,12 +60,12 @@ const Footer = () => {
             </a>
           </div>
 
-          <div className="bg-gradient-to-r from-ancient-stone/50 to-mystic-blue/50 rounded-2xl p-8 border border-ancient-stone/30 glass-effect backdrop-blur-sm mb-8">
-            <h4 className="text-xl font-semibold text-white mb-4 flex items-center justify-center">
+          <div className="bg-black/60 rounded-2xl p-8 border border-ancient-stone/40 glass-effect backdrop-blur-sm mb-8">
+            <h4 className="text-xl font-semibold text-white mb-4 flex items-center justify-center" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
               <span className="mr-2">🎮</span>
               Designed For Everyone
             </h4>
-            <div className="flex flex-wrap justify-center gap-4 text-slate-300">
+            <div className="flex flex-wrap justify-center gap-4 text-gray-200">
               <span className="bg-ancient-stone/50 px-4 py-2 rounded-full text-sm border border-ancient-stone/50 hover:border-ethereal-gold/50 transition-colors">
                 PC (Unreal Engine 5.5)
               </span>
@@ -81,7 +82,7 @@ const Footer = () => {
           </div>
           
           <div className="pt-8 border-t border-ancient-stone/50">
-            <p className="text-slate-500 text-sm flex items-center justify-center text-center">
+            <p className="text-gray-400 text-sm flex items-center justify-center text-center">
               © 2024 PhoenixGold Game Studios. All rights reserved. 
               <span className="mx-2">•</span>
               Built with 

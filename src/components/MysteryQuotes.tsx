@@ -55,7 +55,7 @@ const MysteryQuotes = () => {
   const quote = mysteryQuotes[currentQuote];
 
   return (
-    <section className="py-20 bg-gradient-to-r from-mystic-blue/95 via-ancient-stone/90 to-mystic-blue/95 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-r from-black/90 via-ancient-stone/80 to-black/90 relative overflow-hidden">
       {/* Mystical background effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-ethereal-gold/5 via-transparent to-verdant-glyph/5"></div>
@@ -81,13 +81,13 @@ const MysteryQuotes = () => {
               <Quote className="w-16 h-16 text-ethereal-gold/60 mx-auto mb-6 animate-pulse" />
             </div>
             
-            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-light text-white mb-8 leading-relaxed italic text-center">
+            <blockquote className="font-cinzel text-2xl md:text-3xl lg:text-4xl font-light text-white mb-8 leading-relaxed italic text-center" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.9)' }}>
               "{quote.text}"
             </blockquote>
             
             <div className="flex items-center justify-center space-x-4 mb-8">
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-ethereal-gold"></div>
-              <cite className="text-ethereal-gold font-medium not-italic text-center">{quote.author}</cite>
+              <cite className="text-ethereal-gold font-medium not-italic text-center" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>{quote.author}</cite>
               <div className="h-px w-12 bg-gradient-to-l from-transparent to-ethereal-gold"></div>
             </div>
 

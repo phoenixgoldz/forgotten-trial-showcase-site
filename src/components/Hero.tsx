@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Play, Star } from "lucide-react";
 
@@ -74,21 +75,21 @@ const Hero = () => {
       
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
         <div className="mb-6 animate-fade-in">
-          <span className="inline-flex items-center px-6 py-3 rounded-full bg-mystic-blue/30 border border-ethereal-gold/50 text-ethereal-gold text-sm font-medium backdrop-blur-md glass-effect hover:bg-mystic-blue/40 hover:border-ethereal-gold/70 transition-all duration-300 hover-scale">
+          <span className="inline-flex items-center px-6 py-3 rounded-full bg-black/50 border border-ethereal-gold/70 text-ethereal-gold text-sm font-medium backdrop-blur-md glass-effect hover:bg-black/60 hover:border-ethereal-gold/90 transition-all duration-300 hover-scale">
             <Play className="w-4 h-4 mr-2 animate-pulse" />
             Now Live on Kickstarter
           </span>
         </div>
 
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in leading-tight text-center drop-shadow-2xl">
+        <h1 className="font-cinzel text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in leading-tight text-center drop-shadow-2xl" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}>
           The <span className="gradient-text animate-glow">Forgotten</span> Trial
         </h1>
         
-        <p className="text-lg md:text-xl lg:text-2xl text-white mb-4 animate-fade-in font-light drop-shadow-lg max-w-4xl mx-auto text-center" style={{ animationDelay: "0.2s" }}>
+        <p className="text-lg md:text-xl lg:text-2xl text-white mb-4 animate-fade-in font-light leading-tight max-w-4xl mx-auto text-center" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)', animationDelay: "0.2s" }}>
           A tactical fantasy RPG where every memory is a clue—and every playthrough is a new mystery.
         </p>
         
-        <p className="text-base md:text-lg text-slate-100 mb-12 max-w-3xl mx-auto animate-fade-in leading-relaxed drop-shadow-md text-center" style={{ animationDelay: "0.4s" }}>
+        <p className="text-base md:text-lg text-gray-100 mb-12 max-w-3xl mx-auto animate-fade-in leading-relaxed text-center" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.7)', animationDelay: "0.4s" }}>
           Awaken in a cursed dungeon with no memory. Discover your identity through tactical combat, 
           procedural exploration, and hand-crafted storytelling that adapts to your choices.
         </p>
@@ -115,7 +116,7 @@ const Hero = () => {
           <Button 
             variant="outline" 
             size="lg" 
-            className="border-2 border-ethereal-gold/60 text-ethereal-gold hover:bg-ethereal-gold/15 hover:border-ethereal-gold px-8 py-3 text-base rounded-full backdrop-blur-md glass-effect hover-scale transition-all duration-300 shadow-lg hover:shadow-ethereal-gold/20"
+            className="border-2 border-ethereal-gold/70 text-ethereal-gold hover:bg-ethereal-gold/20 hover:border-ethereal-gold px-8 py-3 text-base rounded-full backdrop-blur-md glass-effect hover-scale transition-all duration-300 shadow-lg hover:shadow-ethereal-gold/20"
             onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Discover the Mystery <ArrowDown className="ml-2 h-5 w-5 animate-bounce" />

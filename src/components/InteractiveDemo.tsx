@@ -62,19 +62,19 @@ const InteractiveDemo = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 gradient-text drop-shadow-lg">
+          <h2 className="font-cinzel text-4xl md:text-5xl font-bold text-white mb-4 gradient-text" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.8)' }}>
             The Forgotten Trial
           </h2>
-          <h3 className="text-2xl md:text-3xl font-semibold text-ethereal-gold mb-8 drop-shadow-md">
+          <h3 className="font-cinzel text-2xl md:text-3xl font-semibold text-ethereal-gold mb-8" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
             Choose Your Own Adventure
           </h3>
 
           {!selectedCharacter ? (
-            <div className="bg-gradient-to-r from-ancient-stone/50 to-mystic-blue/50 rounded-2xl p-8 border border-ancient-stone/30 glass-effect backdrop-blur-sm">
-              <p className="text-slate-100 text-lg mb-6 italic drop-shadow-md">
+            <div className="bg-black/60 rounded-2xl p-8 border border-ancient-stone/40 glass-effect backdrop-blur-sm">
+              <p className="text-gray-100 text-lg mb-6 italic" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
                 "(Narrator – "You awaken in the dark. Your memories are fractured... but you are not alone.")"
               </p>
-              <p className="text-white text-xl mb-8 drop-shadow-md">
+              <p className="text-white text-xl mb-8" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
                 Four silhouettes flicker in the dim torchlight. One steps forward.
               </p>
               
@@ -113,16 +113,16 @@ const InteractiveDemo = () => {
               </div>
             </div>
           ) : (
-            <div className="bg-gradient-to-r from-ancient-stone/50 to-mystic-blue/50 rounded-2xl p-8 border border-ancient-stone/30 glass-effect backdrop-blur-sm animate-fade-in">
-              <h3 className="text-3xl font-bold text-ethereal-gold mb-6 drop-shadow-md">
+            <div className="bg-black/60 rounded-2xl p-8 border border-ancient-stone/40 glass-effect backdrop-blur-sm animate-fade-in">
+              <h3 className="font-cinzel text-3xl font-bold text-ethereal-gold mb-6" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
                 You chose {selectedCharacter}
               </h3>
-              <p className="text-white text-xl leading-relaxed mb-8 italic drop-shadow-md">
+              <p className="text-white text-xl leading-relaxed mb-8 italic" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
                 "{storyText}"
               </p>
               <button
                 onClick={restart}
-                className="bg-gradient-to-r from-ethereal-gold to-ember-flame text-mystic-blue px-8 py-3 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine flex items-center justify-center mx-auto"
+                className="bg-gradient-to-r from-ethereal-gold to-ember-flame text-black px-8 py-3 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine flex items-center justify-center mx-auto"
               >
                 <RotateCcw className="w-5 h-5 mr-2" />
                 Choose Again
@@ -131,10 +131,10 @@ const InteractiveDemo = () => {
           )}
 
           <div className="mt-12 text-center">
-            <p className="text-slate-100 text-lg drop-shadow-md">
+            <p className="text-gray-100 text-lg" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
               Experience the mystery and make choices that shape your destiny.
             </p>
-            <p className="text-ethereal-gold font-medium mt-2 drop-shadow-md">
+            <p className="text-ethereal-gold font-medium mt-2" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
               Every playthrough reveals new secrets...
             </p>
           </div>

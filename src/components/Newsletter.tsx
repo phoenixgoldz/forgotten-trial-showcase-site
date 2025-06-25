@@ -37,17 +37,17 @@ const Newsletter = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <Card className="max-w-2xl mx-auto bg-gradient-to-br from-mystic-blue/90 to-ancient-stone/70 border-2 border-ethereal-gold/30 hover:border-ethereal-gold/60 transition-all duration-500 glass-effect backdrop-blur-sm p-8">
+        <Card className="max-w-2xl mx-auto bg-black/60 border-2 border-ethereal-gold/40 hover:border-ethereal-gold/70 transition-all duration-500 glass-effect backdrop-blur-sm p-8">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-ethereal-gold/20 to-luminous-azure/20 mb-6 border border-ethereal-gold/30 backdrop-blur-sm">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-ethereal-gold/30 to-luminous-azure/30 mb-6 border border-ethereal-gold/40 backdrop-blur-sm">
               <Mail className="w-8 h-8 text-ethereal-gold animate-pulse" />
             </div>
 
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center drop-shadow-md">
+            <h3 className="font-cinzel text-2xl md:text-3xl font-bold text-white mb-4 text-center" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
               Join the <span className="gradient-text">Adventure</span>
             </h3>
             
-            <p className="text-slate-100 mb-8 leading-relaxed text-center drop-shadow-sm">
+            <p className="text-gray-100 mb-8 leading-relaxed text-center" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}>
               Be the first to know about development updates, character reveals, and exclusive behind-the-scenes content. No spam, just mystical updates!
             </p>
 
@@ -58,7 +58,7 @@ const Newsletter = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address"
-                  className="flex-1 px-4 py-3 bg-ancient-stone/50 border border-ancient-stone/60 rounded-lg text-white placeholder-slate-300 focus:outline-none focus:border-ethereal-gold/60 focus:ring-2 focus:ring-ethereal-gold/20 transition-all duration-300 backdrop-blur-sm"
+                  className="flex-1 px-4 py-3 bg-black/60 border border-ancient-stone/80 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:border-ethereal-gold/80 focus:ring-2 focus:ring-ethereal-gold/30 transition-all duration-300 backdrop-blur-sm"
                   disabled={status === 'loading'}
                 />
                 
@@ -86,7 +86,7 @@ const Newsletter = () => {
               {message && (
                 <div className={`flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 text-center ${
                   status === 'success' ? 'text-verdant-glyph' : 'text-ember-flame'
-                }`}>
+                }`} style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                   {status === 'success' ? (
                     <CheckCircle className="w-4 h-4" />
                   ) : (
@@ -97,7 +97,7 @@ const Newsletter = () => {
               )}
             </form>
 
-            <div className="mt-6 text-xs text-slate-300 text-center">
+            <div className="mt-6 text-xs text-gray-300 text-center" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}>
               We respect your privacy. Unsubscribe at any time.
             </div>
           </div>
