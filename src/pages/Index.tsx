@@ -5,6 +5,7 @@ import NewsTicker from "@/components/NewsTicker";
 import About from "@/components/About";
 import Features from "@/components/Features";
 import Characters from "@/components/Characters";
+import InteractiveDemo from "@/components/InteractiveDemo";
 import MysteryQuotes from "@/components/MysteryQuotes";
 import FundingProgress from "@/components/FundingProgress";
 import Newsletter from "@/components/Newsletter";
@@ -28,6 +29,7 @@ const Index = () => {
       <About />
       <Features />
       <Characters />
+      <InteractiveDemo />
       <MysteryQuotes />
       <FundingProgress />
       <Newsletter />
