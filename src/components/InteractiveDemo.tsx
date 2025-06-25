@@ -1,44 +1,114 @@
 
 import { useState } from "react";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, Sparkles } from "lucide-react";
 
 const InteractiveDemo = () => {
   const [selectedCharacter, setSelectedCharacter] = useState<string | null>(null);
   const [storyText, setStoryText] = useState("");
+  const [storyStep, setStoryStep] = useState(0);
+  const [choices, setChoices] = useState<string[]>([]);
 
-  const story = {
-    Solari: [
-      "Solari's hand glows with radiant energy. 'I remember healing... but not who I saved.'",
-      "You follow Solari through a corridor of runes. One lights up as you pass — a lost memory stirs.",
-      "A whisper echoes: 'You once burned the sky… but why?'"
-    ],
-    Tarrin: [
-      "Tarrin growls, electricity crackling. 'We move. Talking wastes breath.'",
-      "You step into a hall filled with broken medallions. Tarrin's eyes narrow. 'I failed this place once.'",
-      "Suddenly, an afterimage flashes beside him — it speaks with your voice."
-    ],
-    Wisp: [
-      "Wisp hums a haunting melody. The walls shimmer in response.",
-      "She laughs softly: 'Time is not a river… it's a song. Do you want to hear your verse?'",
-      "You glimpse yourself… older, wiser — and someone else lies at your feet. Friend or foe?"
-    ],
-    Kael: [
-      "Kael does not speak. His moss-covered stone body moves with purpose.",
-      "Glowing glyphs pulse beneath his rocky skin as he touches a rune stone. A door opens silently.",
-      "On the other side, a statue identical to Kael awaits — etched with your name."
-    ]
+  const introStory = "You awaken on cold stone, your mind a void. The dungeon walls press close, ancient and forgotten. Four shadowy figures emerge from the darkness - companions whose names escape you, yet their presence feels... familiar. Who will you turn to first in this moment of vulnerability?";
+
+  const characterStories = {
+    Solari: {
+      initial: [
+        "Solari's gentle light illuminates your confused face. 'Peace, friend. Your memories may be lost, but your heart still beats with purpose.' Her golden radiance reveals strange scars on your hands - marks of power you cannot remember wielding.",
+        "She extends a healing hand toward you. 'I sense great pain in your past, but also great compassion. The light within you has not dimmed.' As her magic touches you, flashes of burning skies dance at the edge of your memory.",
+        "Solari's eyes grow distant. 'In my dreams, I see you standing before a great fire... were you its master, or its victim?' Her voice trembles with recognition she cannot quite grasp."
+      ],
+      deeper: [
+        "Solari gasps as ancient runes on the dungeon wall begin to glow in response to your presence. 'These markings... they're reacting to you. What manner of power did you once wield?'",
+        "A spectral voice whispers through Solari: 'The Sunburner has awakened... but does the flame remember its purpose?' Her face pales as she realizes the implications.",
+        "Solari places her hand on a cracked mirror, and for a moment, you both see a reflection of you wreathed in celestial fire, standing over a battlefield of fallen enemies... or fallen friends."
+      ]
+    },
+    Tarrin: {
+      initial: [
+        "Tarrin's electric eyes narrow as he studies you. 'Your stance, your scars... you were a warrior once. But warriors remember their battles.' Lightning flickers around his mane as confusion clouds his features.",
+        "He sniffs the air near you, then recoils. 'You smell of old blood and older magic. Familiar, yet... wrong somehow.' His claws extend unconsciously, as if recognizing a threat he cannot name.",
+        "Tarrin circles you warily. 'In the storm of my dreams, a figure fights beside me. Same height, same build as you... but I cannot see their face.' Thunder rumbles in the distance."
+      ],
+      deeper: [
+        "A broken weapon lies embedded in the wall - Tarrin pulls it free and it sparks with recognition in your hands. 'This blade knows you,' he growls, 'but why do I feel we've crossed swords before?'",
+        "Tarrin's memories surge as lightning illuminates the chamber: 'I remember now... a great betrayal. A friend who became an enemy, or an enemy who was once a friend. Which were you to me?'",
+        "The storm warrior's eyes flash with electricity and pain. 'You saved my life once... or perhaps you tried to take it. The lightning cannot tell friend from foe in my fractured memories.'"
+      ]
+    },
+    Wisp: {
+      initial: [
+        "Wisp's ethereal song echoes strangely around you. 'Oh my, oh my... the melody of your soul is so very complex. Like a song played backward, or a story told in reverse.' Her eyes twinkle with otherworldly knowledge.",
+        "She tilts her head, studying you with curious intensity. 'Time whispers secrets about you, dear one. You've danced through moments that haven't happened yet, and forgotten ones that defined who you were.'",
+        "Wisp giggles, but there's sadness in the sound. 'The threads of time are tangled around you like spider silk. Some memories are meant to stay buried... but are you brave enough to unearth them?'"
+      ],
+      deeper: [
+        "Wisp's bard magic reveals ghostly echoes of past events playing out around you - but they're fragmented, showing moments of both heroism and terrible choice.",
+        "She gasps as her time magic shows her glimpses of potential futures: 'I see... so many paths from here. In some, you become our greatest ally. In others...' She shivers and cannot finish.",
+        "Wisp reaches out to touch your forehead, and suddenly you both experience a rush of temporal echoes - versions of yourself making different choices, walking different paths, becoming different people."
+      ]
+    },
+    Kael: {
+      initial: [
+        "Kael's stone features remain impassive, but the glyphs carved into his rocky flesh pulse with recognition. He cannot speak, but his very presence seems to pose a question: 'Do you remember why I was made?'",
+        "The runic warden approaches slowly, each step deliberate. Ancient symbols flare to life on his body - some protective, others... accusatory. His creation and your past are clearly intertwined.",
+        "Kael places a moss-covered hand on your shoulder. The touch floods you with flashes of memory: stone being carved, runes being etched, a purpose being forged. But was that purpose to guard you... or to stop you?"
+      ],
+      deeper: [
+        "Kael's glyphs suddenly blaze with painful light, revealing the truth carved into his very being - he was created as either your greatest protector or your most dedicated jailer.",
+        "The stone guardian kneels before you, and in that gesture lies a terrible question: is he showing respect to his creator, or preparing to carry out an ancient duty to stop you?",
+        "Ancient magic flows between you and Kael, and for a moment you understand the runic language written on his form. The message is clear: 'To guard the Forgotten, until memory returns and judgment can be passed.'"
+      ]
+    }
   };
 
+  const continueChoices = [
+    "Press deeper into the mystery",
+    "Question your companion further", 
+    "Explore the dungeon together",
+    "Try to unlock more memories"
+  ];
+
   const choose = (name: string) => {
-    const stories = story[name as keyof typeof story];
-    const randomStory = stories[Math.floor(Math.random() * stories.length)];
+    const character = characterStories[name as keyof typeof characterStories];
+    const randomStory = character.initial[Math.floor(Math.random() * character.initial.length)];
     setSelectedCharacter(name);
     setStoryText(randomStory);
+    setStoryStep(1);
+    setChoices(continueChoices);
+  };
+
+  const continueStory = (choiceIndex: number) => {
+    if (selectedCharacter && storyStep === 1) {
+      const character = characterStories[selectedCharacter as keyof typeof characterStories];
+      const deeperStory = character.deeper[Math.floor(Math.random() * character.deeper.length)];
+      setStoryText(deeperStory);
+      setStoryStep(2);
+      setChoices([
+        "Begin your journey together",
+        "Seek answers in the deeper dungeon",
+        "Confront the truth of your past",
+        "Choose a different companion"
+      ]);
+    } else if (storyStep === 2) {
+      // Final story conclusions
+      const endings = [
+        "As you venture deeper into the forgotten dungeon, fragments of your true identity begin to surface. Whether hero or villain, savior or destroyer, your story is about to begin anew...",
+        "The dungeon's ancient secrets call to you, promising answers to questions you're afraid to ask. Together with your companion, you step into the shadows of your forgotten past...",
+        "Memory is a double-edged sword, and yours has been shattered for a reason. But in this dark place, with unlikely allies, perhaps you can forge a new legend...",
+        "The whispers of the dungeon grow louder, speaking of trials ahead and choices that will define not just who you were, but who you choose to become..."
+      ];
+      
+      setStoryText(endings[Math.floor(Math.random() * endings.length)]);
+      setStoryStep(3);
+      setChoices([]);
+    }
   };
 
   const restart = () => {
     setSelectedCharacter(null);
     setStoryText("");
+    setStoryStep(0);
+    setChoices([]);
   };
 
   return (
@@ -46,7 +116,7 @@ const InteractiveDemo = () => {
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-ethereal-gold/5 via-transparent to-verdant-glyph/5"></div>
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: 12 }).map((_, i) => (
           <div
             key={i}
             className="absolute w-2 h-2 bg-ethereal-gold/30 rounded-full animate-float"
@@ -66,76 +136,97 @@ const InteractiveDemo = () => {
             The Forgotten Trial
           </h2>
           <h3 className="font-cinzel text-2xl md:text-3xl font-semibold text-ethereal-gold mb-8" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
-            Choose Your Own Adventure
+            Interactive Story Experience
           </h3>
 
-          {!selectedCharacter ? (
+          {storyStep === 0 ? (
             <div className="bg-black/60 rounded-2xl p-8 border border-ancient-stone/40 glass-effect backdrop-blur-sm">
-              <p className="text-gray-100 text-lg mb-6 italic" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
-                "(Narrator – "You awaken in the dark. Your memories are fractured... but you are not alone.")"
-              </p>
-              <p className="text-white text-xl mb-8" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
-                Four silhouettes flicker in the dim torchlight. One steps forward.
+              <div className="mb-6">
+                <Sparkles className="w-12 h-12 text-ethereal-gold mx-auto mb-4 animate-pulse" />
+              </div>
+              
+              <p className="text-gray-100 text-lg mb-6 leading-relaxed italic" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
+                {introStory}
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <button
                   onClick={() => choose('Solari')}
-                  className="bg-gradient-to-br from-ember-flame to-ethereal-gold text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine"
+                  className="bg-gradient-to-br from-ember-flame to-ethereal-gold text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine group"
                 >
-                  <span className="text-2xl mb-2 block">☀️</span>
-                  Solari
+                  <span className="text-2xl mb-2 block group-hover:animate-pulse">☀️</span>
+                  <span className="font-cinzel">Solari</span>
+                  <p className="text-sm mt-1 opacity-80">The Sunweaver</p>
                 </button>
                 
                 <button
                   onClick={() => choose('Tarrin')}
-                  className="bg-gradient-to-br from-luminous-azure to-verdant-glyph text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine"
+                  className="bg-gradient-to-br from-luminous-azure to-verdant-glyph text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine group"
                 >
-                  <span className="text-2xl mb-2 block">⚡</span>
-                  Tarrin
+                  <span className="text-2xl mb-2 block group-hover:animate-pulse">⚡</span>
+                  <span className="font-cinzel">Tarrin</span>
+                  <p className="text-sm mt-1 opacity-80">The Stormblade</p>
                 </button>
                 
                 <button
                   onClick={() => choose('Wisp')}
-                  className="bg-gradient-to-br from-verdant-glyph to-ethereal-gold text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine"
+                  className="bg-gradient-to-br from-verdant-glyph to-ethereal-gold text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine group"
                 >
-                  <span className="text-2xl mb-2 block">🎵</span>
-                  Wisp
+                  <span className="text-2xl mb-2 block group-hover:animate-pulse">🎵</span>
+                  <span className="font-cinzel">Wisp</span>
+                  <p className="text-sm mt-1 opacity-80">The Chronobard</p>
                 </button>
                 
                 <button
                   onClick={() => choose('Kael')}
-                  className="bg-gradient-to-br from-ancient-stone to-mystic-blue text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine"
+                  className="bg-gradient-to-br from-ancient-stone to-mystic-blue text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine group"
                 >
-                  <span className="text-2xl mb-2 block">🌿</span>
-                  Kael
+                  <span className="text-2xl mb-2 block group-hover:animate-pulse">🌿</span>
+                  <span className="font-cinzel">Kael</span>
+                  <p className="text-sm mt-1 opacity-80">The Runic Warden</p>
                 </button>
               </div>
             </div>
           ) : (
             <div className="bg-black/60 rounded-2xl p-8 border border-ancient-stone/40 glass-effect backdrop-blur-sm animate-fade-in">
               <h3 className="font-cinzel text-3xl font-bold text-ethereal-gold mb-6" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
-                You chose {selectedCharacter}
+                {selectedCharacter && storyStep === 1 && `With ${selectedCharacter}...`}
+                {selectedCharacter && storyStep === 2 && `The Mystery Deepens...`}
+                {storyStep === 3 && "Your Journey Begins..."}
               </h3>
-              <p className="text-white text-xl leading-relaxed mb-8 italic" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
-                "{storyText}"
-              </p>
-              <button
-                onClick={restart}
-                className="bg-gradient-to-r from-ethereal-gold to-ember-flame text-black px-8 py-3 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine flex items-center justify-center mx-auto"
-              >
-                <RotateCcw className="w-5 h-5 mr-2" />
-                Choose Again
-              </button>
+              
+              <div className="text-white text-lg leading-relaxed mb-8 italic space-y-4" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
+                <p>"{storyText}"</p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                {choices.length > 0 && choices.map((choice, index) => (
+                  <button
+                    key={index}
+                    onClick={() => continueStory(index)}
+                    className="bg-gradient-to-r from-ethereal-gold to-ember-flame text-black px-6 py-3 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine"
+                  >
+                    {choice}
+                  </button>
+                ))}
+                
+                <button
+                  onClick={restart}
+                  className="bg-gradient-to-r from-ancient-stone to-mystic-blue text-white px-6 py-3 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine flex items-center justify-center"
+                >
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  Begin Anew
+                </button>
+              </div>
             </div>
           )}
 
           <div className="mt-12 text-center">
-            <p className="text-gray-100 text-lg" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
-              Experience the mystery and make choices that shape your destiny.
+            <p className="text-gray-100 text-lg mb-2" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
+              Experience a unique story every time you play.
             </p>
-            <p className="text-ethereal-gold font-medium mt-2" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
-              Every playthrough reveals new secrets...
+            <p className="text-ethereal-gold font-medium" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
+              Your choices shape your destiny in The Forgotten Trial.
             </p>
           </div>
         </div>
