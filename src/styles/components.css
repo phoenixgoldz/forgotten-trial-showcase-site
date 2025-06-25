@@ -1,0 +1,95 @@
+
+/* Component Styles */
+.story-link {
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+.story-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(90deg, var(--ethereal-gold), var(--ember-flame), var(--verdant-glyph));
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.4s ease;
+  border-radius: 2px;
+}
+
+.story-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--ethereal-gold), var(--ember-flame), var(--luminous-azure), var(--verdant-glyph));
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+.glass-effect {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(26, 29, 60, 0.6);
+  border: 1px solid rgba(212, 181, 106, 0.3);
+  position: relative;
+}
+
+.glass-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 181, 106, 0.6), transparent);
+}
+
+.button-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s;
+}
+
+.button-shine:hover::before {
+  left: 100%;
+}
+
+.button-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(45deg, transparent, rgba(212, 181, 106, 0.3), transparent);
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.button-shine:hover::after {
+  opacity: 1;
+}

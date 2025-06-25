@@ -1,0 +1,28 @@
+
+/* Color utility classes */
+.text-mystic-blue { color: var(--mystic-blue); }
+.bg-mystic-blue { background-color: var(--mystic-blue); }
+.text-ethereal-gold { color: var(--ethereal-gold); }
+.bg-ethereal-gold { background-color: var(--ethereal-gold); }
+.text-ancient-stone { color: var(--ancient-stone); }
+.bg-ancient-stone { background-color: var(--ancient-stone); }
+.text-luminous-azure { color: var(--luminous-azure); }
+.bg-luminous-azure { background-color: var(--luminous-azure); }
+.text-ember-flame { color: var(--ember-flame); }
+.bg-ember-flame { background-color: var(--ember-flame); }
+.text-verdant-glyph { color: var(--verdant-glyph); }
+.bg-verdant-glyph { background-color: var(--verdant-glyph); }
+
+/* Shadow utilities matching theme colors */
+.shadow-ethereal-gold\/25 { box-shadow: 0 10px 25px -3px rgba(212, 181, 106, 0.25), 0 4px 6px -2px rgba(212, 181, 106, 0.1); }
+.shadow-ember-flame\/25 { box-shadow: 0 10px 25px -3px rgba(233, 127, 60, 0.25), 0 4px 6px -2px rgba(233, 127, 60, 0.1); }
+.shadow-verdant-glyph\/25 { box-shadow: 0 10px 25px -3px rgba(126, 200, 80, 0.25), 0 4px 6px -2px rgba(126, 200, 80, 0.1); }
+.shadow-luminous-azure\/25 { box-shadow: 0 10px 25px -3px rgba(62, 146, 204, 0.25), 0 4px 6px -2px rgba(62, 146, 204, 0.1); }
+
+.shadow-ethereal-gold\/30 { box-shadow: 0 10px 25px -3px rgba(212, 181, 106, 0.3), 0 4px 6px -2px rgba(212, 181, 106, 0.15); }
+.shadow-ember-flame\/30 { box-shadow: 0 10px 25px -3px rgba(233, 127, 60, 0.3), 0 4px 6px -2px rgba(233, 127, 60, 0.15); }
+.shadow-verdant-glyph\/30 { box-shadow: 0 10px 25px -3px rgba(126, 200, 80, 0.3), 0 4px 6px -2px rgba(126, 200, 80, 0.15); }
+
+.hover\:shadow-ethereal-gold\/20:hover { box-shadow: 0 20px 25px -5px rgba(212, 181, 106, 0.2), 0 10px 10px -5px rgba(212, 181, 106, 0.1); }
+.hover\:shadow-ember-flame\/20:hover { box-shadow: 0 20px 25px -5px rgba(233, 127, 60, 0.2), 0 10px 10px -5px rgba(233, 127, 60, 0.1); }
+.hover\:shadow-verdant-glyph\/20:hover { box-shadow: 0 20px 25px -5px rgba(126, 200, 80, 0.2), 0 10px 10px -5px rgba(126, 200, 80, 0.1); }
