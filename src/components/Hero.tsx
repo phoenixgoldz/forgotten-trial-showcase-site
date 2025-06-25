@@ -8,7 +8,7 @@ const Hero = () => {
       {/* Background Image with improved overlay */}
       <div className="absolute inset-0">
         <img 
-          src="/lovable-uploads/6f040610-e708-4437-889b-206c9c9c9d50.png" 
+          src="/lovable-uploads/fd08db9a-ea75-4280-b9ad-6117a0d836f6.png" 
           alt="The Forgotten Trial Banner"
           className="w-full h-full object-cover opacity-70"
         />
