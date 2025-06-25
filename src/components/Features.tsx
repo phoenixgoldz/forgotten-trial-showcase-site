@@ -6,65 +6,96 @@ const Features = () => {
     {
       title: "Tactical RPG Combat",
       description: "Grid-based battles with fantasy abilities and turn-based strategy that rewards clever positioning and timing.",
-      icon: "⚔️"
+      icon: "⚔️",
+      color: "from-red-500 to-pink-500"
     },
     {
       title: "Procedural Exploration",
       description: "Every dungeon is different. Discover scattered party members, memory shards, and gear across modular maps.",
-      icon: "🗺️"
+      icon: "🗺️",
+      color: "from-blue-500 to-cyan-500"
     },
     {
       title: "Hand-Written Narrative",
       description: "No AI here! Our team crafts evolving dialogue and story fragments that adapt to your progress and choices.",
-      icon: "📜"
+      icon: "📜",
+      color: "from-amber-500 to-orange-500"
     },
     {
       title: "Trust & Morality System",
       description: "Choices matter. Be kind, ruthless, or neutral — and see how it changes your party's trust in you.",
-      icon: "🤝"
+      icon: "🤝",
+      color: "from-green-500 to-emerald-500"
     },
     {
       title: "Party of 1-4 Characters",
       description: "Find and earn the trust of companions, each with their own evolving personality and mystery to uncover.",
-      icon: "👥"
+      icon: "👥",
+      color: "from-purple-500 to-violet-500"
     },
     {
       title: "Kid-Friendly Design",
       description: "No horror, no gore. Just mystery, magic, and meaningful decisions that players of all ages can enjoy.",
-      icon: "✨"
+      icon: "✨",
+      color: "from-pink-500 to-rose-500"
     }
   ];
 
   return (
-    <section id="features" className="py-20 bg-slate-800/50">
-      <div className="container mx-auto px-4">
+    <section id="features" className="py-20 bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)`,
+          backgroundSize: '20px 20px'
+        }}></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Core Gameplay Features
+          <div className="inline-block mb-4">
+            <span className="px-4 py-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-full text-amber-300 text-sm font-medium border border-amber-500/30">
+              Core Features
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 gradient-text">
+            Gameplay That Matters
           </h2>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            Experience a unique blend of tactical combat, procedural storytelling, and meaningful choices
+          <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            Experience a unique blend of tactical combat, procedural storytelling, and meaningful choices that shape your adventure
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="bg-slate-700/50 border-slate-600 hover:bg-slate-700/70 transition-all duration-300 hover-scale animate-fade-in"
+              className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 border-slate-600/50 hover:border-slate-500 transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <CardHeader>
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <CardTitle className="text-xl text-white">{feature.title}</CardTitle>
+              <CardHeader className="text-center pb-4">
+                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} mb-4 mx-auto text-2xl shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+                  {feature.icon}
+                </div>
+                <CardTitle className="text-xl font-bold text-white group-hover:text-amber-300 transition-colors duration-300">
+                  {feature.title}
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-slate-300 text-base leading-relaxed">
+                <CardDescription className="text-slate-300 text-base leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
                   {feature.description}
                 </CardDescription>
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <div className="inline-block p-6 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-2xl border border-amber-500/20 backdrop-blur-sm">
+            <p className="text-amber-300 text-lg font-medium">
+              🎯 Every feature designed to create memorable, meaningful experiences
+            </p>
+          </div>
         </div>
       </div>
     </section>
