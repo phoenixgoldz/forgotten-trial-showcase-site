@@ -52,6 +52,14 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* The Forgotten Trial Color Palette */
+    --mystic-blue: #1A1D3C;
+    --ethereal-gold: #D4B56A;
+    --ancient-stone: #44424D;
+    --luminous-azure: #3E92CC;
+    --ember-flame: #E97F3C;
+    --verdant-glyph: #7EC850;
   }
 
   .dark {
@@ -126,10 +134,10 @@
 
 @keyframes glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 20px rgba(212, 181, 106, 0.3);
   }
   50% {
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+    box-shadow: 0 0 30px rgba(212, 181, 106, 0.6);
   }
 }
 
@@ -175,7 +183,7 @@
   height: 2px;
   bottom: -2px;
   left: 0;
-  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  background: linear-gradient(90deg, var(--ethereal-gold), var(--ember-flame));
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease;
@@ -187,7 +195,7 @@
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+  background: linear-gradient(135deg, var(--ethereal-gold), var(--ember-flame), var(--luminous-azure));
   background-size: 200% 200%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -198,8 +206,8 @@
 .glass-effect {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(26, 29, 60, 0.4);
+  border: 1px solid rgba(212, 181, 106, 0.2);
 }
 
 .button-shine {
@@ -217,7 +225,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.2),
+    rgba(212, 181, 106, 0.2),
     transparent
   );
   transition: left 0.5s;
@@ -226,3 +234,17 @@
 .button-shine:hover::before {
   left: 100%;
 }
+
+/* Color utility classes */
+.text-mystic-blue { color: var(--mystic-blue); }
+.bg-mystic-blue { background-color: var(--mystic-blue); }
+.text-ethereal-gold { color: var(--ethereal-gold); }
+.bg-ethereal-gold { background-color: var(--ethereal-gold); }
+.text-ancient-stone { color: var(--ancient-stone); }
+.bg-ancient-stone { background-color: var(--ancient-stone); }
+.text-luminous-azure { color: var(--luminous-azure); }
+.bg-luminous-azure { background-color: var(--luminous-azure); }
+.text-ember-flame { color: var(--ember-flame); }
+.bg-ember-flame { background-color: var(--ember-flame); }
+.text-verdant-glyph { color: var(--verdant-glyph); }
+.bg-verdant-glyph { background-color: var(--verdant-glyph); }

@@ -7,46 +7,46 @@ const Features = () => {
       title: "Tactical RPG Combat",
       description: "Grid-based battles with fantasy abilities and turn-based strategy that rewards clever positioning and timing.",
       icon: "⚔️",
-      color: "from-red-500 to-pink-500"
+      color: "from-ember-flame to-ethereal-gold"
     },
     {
       title: "Procedural Exploration",
       description: "Every dungeon is different. Discover scattered party members, memory shards, and gear across modular maps.",
       icon: "🗺️",
-      color: "from-blue-500 to-cyan-500"
+      color: "from-luminous-azure to-verdant-glyph"
     },
     {
       title: "Hand-Written Narrative",
       description: "No AI here! Our team crafts evolving dialogue and story fragments that adapt to your progress and choices.",
       icon: "📜",
-      color: "from-amber-500 to-orange-500"
+      color: "from-ethereal-gold to-ember-flame"
     },
     {
       title: "Trust & Morality System",
       description: "Choices matter. Be kind, ruthless, or neutral — and see how it changes your party's trust in you.",
       icon: "🤝",
-      color: "from-green-500 to-emerald-500"
+      color: "from-verdant-glyph to-luminous-azure"
     },
     {
       title: "Party of 1-4 Characters",
       description: "Find and earn the trust of companions, each with their own evolving personality and mystery to uncover.",
       icon: "👥",
-      color: "from-purple-500 to-violet-500"
+      color: "from-luminous-azure to-ethereal-gold"
     },
     {
       title: "Kid-Friendly Design",
       description: "No horror, no gore. Just mystery, magic, and meaningful decisions that players of all ages can enjoy.",
       icon: "✨",
-      color: "from-pink-500 to-rose-500"
+      color: "from-ethereal-gold to-verdant-glyph"
     }
   ];
 
   return (
-    <section id="features" className="py-20 bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 relative overflow-hidden">
+    <section id="features" className="py-20 bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(212, 181, 106, 0.3) 1px, transparent 0)`,
           backgroundSize: '20px 20px'
         }}></div>
       </div>
@@ -54,7 +54,7 @@ const Features = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
-            <span className="px-4 py-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-full text-amber-300 text-sm font-medium border border-amber-500/30">
+            <span className="px-4 py-2 bg-gradient-to-r from-ethereal-gold/20 to-ember-flame/20 rounded-full text-ethereal-gold text-sm font-medium border border-ethereal-gold/30">
               Core Features
             </span>
           </div>
@@ -70,14 +70,14 @@ const Features = () => {
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 border-slate-600/50 hover:border-slate-500 transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm animate-fade-in"
+              className="bg-gradient-to-br from-ancient-stone/80 to-mystic-blue/80 border-ancient-stone/50 hover:border-ethereal-gold/50 transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardHeader className="text-center pb-4">
                 <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} mb-4 mx-auto text-2xl shadow-lg group-hover:shadow-xl transition-all duration-300`}>
                   {feature.icon}
                 </div>
-                <CardTitle className="text-xl font-bold text-white group-hover:text-amber-300 transition-colors duration-300">
+                <CardTitle className="text-xl font-bold text-white group-hover:text-ethereal-gold transition-colors duration-300">
                   {feature.title}
                 </CardTitle>
               </CardHeader>
@@ -91,8 +91,8 @@ const Features = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <div className="inline-block p-6 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-2xl border border-amber-500/20 backdrop-blur-sm">
-            <p className="text-amber-300 text-lg font-medium">
+          <div className="inline-block p-6 bg-gradient-to-r from-ethereal-gold/10 to-ember-flame/10 rounded-2xl border border-ethereal-gold/20 backdrop-blur-sm">
+            <p className="text-ethereal-gold text-lg font-medium">
               🎯 Every feature designed to create memorable, meaningful experiences
             </p>
           </div>

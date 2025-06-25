@@ -3,11 +3,11 @@ import { Heart, ExternalLink, Coffee, Zap } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-slate-900 to-indigo-900 py-16 border-t border-slate-700/50 relative overflow-hidden">
+    <footer className="bg-gradient-to-br from-mystic-blue to-ancient-stone py-16 border-t border-ancient-stone/50 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.3) 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(212, 181, 106, 0.3) 1px, transparent 0)`,
           backgroundSize: '40px 40px'
         }}></div>
       </div>
@@ -29,18 +29,18 @@ const Footer = () => {
               href="https://ko-fi.com/phoenixgoldzstudios" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center text-orange-400 hover:text-orange-300 transition-colors story-link text-lg group"
+              className="flex items-center text-ember-flame hover:text-ethereal-gold transition-colors story-link text-lg group"
             >
               <Coffee className="w-5 h-5 mr-2 group-hover:animate-bounce" />
               Ko-fi Dev Blog
               <ExternalLink className="w-4 h-4 ml-1 opacity-60" />
             </a>
-            <div className="hidden sm:block w-1 h-1 bg-slate-600 rounded-full"></div>
+            <div className="hidden sm:block w-1 h-1 bg-ancient-stone rounded-full"></div>
             <a 
               href="https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center text-emerald-400 hover:text-emerald-300 transition-colors story-link text-lg group"
+              className="flex items-center text-verdant-glyph hover:text-luminous-azure transition-colors story-link text-lg group"
             >
               <Zap className="w-5 h-5 mr-2 group-hover:animate-pulse" />
               Kickstarter Campaign
@@ -48,33 +48,33 @@ const Footer = () => {
             </a>
           </div>
 
-          <div className="bg-gradient-to-r from-slate-800/50 to-indigo-800/50 rounded-2xl p-8 border border-slate-600/30 glass-effect backdrop-blur-sm mb-8">
+          <div className="bg-gradient-to-r from-ancient-stone/50 to-mystic-blue/50 rounded-2xl p-8 border border-ancient-stone/30 glass-effect backdrop-blur-sm mb-8">
             <h4 className="text-xl font-semibold text-white mb-4 flex items-center justify-center">
               <span className="mr-2">🎮</span>
               Designed For Everyone
             </h4>
             <div className="flex flex-wrap justify-center gap-4 text-slate-300">
-              <span className="bg-slate-700/50 px-4 py-2 rounded-full text-sm border border-slate-600/50 hover:border-slate-500/50 transition-colors">
+              <span className="bg-ancient-stone/50 px-4 py-2 rounded-full text-sm border border-ancient-stone/50 hover:border-ethereal-gold/50 transition-colors">
                 PC (Unreal Engine 5.5)
               </span>
-              <span className="bg-slate-700/50 px-4 py-2 rounded-full text-sm border border-slate-600/50 hover:border-slate-500/50 transition-colors">
+              <span className="bg-ancient-stone/50 px-4 py-2 rounded-full text-sm border border-ancient-stone/50 hover:border-ethereal-gold/50 transition-colors">
                 Full Gamepad Support
               </span>
-              <span className="bg-slate-700/50 px-4 py-2 rounded-full text-sm border border-slate-600/50 hover:border-slate-500/50 transition-colors">
+              <span className="bg-ancient-stone/50 px-4 py-2 rounded-full text-sm border border-ancient-stone/50 hover:border-ethereal-gold/50 transition-colors">
                 Accessibility Options
               </span>
-              <span className="bg-slate-700/50 px-4 py-2 rounded-full text-sm border border-slate-600/50 hover:border-slate-500/50 transition-colors">
+              <span className="bg-ancient-stone/50 px-4 py-2 rounded-full text-sm border border-ancient-stone/50 hover:border-ethereal-gold/50 transition-colors">
                 Kid-Friendly Content
               </span>
             </div>
           </div>
           
-          <div className="pt-8 border-t border-slate-700/50">
+          <div className="pt-8 border-t border-ancient-stone/50">
             <p className="text-slate-500 text-sm flex items-center justify-center">
               © 2024 Phoenix Goldz Studios. All rights reserved. 
               <span className="mx-2">•</span>
               Built with 
-              <Heart className="w-4 h-4 mx-1 text-pink-400 animate-pulse" />
+              <Heart className="w-4 h-4 mx-1 text-ember-flame animate-pulse" />
               for RPG lovers everywhere.
             </p>
           </div>
