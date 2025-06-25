@@ -1,10 +1,11 @@
 
 import { useState, useEffect } from "react";
-import { Quote } from "lucide-react";
+import { Quote, Play, Pause } from "lucide-react";
 
 const MysteryQuotes = () => {
   const [currentQuote, setCurrentQuote] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const mysteryQuotes = [
     {
@@ -40,6 +41,8 @@ const MysteryQuotes = () => {
   ];
 
   useEffect(() => {
+    if (!isPlaying) return;
+
     const interval = setInterval(() => {
       setIsVisible(false);
       
@@ -50,9 +53,21 @@ const MysteryQuotes = () => {
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [mysteryQuotes.length]);
+  }, [mysteryQuotes.length, isPlaying]);
 
   const quote = mysteryQuotes[currentQuote];
+
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const goToQuote = (index: number) => {
+    setIsVisible(false);
+    setTimeout(() => {
+      setCurrentQuote(index);
+      setIsVisible(true);
+    }, 250);
+  };
 
   return (
     <section className="py-20 bg-gradient-to-r from-black/90 via-ancient-stone/80 to-black/90 relative overflow-hidden">
@@ -76,6 +91,16 @@ const MysteryQuotes = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-6 flex justify-center">
+            <button
+              onClick={togglePlayPause}
+              className="text-ethereal-gold/60 hover:text-ethereal-gold transition-colors p-2 rounded-full hover:bg-ethereal-gold/10"
+              aria-label={isPlaying ? 'Pause quotes' : 'Play quotes'}
+            >
+              {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+            </button>
+          </div>
+
           <div className={`transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <div className="mb-8">
               <Quote className="w-16 h-16 text-ethereal-gold/60 mx-auto mb-6 animate-pulse" />
@@ -95,12 +120,13 @@ const MysteryQuotes = () => {
               {mysteryQuotes.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentQuote(index)}
+                  onClick={() => goToQuote(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentQuote 
                       ? 'bg-ethereal-gold scale-125 shadow-lg shadow-ethereal-gold/30' 
                       : 'bg-ancient-stone/40 hover:bg-ethereal-gold/50'
                   }`}
+                  aria-label={`Go to quote ${index + 1}`}
                 />
               ))}
             </div>

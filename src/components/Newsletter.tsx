@@ -2,30 +2,69 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Mail, CheckCircle, AlertCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Mail, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState("");
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !email.includes('@')) {
+    if (!email.trim()) {
+      setStatus('error');
+      setMessage('Please enter your email address');
+      return;
+    }
+
+    if (!validateEmail(email)) {
       setStatus('error');
       setMessage('Please enter a valid email address');
       return;
     }
 
     setStatus('loading');
+    setMessage('');
     
-    // Simulate API call - in real implementation, this would call your backend
-    setTimeout(() => {
+    // Simulate API call with better error handling
+    try {
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // Simulate 95% success rate
+          if (Math.random() > 0.05) {
+            resolve(true);
+          } else {
+            reject(new Error('Network error'));
+          }
+        }, 1000);
+      });
+      
       setStatus('success');
-      setMessage('Thanks for joining our adventure! Check your email for updates.');
+      setMessage('Welcome aboard! Check your email for exclusive updates about The Forgotten Trial.');
       setEmail("");
-    }, 1000);
+      
+      // Reset success state after 5 seconds
+      setTimeout(() => {
+        setStatus('idle');
+        setMessage('');
+      }, 5000);
+    } catch (error) {
+      setStatus('error');
+      setMessage('Something went wrong. Please try again later.');
+      
+      // Reset error state after 3 seconds
+      setTimeout(() => {
+        setStatus('idle');
+        setMessage('');
+      }, 3000);
+    }
   };
 
   return (
@@ -53,23 +92,27 @@ const Newsletter = () => {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="flex flex-col sm:flex-row gap-4">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
-                  className="flex-1 px-4 py-3 bg-black/60 border border-ancient-stone/80 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:border-ethereal-gold/80 focus:ring-2 focus:ring-ethereal-gold/30 transition-all duration-300 backdrop-blur-sm"
-                  disabled={status === 'loading'}
-                />
+                <div className="flex-1">
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email address"
+                    className="bg-black/60 border-ancient-stone/80 text-white placeholder-gray-300 focus:border-ethereal-gold/80 focus:ring-ethereal-gold/30 h-12"
+                    disabled={status === 'loading'}
+                    aria-label="Email address"
+                    autoComplete="email"
+                  />
+                </div>
                 
                 <Button
                   type="submit"
-                  disabled={status === 'loading' || status === 'success'}
-                  className="bg-gradient-to-r from-verdant-glyph to-luminous-azure hover:from-verdant-glyph/90 hover:to-luminous-azure/90 text-white font-semibold px-8 py-3 rounded-lg button-shine hover-scale shadow-lg hover:shadow-verdant-glyph/30 border border-verdant-glyph/30 hover:border-verdant-glyph/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={status === 'loading'}
+                  className="bg-gradient-to-r from-verdant-glyph to-luminous-azure hover:from-verdant-glyph/90 hover:to-luminous-azure/90 text-white font-semibold px-8 h-12 rounded-lg button-shine hover-scale shadow-lg hover:shadow-verdant-glyph/30 border border-verdant-glyph/30 hover:border-verdant-glyph/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
                   {status === 'loading' ? (
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      <Loader2 className="w-4 h-4 animate-spin" />
                       Joining...
                     </div>
                   ) : status === 'success' ? (
@@ -84,21 +127,21 @@ const Newsletter = () => {
               </div>
 
               {message && (
-                <div className={`flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 text-center ${
+                <div className={`flex items-center justify-center gap-2 text-sm font-medium transition-all duration-300 text-center animate-fade-in ${
                   status === 'success' ? 'text-verdant-glyph' : 'text-ember-flame'
                 }`} style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
                   {status === 'success' ? (
                     <CheckCircle className="w-4 h-4" />
-                  ) : (
+                  ) : status === 'error' ? (
                     <AlertCircle className="w-4 h-4" />
-                  )}
+                  ) : null}
                   {message}
                 </div>
               )}
             </form>
 
             <div className="mt-6 text-xs text-gray-300 text-center" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}>
-              We respect your privacy. Unsubscribe at any time.
+              We respect your privacy. Unsubscribe at any time. No spam, ever.
             </div>
           </div>
         </Card>
