@@ -90,7 +90,7 @@ const Features = () => {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 gradient-text drop-shadow-lg animate-glow">
             Gameplay That Matters
           </h2>
-          <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+          <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md">
             Experience a unique blend of tactical combat, procedural storytelling, and meaningful choices that shape your adventure
           </p>
         </div>
@@ -117,7 +117,7 @@ const Features = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="relative z-10">
-                <CardDescription className="text-slate-300 text-base leading-relaxed group-hover:text-slate-200 transition-colors duration-500">
+                <CardDescription className="text-slate-200 text-base leading-relaxed group-hover:text-slate-100 transition-colors duration-500">
                   {feature.description}
                 </CardDescription>
               </CardContent>
@@ -127,7 +127,7 @@ const Features = () => {
 
         <div className="mt-16 text-center">
           <div className="inline-block p-8 bg-gradient-to-r from-ethereal-gold/15 to-ember-flame/15 rounded-2xl border border-ethereal-gold/30 backdrop-blur-md hover:bg-ethereal-gold/20 hover:border-ethereal-gold/50 transition-all duration-300 hover-scale shadow-lg">
-            <p className="text-ethereal-gold text-lg font-medium drop-shadow-sm">
+            <p className="text-white text-lg font-medium drop-shadow-sm">
               🎯 Every feature designed to create memorable, meaningful experiences
             </p>
           </div>

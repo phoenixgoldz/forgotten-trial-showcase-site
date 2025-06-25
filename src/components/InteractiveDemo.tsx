@@ -62,19 +62,19 @@ const InteractiveDemo = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 gradient-text">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 gradient-text drop-shadow-lg">
             The Forgotten Trial
           </h2>
-          <h3 className="text-2xl md:text-3xl font-semibold text-ethereal-gold mb-8">
+          <h3 className="text-2xl md:text-3xl font-semibold text-ethereal-gold mb-8 drop-shadow-md">
             Choose Your Own Adventure
           </h3>
 
           {!selectedCharacter ? (
             <div className="bg-gradient-to-r from-ancient-stone/50 to-mystic-blue/50 rounded-2xl p-8 border border-ancient-stone/30 glass-effect backdrop-blur-sm">
-              <p className="text-slate-300 text-lg mb-6 italic">
+              <p className="text-slate-100 text-lg mb-6 italic drop-shadow-md">
                 "(Narrator – "You awaken in the dark. Your memories are fractured... but you are not alone.")"
               </p>
-              <p className="text-white text-xl mb-8">
+              <p className="text-white text-xl mb-8 drop-shadow-md">
                 Four silhouettes flicker in the dim torchlight. One steps forward.
               </p>
               
@@ -114,10 +114,10 @@ const InteractiveDemo = () => {
             </div>
           ) : (
             <div className="bg-gradient-to-r from-ancient-stone/50 to-mystic-blue/50 rounded-2xl p-8 border border-ancient-stone/30 glass-effect backdrop-blur-sm animate-fade-in">
-              <h3 className="text-3xl font-bold text-ethereal-gold mb-6">
+              <h3 className="text-3xl font-bold text-ethereal-gold mb-6 drop-shadow-md">
                 You chose {selectedCharacter}
               </h3>
-              <p className="text-white text-xl leading-relaxed mb-8 italic">
+              <p className="text-white text-xl leading-relaxed mb-8 italic drop-shadow-md">
                 "{storyText}"
               </p>
               <button
@@ -131,10 +131,10 @@ const InteractiveDemo = () => {
           )}
 
           <div className="mt-12 text-center">
-            <p className="text-slate-400 text-lg">
+            <p className="text-slate-100 text-lg drop-shadow-md">
               Experience the mystery and make choices that shape your destiny.
             </p>
-            <p className="text-ethereal-gold font-medium mt-2">
+            <p className="text-ethereal-gold font-medium mt-2 drop-shadow-md">
               Every playthrough reveals new secrets...
             </p>
           </div>

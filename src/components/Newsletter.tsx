@@ -43,11 +43,11 @@ const Newsletter = () => {
               <Mail className="w-8 h-8 text-ethereal-gold animate-pulse" />
             </div>
 
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center drop-shadow-md">
               Join the <span className="gradient-text">Adventure</span>
             </h3>
             
-            <p className="text-slate-300 mb-8 leading-relaxed text-center">
+            <p className="text-slate-100 mb-8 leading-relaxed text-center drop-shadow-sm">
               Be the first to know about development updates, character reveals, and exclusive behind-the-scenes content. No spam, just mystical updates!
             </p>
 
@@ -58,7 +58,7 @@ const Newsletter = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address"
-                  className="flex-1 px-4 py-3 bg-ancient-stone/50 border border-ancient-stone/60 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-ethereal-gold/60 focus:ring-2 focus:ring-ethereal-gold/20 transition-all duration-300 backdrop-blur-sm"
+                  className="flex-1 px-4 py-3 bg-ancient-stone/50 border border-ancient-stone/60 rounded-lg text-white placeholder-slate-300 focus:outline-none focus:border-ethereal-gold/60 focus:ring-2 focus:ring-ethereal-gold/20 transition-all duration-300 backdrop-blur-sm"
                   disabled={status === 'loading'}
                 />
                 
@@ -97,7 +97,7 @@ const Newsletter = () => {
               )}
             </form>
 
-            <div className="mt-6 text-xs text-slate-400 text-center">
+            <div className="mt-6 text-xs text-slate-300 text-center">
               We respect your privacy. Unsubscribe at any time.
             </div>
           </div>

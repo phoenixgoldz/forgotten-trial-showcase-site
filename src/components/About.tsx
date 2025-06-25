@@ -1,153 +1,144 @@
 
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Scroll, Heart, Users, Sparkles, ChevronDown, ChevronUp } from "lucide-react";
+import { BookOpen, Heart, Shield, Users } from "lucide-react";
 
 const About = () => {
-  const [expandedCard, setExpandedCard] = useState<string | null>(null);
-
-  const aboutCards = [
-    {
-      id: "story",
-      icon: Scroll,
-      title: "What is The Forgotten Trial?",
-      preview: "Step into a cursed dungeon where you awaken with no memory...",
-      content: "Step into a cursed dungeon where you awaken with no memory—and only the echoing whispers of the past to guide you. In The Forgotten Trial, you lead a party of mysterious heroes through tactical battles and narrative choices. Each dungeon run is unique, shaped by handcrafted story fragments and a procedurally rebuilt world. No AI-generated content here—every word, character, and line of dialogue is crafted by our writing team to deliver a heartfelt, meaningful experience.",
-      color: "ethereal-gold"
-    },
-    {
-      id: "team",
-      icon: Heart,
-      title: "Crafted with Passion",
-      preview: "Every word, character, and dialogue is hand-written by our team...",
-      content: "No AI-generated content here. Every word, character, and line of dialogue is crafted by our passionate writing team at Phoenix Goldz Studios. We believe in creating heartfelt, meaningful experiences that resonate with players. Our small but dedicated team pours love into every aspect of the game, from the mystical world-building to the tactical combat mechanics.",
-      color: "ember-flame"
-    },
-    {
-      id: "community",
-      icon: Users,
-      title: "Built for the Community",
-      preview: "Join fellow adventurers in bringing this mystical world to life...",
-      content: "The Forgotten Trial is more than just a game—it's a community-driven adventure. Through Kickstarter and Ko-fi, we're building this experience together with fellow RPG enthusiasts. Your support helps us create deeper storylines, more characters, and richer gameplay mechanics. Every backer becomes part of our extended development family.",
-      color: "verdant-glyph"
-    },
-    {
-      id: "mystery",
-      icon: Sparkles,
-      title: "The Mystery Deepens",
-      preview: "Who were you before the dungeon claimed your mind?...",
-      content: "Who were you before the dungeon claimed your mind? Will you find the truth—or become part of the legend? Every memory fragment you collect adds a piece to the story. Every run is a new adventure, with different characters, outcomes, and twists. But beware: One of you might be a traitor... and not even know it. The deeper you delve, the more questions arise.",
-      color: "luminous-azure"
-    }
-  ];
-
-  const toggleCard = (cardId: string) => {
-    setExpandedCard(expandedCard === cardId ? null : cardId);
-  };
-
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-ancient-stone via-mystic-blue to-ancient-stone relative overflow-hidden">
-      {/* Mystical Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-10 left-10 w-96 h-96 bg-ethereal-gold/5 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-10 right-10 w-80 h-80 bg-verdant-glyph/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-ember-flame/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+    <section className="py-20 bg-gradient-to-br from-ancient-stone via-mystic-blue to-ancient-stone/80 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(212, 181, 106, 0.3) 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
+        }}></div>
+      </div>
+      
+      {/* Floating elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full opacity-20 blur-xl animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${60 + Math.random() * 120}px`,
+              height: `${60 + Math.random() * 120}px`,
+              background: `radial-gradient(circle, ${i % 2 === 0 ? 'var(--ethereal-gold)' : 'var(--verdant-glyph)'}, transparent)`,
+              animationDelay: `${Math.random() * 4}s`,
+              animationDuration: `${6 + Math.random() * 4}s`
+            }}
+          />
+        ))}
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-block mb-6">
-            <span className="px-6 py-3 bg-gradient-to-r from-ethereal-gold/20 to-ember-flame/20 rounded-full text-ethereal-gold text-sm font-medium border border-ethereal-gold/30 backdrop-blur-md glass-effect">
-              ✨ About the Adventure
+          <div className="inline-block mb-4">
+            <span className="px-4 py-2 bg-gradient-to-r from-ethereal-gold/20 to-ember-flame/20 rounded-full text-ethereal-gold text-sm font-medium border border-ethereal-gold/30">
+              About The Game
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Discover the <span className="gradient-text">Mystery</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 gradient-text drop-shadow-lg">
+            What is The Forgotten Trial?
           </h2>
-          <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Every choice matters, every memory is a clue, and every playthrough reveals new secrets
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {aboutCards.map((card) => {
-            const IconComponent = card.icon;
-            const isExpanded = expandedCard === card.id;
-            
-            return (
-              <Card 
-                key={card.id}
-                className={`bg-gradient-to-br from-mystic-blue/90 to-ancient-stone/70 border-2 transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm relative overflow-hidden cursor-pointer ${
-                  card.color === 'ethereal-gold' ? 'border-ethereal-gold/30 hover:border-ethereal-gold/60' :
-                  card.color === 'ember-flame' ? 'border-ember-flame/30 hover:border-ember-flame/60' :
-                  card.color === 'verdant-glyph' ? 'border-verdant-glyph/30 hover:border-verdant-glyph/60' :
-                  'border-luminous-azure/30 hover:border-luminous-azure/60'
-                }`}
-                onClick={() => toggleCard(card.id)}
-              >
-                <CardHeader className="relative z-10">
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl mb-4 border backdrop-blur-sm ${
-                    card.color === 'ethereal-gold' ? 'bg-gradient-to-br from-ethereal-gold/20 to-ethereal-gold/10 border-ethereal-gold/30' :
-                    card.color === 'ember-flame' ? 'bg-gradient-to-br from-ember-flame/20 to-ember-flame/10 border-ember-flame/30' :
-                    card.color === 'verdant-glyph' ? 'bg-gradient-to-br from-verdant-glyph/20 to-verdant-glyph/10 border-verdant-glyph/30' :
-                    'bg-gradient-to-br from-luminous-azure/20 to-luminous-azure/10 border-luminous-azure/30'
-                  }`}>
-                    <IconComponent className={`w-8 h-8 animate-pulse ${
-                      card.color === 'ethereal-gold' ? 'text-ethereal-gold' :
-                      card.color === 'ember-flame' ? 'text-ember-flame' :
-                      card.color === 'verdant-glyph' ? 'text-verdant-glyph' :
-                      'text-luminous-azure'
-                    }`} />
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <CardTitle className={`text-xl font-bold text-white transition-colors ${
-                      card.color === 'ethereal-gold' ? 'group-hover:text-ethereal-gold' :
-                      card.color === 'ember-flame' ? 'group-hover:text-ember-flame' :
-                      card.color === 'verdant-glyph' ? 'group-hover:text-verdant-glyph' :
-                      'group-hover:text-luminous-azure'
-                    }`}>
-                      {card.title}
-                    </CardTitle>
-                    
-                    {isExpanded ? (
-                      <ChevronUp className="w-5 h-5 text-slate-400 transition-transform" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5 text-slate-400 transition-transform" />
-                    )}
-                  </div>
-                </CardHeader>
-                
-                <CardContent className="relative z-10">
-                  <div className={`transition-all duration-500 overflow-hidden ${
-                    isExpanded ? 'max-h-96 opacity-100' : 'max-h-20 opacity-80'
-                  }`}>
-                    <p className="text-slate-300 leading-relaxed">
-                      {isExpanded ? card.content : card.preview}
-                    </p>
-                  </div>
-                  
-                  {!isExpanded && (
-                    <div className="mt-4">
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        className={`border transition-colors ${
-                          card.color === 'ethereal-gold' ? 'border-ethereal-gold/60 text-ethereal-gold hover:bg-ethereal-gold/15' :
-                          card.color === 'ember-flame' ? 'border-ember-flame/60 text-ember-flame hover:bg-ember-flame/15' :
-                          card.color === 'verdant-glyph' ? 'border-verdant-glyph/60 text-verdant-glyph hover:bg-verdant-glyph/15' :
-                          'border-luminous-azure/60 text-luminous-azure hover:bg-luminous-azure/15'
-                        }`}
-                      >
-                        Read More
-                      </Button>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            );
-          })}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto mb-16">
+          <div className="space-y-6">
+            <p className="text-lg md:text-xl text-white leading-relaxed drop-shadow-md">
+              Step into a cursed dungeon where you awaken with no memory—and only the echoing whispers of the past to guide you. In <span className="text-ethereal-gold font-semibold">The Forgotten Trial</span>, you lead a party of mysterious heroes through tactical battles and narrative choices.
+            </p>
+            <p className="text-lg md:text-xl text-slate-100 leading-relaxed drop-shadow-md">
+              Each dungeon run is unique, shaped by handcrafted story fragments and a procedurally rebuilt world. Every memory you uncover brings you closer to the truth—but also deeper into the mystery.
+            </p>
+            <div className="bg-gradient-to-r from-verdant-glyph/20 to-luminous-azure/20 rounded-2xl p-6 border border-verdant-glyph/30 backdrop-blur-sm">
+              <p className="text-white font-semibold text-lg flex items-center">
+                <Heart className="w-5 h-5 mr-2 text-ember-flame" />
+                <strong>No AI-generated content here.</strong>
+              </p>
+              <p className="text-slate-100 mt-2">
+                Every word, character, and line of dialogue is crafted by our writing team to deliver a heartfelt, meaningful experience.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="aspect-[4/3] bg-gradient-to-br from-ancient-stone/50 to-mystic-blue/50 rounded-2xl overflow-hidden border border-ancient-stone/30 glass-effect backdrop-blur-sm">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
+                  <BookOpen className="w-16 h-16 text-ethereal-gold mx-auto mb-4 animate-pulse" />
+                  <p className="text-white text-lg font-medium">
+                    Hand-crafted Stories
+                  </p>
+                  <p className="text-slate-200 text-sm mt-2">
+                    Every narrative fragment tells a piece of your forgotten past
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <Card className="bg-gradient-to-br from-ancient-stone/80 to-mystic-blue/80 border-ethereal-gold/30 hover:border-ethereal-gold/50 transition-all duration-300 hover-scale group glass-effect backdrop-blur-sm">
+            <CardHeader className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r from-ethereal-gold to-ember-flame mb-3 mx-auto">
+                <Shield className="w-6 h-6 text-white" />
+              </div>
+              <CardTitle className="text-white group-hover:text-ethereal-gold transition-colors">
+                Family Friendly
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="text-slate-200 text-center">
+                No horror, no gore. Just mystery, magic, and meaningful decisions for all ages.
+              </CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-ancient-stone/80 to-mystic-blue/80 border-verdant-glyph/30 hover:border-verdant-glyph/50 transition-all duration-300 hover-scale group glass-effect backdrop-blur-sm">
+            <CardHeader className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r from-verdant-glyph to-luminous-azure mb-3 mx-auto">
+                <Users className="w-6 h-6 text-white" />
+              </div>
+              <CardTitle className="text-white group-hover:text-verdant-glyph transition-colors">
+                Rich Characters
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="text-slate-200 text-center">
+                Each companion has secrets, personalities, and reactions that evolve with your choices.
+              </CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-ancient-stone/80 to-mystic-blue/80 border-luminous-azure/30 hover:border-luminous-azure/50 transition-all duration-300 hover-scale group glass-effect backdrop-blur-sm">
+            <CardHeader className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r from-luminous-azure to-ethereal-gold mb-3 mx-auto">
+                <BookOpen className="w-6 h-6 text-white" />
+              </div>
+              <CardTitle className="text-white group-hover:text-luminous-azure transition-colors">
+                Endless Stories
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="text-slate-200 text-center">
+                Procedural storytelling ensures every playthrough reveals new mysteries and outcomes.
+              </CardDescription>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="text-center mt-16">
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-ethereal-gold to-ember-flame hover:from-ethereal-gold/90 hover:to-ember-flame/90 text-mystic-blue font-semibold px-10 py-4 text-lg rounded-full button-shine hover-scale shadow-xl hover:shadow-ethereal-gold/25 transition-all duration-300"
+            onClick={() => document.getElementById('characters')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            Meet Your Companions
+          </Button>
         </div>
       </div>
     </section>
