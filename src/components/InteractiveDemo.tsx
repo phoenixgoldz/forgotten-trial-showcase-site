@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { RotateCcw, Sparkles } from "lucide-react";
 
@@ -152,38 +151,38 @@ const InteractiveDemo = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <button
                   onClick={() => choose('Solari')}
-                  className="bg-gradient-to-br from-ember-flame to-ethereal-gold text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine group"
+                  className="group bg-gradient-to-br from-ember-flame/90 to-ethereal-gold/90 hover:from-ember-flame hover:to-ethereal-gold text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg shadow-ember-flame/25 hover:shadow-xl hover:shadow-ember-flame/30 transition-all duration-300 hover:scale-105 button-shine border border-ethereal-gold/30 hover:border-ethereal-gold/60"
                 >
                   <span className="text-2xl mb-2 block group-hover:animate-pulse">☀️</span>
                   <span className="font-cinzel">Solari</span>
-                  <p className="text-sm mt-1 opacity-80">The Sunweaver</p>
+                  <p className="text-sm mt-1 opacity-90">The Sunweaver</p>
                 </button>
                 
                 <button
                   onClick={() => choose('Tarrin')}
-                  className="bg-gradient-to-br from-luminous-azure to-verdant-glyph text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine group"
+                  className="group bg-gradient-to-br from-luminous-azure/90 to-mystic-blue/90 hover:from-luminous-azure hover:to-mystic-blue text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg shadow-luminous-azure/25 hover:shadow-xl hover:shadow-luminous-azure/30 transition-all duration-300 hover:scale-105 button-shine border border-luminous-azure/30 hover:border-luminous-azure/60"
                 >
                   <span className="text-2xl mb-2 block group-hover:animate-pulse">⚡</span>
                   <span className="font-cinzel">Tarrin</span>
-                  <p className="text-sm mt-1 opacity-80">The Stormblade</p>
+                  <p className="text-sm mt-1 opacity-90">The Stormblade</p>
                 </button>
                 
                 <button
                   onClick={() => choose('Wisp')}
-                  className="bg-gradient-to-br from-verdant-glyph to-ethereal-gold text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine group"
+                  className="group bg-gradient-to-br from-verdant-glyph/90 to-ethereal-gold/80 hover:from-verdant-glyph hover:to-ethereal-gold text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg shadow-verdant-glyph/25 hover:shadow-xl hover:shadow-verdant-glyph/30 transition-all duration-300 hover:scale-105 button-shine border border-verdant-glyph/30 hover:border-verdant-glyph/60"
                 >
                   <span className="text-2xl mb-2 block group-hover:animate-pulse">🎵</span>
                   <span className="font-cinzel">Wisp</span>
-                  <p className="text-sm mt-1 opacity-80">The Chronobard</p>
+                  <p className="text-sm mt-1 opacity-90">The Chronobard</p>
                 </button>
                 
                 <button
                   onClick={() => choose('Kael')}
-                  className="bg-gradient-to-br from-ancient-stone to-mystic-blue text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine group"
+                  className="group bg-gradient-to-br from-ancient-stone/90 to-mystic-blue/90 hover:from-ancient-stone hover:to-mystic-blue text-white px-6 py-4 rounded-xl font-semibold text-lg shadow-lg shadow-ancient-stone/25 hover:shadow-xl hover:shadow-ancient-stone/30 transition-all duration-300 hover:scale-105 button-shine border border-ancient-stone/50 hover:border-ancient-stone/80"
                 >
                   <span className="text-2xl mb-2 block group-hover:animate-pulse">🌿</span>
                   <span className="font-cinzel">Kael</span>
-                  <p className="text-sm mt-1 opacity-80">The Runic Warden</p>
+                  <p className="text-sm mt-1 opacity-90">The Runic Warden</p>
                 </button>
               </div>
             </div>
@@ -204,7 +203,7 @@ const InteractiveDemo = () => {
                   <button
                     key={index}
                     onClick={() => continueStory(index)}
-                    className="bg-gradient-to-r from-ethereal-gold to-ember-flame text-black px-6 py-3 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine"
+                    className="bg-gradient-to-r from-ethereal-gold/90 to-ember-flame/90 hover:from-ethereal-gold hover:to-ember-flame text-mystic-blue hover:text-mystic-blue/90 px-6 py-3 rounded-xl font-semibold text-base shadow-lg shadow-ethereal-gold/25 hover:shadow-xl hover:shadow-ethereal-gold/30 transition-all duration-300 hover:scale-105 button-shine border border-ethereal-gold/40 hover:border-ethereal-gold/70 font-cinzel"
                   >
                     {choice}
                   </button>
@@ -212,7 +211,7 @@ const InteractiveDemo = () => {
                 
                 <button
                   onClick={restart}
-                  className="bg-gradient-to-r from-ancient-stone to-mystic-blue text-white px-6 py-3 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 button-shine flex items-center justify-center"
+                  className="bg-gradient-to-r from-ancient-stone/90 to-mystic-blue/90 hover:from-ancient-stone hover:to-mystic-blue text-white px-6 py-3 rounded-xl font-semibold text-base shadow-lg shadow-ancient-stone/25 hover:shadow-xl hover:shadow-ancient-stone/30 transition-all duration-300 hover:scale-105 button-shine flex items-center justify-center border border-ancient-stone/40 hover:border-ancient-stone/70 font-cinzel"
                 >
                   <RotateCcw className="w-4 h-4 mr-2" />
                   Begin Anew

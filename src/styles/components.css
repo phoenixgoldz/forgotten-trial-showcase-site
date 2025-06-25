@@ -33,6 +33,11 @@
   animation: shimmer 4s ease-in-out infinite;
 }
 
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 .glass-effect {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -54,6 +59,7 @@
 .button-shine {
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .button-shine::before {
@@ -66,7 +72,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.4),
     transparent
   );
   transition: left 0.6s;
@@ -80,8 +86,14 @@
   content: '';
   position: absolute;
   inset: 0;
-  padding: 2px;
-  background: linear-gradient(45deg, transparent, rgba(212, 181, 106, 0.3), transparent);
+  padding: 1px;
+  background: linear-gradient(45deg, 
+    transparent, 
+    rgba(212, 181, 106, 0.5), 
+    rgba(233, 127, 60, 0.3),
+    rgba(126, 200, 80, 0.3),
+    transparent
+  );
   border-radius: inherit;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: xor;
@@ -92,4 +104,30 @@
 
 .button-shine:hover::after {
   opacity: 1;
+}
+
+/* Enhanced button hover effects for The Forgotten Trial theme */
+.button-shine:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.button-shine:active {
+  transform: translateY(0px);
+  transition: transform 0.1s;
+}
+
+/* Mystical glow effect for interactive elements */
+.mystical-glow {
+  box-shadow: 
+    0 0 20px rgba(212, 181, 106, 0.3),
+    0 0 40px rgba(212, 181, 106, 0.2),
+    0 0 60px rgba(212, 181, 106, 0.1);
+}
+
+.mystical-glow:hover {
+  box-shadow: 
+    0 0 25px rgba(212, 181, 106, 0.4),
+    0 0 50px rgba(212, 181, 106, 0.3),
+    0 0 75px rgba(212, 181, 106, 0.2);
 }
