@@ -1,5 +1,5 @@
 
-import { Heart, ExternalLink } from "lucide-react";
+import { Heart, ExternalLink, Coffee, Zap } from "lucide-react";
 
 const Footer = () => {
   return (
