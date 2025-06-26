@@ -91,7 +91,7 @@ const NewsTicker = () => {
               }`}
               aria-label={`${currentUpdate.text}. ${currentUpdate.link.startsWith('http') ? 'Opens in new tab' : 'Scroll to section'}`}
             >
-              <span className="inline-flex items-center gap-2 animate-fade-in">
+              <span className="inline-flex items-center gap-2">
                 {currentUpdate.text}
                 {currentUpdate.link.startsWith('http') && (
                   <ExternalLink className="w-3 h-3 opacity-60" aria-hidden="true" />

@@ -64,17 +64,6 @@
   }
 }
 
-@keyframes slide-in {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 @keyframes bounce-subtle {
   0%, 100% {
     transform: translateY(0);
@@ -99,10 +88,6 @@
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.animate-slide-in {
-  animation: slide-in 0.6s ease-out forwards;
 }
 
 .animate-bounce-subtle {
