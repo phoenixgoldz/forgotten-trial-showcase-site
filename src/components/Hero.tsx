@@ -4,10 +4,12 @@ import { ArrowDown, Play, Star } from "lucide-react";
 
 const Hero = () => {
   const handleKickstarterClick = () => {
+    console.log('Redirecting to Kickstarter');
     window.open('https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial', '_blank', 'noopener,noreferrer');
   };
 
   const handleKofiClick = () => {
+    console.log('Redirecting to Ko-fi');
     window.open('https://ko-fi.com/phoenixgoldzstudios', '_blank', 'noopener,noreferrer');
   };
 
@@ -15,22 +17,33 @@ const Hero = () => {
     const featuresElement = document.getElementById('features');
     if (featuresElement) {
       featuresElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.log('Features section not found, scrolling to mystery quotes instead');
+      const mysteryElement = document.querySelector('[data-section="mystery"]');
+      if (mysteryElement) {
+        mysteryElement.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue overflow-hidden">
-      {/* Improved Background Image Display with 50% size */}
+      {/* Background Image Display with proper loading */}
       <div className="absolute inset-0">
         <div className="w-full h-full flex items-center justify-center">
           <img 
             src="/lovable-uploads/fd08db9a-ea75-4280-b9ad-6117a0d836f6.png" 
-            alt="The Forgotten Trial - Fantasy RPG artwork showing mystical dungeon atmosphere"
+            alt="The Forgotten Trial - Mystical dungeon entrance with ancient stone archways and ethereal lighting, setting the atmospheric tone for a fantasy RPG adventure"
             className="max-w-[50%] h-auto object-contain opacity-70"
             style={{ 
               filter: 'brightness(0.7) contrast(1.3) saturate(1.2)',
             }}
             loading="eager"
+            onError={(e) => {
+              console.warn('Hero background image failed to load');
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+            }}
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-mystic-blue/95 via-mystic-blue/60 to-mystic-blue/40"></div>
@@ -42,7 +55,7 @@ const Hero = () => {
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {Array.from({ length: 30 }, (_, i) => (
           <div
-            key={`particle-${i}`}
+            key={`hero-particle-${i}`}
             className="absolute w-1 h-1 bg-ethereal-gold rounded-full animate-float opacity-70"
             style={{
               left: `${Math.random() * 100}%`,
@@ -55,7 +68,7 @@ const Hero = () => {
         ))}
         {Array.from({ length: 15 }, (_, i) => (
           <Star
-            key={`star-${i}`}
+            key={`hero-star-${i}`}
             className="absolute text-verdant-glyph opacity-50 animate-pulse"
             size={6 + Math.random() * 10}
             style={{
@@ -68,7 +81,7 @@ const Hero = () => {
         ))}
         {Array.from({ length: 6 }, (_, i) => (
           <div
-            key={`orb-${i}`}
+            key={`hero-orb-${i}`}
             className="absolute rounded-full opacity-25 blur-sm animate-float"
             style={{
               left: `${Math.random() * 100}%`,
@@ -78,7 +91,7 @@ const Hero = () => {
               background: `radial-gradient(circle, ${
                 i % 3 === 0 ? 'rgb(212, 181, 106)' : 
                 i % 3 === 1 ? 'rgb(126, 200, 80)' : 
-                'rgb(239, 68, 68)'
+                'rgb(233, 127, 60)'
               }, transparent)`,
               animationDelay: `${Math.random() * 4}s`,
               animationDuration: `${6 + Math.random() * 4}s`
@@ -89,7 +102,7 @@ const Hero = () => {
       
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
         <div className="mb-8 animate-fade-in">
-          <span className="inline-flex items-center px-6 py-3 rounded-full bg-black/50 border border-ethereal-gold/70 text-ethereal-gold text-sm font-medium backdrop-blur-md glass-effect hover:bg-black/60 hover:border-ethereal-gold/90 transition-all duration-300 hover-scale font-citizen">
+          <span className="inline-flex items-center px-6 py-3 rounded-full bg-black/50 border border-ethereal-gold/70 text-ethereal-gold text-sm font-medium backdrop-blur-md glass-effect hover:bg-black/60 hover:border-ethereal-gold/90 transition-all duration-300 font-citizen">
             <Play className="w-4 h-4 mr-2 animate-pulse" aria-hidden="true" />
             Now Live on Kickstarter
           </span>
@@ -110,17 +123,21 @@ const Hero = () => {
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in mb-12" style={{ animationDelay: "0.6s" }}>
           <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-verdant-glyph to-luminous-azure hover:from-verdant-glyph/90 hover:to-luminous-azure/90 text-white font-semibold px-12 py-5 text-lg rounded-full button-shine hover-scale shadow-xl hover:shadow-verdant-glyph/30 border border-verdant-glyph/30 hover:border-verdant-glyph/50 transition-all duration-300 font-citizen"
+            size="hero" 
+            variant="verdant"
             onClick={handleKickstarterClick}
+            className="font-citizen min-w-[250px]"
+            aria-label="Support The Forgotten Trial on Kickstarter - opens in new tab"
           >
             🎮 Back on Kickstarter
           </Button>
           
           <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-ember-flame to-ethereal-gold hover:from-ember-flame/90 hover:to-ethereal-gold/90 text-white font-semibold px-12 py-5 text-lg rounded-full button-shine hover-scale shadow-xl hover:shadow-ember-flame/30 border border-ember-flame/30 hover:border-ember-flame/50 transition-all duration-300 font-citizen"
+            size="hero" 
+            variant="ember"
             onClick={handleKofiClick}
+            className="font-citizen min-w-[200px]"
+            aria-label="Support development on Ko-fi - opens in new tab"
           >
             ☕ Support on Ko-fi
           </Button>
@@ -128,10 +145,11 @@ const Hero = () => {
 
         <div className="animate-fade-in text-center" style={{ animationDelay: "0.8s" }}>
           <Button 
-            variant="outline" 
-            size="lg" 
-            className="border-2 border-ethereal-gold/70 text-ethereal-gold hover:bg-ethereal-gold/20 hover:border-ethereal-gold px-10 py-4 text-lg rounded-full backdrop-blur-md glass-effect hover-scale transition-all duration-300 shadow-lg hover:shadow-ethereal-gold/20 font-citizen"
+            variant="ethereal" 
+            size="story" 
             onClick={handleScrollToFeatures}
+            className="font-citizen"
+            aria-label="Scroll down to discover more about the game"
           >
             Discover the Mystery <ArrowDown className="ml-2 h-6 w-6 animate-bounce" />
           </Button>

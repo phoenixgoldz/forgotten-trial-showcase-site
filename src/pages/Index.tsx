@@ -30,11 +30,17 @@ const Index = () => {
       '/lovable-uploads/c261823d-4fbe-4910-83e7-edaf1effd9bd.png'
     ];
     
-    const preloadPromises = criticalImages.map(src => {
+    const preloadPromises = criticalImages.map((src, index) => {
       return new Promise((resolve) => {
         const img = new Image();
-        img.onload = () => resolve(src);
-        img.onerror = () => resolve(src); // Still resolve on error to continue
+        img.onload = () => {
+          console.log(`Image ${index + 1} loaded successfully: ${src}`);
+          resolve(src);
+        };
+        img.onerror = () => {
+          console.warn(`Failed to load image ${index + 1}: ${src}`);
+          resolve(src); // Still resolve on error to continue
+        };
         img.src = src;
       });
     });
@@ -56,7 +62,7 @@ const Index = () => {
       <div className="min-h-screen bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-ethereal-gold/30 border-t-ethereal-gold rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-ethereal-gold font-cinzel text-xl">Awakening the forgotten memories...</p>
+          <p className="text-ethereal-gold font-cinzel text-xl animate-pulse">Awakening the forgotten memories...</p>
         </div>
       </div>
     );

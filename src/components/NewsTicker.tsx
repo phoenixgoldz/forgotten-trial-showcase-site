@@ -8,21 +8,25 @@ const NewsTicker = () => {
   
   const updates = [
     {
+      id: 'kickstarter-live',
       text: "🎮 Kickstarter campaign is now live! Support The Forgotten Trial",
       link: "https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial",
       type: "kickstarter"
     },
     {
+      id: 'dev-blog',
       text: "☕ New development blog post available on Ko-fi",
       link: "https://ko-fi.com/phoenixgoldzstudios",
       type: "blog"
     },
     {
-      text: "🎨 Four unique characters revealed - each with mysterious pasts",
+      id: 'characters-revealed',
+      text: "🎭 Four unique characters revealed - each with mysterious pasts",
       link: "/characters",
       type: "feature"
     },
     {
+      id: 'combat-system',
       text: "⚔️ Tactical combat system development in progress",
       link: "/features",
       type: "feature"
@@ -50,17 +54,24 @@ const NewsTicker = () => {
   };
 
   const handleLinkClick = (link: string) => {
-    if (link.startsWith('http')) {
-      window.open(link, '_blank', 'noopener,noreferrer');
-    } else if (link.startsWith('/')) {
-      // Use React Router navigation for internal links
-      window.location.href = link;
-    } else if (link.startsWith('#')) {
-      // Smooth scroll for anchor links
-      const element = document.querySelector(link);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+    try {
+      if (link.startsWith('http')) {
+        console.log('Opening external link:', link);
+        window.open(link, '_blank', 'noopener,noreferrer');
+      } else if (link.startsWith('/')) {
+        console.log('Navigating to internal route:', link);
+        window.location.href = link;
+      } else if (link.startsWith('#')) {
+        console.log('Scrolling to anchor:', link);
+        const element = document.querySelector(link);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          console.warn('Anchor element not found:', link);
+        }
       }
+    } catch (error) {
+      console.error('Error handling link click:', error);
     }
   };
 
@@ -70,7 +81,7 @@ const NewsTicker = () => {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       role="banner"
-      aria-label="News updates"
+      aria-label="News updates ticker"
     >
       <div className="absolute inset-0 bg-gradient-to-r from-ethereal-gold/5 via-transparent to-verdant-glyph/5"></div>
       
@@ -113,16 +124,16 @@ const NewsTicker = () => {
           </button>
 
           <div className="flex gap-1 ml-2">
-            {updates.map((_, index) => (
+            {updates.map((update, index) => (
               <button
-                key={index}
+                key={update.id}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-ethereal-gold/50 ${
                   index === currentIndex 
                     ? 'bg-ethereal-gold scale-125' 
                     : 'bg-ancient-stone/50 hover:bg-ethereal-gold/50'
                 }`}
-                aria-label={`Go to update ${index + 1}`}
+                aria-label={`Go to update ${index + 1}: ${update.text}`}
               />
             ))}
           </div>
