@@ -2,13 +2,8 @@
 import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
 import NewsTicker from "@/components/NewsTicker";
-import About from "@/components/About";
-import Features from "@/components/Features";
-import Characters from "@/components/Characters";
 import MysteryQuotes from "@/components/MysteryQuotes";
-import FundingProgress from "@/components/FundingProgress";
 import Newsletter from "@/components/Newsletter";
-import Support from "@/components/Support";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -49,24 +44,9 @@ const Index = () => {
       console.log('Some images failed to preload, but continuing...');
     });
 
-    // Add intersection observer for performance
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in');
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.1,
-      rootMargin: '50px'
-    });
-
     // Cleanup function
     return () => {
       document.documentElement.style.scrollBehavior = 'auto';
-      observer.disconnect();
     };
   }, []);
 
@@ -108,13 +88,8 @@ const Index = () => {
           <div className="pt-16">
             <NewsTicker />
             <Hero />
-            <About />
-            <Features />
-            <Characters />
             <MysteryQuotes />
-            <FundingProgress />
             <Newsletter />
-            <Support />
           </div>
           <Footer />
         </div>

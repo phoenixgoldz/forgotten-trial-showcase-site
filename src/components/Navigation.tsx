@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Scroll, Users, Gamepad2, Heart, MessageCircle } from "lucide-react";
+import { Menu, X, Scroll, Users, Gamepad2, Heart, MessageCircle, Info, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
@@ -10,20 +10,17 @@ const Navigation = () => {
 
   const navItems = [
     { name: "Home", path: "/", icon: Scroll },
-    { name: "Interactive Demo", path: "/demo", icon: Gamepad2 },
-    { name: "Characters", path: "/#characters", icon: Users },
-    { name: "Support", path: "/#support", icon: Heart },
+    { name: "About", path: "/about", icon: Info },
+    { name: "Features", path: "/features", icon: Zap },
+    { name: "Characters", path: "/characters", icon: Users },
+    { name: "Demo", path: "/demo", icon: Gamepad2 },
+    { name: "Support", path: "/support", icon: Heart },
     { name: "Discord", path: "https://discord.gg/knfKP9qxtM", icon: MessageCircle, external: true }
   ];
 
   const handleNavClick = (path: string, external?: boolean) => {
     if (external) {
       window.open(path, '_blank', 'noopener,noreferrer');
-    } else if (path.startsWith('/#')) {
-      const element = document.querySelector(path.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
     }
     setIsOpen(false);
   };
@@ -46,7 +43,7 @@ const Navigation = () => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
               
-              if (item.external || item.path.startsWith('/#')) {
+              if (item.external) {
                 return (
                   <button
                     key={item.name}
@@ -59,7 +56,7 @@ const Navigation = () => {
                   >
                     <Icon className="w-4 h-4" />
                     <span>{item.name}</span>
-                    {item.external && <span className="text-xs">↗</span>}
+                    <span className="text-xs">↗</span>
                   </button>
                 );
               }
@@ -99,7 +96,7 @@ const Navigation = () => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.path;
                 
-                if (item.external || item.path.startsWith('/#')) {
+                if (item.external) {
                   return (
                     <button
                       key={item.name}
@@ -112,7 +109,7 @@ const Navigation = () => {
                     >
                       <Icon className="w-4 h-4" />
                       <span>{item.name}</span>
-                      {item.external && <span className="text-xs">↗</span>}
+                      <span className="text-xs">↗</span>
                     </button>
                   );
                 }
