@@ -19,12 +19,12 @@ const NewsTicker = () => {
     },
     {
       text: "🎨 Four unique characters revealed - each with mysterious pasts",
-      link: "#characters",
+      link: "/characters",
       type: "feature"
     },
     {
       text: "⚔️ Tactical combat system development in progress",
-      link: "#features",
+      link: "/features",
       type: "feature"
     }
   ];
@@ -50,13 +50,17 @@ const NewsTicker = () => {
   };
 
   const handleLinkClick = (link: string) => {
-    if (link.startsWith('#')) {
+    if (link.startsWith('http')) {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    } else if (link.startsWith('/')) {
+      // Use React Router navigation for internal links
+      window.location.href = link;
+    } else if (link.startsWith('#')) {
+      // Smooth scroll for anchor links
       const element = document.querySelector(link);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
-    } else {
-      window.open(link, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -76,7 +80,7 @@ const NewsTicker = () => {
           
           <button
             onClick={goToPrevious}
-            className="text-ethereal-gold/60 hover:text-ethereal-gold transition-colors p-1 rounded"
+            className="text-ethereal-gold/60 hover:text-ethereal-gold transition-colors p-1 rounded focus:outline-none focus:ring-2 focus:ring-ethereal-gold/50"
             aria-label="Previous update"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -85,11 +89,11 @@ const NewsTicker = () => {
           <div className="flex-1 min-w-0">
             <button
               onClick={() => handleLinkClick(currentUpdate.link)}
-              className={`block text-sm font-medium transition-all duration-500 hover:text-ethereal-gold w-full text-center font-citizen ${
+              className={`block text-sm font-medium transition-all duration-500 hover:text-ethereal-gold w-full text-center font-citizen focus:outline-none focus:ring-2 focus:ring-ethereal-gold/50 rounded px-2 py-1 ${
                 currentUpdate.type === 'kickstarter' ? 'text-verdant-glyph' :
                 currentUpdate.type === 'blog' ? 'text-ember-flame' : 'text-slate-200'
               }`}
-              aria-label={`${currentUpdate.text}. ${currentUpdate.link.startsWith('http') ? 'Opens in new tab' : 'Scroll to section'}`}
+              aria-label={`${currentUpdate.text}. ${currentUpdate.link.startsWith('http') ? 'Opens in new tab' : 'Navigate to page'}`}
             >
               <span className="inline-flex items-center gap-2">
                 {currentUpdate.text}
@@ -102,7 +106,7 @@ const NewsTicker = () => {
 
           <button
             onClick={goToNext}
-            className="text-ethereal-gold/60 hover:text-ethereal-gold transition-colors p-1 rounded"
+            className="text-ethereal-gold/60 hover:text-ethereal-gold transition-colors p-1 rounded focus:outline-none focus:ring-2 focus:ring-ethereal-gold/50"
             aria-label="Next update"
           >
             <ChevronRight className="w-4 h-4" />
@@ -113,7 +117,7 @@ const NewsTicker = () => {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-ethereal-gold/50 ${
                   index === currentIndex 
                     ? 'bg-ethereal-gold scale-125' 
                     : 'bg-ancient-stone/50 hover:bg-ethereal-gold/50'

@@ -12,10 +12,14 @@ const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Enhanced smooth scrolling and performance optimizations
     document.documentElement.style.scrollBehavior = 'smooth';
     
-    // Preload critical images for better performance
+    // Set a timeout to show content even if images don't load
+    const loadingTimeout = setTimeout(() => {
+      setIsLoaded(true);
+    }, 3000);
+
+    // Preload critical images
     const criticalImages = [
       '/lovable-uploads/fd08db9a-ea75-4280-b9ad-6117a0d836f6.png',
       '/lovable-uploads/965e98d3-fb85-40c6-9263-e357de40fd59.png',
@@ -26,31 +30,27 @@ const Index = () => {
       '/lovable-uploads/c261823d-4fbe-4910-83e7-edaf1effd9bd.png'
     ];
     
-    // Preload images with promise handling
-    Promise.all(
-      criticalImages.map(src => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.onload = resolve;
-          img.onerror = reject;
-          img.src = src;
-        });
-      })
-    ).then(() => {
+    const preloadPromises = criticalImages.map(src => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(src);
+        img.onerror = () => resolve(src); // Still resolve on error to continue
+        img.src = src;
+      });
+    });
+    
+    Promise.allSettled(preloadPromises).then(() => {
+      clearTimeout(loadingTimeout);
       setIsLoaded(true);
-      console.log('All critical images preloaded successfully');
-    }).catch(() => {
-      setIsLoaded(true); // Still show content even if some images fail
-      console.log('Some images failed to preload, but continuing...');
+      console.log('Image preloading completed');
     });
 
-    // Cleanup function
     return () => {
       document.documentElement.style.scrollBehavior = 'auto';
+      clearTimeout(loadingTimeout);
     };
   }, []);
 
-  // Add a loading state for the initial render
   if (!isLoaded) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue flex items-center justify-center">
@@ -68,9 +68,9 @@ const Index = () => {
         {/* Global background effects */}
         <div className="fixed inset-0 pointer-events-none z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-mystic-blue/90 via-ancient-stone/80 to-mystic-blue/90"></div>
-          {Array.from({ length: 30 }).map((_, i) => (
+          {Array.from({ length: 30 }, (_, i) => (
             <div
-              key={i}
+              key={`bg-particle-${i}`}
               className="absolute w-1 h-1 bg-ethereal-gold/20 rounded-full animate-float"
               style={{
                 left: `${Math.random() * 100}%`,
