@@ -77,7 +77,7 @@ const NewsTicker = () => {
 
   return (
     <div 
-      className="bg-gradient-to-r from-mystic-blue/90 to-ancient-stone/80 border-b border-ethereal-gold/30 backdrop-blur-md relative overflow-hidden"
+      className="bg-gradient-to-r from-mystic-blue/90 to-ancient-stone/80 border-b border-ethereal-gold/30 backdrop-blur-md relative overflow-hidden no-horizontal-scroll"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       role="banner"
@@ -100,13 +100,13 @@ const NewsTicker = () => {
           <div className="flex-1 min-w-0">
             <button
               onClick={() => handleLinkClick(currentUpdate.link)}
-              className={`block text-sm font-medium transition-all duration-500 hover:text-ethereal-gold w-full text-center font-citizen focus:outline-none focus:ring-2 focus:ring-ethereal-gold/50 rounded px-2 py-1 ${
+              className={`block text-sm font-medium transition-opacity duration-500 hover:text-ethereal-gold w-full text-center font-citizen focus:outline-none focus:ring-2 focus:ring-ethereal-gold/50 rounded px-2 py-1 text-fixed-position ${
                 currentUpdate.type === 'kickstarter' ? 'text-verdant-glyph' :
                 currentUpdate.type === 'blog' ? 'text-ember-flame' : 'text-slate-200'
               }`}
               aria-label={`${currentUpdate.text}. ${currentUpdate.link.startsWith('http') ? 'Opens in new tab' : 'Navigate to page'}`}
             >
-              <span className="inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 text-fixed-position">
                 {currentUpdate.text}
                 {currentUpdate.link.startsWith('http') && (
                   <ExternalLink className="w-3 h-3 opacity-60" aria-hidden="true" />
