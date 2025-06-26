@@ -5,12 +5,12 @@ import NewsTicker from "@/components/NewsTicker";
 import About from "@/components/About";
 import Features from "@/components/Features";
 import Characters from "@/components/Characters";
-import InteractiveDemo from "@/components/InteractiveDemo";
 import MysteryQuotes from "@/components/MysteryQuotes";
 import FundingProgress from "@/components/FundingProgress";
 import Newsletter from "@/components/Newsletter";
 import Support from "@/components/Support";
 import Footer from "@/components/Footer";
+import Navigation from "@/components/Navigation";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 const Index = () => {
@@ -104,16 +104,18 @@ const Index = () => {
 
         {/* Main content */}
         <div className="relative z-10">
-          <NewsTicker />
-          <Hero />
-          <About />
-          <Features />
-          <Characters />
-          <InteractiveDemo />
-          <MysteryQuotes />
-          <FundingProgress />
-          <Newsletter />
-          <Support />
+          <Navigation />
+          <div className="pt-16">
+            <NewsTicker />
+            <Hero />
+            <About />
+            <Features />
+            <Characters />
+            <MysteryQuotes />
+            <FundingProgress />
+            <Newsletter />
+            <Support />
+          </div>
           <Footer />
         </div>
       </div>
