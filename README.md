@@ -1,73 +1,95 @@
-# Welcome to your Lovable project
 
-## Project info
+# 🌌 The Forgotten Trial – Showcase Website
 
-**URL**: https://lovable.dev/projects/dc284666-6037-4772-b913-9e456f674e7f
+🎮 **Live Demo**: [forgotten-trial-showcase-site.lovable.app](https://forgotten-trial-showcase-site.lovable.app)
 
-## How can I edit this code?
+Welcome to the official showcase site for **The Forgotten Trial**, a mysterious, story-driven tactical RPG built in Unreal Engine 5. This site offers a preview of the game’s unique characters, immersive world, evolving gameplay systems, and hauntingly beautiful soundtrack — all presented through a polished web experience.
 
-There are several ways of editing your application.
+> Every visit is a step deeper into the mystery. Memory fragments. Party trust. Ghostly whispers. Nothing is what it seems.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/dc284666-6037-4772-b913-9e456f674e7f) and start prompting.
+## 🖼️ What You'll Find On This Site
 
-Changes made via Lovable will be committed automatically to this repo.
+* 🧙‍♀️ **Character Spotlights**
+  Scrollable sections reveal the party members:
 
-**Use your preferred IDE**
+  * Solari Emberkin – *Sunweaver*
+  * Tarrin Duskmane – *Stormblade*
+  * Wispeluna “Wisp” Brambletuck – *Chronobard*
+  * Kael Thornstride – *Runic Warden*
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+* 🎵 **Original Music Non-Copyright and Royalty Free**
+  Explore the custom background theme used in the dungeon’s forgotten chambers.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+* 🌀 **Animated Visuals**
+  Clean transitions, floating memory fragments, flickering header text, and glowing effects enhance the mystical theme.
 
-Follow these steps:
+* 🧩 **Core Gameplay Overview**
+  Procedurally generated dungeon layout, dynamic narrative system, turn-based tactical combat, and evolving trust mechanics.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+* 📜 **Narrative Flavor**
+  Includes cryptic quotes, character-driven mystery hooks, and narrator whispers to mirror in-game experiences.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🧰 Tech Stack
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+This site is built with the following modern frontend technologies:
+
+* ⚡ **Vite** — Lightning-fast frontend tooling
+* ⚛️ **React** — UI library for dynamic component rendering
+* 🧠 **TypeScript** — Static type safety
+* 🧩 **shadcn/ui** — Modern headless component UI system
+* 🎨 **Tailwind CSS** — Utility-first CSS for custom styling
+* 🎧 **Custom audio integration** — for dynamic background ambiance
+
+---
+
+## 🛠️ Getting Started Locally
+
+To run this project locally:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/phoenixgoldz/forgotten-trial-showcase-site.git
+
+# 2. Navigate to the project folder
+cd forgotten-trial-showcase-site
+
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+This will launch the site locally with live reloading at `http://localhost:5173`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+> Make sure Node.js and npm are installed. Use [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) for easy version management.
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🌐 Deployment
 
-## What technologies are used for this project?
+To deploy this site:
 
-This project is built with:
+1. Run the build script:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+   ```bash
+   npm run build
+   ```
+2. Upload the contents of the `dist/` folder to any static host (e.g. **Vercel**, **Netlify**, or **GitHub Pages**).
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/dc284666-6037-4772-b913-9e456f674e7f) and click on Share -> Publish.
+## 🧪 Status
 
-## Can I connect a custom domain to my Lovable project?
+🟢 **In Development**
+The site is active and reflects the current state of the game's concept and design direction. Additional features such as video previews, in-engine footage, and devlogs may be added in future iterations.
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📝 License
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is private and not open-source at this time. All media and assets are property of the *Forgotten Trial* development team
