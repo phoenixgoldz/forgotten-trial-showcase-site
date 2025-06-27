@@ -13,6 +13,7 @@ export const useAudio = () => {
   const [currentTrack, setCurrentTrack] = useState<string | null>(null);
   const [volume, setVolume] = useState(0.3);
   const [isMuted, setIsMuted] = useState(false);
+  const [audioError, setAudioError] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const tracks = {
@@ -32,11 +33,18 @@ export const useAudio = () => {
     audio.volume = isMuted ? 0 : volume;
     audio.loop = loop;
     
+    // Clear any previous error
+    setAudioError(null);
+    
     audio.play().then(() => {
       setIsPlaying(true);
       setCurrentTrack(trackId);
+      console.log(`Successfully playing: ${trackId}`);
     }).catch(error => {
-      console.log('Audio playback failed:', error);
+      console.log('Audio playback failed - this is normal if audio files are not uploaded yet:', error);
+      setAudioError('Audio files not available yet. Upload audio files to enable sound.');
+      setIsPlaying(false);
+      setCurrentTrack(null);
     });
   }, [volume, isMuted, tracks]);
 
@@ -46,6 +54,7 @@ export const useAudio = () => {
       audioRef.current.currentTime = 0;
       setIsPlaying(false);
       setCurrentTrack(null);
+      setAudioError(null);
     }
   }, []);
 
@@ -79,6 +88,7 @@ export const useAudio = () => {
     currentTrack,
     volume,
     isMuted,
+    audioError,
     playTrack,
     stopTrack,
     toggleMute,
