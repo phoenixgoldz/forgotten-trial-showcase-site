@@ -1,7 +1,21 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
 
 const About = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+    console.log('About page image loaded successfully');
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
+    console.warn('About page image failed to load');
+  };
+
   return (
     <section className="py-20 bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue relative overflow-hidden">
       {/* Background Effects */}
@@ -54,12 +68,32 @@ const About = () => {
 
             <div className="relative">
               <Card className="bg-gradient-to-br from-ancient-stone/80 to-mystic-blue/80 border-ancient-stone/50 glass-effect backdrop-blur-sm">
-                <div className="aspect-[4/3] flex items-center justify-center bg-gradient-to-br from-ancient-stone/30 to-mystic-blue/30">
-                  <img 
-                    src="/lovable-uploads/fd08db9a-ea75-4280-b9ad-6117a0d836f6.png" 
-                    alt="The Forgotten Trial Game Art"
-                    className="w-full h-full object-contain rounded-lg"
-                  />
+                <div className="aspect-[4/3] flex items-center justify-center bg-gradient-to-br from-ancient-stone/30 to-mystic-blue/30 rounded-lg overflow-hidden">
+                  {!imageError ? (
+                    <>
+                      {!imageLoaded && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-ancient-stone/50">
+                          <div className="w-8 h-8 border-2 border-ethereal-gold/30 border-t-ethereal-gold rounded-full animate-spin"></div>
+                        </div>
+                      )}
+                      <img 
+                        src="/lovable-uploads/fd08db9a-ea75-4280-b9ad-6117a0d836f6.png" 
+                        alt="The Forgotten Trial - A mystical dungeon scene showing the atmospheric game world"
+                        className={`w-full h-full object-contain rounded-lg transition-opacity duration-300 ${
+                          imageLoaded ? 'opacity-100' : 'opacity-0'
+                        }`}
+                        onLoad={handleImageLoad}
+                        onError={handleImageError}
+                        loading="lazy"
+                      />
+                    </>
+                  ) : (
+                    <div className="text-center p-8">
+                      <div className="text-4xl mb-4">🏰</div>
+                      <p className="text-ethereal-gold font-cinzel">Game Artwork</p>
+                      <p className="text-slate-400 text-sm mt-2">Visual preview coming soon</p>
+                    </div>
+                  )}
                 </div>
               </Card>
             </div>
@@ -69,7 +103,7 @@ const About = () => {
             <Card className="bg-gradient-to-br from-ember-flame/20 to-ethereal-gold/20 border-ember-flame/30 glass-effect backdrop-blur-sm hover-scale">
               <CardHeader className="text-center">
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-ember-flame to-ethereal-gold rounded-xl flex items-center justify-center">
-                  <span className="text-2xl">🧩</span>
+                  <span className="text-2xl" role="img" aria-label="Puzzle piece">🧩</span>
                 </div>
                 <CardTitle className="text-white font-cinzel">Procedural Mystery</CardTitle>
               </CardHeader>
@@ -83,7 +117,7 @@ const About = () => {
             <Card className="bg-gradient-to-br from-luminous-azure/20 to-verdant-glyph/20 border-luminous-azure/30 glass-effect backdrop-blur-sm hover-scale">
               <CardHeader className="text-center">
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-luminous-azure to-verdant-glyph rounded-xl flex items-center justify-center">
-                  <span className="text-2xl">⚔️</span>
+                  <span className="text-2xl" role="img" aria-label="Crossed swords">⚔️</span>
                 </div>
                 <CardTitle className="text-white font-cinzel">Tactical Combat</CardTitle>
               </CardHeader>
@@ -97,7 +131,7 @@ const About = () => {
             <Card className="bg-gradient-to-br from-verdant-glyph/20 to-ethereal-gold/20 border-verdant-glyph/30 glass-effect backdrop-blur-sm hover-scale">
               <CardHeader className="text-center">
                 <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-verdant-glyph to-ethereal-gold rounded-xl flex items-center justify-center">
-                  <span className="text-2xl">💝</span>
+                  <span className="text-2xl" role="img" aria-label="Gift with ribbon">💝</span>
                 </div>
                 <CardTitle className="text-white font-cinzel">Character Trust</CardTitle>
               </CardHeader>

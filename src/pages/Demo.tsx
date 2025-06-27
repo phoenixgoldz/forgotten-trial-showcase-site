@@ -1,9 +1,17 @@
 
-import InteractiveDemo from "@/components/InteractiveDemo";
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
+import InteractiveDemo from "@/components/InteractiveDemo";
 import Footer from "@/components/Footer";
 
 const Demo = () => {
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
+  }, []);
+
   return (
     <div className="min-h-screen relative overflow-x-hidden">
       {/* Global background effects */}

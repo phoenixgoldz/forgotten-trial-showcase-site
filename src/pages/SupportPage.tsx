@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Support from "@/components/Support";
-import FundingProgress from "@/components/FundingProgress";
 import Footer from "@/components/Footer";
 
 const SupportPage = () => {
@@ -36,7 +35,6 @@ const SupportPage = () => {
       <div className="relative z-10">
         <Navigation />
         <div className="pt-16">
-          <FundingProgress />
           <Support />
         </div>
         <Footer />
