@@ -1,7 +1,8 @@
 
 # 🌌 The Forgotten Trial – Showcase Website
 
-🎮 **Live Demo**: [forgotten-trial-showcase-site.lovable.app](https://forgotten-trial-showcase-site.lovable.app)
+🎮 **Live Site**: 
+✨[Project Site](https://forgotten-trial-showcase-site.lovable.app)
 
 Welcome to the official showcase site for **The Forgotten Trial**, a mysterious, story-driven tactical RPG built in Unreal Engine 5. This site offers a preview of the game’s unique characters, immersive world, evolving gameplay systems, and hauntingly beautiful soundtrack — all presented through a polished web experience.
 
