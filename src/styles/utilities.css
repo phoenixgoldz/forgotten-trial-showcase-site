@@ -42,13 +42,15 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Advanced gradient text effects */
+/* Advanced gradient text effects - NO HORIZONTAL MOVEMENT */
 .gradient-text-gold {
   background: linear-gradient(135deg, #D4B56A 0%, #F4E4BC 50%, #D4B56A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-shadow: none;
+  background-size: 100% 100%;
+  position: static;
 }
 
 .gradient-text-mystical {
@@ -57,9 +59,11 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-shadow: none;
+  background-size: 100% 100%;
+  position: static;
 }
 
-/* Premium hover effects */
+/* Premium hover effects - NO HORIZONTAL MOVEMENT */
 .hover-glow:hover {
   filter: drop-shadow(0 0 20px rgba(212, 181, 106, 0.5));
   transition: filter 0.3s ease;
@@ -70,12 +74,7 @@
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Loading animations */
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
+/* Loading animations - NO HORIZONTAL MOVEMENT */
 .shimmer-effect {
   position: relative;
   overflow: hidden;
@@ -89,7 +88,7 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  animation: shimmer 2s infinite;
+  opacity: 0.5;
 }
 
 /* Premium text effects */

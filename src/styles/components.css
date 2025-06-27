@@ -1,5 +1,5 @@
 
-/* Component Styles */
+/* Component Styles - NO HORIZONTAL MOVEMENT */
 .story-link {
   position: relative;
   transition: all 0.4s ease;
@@ -13,29 +13,23 @@
   bottom: -4px;
   left: 0;
   background: linear-gradient(90deg, var(--ethereal-gold), var(--ember-flame), var(--verdant-glyph));
-  transform: scaleX(0);
-  transform-origin: bottom right;
+  transform: scaleY(0);
+  transform-origin: bottom;
   transition: transform 0.4s ease;
   border-radius: 2px;
 }
 
 .story-link:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+  transform: scaleY(1);
 }
 
 .gradient-text {
   background: linear-gradient(135deg, var(--ethereal-gold), var(--ember-flame), var(--luminous-azure), var(--verdant-glyph));
-  background-size: 400% 400%;
+  background-size: 100% 100%;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shimmer 4s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  position: static;
 }
 
 .glass-effect {
@@ -66,20 +60,16 @@
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
-  transition: left 0.6s;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .button-shine:hover::before {
-  left: 100%;
+  opacity: 1;
 }
 
 .button-shine::after {
