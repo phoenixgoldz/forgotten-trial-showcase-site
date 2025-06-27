@@ -2,6 +2,8 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import InteractiveDemo from "@/components/InteractiveDemo";
+import Gamification from "@/components/Gamification";
+import AudioControls from "@/components/AudioControls";
 import Footer from "@/components/Footer";
 
 const Demo = () => {
@@ -36,9 +38,13 @@ const Demo = () => {
         <Navigation />
         <div className="pt-16">
           <InteractiveDemo />
+          <Gamification />
         </div>
         <Footer />
       </div>
+
+      {/* Audio Controls */}
+      <AudioControls />
     </div>
   );
 };

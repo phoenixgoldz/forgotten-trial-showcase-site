@@ -6,6 +6,7 @@ import MysteryQuotes from "@/components/MysteryQuotes";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
+import AudioControls from "@/components/AudioControls";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 const Index = () => {
@@ -99,6 +100,9 @@ const Index = () => {
           </div>
           <Footer />
         </div>
+
+        {/* Audio Controls */}
+        <AudioControls />
       </div>
     </ErrorBoundary>
   );

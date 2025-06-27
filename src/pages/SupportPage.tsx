@@ -1,7 +1,10 @@
 
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
-import Support from "@/components/Support";
+import EnhancedFundingProgress from "@/components/EnhancedFundingProgress";
+import Gamification from "@/components/Gamification";
+import SocialSharing from "@/components/SocialSharing";
+import AudioControls from "@/components/AudioControls";
 import Footer from "@/components/Footer";
 
 const SupportPage = () => {
@@ -17,7 +20,7 @@ const SupportPage = () => {
       {/* Global background effects */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-mystic-blue/90 via-ancient-stone/80 to-mystic-blue/90"></div>
-        {Array.from({ length: 20 }).map((_, i) => (
+        {Array.from({ length: 25 }).map((_, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-ethereal-gold/20 rounded-full animate-float"
@@ -35,10 +38,15 @@ const SupportPage = () => {
       <div className="relative z-10">
         <Navigation />
         <div className="pt-16">
-          <Support />
+          <EnhancedFundingProgress />
+          <Gamification />
+          <SocialSharing />
         </div>
         <Footer />
       </div>
+
+      {/* Audio Controls */}
+      <AudioControls />
     </div>
   );
 };
