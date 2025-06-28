@@ -4,7 +4,9 @@ import Navigation from "@/components/Navigation";
 import EnhancedFundingProgress from "@/components/EnhancedFundingProgress";
 import Gamification from "@/components/Gamification";
 import SocialSharing from "@/components/SocialSharing";
+import RealTimeEngagement from "@/components/RealTimeEngagement";
 import AudioControls from "@/components/AudioControls";
+import ContextualAudio from "@/components/ContextualAudio";
 import Footer from "@/components/Footer";
 
 const SupportPage = () => {
@@ -39,13 +41,15 @@ const SupportPage = () => {
         <Navigation />
         <div className="pt-16">
           <EnhancedFundingProgress />
+          <RealTimeEngagement />
           <Gamification />
           <SocialSharing />
         </div>
         <Footer />
       </div>
 
-      {/* Audio Controls */}
+      {/* Audio Components */}
+      <ContextualAudio />
       <AudioControls />
     </div>
   );

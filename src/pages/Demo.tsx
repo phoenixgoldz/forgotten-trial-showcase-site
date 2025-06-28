@@ -3,7 +3,9 @@ import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import InteractiveDemo from "@/components/InteractiveDemo";
 import Gamification from "@/components/Gamification";
+import EnhancedInteractiveElements from "@/components/EnhancedInteractiveElements";
 import AudioControls from "@/components/AudioControls";
+import ContextualAudio from "@/components/ContextualAudio";
 import Footer from "@/components/Footer";
 
 const Demo = () => {
@@ -38,12 +40,14 @@ const Demo = () => {
         <Navigation />
         <div className="pt-16">
           <InteractiveDemo />
+          <EnhancedInteractiveElements />
           <Gamification />
         </div>
         <Footer />
       </div>
 
-      {/* Audio Controls */}
+      {/* Audio Components */}
+      <ContextualAudio />
       <AudioControls />
     </div>
   );

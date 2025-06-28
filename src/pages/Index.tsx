@@ -7,6 +7,8 @@ import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import AudioControls from "@/components/AudioControls";
+import ContextualAudio from "@/components/ContextualAudio";
+import EnhancedInteractiveElements from "@/components/EnhancedInteractiveElements";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 const Index = () => {
@@ -95,13 +97,15 @@ const Index = () => {
           <div className="pt-16">
             <NewsTicker />
             <Hero />
+            <EnhancedInteractiveElements />
             <MysteryQuotes />
             <Newsletter />
           </div>
           <Footer />
         </div>
 
-        {/* Audio Controls */}
+        {/* Audio Components */}
+        <ContextualAudio />
         <AudioControls />
       </div>
     </ErrorBoundary>
