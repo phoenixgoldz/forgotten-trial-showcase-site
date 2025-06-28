@@ -9,20 +9,35 @@ import Navigation from "@/components/Navigation";
 import AudioControls from "@/components/AudioControls";
 import ContextualAudio from "@/components/ContextualAudio";
 import EnhancedInteractiveElements from "@/components/EnhancedInteractiveElements";
-import ErrorBoundary from "@/components/ErrorBoundary";
+import ImprovedErrorBoundary from "@/components/ImprovedErrorBoundary";
+import SkeletonLoader from "@/components/SkeletonLoader";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
     
+    // Simulate progressive loading
+    const progressInterval = setInterval(() => {
+      setLoadingProgress(prev => {
+        if (prev >= 90) {
+          clearInterval(progressInterval);
+          return prev;
+        }
+        return prev + Math.random() * 15;
+      });
+    }, 200);
+    
     // Set a timeout to show content even if images don't load
     const loadingTimeout = setTimeout(() => {
+      setLoadingProgress(100);
       setIsLoaded(true);
+      clearInterval(progressInterval);
     }, 3000);
 
-    // Preload critical images
+    // Preload critical images with progress tracking
     const criticalImages = [
       '/lovable-uploads/fd08db9a-ea75-4280-b9ad-6117a0d836f6.png',
       '/lovable-uploads/965e98d3-fb85-40c6-9263-e357de40fd59.png',
@@ -50,34 +65,60 @@ const Index = () => {
     
     Promise.allSettled(preloadPromises).then(() => {
       clearTimeout(loadingTimeout);
-      setIsLoaded(true);
+      clearInterval(progressInterval);
+      setLoadingProgress(100);
+      setTimeout(() => setIsLoaded(true), 300); // Small delay for smooth transition
       console.log('Image preloading completed');
     });
 
     return () => {
       document.documentElement.style.scrollBehavior = 'auto';
       clearTimeout(loadingTimeout);
+      clearInterval(progressInterval);
     };
   }, []);
 
   if (!isLoaded) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-ethereal-gold/30 border-t-ethereal-gold rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-ethereal-gold font-cinzel text-xl animate-pulse">Awakening the forgotten memories...</p>
+        <div className="text-center max-w-md mx-auto px-4">
+          <div className="relative mb-8">
+            <div className="w-20 h-20 border-4 border-ethereal-gold/30 border-t-ethereal-gold rounded-full animate-spin mx-auto"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-xs font-bold text-ethereal-gold font-citizen">
+                {Math.round(loadingProgress)}%
+              </span>
+            </div>
+          </div>
+          
+          <div className="space-y-4">
+            <h1 className="text-ethereal-gold font-cinzel text-2xl animate-pulse">
+              Awakening the forgotten memories...
+            </h1>
+            
+            <div className="w-full bg-ancient-stone/30 rounded-full h-2 overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-ethereal-gold to-ember-flame transition-all duration-300 ease-out"
+                style={{ width: `${loadingProgress}%` }}
+              ></div>
+            </div>
+            
+            <p className="text-gray-300 text-sm font-citizen">
+              Preparing your mystical adventure...
+            </p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <ErrorBoundary>
+    <ImprovedErrorBoundary>
       <div className="min-h-screen relative overflow-x-hidden">
-        {/* Global background effects */}
+        {/* Optimized background effects */}
         <div className="fixed inset-0 pointer-events-none z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-mystic-blue/90 via-ancient-stone/80 to-mystic-blue/90"></div>
-          {Array.from({ length: 30 }, (_, i) => (
+          {Array.from({ length: 20 }, (_, i) => (
             <div
               key={`bg-particle-${i}`}
               className="absolute w-1 h-1 bg-ethereal-gold/20 rounded-full animate-float"
@@ -108,7 +149,7 @@ const Index = () => {
         <ContextualAudio />
         <AudioControls />
       </div>
-    </ErrorBoundary>
+    </ImprovedErrorBoundary>
   );
 };
 
