@@ -1,16 +1,27 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 
+type TrackId = 'ambient' | 'battle' | 'ethereal' | 'town' | 'medieval';
+type AudioContext = 'hero' | 'characters' | 'demo' | 'support' | 'features';
+
 interface AudioTrack {
-  id: string;
+  id: TrackId;
   src: string;
   volume: number;
   loop: boolean;
 }
 
+const TRACKS: Record<TrackId, string> = {
+  ambient: '/audio/fantasy-song-363806.mp3',
+  battle: '/audio/battle-of-the-dragons-8037.mp3',
+  ethereal: '/audio/elves-song-ethereal-fantasy-elf-music-363281.mp3',
+  town: '/audio/market-town-of-turelli-135459.mp3',
+  medieval: '/audio/rpg-medieval-animated-music-320583.mp3'
+};
+
 export const useAudio = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState<string | null>(null);
+  const [currentTrack, setCurrentTrack] = useState<TrackId | null>(null);
   const [volume, setVolume] = useState(0.3);
   const [isMuted, setIsMuted] = useState(false);
   const [audioError, setAudioError] = useState<string | null>(null);
@@ -18,38 +29,33 @@ export const useAudio = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const tracks = {
-    ambient: '/audio/fantasy-song-363806.mp3',
-    battle: '/audio/battle-of-the-dragons-8037.mp3',
-    ethereal: '/audio/elves-song-ethereal-fantasy-elf-music-363281.mp3',
-    town: '/audio/market-town-of-turelli-135459.mp3',
-    medieval: '/audio/rpg-medieval-animated-music-320583.mp3'
-  };
+  const clearFadeInterval = useCallback(() => {
+    if (fadeIntervalRef.current) {
+      clearInterval(fadeIntervalRef.current);
+      fadeIntervalRef.current = null;
+    }
+  }, []);
 
   const fadeOut = useCallback((callback?: () => void) => {
     if (!audioRef.current) return;
     
     const audio = audioRef.current;
     const startVolume = audio.volume;
-    const fadeStep = startVolume / 20; // 20 steps for smooth fade
+    const fadeStep = startVolume / 20;
     
-    if (fadeIntervalRef.current) {
-      clearInterval(fadeIntervalRef.current);
-    }
+    clearFadeInterval();
     
     fadeIntervalRef.current = setInterval(() => {
       if (audio.volume > fadeStep) {
-        audio.volume -= fadeStep;
+        audio.volume = Math.max(0, audio.volume - fadeStep);
       } else {
         audio.volume = 0;
         audio.pause();
-        if (fadeIntervalRef.current) {
-          clearInterval(fadeIntervalRef.current);
-        }
-        if (callback) callback();
+        clearFadeInterval();
+        callback?.();
       }
     }, 50);
-  }, []);
+  }, [clearFadeInterval]);
 
   const fadeIn = useCallback((targetVolume: number) => {
     if (!audioRef.current) return;
@@ -58,23 +64,19 @@ export const useAudio = () => {
     audio.volume = 0;
     const fadeStep = targetVolume / 20;
     
-    if (fadeIntervalRef.current) {
-      clearInterval(fadeIntervalRef.current);
-    }
+    clearFadeInterval();
     
     fadeIntervalRef.current = setInterval(() => {
       if (audio.volume < targetVolume - fadeStep) {
-        audio.volume += fadeStep;
+        audio.volume = Math.min(targetVolume, audio.volume + fadeStep);
       } else {
         audio.volume = targetVolume;
-        if (fadeIntervalRef.current) {
-          clearInterval(fadeIntervalRef.current);
-        }
+        clearFadeInterval();
       }
     }, 50);
-  }, []);
+  }, [clearFadeInterval]);
 
-  const playTrack = useCallback((trackId: keyof typeof tracks, loop = true, crossfade = true) => {
+  const playTrack = useCallback((trackId: TrackId, loop = true, crossfade = true) => {
     if (!audioRef.current) {
       audioRef.current = new Audio();
     }
@@ -84,18 +86,22 @@ export const useAudio = () => {
     setAudioError(null);
     
     const switchTrack = () => {
-      audio.src = tracks[trackId];
+      audio.src = TRACKS[trackId];
       audio.loop = loop;
       
-      audio.addEventListener('loadstart', () => setIsLoading(true));
-      audio.addEventListener('canplaythrough', () => setIsLoading(false));
-      audio.addEventListener('error', () => {
+      const handleLoadStart = () => setIsLoading(true);
+      const handleCanPlayThrough = () => setIsLoading(false);
+      const handleError = () => {
         console.log('Audio playback failed - this is normal if audio files are not uploaded yet');
         setAudioError('Audio files not available yet. Upload audio files to enable sound.');
         setIsPlaying(false);
         setCurrentTrack(null);
         setIsLoading(false);
-      });
+      };
+      
+      audio.addEventListener('loadstart', handleLoadStart);
+      audio.addEventListener('canplaythrough', handleCanPlayThrough);
+      audio.addEventListener('error', handleError);
       
       audio.play().then(() => {
         setIsPlaying(true);
@@ -121,7 +127,7 @@ export const useAudio = () => {
     } else {
       switchTrack();
     }
-  }, [volume, isMuted, isPlaying, fadeOut, fadeIn, tracks]);
+  }, [volume, isMuted, isPlaying, fadeOut, fadeIn]);
 
   const stopTrack = useCallback((smooth = true) => {
     if (audioRef.current) {
@@ -156,23 +162,23 @@ export const useAudio = () => {
   }, [volume, fadeOut, fadeIn]);
 
   const changeVolume = useCallback((newVolume: number) => {
-    setVolume(newVolume);
+    const clampedVolume = Math.max(0, Math.min(1, newVolume));
+    setVolume(clampedVolume);
     if (audioRef.current && !isMuted && isPlaying) {
-      audioRef.current.volume = newVolume;
+      audioRef.current.volume = clampedVolume;
     }
   }, [isMuted, isPlaying]);
 
-  // Context-aware audio switching based on page/section
-  const playContextualAudio = useCallback((context: 'hero' | 'characters' | 'demo' | 'support' | 'features') => {
-    const contextMap = {
-      hero: 'ethereal' as const,
-      characters: 'medieval' as const,
-      demo: 'battle' as const,
-      support: 'ambient' as const,
-      features: 'town' as const
+  const playContextualAudio = useCallback((context: AudioContext) => {
+    const contextMap: Record<AudioContext, TrackId> = {
+      hero: 'ethereal',
+      characters: 'medieval',
+      demo: 'battle',
+      support: 'ambient',
+      features: 'town'
     };
     
-    const trackToPlay = contextMap[context] || 'ambient';
+    const trackToPlay = contextMap[context];
     if (currentTrack !== trackToPlay) {
       playTrack(trackToPlay, true, true);
     }
@@ -182,12 +188,11 @@ export const useAudio = () => {
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
+        audioRef.current = null;
       }
-      if (fadeIntervalRef.current) {
-        clearInterval(fadeIntervalRef.current);
-      }
+      clearFadeInterval();
     };
-  }, []);
+  }, [clearFadeInterval]);
 
   return {
     isPlaying,
@@ -201,6 +206,6 @@ export const useAudio = () => {
     toggleMute,
     changeVolume,
     playContextualAudio,
-    availableTracks: Object.keys(tracks)
+    availableTracks: Object.keys(TRACKS) as TrackId[]
   };
 };
