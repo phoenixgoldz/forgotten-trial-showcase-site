@@ -61,15 +61,6 @@ const EnhancedInteractiveElements = () => {
   return (
     <section className="py-16 bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-cinzel">
-            Discover <span className="gradient-text">Hidden Mysteries</span>
-          </h2>
-          <p className="text-slate-300 text-lg">
-            Interact with mystical elements to uncover secrets
-          </p>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {interactiveElements.map((element) => {
             const Icon = element.icon;
@@ -125,7 +116,7 @@ const EnhancedInteractiveElements = () => {
                   
                   {isClicked && (
                     <div className="mt-4 text-xs text-ethereal-gold animate-fade-in">
-                      ✨ Mystery Revealed!
+                      ✨ Explored!
                     </div>
                   )}
                 </CardContent>
@@ -137,19 +128,6 @@ const EnhancedInteractiveElements = () => {
               </Card>
             );
           })}
-        </div>
-
-        <div className="text-center mt-12">
-          <div className="bg-gradient-to-r from-ancient-stone/40 to-mystic-blue/40 rounded-xl p-6 max-w-2xl mx-auto border border-ethereal-gold/20 backdrop-blur-md glass-effect">
-            <p className="text-slate-300 text-sm leading-relaxed">
-              <span className="text-ethereal-gold font-semibold">You've discovered {clickedElements.size} of {interactiveElements.length} mysteries!</span>
-              {clickedElements.size === interactiveElements.length && (
-                <span className="block mt-2 text-verdant-glyph animate-glow">
-                  🎉 All secrets unlocked! You're a true master of mysteries!
-                </span>
-              )}
-            </p>
-          </div>
         </div>
       </div>
     </section>
