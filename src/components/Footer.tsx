@@ -50,9 +50,9 @@ const Footer = () => {
             </div>
             
             <div className="space-y-4">
-              <h3 className="font-cinzel text-4xl md:text-5xl font-bold text-white mb-2 gradient-text relative" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9)' }}>
+              <h3 className="font-cinzel text-4xl md:text-5xl font-bold text-white mb-2 relative" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9)' }}>
                 <Sparkles className="w-8 h-8 inline-block mr-3 text-ethereal-gold animate-pulse" />
-                PhoenixGold Game Studios
+                <span className="text-ethereal-gold">PhoenixGold Game Studios</span>
                 <Sparkles className="w-8 h-8 inline-block ml-3 text-ethereal-gold animate-pulse" />
               </h3>
               
@@ -107,7 +107,7 @@ const Footer = () => {
             <div className="relative z-10">
               <h4 className="text-2xl font-bold text-white mb-8 flex items-center justify-center font-cinzel" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
                 <Star className="w-6 h-6 mr-3 text-ethereal-gold animate-pulse" />
-                Designed For Everyone
+                <span className="text-ethereal-gold">Designed For Everyone</span>
                 <Star className="w-6 h-6 ml-3 text-ethereal-gold animate-pulse" />
               </h4>
               
