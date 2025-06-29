@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import AudioControls from "@/components/AudioControls";
 import ContextualAudio from "@/components/ContextualAudio";
-import EnhancedInteractiveElements from "@/components/EnhancedInteractiveElements";
 import ImprovedErrorBoundary from "@/components/ImprovedErrorBoundary";
 import SkeletonLoader from "@/components/SkeletonLoader";
 
@@ -138,7 +137,6 @@ const Index = () => {
           <div className="pt-16">
             <NewsTicker />
             <Hero />
-            <EnhancedInteractiveElements />
             <MysteryQuotes />
             <Newsletter />
           </div>
