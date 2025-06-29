@@ -4,13 +4,6 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 type TrackId = 'ambient' | 'battle' | 'ethereal' | 'town' | 'medieval';
 type AudioContext = 'hero' | 'characters' | 'demo' | 'support' | 'features';
 
-interface AudioTrack {
-  id: TrackId;
-  src: string;
-  volume: number;
-  loop: boolean;
-}
-
 const TRACKS: Record<TrackId, string> = {
   ambient: '/audio/fantasy-song-363806.mp3',
   battle: '/audio/battle-of-the-dragons-8037.mp3',
@@ -99,6 +92,11 @@ export const useAudio = () => {
         setIsLoading(false);
       };
       
+      // Remove previous event listeners to prevent memory leaks
+      audio.removeEventListener('loadstart', handleLoadStart);
+      audio.removeEventListener('canplaythrough', handleCanPlayThrough);
+      audio.removeEventListener('error', handleError);
+      
       audio.addEventListener('loadstart', handleLoadStart);
       audio.addEventListener('canplaythrough', handleCanPlayThrough);
       audio.addEventListener('error', handleError);
@@ -122,12 +120,12 @@ export const useAudio = () => {
       });
     };
 
-    if (isPlaying && crossfade) {
+    if (isPlaying && crossfade && currentTrack !== trackId) {
       fadeOut(switchTrack);
     } else {
       switchTrack();
     }
-  }, [volume, isMuted, isPlaying, fadeOut, fadeIn]);
+  }, [volume, isMuted, isPlaying, currentTrack, fadeOut, fadeIn]);
 
   const stopTrack = useCallback((smooth = true) => {
     if (audioRef.current) {
@@ -150,7 +148,7 @@ export const useAudio = () => {
   const toggleMute = useCallback(() => {
     setIsMuted(prev => {
       const newMuted = !prev;
-      if (audioRef.current) {
+      if (audioRef.current && isPlaying) {
         if (newMuted) {
           fadeOut();
         } else {
@@ -159,7 +157,7 @@ export const useAudio = () => {
       }
       return newMuted;
     });
-  }, [volume, fadeOut, fadeIn]);
+  }, [volume, isPlaying, fadeOut, fadeIn]);
 
   const changeVolume = useCallback((newVolume: number) => {
     const clampedVolume = Math.max(0, Math.min(1, newVolume));
@@ -188,6 +186,8 @@ export const useAudio = () => {
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
+        audioRef.current.src = '';
+        audioRef.current.load();
         audioRef.current = null;
       }
       clearFadeInterval();

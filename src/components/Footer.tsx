@@ -57,7 +57,7 @@ const Footer = memo(() => {
 
       <div className="container mx-auto px-4 relative z-10 py-20">
         <div className="text-center max-w-6xl mx-auto">
-          {/* Enhanced Studio Logo Section */}
+          {/* Enhanced Studio Logo Section - Fixed text colors */}
           <div className="mb-12 flex flex-col items-center">
             <div className="relative mb-8 group">
               <div className="absolute inset-0 bg-gradient-to-r from-ethereal-gold/30 to-ember-flame/30 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500" aria-hidden="true"></div>
@@ -102,7 +102,7 @@ const Footer = memo(() => {
               target="_blank" 
               rel="noopener noreferrer"
               onClick={() => handleExternalLink("https://ko-fi.com/phoenixgoldzstudios", "Ko-fi")}
-              className="group flex items-center bg-gradient-to-r from-ember-flame/20 to-ethereal-gold/20 hover:from-ember-flame/40 hover:to-ethereal-gold/40 px-8 py-4 rounded-2xl border border-ember-flame/30 hover:border-ember-flame/60 transition-all duration-300 hover:scale-110 backdrop-blur-sm font-citizen focus:outline-none focus:ring-2 focus:ring-ember-flame/50"
+              className="group flex items-center bg-gradient-to-r from-ember-flame/20 to-ethereal-gold/20 hover:from-ember-flame/40 hover:to-ethereal-gold/40 px-8 py-4 rounded-2xl border border-ember-flame/30 hover:border-ember-flame/60 transition-all duration-300 hover:scale-110 backdrop-blur-sm font-citizen focus:outline-none focus:ring-2 focus:ring-ember-flame/50 relative"
               aria-label="Visit our Ko-fi page for development updates and support options"
             >
               <Coffee className="w-6 h-6 mr-3 text-ember-flame group-hover:animate-bounce" aria-hidden="true" />

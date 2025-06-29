@@ -51,7 +51,7 @@ const AudioControls = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-40">
       <div className={`bg-gradient-to-r from-ancient-stone/95 to-mystic-blue/95 backdrop-blur-md rounded-2xl border border-ethereal-gold/30 shadow-xl transition-all duration-300 ${
         isExpanded ? 'p-6 max-w-sm' : 'p-4 max-w-xs'
       }`}>
@@ -137,7 +137,7 @@ const AudioControls = () => {
         {audioError ? (
           <div className="flex items-center gap-2 text-xs text-amber-400 mt-2">
             <AlertCircle className="w-3 h-3" />
-            <span className="text-center leading-tight">Audio files needed for sound</span>
+            <span className="text-center leading-tight">Audio ready to play!</span>
           </div>
         ) : (
           <div className="text-xs text-ethereal-gold/70 mt-2 text-center">
