@@ -28,24 +28,8 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue overflow-hidden">
-      {/* Background Image Display with proper loading */}
+      {/* Clean background without problematic image */}
       <div className="absolute inset-0">
-        <div className="w-full h-full flex items-center justify-center">
-          <img 
-            src="/lovable-uploads/fd08db9a-ea75-4280-b9ad-6117a0d836f6.png" 
-            alt="The Forgotten Trial - Mystical dungeon entrance with ancient stone archways and ethereal lighting, setting the atmospheric tone for a fantasy RPG adventure"
-            className="max-w-[50%] h-auto object-contain opacity-70"
-            style={{ 
-              filter: 'brightness(0.7) contrast(1.3) saturate(1.2)',
-            }}
-            loading="eager"
-            onError={(e) => {
-              console.warn('Hero background image failed to load');
-              const target = e.target as HTMLImageElement;
-              target.style.display = 'none';
-            }}
-          />
-        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-mystic-blue/95 via-mystic-blue/60 to-mystic-blue/40"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-mystic-blue/70 via-transparent to-ancient-stone/50"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-mystic-blue/30 to-mystic-blue/80"></div>
@@ -109,7 +93,7 @@ const Hero = () => {
         </div>
 
         <h1 className="font-cinzel text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 animate-fade-in leading-tight text-center drop-shadow-2xl" style={{ textShadow: '3px 3px 12px rgba(0,0,0,0.9)' }}>
-          The <span className="gradient-text">Forgotten</span> Trial
+          The <span className="text-ethereal-gold">Forgotten</span> Trial
         </h1>
         
         <p className="text-xl md:text-2xl lg:text-3xl text-white mb-6 animate-fade-in font-light leading-tight max-w-5xl mx-auto text-center font-citizen" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.8)', animationDelay: "0.2s" }}>
@@ -124,9 +108,9 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in mb-12" style={{ animationDelay: "0.6s" }}>
           <Button 
             size="hero" 
-            variant="verdant"
+            variant="primary"
             onClick={handleKickstarterClick}
-            className="font-citizen min-w-[250px]"
+            className="font-citizen min-w-[250px] bg-ethereal-gold text-mystic-blue hover:bg-ethereal-gold/90 border-2 border-ethereal-gold hover:border-ethereal-gold/90"
             aria-label="Support The Forgotten Trial on Kickstarter - opens in new tab"
           >
             🎮 Back on Kickstarter
@@ -134,9 +118,9 @@ const Hero = () => {
           
           <Button 
             size="hero" 
-            variant="ember"
+            variant="secondary"
             onClick={handleKofiClick}
-            className="font-citizen min-w-[200px]"
+            className="font-citizen min-w-[200px] bg-ember-flame text-white hover:bg-ember-flame/90 border-2 border-ember-flame hover:border-ember-flame/90"
             aria-label="Support development on Ko-fi - opens in new tab"
           >
             ☕ Support on Ko-fi
@@ -145,10 +129,10 @@ const Hero = () => {
 
         <div className="animate-fade-in text-center" style={{ animationDelay: "0.8s" }}>
           <Button 
-            variant="ethereal" 
+            variant="outline" 
             size="story" 
             onClick={handleScrollToFeatures}
-            className="font-citizen"
+            className="font-citizen bg-transparent border-2 border-ethereal-gold text-ethereal-gold hover:bg-ethereal-gold hover:text-mystic-blue"
             aria-label="Scroll down to discover more about the game"
           >
             Discover the Mystery <ArrowDown className="ml-2 h-6 w-6 animate-bounce" />
