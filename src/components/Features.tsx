@@ -1,135 +1,220 @@
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { 
+  Puzzle, 
+  Brain, 
+  Swords, 
+  MessageCircle, 
+  Users, 
+  Sparkles, 
+  Crown,
+  Shield,
+  Zap,
+  ArrowRight
+} from "lucide-react";
 
 const Features = () => {
-  const features = [
+  const coreFeatures = [
     {
-      title: "Tactical RPG Combat",
-      description: "Grid-based battles with fantasy abilities and turn-based strategy that rewards clever positioning and timing.",
-      icon: "⚔️",
-      color: "from-ember-flame to-ethereal-gold",
-      shadowColor: "shadow-ember-flame/25"
+      icon: Puzzle,
+      title: "Procedural Dungeon Layouts",
+      description: "Every playthrough offers a new map, new encounters, and new memories to discover. No two adventures are ever the same.",
+      badge: "Infinite Replayability",
+      color: "luminous-azure",
+      details: ["Handcrafted room templates", "Dynamic encounter placement", "Secrets that change location"]
     },
     {
-      title: "Procedural Exploration",
-      description: "Every dungeon is different. Discover scattered party members, memory shards, and gear across modular maps.",
-      icon: "🗺️",
-      color: "from-luminous-azure to-verdant-glyph",
-      shadowColor: "shadow-luminous-azure/25"
+      icon: Brain,
+      title: "Hand-Written Narrative Fragments",
+      description: "Letters, journal entries, and ghostly whispers reveal who you were—and who you might become.",
+      badge: "Story-Driven",
+      color: "ethereal-gold",
+      details: ["200+ unique story fragments", "Branching narrative paths", "Character backstory reveals"]
     },
     {
-      title: "Hand-Written Narrative",
-      description: "No AI here! Our team crafts evolving dialogue and story fragments that adapt to your progress and choices.",
-      icon: "📜",
-      color: "from-ethereal-gold to-ember-flame",
-      shadowColor: "shadow-ethereal-gold/25"
+      icon: Swords,
+      title: "Tactical Turn-Based Combat",
+      description: "Command your party on a grid in rich, strategic battles with unique abilities and positioning.",
+      badge: "Strategic Depth",
+      color: "ember-flame",
+      details: ["Grid-based positioning", "Combo attacks", "Environmental interactions"]
     },
     {
-      title: "Trust & Morality System",
-      description: "Choices matter. Be kind, ruthless, or neutral — and see how it changes your party's trust in you.",
-      icon: "🤝",
-      color: "from-verdant-glyph to-luminous-azure",
-      shadowColor: "shadow-verdant-glyph/25"
+      icon: MessageCircle,
+      title: "Dynamic Trust System",
+      description: "Your actions shape your party's trust in you. Will you lead with kindness, neutrality, or ruthlessness?",
+      badge: "Meaningful Choices",
+      color: "verdant-glyph",
+      details: ["Relationship tracking", "Trust-based abilities", "Multiple endings"]
     },
     {
-      title: "Party of 1-4 Characters",
-      description: "Find and earn the trust of companions, each with their own evolving personality and mystery to uncover.",
-      icon: "👥",
-      color: "from-luminous-azure to-ethereal-gold",
-      shadowColor: "shadow-luminous-azure/25"
+      icon: Users,
+      title: "Character-Driven Storytelling",
+      description: "Each companion has secrets, personalities, and reactions that change with your choices.",
+      badge: "Deep Characters",
+      color: "luminous-azure",
+      details: ["4 unique companions", "Personal questlines", "Dynamic dialogue"]
     },
     {
-      title: "Kid-Friendly Design",
-      description: "No horror, no gore. Just mystery, magic, and meaningful decisions that players of all ages can enjoy.",
-      icon: "✨",
-      color: "from-ethereal-gold to-verdant-glyph",
-      shadowColor: "shadow-ethereal-gold/25"
+      icon: Crown,
+      title: "Mystery & Betrayal",
+      description: "One of your party might be a traitor... and not even know it. Uncover the truth through gameplay.",
+      badge: "Plot Twists",
+      color: "ember-flame",
+      details: ["Hidden agendas", "Unreliable narrators", "Shocking revelations"]
     }
   ];
 
+  const handleDemoClick = () => {
+    console.log('Redirecting to demo');
+    // This would navigate to demo page
+  };
+
+  const handleKickstarterClick = () => {
+    console.log('Redirecting to Kickstarter from Features');
+    window.open('https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial', '_blank', 'noopener,noreferrer');
+  };
+
   return (
-    <section id="features" className="py-20 bg-gradient-to-br from-mystic-blue via-ancient-stone/80 to-mystic-blue relative overflow-hidden">
-      {/* Enhanced Background Pattern */}
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(212, 181, 106, 0.4) 1px, transparent 0)`,
-          backgroundSize: '30px 30px'
-        }}></div>
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 15px 15px, rgba(126, 200, 80, 0.2) 1px, transparent 0)`,
-          backgroundSize: '60px 60px'
-        }}></div>
-      </div>
-      
-      {/* Floating background elements */}
+    <section id="features" className="py-24 px-6 relative overflow-hidden">
+      {/* Enhanced background effects */}
       <div className="absolute inset-0 pointer-events-none">
-        {Array.from({ length: 6 }).map((_, i) => (
+        <div className="absolute inset-0 bg-gradient-to-b from-mystic-blue/60 via-ancient-stone/40 to-mystic-blue/60"></div>
+        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-ethereal-gold/5 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-verdant-glyph/5 to-transparent"></div>
+        {Array.from({ length: 20 }, (_, i) => (
           <div
-            key={i}
-            className="absolute rounded-full opacity-10 blur-xl animate-float"
+            key={`feature-particle-${i}`}
+            className="absolute w-1 h-1 bg-ethereal-gold/20 rounded-full animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              width: `${100 + Math.random() * 200}px`,
-              height: `${100 + Math.random() * 200}px`,
-              background: `radial-gradient(circle, ${i % 3 === 0 ? 'var(--ethereal-gold)' : i % 3 === 1 ? 'var(--verdant-glyph)' : 'var(--luminous-azure)'}, transparent)`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${8 + Math.random() * 4}s`
+              animationDelay: `${Math.random() * 10}s`,
+              animationDuration: `${8 + Math.random() * 6}s`,
             }}
           />
         ))}
       </div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-block mb-4">
-            <span className="px-6 py-3 bg-gradient-to-r from-ethereal-gold/20 to-ember-flame/20 rounded-full text-ethereal-gold text-sm font-medium border border-ethereal-gold/40 backdrop-blur-sm hover:bg-ethereal-gold/30 hover:border-ethereal-gold/60 transition-all duration-300 font-citizen">
-              Core Features
-            </span>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Enhanced Header */}
+        <div className="text-center mb-20 animate-fade-in">
+          <div className="inline-flex items-center px-8 py-4 rounded-full bg-gradient-to-r from-ethereal-gold/20 to-verdant-glyph/20 border border-ethereal-gold/40 backdrop-blur-sm mb-8">
+            <Sparkles className="w-6 h-6 text-ethereal-gold mr-3 animate-pulse" />
+            <span className="font-citizen text-ethereal-gold font-bold text-lg">Core Features</span>
+            <Zap className="w-6 h-6 text-verdant-glyph ml-3 animate-pulse" />
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 gradient-text drop-shadow-lg font-cinzel">
-            Gameplay That Matters
+          
+          <h2 className="font-cinzel text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
+            🧠 <span className="text-transparent bg-gradient-to-r from-ethereal-gold via-ember-flame to-verdant-glyph bg-clip-text">Epic Features</span> ⚔️
           </h2>
-          <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md font-citizen">
-            Experience a unique blend of tactical combat, procedural storytelling, and meaningful choices that shape your adventure
+          
+          <p className="text-2xl text-gray-100 leading-relaxed font-citizen max-w-4xl mx-auto mb-8">
+            Every feature designed to create unforgettable tactical RPG experiences that keep you coming back for more
           </p>
+          
+          <div className="flex flex-wrap justify-center gap-4">
+            <Badge variant="outline" className="px-6 py-3 text-lg font-citizen bg-luminous-azure/20 border-luminous-azure/40 text-luminous-azure">
+              <Shield className="w-5 h-5 mr-2" />
+              Tactical Combat
+            </Badge>
+            <Badge variant="outline" className="px-6 py-3 text-lg font-citizen bg-ethereal-gold/20 border-ethereal-gold/40 text-ethereal-gold">
+              <Brain className="w-5 h-5 mr-2" />
+              Deep Story
+            </Badge>
+            <Badge variant="outline" className="px-6 py-3 text-lg font-citizen bg-verdant-glyph/20 border-verdant-glyph/40 text-verdant-glyph">
+              <Puzzle className="w-5 h-5 mr-2" />
+              Endless Replayability
+            </Badge>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {features.map((feature, index) => (
-            <Card 
-              key={index} 
-              className="bg-gradient-to-br from-ancient-stone/90 to-mystic-blue/90 border-ancient-stone/60 hover:border-ethereal-gold/60 transition-all duration-700 hover-scale group glass-effect backdrop-blur-md animate-fade-in relative overflow-hidden"
-              style={{ animationDelay: `${index * 0.15}s` }}
-            >
-              {/* Card hover glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-ethereal-gold/5 to-verdant-glyph/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              {/* Subtle border glow */}
-              <div className="absolute inset-0 rounded-lg border border-transparent group-hover:border-ethereal-gold/30 transition-all duration-500"></div>
-              
-              <CardHeader className="text-center pb-4 relative z-10">
-                <div className={`inline-flex items-center justify-center w-18 h-18 rounded-2xl bg-gradient-to-r ${feature.color} mb-4 mx-auto text-3xl shadow-xl ${feature.shadowColor} group-hover:shadow-2xl group-hover:scale-110 transition-all duration-500 border border-white/20`}>
-                  {feature.icon}
-                </div>
-                <CardTitle className="text-xl font-bold text-white group-hover:text-ethereal-gold transition-colors duration-500 drop-shadow-sm font-citizen">
-                  {feature.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="relative z-10">
-                <CardDescription className="text-slate-200 text-base leading-relaxed group-hover:text-slate-100 transition-colors duration-500 font-citizen">
-                  {feature.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
-          ))}
+        {/* Features Grid */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-20">
+          {coreFeatures.map((feature, index) => {
+            const Icon = feature.icon;
+            return (
+              <Card 
+                key={feature.title}
+                className="group bg-gradient-to-br from-ancient-stone/30 to-mystic-blue/30 border border-ethereal-gold/20 hover:border-ethereal-gold/40 backdrop-blur-sm transition-all duration-700 hover:-translate-y-3 hover:shadow-2xl animate-fade-in overflow-hidden"
+                style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+              >
+                {/* Card glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-ethereal-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                
+                <CardContent className="p-8 relative z-10">
+                  <div className="flex items-start space-x-6">
+                    {/* Icon section */}
+                    <div className={`flex-shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-r from-${feature.color}/20 to-${feature.color}/10 border border-${feature.color}/30 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
+                      <Icon className={`w-10 h-10 text-${feature.color} group-hover:animate-pulse`} />
+                    </div>
+                    
+                    {/* Content section */}
+                    <div className="flex-1 space-y-4">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-cinzel text-2xl font-bold text-white group-hover:text-ethereal-gold transition-colors duration-300">
+                          {feature.title}
+                        </h3>
+                        <Badge 
+                          variant="outline" 
+                          className={`px-3 py-1 font-citizen bg-${feature.color}/10 border-${feature.color}/30 text-${feature.color} text-sm`}
+                        >
+                          {feature.badge}
+                        </Badge>
+                      </div>
+                      
+                      <p className="text-gray-200 font-citizen text-lg leading-relaxed">
+                        {feature.description}
+                      </p>
+                      
+                      {/* Feature details */}
+                      <div className="space-y-2 pt-2">
+                        {feature.details.map((detail, idx) => (
+                          <div key={idx} className="flex items-center space-x-3">
+                            <div className={`w-2 h-2 rounded-full bg-${feature.color}`}></div>
+                            <span className="text-gray-300 font-citizen text-sm">{detail}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
-        <div className="mt-16 text-center">
-          <div className="inline-block p-8 bg-gradient-to-r from-ethereal-gold/15 to-ember-flame/15 rounded-2xl border border-ethereal-gold/30 backdrop-blur-md hover:bg-ethereal-gold/20 hover:border-ethereal-gold/50 transition-all duration-300 hover-scale shadow-lg">
-            <p className="text-white text-lg font-medium drop-shadow-sm font-citizen">
-              🎯 Every feature designed to create memorable, meaningful experiences
+        {/* Call to Action Section */}
+        <div className="text-center animate-fade-in" style={{ animationDelay: "0.8s" }}>
+          <div className="bg-gradient-to-r from-black/50 to-black/30 rounded-3xl p-12 backdrop-blur-sm border border-ethereal-gold/30 max-w-4xl mx-auto">
+            <h3 className="font-cinzel text-4xl font-bold text-white mb-6">
+              Ready to Experience <span className="text-ethereal-gold">The Mystery?</span>
+            </h3>
+            <p className="text-xl text-gray-200 font-citizen mb-8 leading-relaxed">
+              Join thousands of adventurers who are already backing this epic tactical RPG experience
             </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Button 
+                onClick={handleKickstarterClick}
+                className="font-citizen text-lg py-6 px-8 bg-gradient-to-r from-ethereal-gold to-ember-flame text-mystic-blue hover:from-ethereal-gold/90 hover:to-ember-flame/90 shadow-xl shadow-ethereal-gold/30 hover:shadow-ethereal-gold/50 transform hover:scale-105 transition-all duration-300"
+              >
+                <Crown className="w-6 h-6 mr-3" />
+                Back on Kickstarter
+                <ArrowRight className="w-6 h-6 ml-3" />
+              </Button>
+              
+              <Button 
+                variant="outline"
+                onClick={handleDemoClick}
+                className="font-citizen text-lg py-6 px-8 border-2 border-verdant-glyph text-verdant-glyph hover:bg-verdant-glyph hover:text-white transition-all duration-300"
+              >
+                <Swords className="w-6 h-6 mr-3" />
+                Try the Demo
+              </Button>
+            </div>
           </div>
         </div>
       </div>

@@ -1,132 +1,246 @@
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { 
+  Sun, 
+  Zap, 
+  Music, 
+  Shield, 
+  Heart,
+  Sword,
+  Sparkles,
+  ArrowRight,
+  Crown
+} from "lucide-react";
 
 const Characters = () => {
   const characters = [
     {
       name: "Solari Emberkin",
-      class: "The Sunweaver",
-      description: "Healer, light mage, and gentle soul with a flickering past. 'You once burned the sky,' the whispers say.",
-      image: "/lovable-uploads/8654a423-2282-4ae5-bd0b-870a0ac350af.png",
-      color: "from-ethereal-gold via-ember-flame to-verdant-glyph",
-      bgColor: "from-ethereal-gold/20 to-ember-flame/20"
+      title: "The Sunweaver",
+      emoji: "☀️",
+      role: "Healer & Light Mage",
+      image: "/lovable-uploads/965e98d3-fb85-40c6-9263-e357de40fd59.png",
+      description: "A gentle soul with a flickering past who weaves light into healing magic",
+      whisper: '"You once burned the sky," the whispers say.',
+      abilities: ["Divine Healing", "Light Manipulation", "Solar Flare"],
+      personality: "Compassionate, mysterious, haunted by forgotten power",
+      icon: Sun,
+      color: "ethereal-gold",
+      bgGradient: "from-ethereal-gold/20 to-amber-400/10"
     },
     {
       name: "Tarrin Duskmane",
-      class: "The Stormblade",
-      description: "A lion warrior with shattered memories and lightning-fast reflexes. What was he sworn to protect?",
-      image: "/lovable-uploads/aba7c576-7054-488d-bf91-e74455e2ade2.png",
-      color: "from-luminous-azure via-verdant-glyph to-ethereal-gold",
-      bgColor: "from-luminous-azure/20 to-verdant-glyph/20"
+      title: "The Stormblade",
+      emoji: "⚡",
+      role: "Lightning Warrior",
+      image: "/lovable-uploads/8654a423-2282-4ae5-bd0b-870a0ac350af.png",
+      description: "A majestic lion warrior with shattered memories and lightning-fast reflexes",
+      whisper: "What was he sworn to protect?",
+      abilities: ["Lightning Strike", "Storm Shield", "Thunder Roar"],
+      personality: "Noble, fierce, struggling with lost oaths",
+      icon: Zap,
+      color: "luminous-azure",
+      bgGradient: "from-luminous-azure/20 to-blue-400/10"
     },
     {
       name: "Wisp Brambletuck",
-      class: "The Chronobard",
-      description: "A whimsical bard who bends time through music. Her songs echo forgotten truths.",
-      image: "/lovable-uploads/c261823d-4fbe-4910-83e7-edaf1effd9bd.png",
-      color: "from-verdant-glyph via-luminous-azure to-ethereal-gold",
-      bgColor: "from-verdant-glyph/20 to-luminous-azure/20"
+      title: "The Chronobard",
+      emoji: "🎵",
+      role: "Time-Bending Bard",
+      image: "/lovable-uploads/aba7c576-7054-488d-bf91-e74455e2ade2.png",
+      description: "A whimsical bard who bends time through music, with songs that echo forgotten truths",
+      whisper: "Her melodies remember what others have forgotten.",
+      abilities: ["Time Distortion", "Memory Song", "Fate's Melody"],
+      personality: "Playful, wise, keeper of ancient songs",
+      icon: Music,
+      color: "verdant-glyph",
+      bgGradient: "from-verdant-glyph/20 to-green-400/10"
     },
     {
-      name: "Kael Thornstride",
-      class: "The Runic Warden",
-      description: "A silent stone guardian etched with ancient glyphs. Was he carved to protect—or destroy?",
-      image: "/lovable-uploads/728cafee-48b6-4a16-b5aa-d8fe7882ef2d.png",
-      color: "from-ethereal-gold via-amber-500 to-orange-400",
-      bgColor: "from-ethereal-gold/30 to-amber-500/30"
+      name: "Kael Thornstride", 
+      title: "The Runic Warden",
+      emoji: "🌿🛡️",
+      role: "Stone Guardian",
+      image: "/lovable-uploads/c261823d-4fbe-4910-83e7-edaf1effd9bd.png",
+      description: "A silent stone guardian etched with ancient glyphs, carved from living rock",
+      whisper: "Was he carved to protect—or destroy?",
+      abilities: ["Stone Fortress", "Runic Power", "Earth Tremor"],
+      personality: "Silent, loyal, harboring ancient secrets",
+      icon: Shield,
+      color: "ember-flame",
+      bgGradient: "from-ember-flame/20 to-orange-400/10"
     }
   ];
 
+  const handleKickstarterClick = () => {
+    console.log('Redirecting to Kickstarter from Characters');
+    window.open('https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial', '_blank', 'noopener,noreferrer');
+  };
+
   return (
-    <section id="characters" className="py-20 bg-gradient-to-br from-mystic-blue via-ancient-stone to-luminous-azure/30 relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-ethereal-gold/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-ember-flame/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-verdant-glyph/10 rounded-full blur-2xl"></div>
+    <section className="py-24 px-6 relative overflow-hidden">
+      {/* Enhanced background effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-mystic-blue/70 via-ancient-stone/50 to-mystic-blue/70"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-ethereal-gold/5 via-transparent to-verdant-glyph/5"></div>
+        {Array.from({ length: 25 }, (_, i) => (
+          <div
+            key={`char-particle-${i}`}
+            className="absolute w-1 h-1 bg-ethereal-gold/30 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 8}s`,
+              animationDuration: `${6 + Math.random() * 8}s`,
+            }}
+          />
+        ))}
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-block mb-4">
-            <span className="px-4 py-2 bg-gradient-to-r from-luminous-azure/20 to-verdant-glyph/20 rounded-full text-luminous-azure text-sm font-medium border border-luminous-azure/30 font-citizen">
-              Meet Your Party
-            </span>
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Enhanced Header */}
+        <div className="text-center mb-20 animate-fade-in">
+          <div className="inline-flex items-center px-8 py-4 rounded-full bg-gradient-to-r from-ethereal-gold/20 to-ember-flame/20 border border-ethereal-gold/40 backdrop-blur-sm mb-8">
+            <Crown className="w-6 h-6 text-ethereal-gold mr-3 animate-pulse" />
+            <span className="font-citizen text-ethereal-gold font-bold text-lg">Meet Your Party</span>
+            <Sparkles className="w-6 h-6 text-ember-flame ml-3 animate-pulse" />
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-cinzel">
-            Four <span className="gradient-text">Mysterious</span> Souls
+          
+          <h2 className="font-cinzel text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
+            🎭 <span className="text-transparent bg-gradient-to-r from-ethereal-gold via-verdant-glyph to-luminous-azure bg-clip-text">The Characters</span> ⚔️
           </h2>
-          <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-citizen">
-            Each character harbors secrets, unique abilities, and evolving stories that change based on your choices
+          
+          <p className="text-2xl text-gray-100 leading-relaxed font-citizen max-w-4xl mx-auto">
+            Four mysterious heroes, each with secrets to uncover and stories to tell. Who will you trust?
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
-          {characters.map((character, index) => (
-            <Card 
-              key={index}
-              className="bg-gradient-to-br from-ancient-stone/80 to-mystic-blue/80 border-ancient-stone/50 overflow-hidden hover:border-ethereal-gold/50 transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm animate-fade-in"
-              style={{ animationDelay: `${index * 0.15}s` }}
-            >
-              <div className="relative overflow-hidden">
-                <div className="aspect-[4/5] flex items-center justify-center bg-gradient-to-br from-ancient-stone/50 to-mystic-blue/50">
-                  <img 
-                    src={character.image} 
-                    alt={character.name}
-                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <div className={`absolute inset-0 bg-gradient-to-t ${character.bgColor} opacity-40`}></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-mystic-blue/60 via-transparent to-transparent"></div>
+        {/* Characters Grid */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-20">
+          {characters.map((character, index) => {
+            const Icon = character.icon;
+            return (
+              <Card 
+                key={character.name}
+                className="group bg-gradient-to-br from-ancient-stone/40 to-mystic-blue/40 border border-ethereal-gold/20 hover:border-ethereal-gold/50 backdrop-blur-sm transition-all duration-700 hover:-translate-y-4 hover:shadow-2xl animate-fade-in overflow-hidden"
+                style={{ animationDelay: `${0.2 + index * 0.15}s` }}
+              >
+                {/* Character glow effect */}
+                <div className={`absolute inset-0 bg-gradient-to-r ${character.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}></div>
                 
-                {/* Character Class Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r ${character.color} text-white shadow-lg font-citizen`}>
-                    {character.class}
-                  </span>
-                </div>
-              </div>
-              
-              <CardHeader className="pb-3">
-                <CardTitle className="text-2xl font-bold text-white group-hover:text-ethereal-gold transition-colors duration-300 font-cinzel">
-                  {character.name}
-                </CardTitle>
-                <CardDescription className={`text-lg font-semibold bg-gradient-to-r ${character.color} bg-clip-text text-transparent font-citizen`}>
-                  {character.class}
-                </CardDescription>
-              </CardHeader>
-              
-              <CardContent>
-                <p className="text-slate-300 leading-relaxed group-hover:text-slate-200 transition-colors duration-300 font-citizen">
-                  {character.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
+                <CardContent className="p-0 relative z-10">
+                  {/* Character Image Section */}
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={character.image}
+                      alt={`${character.name} - ${character.title}`}
+                      className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    
+                    {/* Character overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    
+                    {/* Character badge */}
+                    <div className="absolute top-4 left-4">
+                      <Badge className={`px-4 py-2 font-citizen bg-${character.color}/20 border-${character.color}/40 text-${character.color} text-sm font-bold`}>
+                        <Icon className="w-4 h-4 mr-2" />
+                        {character.role}
+                      </Badge>
+                    </div>
+                    
+                    {/* Character emoji in corner */}
+                    <div className="absolute top-4 right-4 text-4xl animate-pulse">
+                      {character.emoji}
+                    </div>
+                  </div>
+                  
+                  {/* Character Info Section */}
+                  <div className="p-8 space-y-6">
+                    <div className="text-center space-y-2">
+                      <h3 className="font-cinzel text-3xl font-bold text-white group-hover:text-ethereal-gold transition-colors duration-300">
+                        {character.name}
+                      </h3>
+                      <p className={`font-citizen text-xl font-semibold text-${character.color}`}>
+                        {character.title}
+                      </p>
+                    </div>
+                    
+                    <p className="text-gray-200 font-citizen text-lg leading-relaxed text-center">
+                      {character.description}
+                    </p>
+                    
+                    {/* Whisper quote */}
+                    <div className="bg-black/30 rounded-xl p-6 border border-ethereal-gold/20">
+                      <p className="text-ethereal-gold font-citizen italic text-center text-lg leading-relaxed">
+                        {character.whisper}
+                      </p>
+                    </div>
+                    
+                    {/* Abilities */}
+                    <div className="space-y-3">
+                      <h4 className="font-cinzel text-lg font-bold text-white text-center">Signature Abilities</h4>
+                      <div className="flex flex-wrap justify-center gap-2">
+                        {character.abilities.map((ability, idx) => (
+                          <Badge 
+                            key={idx}
+                            variant="outline" 
+                            className={`px-3 py-1 font-citizen bg-${character.color}/10 border-${character.color}/30 text-${character.color} text-sm`}
+                          >
+                            {ability}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {/* Personality */}
+                    <div className="text-center">
+                      <p className="text-gray-300 font-citizen text-sm leading-relaxed">
+                        <span className="font-semibold text-white">Personality:</span> {character.personality}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
-        <div className="text-center">
-          <div className="bg-gradient-to-r from-ancient-stone/60 to-mystic-blue/60 rounded-2xl p-8 max-w-4xl mx-auto border border-ancient-stone/50 glass-effect backdrop-blur-sm">
-            <div className="mb-4">
-              <span className="text-4xl">🔮</span>
-            </div>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 gradient-text font-cinzel">The Mystery Awaits</h3>
-            <p className="text-slate-300 text-lg md:text-xl italic mb-6 leading-relaxed font-citizen">
+        {/* Mystery Teaser Section */}
+        <div className="text-center animate-fade-in" style={{ animationDelay: "0.8s" }}>
+          <div className="bg-gradient-to-r from-black/60 to-black/40 rounded-3xl p-12 backdrop-blur-sm border border-ethereal-gold/30 max-w-5xl mx-auto">
+            <div className="text-6xl mb-6">🌌</div>
+            <h3 className="font-cinzel text-4xl font-bold text-white mb-6">
+              The <span className="text-ethereal-gold">Mystery</span> Awaits
+            </h3>
+            
+            <blockquote className="text-2xl text-gray-200 font-citizen italic mb-8 leading-relaxed max-w-3xl mx-auto">
               "Who were you before the dungeon claimed your mind? Will you find the truth—or become part of the legend?"
+            </blockquote>
+            
+            <p className="text-xl text-gray-300 font-citizen mb-8 leading-relaxed max-w-4xl mx-auto">
+              Every memory fragment you collect adds a piece to the story. Every run is a new adventure, 
+              with different characters, outcomes, and twists. But beware: <span className="text-ember-flame font-bold">One of you might be a traitor... and not even know it.</span>
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-slate-400">
-              <div className="flex flex-col items-center p-4 bg-ancient-stone/30 rounded-lg">
-                <span className="text-2xl mb-2">🧩</span>
-                <p className="text-sm font-citizen">Memory fragments reveal your past</p>
-              </div>
-              <div className="flex flex-col items-center p-4 bg-ancient-stone/30 rounded-lg">
-                <span className="text-2xl mb-2">🎭</span>
-                <p className="text-sm font-citizen">Every run tells a different story</p>
-              </div>
-              <div className="flex flex-col items-center p-4 bg-ancient-stone/30 rounded-lg">
-                <span className="text-2xl mb-2">⚡</span>
-                <p className="text-sm font-citizen">One of you might be a traitor</p>
-              </div>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Button 
+                onClick={handleKickstarterClick}
+                className="font-citizen text-lg py-6 px-8 bg-gradient-to-r from-ethereal-gold to-ember-flame text-mystic-blue hover:from-ethereal-gold/90 hover:to-ember-flame/90 shadow-xl shadow-ethereal-gold/30 hover:shadow-ethereal-gold/50 transform hover:scale-105 transition-all duration-300"
+              >
+                <Heart className="w-6 h-6 mr-3" />
+                Support Their Story
+                <ArrowRight className="w-6 h-6 ml-3" />
+              </Button>
+              
+              <Button 
+                variant="outline"
+                className="font-citizen text-lg py-6 px-8 border-2 border-verdant-glyph text-verdant-glyph hover:bg-verdant-glyph hover:text-white transition-all duration-300"
+              >
+                <Sword className="w-6 h-6 mr-3" />
+                Meet Them in Battle
+              </Button>
             </div>
           </div>
         </div>
