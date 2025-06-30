@@ -14,25 +14,37 @@ const About = () => {
       icon: BookOpen,
       title: "Hand-Written Narrative",
       description: "Every word, character, and dialogue crafted by our passionate writing team—no AI-generated content.",
-      color: "ethereal-gold"
+      colorClasses: {
+        icon: "text-ethereal-gold",
+        iconBg: "bg-ethereal-gold/20 border-ethereal-gold/30"
+      }
     },
     {
       icon: Users,
       title: "Character-Driven Stories",
       description: "Each companion has deep secrets, unique personalities, and meaningful reactions to your choices.",
-      color: "luminous-azure"
+      colorClasses: {
+        icon: "text-luminous-azure",
+        iconBg: "bg-luminous-azure/20 border-luminous-azure/30"
+      }
     },
     {
       icon: Sparkles,
       title: "Meaningful Experience",
       description: "A heartfelt adventure that respects your time and intelligence with rich, thoughtful storytelling.",
-      color: "verdant-glyph"
+      colorClasses: {
+        icon: "text-verdant-glyph",
+        iconBg: "bg-verdant-glyph/20 border-verdant-glyph/30"
+      }
     },
     {
       icon: Heart,
       title: "Passion Project",
       description: "Made with love by a dedicated indie team who believe games should tell meaningful stories.",
-      color: "ember-flame"
+      colorClasses: {
+        icon: "text-ember-flame",
+        iconBg: "bg-ember-flame/20 border-ember-flame/30"
+      }
     }
   ];
 
@@ -151,8 +163,8 @@ const About = () => {
                   style={{ animationDelay: `${0.9 + index * 0.1}s` }}
                 >
                   <CardContent className="p-8 text-center space-y-4">
-                    <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-r from-${feature.color}/20 to-${feature.color}/10 border border-${feature.color}/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                      <Icon className={`w-8 h-8 text-${feature.color}`} />
+                    <div className={`w-16 h-16 mx-auto rounded-full ${feature.colorClasses.iconBg} border flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className={`w-8 h-8 ${feature.colorClasses.icon}`} />
                     </div>
                     <h4 className="font-cinzel text-xl font-bold text-white group-hover:text-ethereal-gold transition-colors">
                       {feature.title}

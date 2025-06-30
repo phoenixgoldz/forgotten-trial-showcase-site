@@ -22,7 +22,12 @@ const Features = () => {
       title: "Procedural Dungeon Layouts",
       description: "Every playthrough offers a new map, new encounters, and new memories to discover. No two adventures are ever the same.",
       badge: "Infinite Replayability",
-      color: "luminous-azure",
+      colorClasses: {
+        icon: "text-luminous-azure",
+        iconBg: "bg-luminous-azure/20 border-luminous-azure/30",
+        badge: "bg-luminous-azure/10 border-luminous-azure/30 text-luminous-azure",
+        bullet: "bg-luminous-azure"
+      },
       details: ["Handcrafted room templates", "Dynamic encounter placement", "Secrets that change location"]
     },
     {
@@ -30,7 +35,12 @@ const Features = () => {
       title: "Hand-Written Narrative Fragments",
       description: "Letters, journal entries, and ghostly whispers reveal who you were—and who you might become.",
       badge: "Story-Driven",
-      color: "ethereal-gold",
+      colorClasses: {
+        icon: "text-ethereal-gold",
+        iconBg: "bg-ethereal-gold/20 border-ethereal-gold/30",
+        badge: "bg-ethereal-gold/10 border-ethereal-gold/30 text-ethereal-gold",
+        bullet: "bg-ethereal-gold"
+      },
       details: ["200+ unique story fragments", "Branching narrative paths", "Character backstory reveals"]
     },
     {
@@ -38,7 +48,12 @@ const Features = () => {
       title: "Tactical Turn-Based Combat",
       description: "Command your party on a grid in rich, strategic battles with unique abilities and positioning.",
       badge: "Strategic Depth",
-      color: "ember-flame",
+      colorClasses: {
+        icon: "text-ember-flame",
+        iconBg: "bg-ember-flame/20 border-ember-flame/30",
+        badge: "bg-ember-flame/10 border-ember-flame/30 text-ember-flame",
+        bullet: "bg-ember-flame"
+      },
       details: ["Grid-based positioning", "Combo attacks", "Environmental interactions"]
     },
     {
@@ -46,7 +61,12 @@ const Features = () => {
       title: "Dynamic Trust System",
       description: "Your actions shape your party's trust in you. Will you lead with kindness, neutrality, or ruthlessness?",
       badge: "Meaningful Choices",
-      color: "verdant-glyph",
+      colorClasses: {
+        icon: "text-verdant-glyph",
+        iconBg: "bg-verdant-glyph/20 border-verdant-glyph/30",
+        badge: "bg-verdant-glyph/10 border-verdant-glyph/30 text-verdant-glyph",
+        bullet: "bg-verdant-glyph"
+      },
       details: ["Relationship tracking", "Trust-based abilities", "Multiple endings"]
     },
     {
@@ -54,7 +74,12 @@ const Features = () => {
       title: "Character-Driven Storytelling",
       description: "Each companion has secrets, personalities, and reactions that change with your choices.",
       badge: "Deep Characters",
-      color: "luminous-azure",
+      colorClasses: {
+        icon: "text-luminous-azure",
+        iconBg: "bg-luminous-azure/20 border-luminous-azure/30",
+        badge: "bg-luminous-azure/10 border-luminous-azure/30 text-luminous-azure",
+        bullet: "bg-luminous-azure"
+      },
       details: ["4 unique companions", "Personal questlines", "Dynamic dialogue"]
     },
     {
@@ -62,7 +87,12 @@ const Features = () => {
       title: "Mystery & Betrayal",
       description: "One of your party might be a traitor... and not even know it. Uncover the truth through gameplay.",
       badge: "Plot Twists",
-      color: "ember-flame",
+      colorClasses: {
+        icon: "text-ember-flame",
+        iconBg: "bg-ember-flame/20 border-ember-flame/30",
+        badge: "bg-ember-flame/10 border-ember-flame/30 text-ember-flame",
+        bullet: "bg-ember-flame"
+      },
       details: ["Hidden agendas", "Unreliable narrators", "Shocking revelations"]
     }
   ];
@@ -147,8 +177,8 @@ const Features = () => {
                 <CardContent className="p-8 relative z-10">
                   <div className="flex items-start space-x-6">
                     {/* Icon section */}
-                    <div className={`flex-shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-r from-${feature.color}/20 to-${feature.color}/10 border border-${feature.color}/30 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
-                      <Icon className={`w-10 h-10 text-${feature.color} group-hover:animate-pulse`} />
+                    <div className={`flex-shrink-0 w-20 h-20 rounded-2xl ${feature.colorClasses.iconBg} border flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
+                      <Icon className={`w-10 h-10 ${feature.colorClasses.icon} group-hover:animate-pulse`} />
                     </div>
                     
                     {/* Content section */}
@@ -159,7 +189,7 @@ const Features = () => {
                         </h3>
                         <Badge 
                           variant="outline" 
-                          className={`px-3 py-1 font-citizen bg-${feature.color}/10 border-${feature.color}/30 text-${feature.color} text-sm`}
+                          className={`px-3 py-1 font-citizen ${feature.colorClasses.badge} text-sm`}
                         >
                           {feature.badge}
                         </Badge>
@@ -173,7 +203,7 @@ const Features = () => {
                       <div className="space-y-2 pt-2">
                         {feature.details.map((detail, idx) => (
                           <div key={idx} className="flex items-center space-x-3">
-                            <div className={`w-2 h-2 rounded-full bg-${feature.color}`}></div>
+                            <div className={`w-2 h-2 rounded-full ${feature.colorClasses.bullet}`}></div>
                             <span className="text-gray-300 font-citizen text-sm">{detail}</span>
                           </div>
                         ))}

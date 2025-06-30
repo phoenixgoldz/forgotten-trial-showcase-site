@@ -1,31 +1,90 @@
 
 /* Color utility classes */
-.text-mystic-blue { color: var(--mystic-blue); }
-.bg-mystic-blue { background-color: var(--mystic-blue); }
-.text-ethereal-gold { color: var(--ethereal-gold); }
-.bg-ethereal-gold { background-color: var(--ethereal-gold); }
-.text-ancient-stone { color: var(--ancient-stone); }
-.bg-ancient-stone { background-color: var(--ancient-stone); }
-.text-luminous-azure { color: var(--luminous-azure); }
-.bg-luminous-azure { background-color: var(--luminous-azure); }
-.text-ember-flame { color: var(--ember-flame); }
-.bg-ember-flame { background-color: var(--ember-flame); }
-.text-verdant-glyph { color: var(--verdant-glyph); }
-.bg-verdant-glyph { background-color: var(--verdant-glyph); }
+.text-mystic-blue { color: #1A1D3C; }
+.bg-mystic-blue { background-color: #1A1D3C; }
+.text-ethereal-gold { color: #D4B56A; }
+.bg-ethereal-gold { background-color: #D4B56A; }
+.text-ancient-stone { color: #44424D; }
+.bg-ancient-stone { background-color: #44424D; }
+.text-luminous-azure { color: #3E92CC; }
+.bg-luminous-azure { background-color: #3E92CC; }
+.text-ember-flame { color: #E97F3C; }
+.bg-ember-flame { background-color: #E97F3C; }
+.text-verdant-glyph { color: #7EC850; }
+.bg-verdant-glyph { background-color: #7EC850; }
 
-/* Enhanced shadow utilities matching theme colors */
+/* Enhanced shadow utilities with proper color values */
 .shadow-ethereal-gold\/25 { box-shadow: 0 10px 25px -3px rgba(212, 181, 106, 0.25), 0 4px 6px -2px rgba(212, 181, 106, 0.1); }
 .shadow-ember-flame\/25 { box-shadow: 0 10px 25px -3px rgba(233, 127, 60, 0.25), 0 4px 6px -2px rgba(233, 127, 60, 0.1); }
 .shadow-verdant-glyph\/25 { box-shadow: 0 10px 25px -3px rgba(126, 200, 80, 0.25), 0 4px 6px -2px rgba(126, 200, 80, 0.1); }
 .shadow-luminous-azure\/25 { box-shadow: 0 10px 25px -3px rgba(62, 146, 204, 0.25), 0 4px 6px -2px rgba(62, 146, 204, 0.1); }
+.shadow-ancient-stone\/25 { box-shadow: 0 10px 25px -3px rgba(68, 66, 77, 0.25), 0 4px 6px -2px rgba(68, 66, 77, 0.1); }
 
 .shadow-ethereal-gold\/30 { box-shadow: 0 10px 25px -3px rgba(212, 181, 106, 0.3), 0 4px 6px -2px rgba(212, 181, 106, 0.15); }
 .shadow-ember-flame\/30 { box-shadow: 0 10px 25px -3px rgba(233, 127, 60, 0.3), 0 4px 6px -2px rgba(233, 127, 60, 0.15); }
 .shadow-verdant-glyph\/30 { box-shadow: 0 10px 25px -3px rgba(126, 200, 80, 0.3), 0 4px 6px -2px rgba(126, 200, 80, 0.15); }
+.shadow-luminous-azure\/30 { box-shadow: 0 10px 25px -3px rgba(62, 146, 204, 0.3), 0 4px 6px -2px rgba(62, 146, 204, 0.15); }
 
-.hover\:shadow-ethereal-gold\/20:hover { box-shadow: 0 20px 25px -5px rgba(212, 181, 106, 0.2), 0 10px 10px -5px rgba(212, 181, 106, 0.1); }
-.hover\:shadow-ember-flame\/20:hover { box-shadow: 0 20px 25px -5px rgba(233, 127, 60, 0.2), 0 10px 10px -5px rgba(233, 127, 60, 0.1); }
-.hover\:shadow-verdant-glyph\/20:hover { box-shadow: 0 20px 25px -5px rgba(126, 200, 80, 0.2), 0 10px 10px -5px rgba(126, 200, 80, 0.1); }
+.shadow-ethereal-gold\/40 { box-shadow: 0 20px 25px -5px rgba(212, 181, 106, 0.4), 0 10px 10px -5px rgba(212, 181, 106, 0.2); }
+.shadow-ember-flame\/40 { box-shadow: 0 20px 25px -5px rgba(233, 127, 60, 0.4), 0 10px 10px -5px rgba(233, 127, 60, 0.2); }
+.shadow-verdant-glyph\/40 { box-shadow: 0 20px 25px -5px rgba(126, 200, 80, 0.4), 0 10px 10px -5px rgba(126, 200, 80, 0.2); }
+
+.shadow-ethereal-gold\/50 { box-shadow: 0 25px 50px -12px rgba(212, 181, 106, 0.5), 0 10px 20px -5px rgba(212, 181, 106, 0.25); }
+.shadow-ember-flame\/50 { box-shadow: 0 25px 50px -12px rgba(233, 127, 60, 0.5), 0 10px 20px -5px rgba(233, 127, 60, 0.25); }
+.shadow-verdant-glyph\/50 { box-shadow: 0 25px 50px -12px rgba(126, 200, 80, 0.5), 0 10px 20px -5px rgba(126, 200, 80, 0.25); }
+
+/* Border utilities */
+.border-ethereal-gold\/20 { border-color: rgba(212, 181, 106, 0.2); }
+.border-ethereal-gold\/30 { border-color: rgba(212, 181, 106, 0.3); }
+.border-ethereal-gold\/40 { border-color: rgba(212, 181, 106, 0.4); }
+.border-ethereal-gold\/60 { border-color: rgba(212, 181, 106, 0.6); }
+.border-ethereal-gold\/70 { border-color: rgba(212, 181, 106, 0.7); }
+
+.border-ember-flame\/20 { border-color: rgba(233, 127, 60, 0.2); }
+.border-ember-flame\/30 { border-color: rgba(233, 127, 60, 0.3); }
+.border-ember-flame\/60 { border-color: rgba(233, 127, 60, 0.6); }
+.border-ember-flame\/90 { border-color: rgba(233, 127, 60, 0.9); }
+
+.border-verdant-glyph\/20 { border-color: rgba(126, 200, 80, 0.2); }
+.border-verdant-glyph\/30 { border-color: rgba(126, 200, 80, 0.3); }
+.border-verdant-glyph\/60 { border-color: rgba(126, 200, 80, 0.6); }
+
+.border-luminous-azure\/20 { border-color: rgba(62, 146, 204, 0.2); }
+.border-luminous-azure\/30 { border-color: rgba(62, 146, 204, 0.3); }
+.border-luminous-azure\/40 { border-color: rgba(62, 146, 204, 0.4); }
+.border-luminous-azure\/60 { border-color: rgba(62, 146, 204, 0.6); }
+
+/* Background color utilities with opacity */
+.bg-ethereal-gold\/5 { background-color: rgba(212, 181, 106, 0.05); }
+.bg-ethereal-gold\/10 { background-color: rgba(212, 181, 106, 0.1); }
+.bg-ethereal-gold\/20 { background-color: rgba(212, 181, 106, 0.2); }
+.bg-ethereal-gold\/90 { background-color: rgba(212, 181, 106, 0.9); }
+
+.bg-ember-flame\/5 { background-color: rgba(233, 127, 60, 0.05); }
+.bg-ember-flame\/10 { background-color: rgba(233, 127, 60, 0.1); }
+.bg-ember-flame\/20 { background-color: rgba(233, 127, 60, 0.2); }
+.bg-ember-flame\/90 { background-color: rgba(233, 127, 60, 0.9); }
+
+.bg-verdant-glyph\/5 { background-color: rgba(126, 200, 80, 0.05); }
+.bg-verdant-glyph\/10 { background-color: rgba(126, 200, 80, 0.1); }
+.bg-verdant-glyph\/20 { background-color: rgba(126, 200, 80, 0.2); }
+.bg-verdant-glyph\/90 { background-color: rgba(126, 200, 80, 0.9); }
+
+.bg-luminous-azure\/5 { background-color: rgba(62, 146, 204, 0.05); }
+.bg-luminous-azure\/10 { background-color: rgba(62, 146, 204, 0.1); }
+.bg-luminous-azure\/20 { background-color: rgba(62, 146, 204, 0.2); }
+.bg-luminous-azure\/90 { background-color: rgba(62, 146, 204, 0.9); }
+
+.bg-ancient-stone\/20 { background-color: rgba(68, 66, 77, 0.2); }
+.bg-ancient-stone\/30 { background-color: rgba(68, 66, 77, 0.3); }
+.bg-ancient-stone\/40 { background-color: rgba(68, 66, 77, 0.4); }
+.bg-ancient-stone\/90 { background-color: rgba(68, 66, 77, 0.9); }
+
+.bg-mystic-blue\/30 { background-color: rgba(26, 29, 60, 0.3); }
+.bg-mystic-blue\/50 { background-color: rgba(26, 29, 60, 0.5); }
+.bg-mystic-blue\/60 { background-color: rgba(26, 29, 60, 0.6); }
+.bg-mystic-blue\/85 { background-color: rgba(26, 29, 60, 0.85); }
+.bg-mystic-blue\/95 { background-color: rgba(26, 29, 60, 0.95); }
 
 /* Premium glass effects */
 .glass-effect {
@@ -42,7 +101,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Advanced gradient text effects - NO HORIZONTAL MOVEMENT */
+/* Advanced gradient text effects */
 .gradient-text-gold {
   background: linear-gradient(135deg, #D4B56A 0%, #F4E4BC 50%, #D4B56A 100%);
   -webkit-background-clip: text;
@@ -63,7 +122,7 @@
   position: static;
 }
 
-/* Premium hover effects - NO HORIZONTAL MOVEMENT */
+/* Premium hover effects */
 .hover-glow:hover {
   filter: drop-shadow(0 0 20px rgba(212, 181, 106, 0.5));
   transition: filter 0.3s ease;
@@ -74,7 +133,7 @@
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Loading animations - NO HORIZONTAL MOVEMENT */
+/* Loading animations */
 .shimmer-effect {
   position: relative;
   overflow: hidden;
