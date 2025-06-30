@@ -1,5 +1,5 @@
 
-import { Volume2, VolumeX, Play, Pause, AlertCircle, Music, Settings } from "lucide-react";
+import { Volume2, VolumeX, Play, Pause, AlertCircle, Music, Settings, SkipBack, SkipForward, Shuffle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -25,10 +25,16 @@ const AudioControls = () => {
     isMuted, 
     audioError, 
     currentTrack,
+    currentTime,
+    duration,
+    isShuffled,
     playTrack, 
     stopTrack, 
     toggleMute, 
     changeVolume,
+    nextTrack,
+    previousTrack,
+    toggleShuffle,
     availableTracks
   } = useAudio();
   
@@ -53,13 +59,31 @@ const AudioControls = () => {
     changeVolume(newVolume);
   };
 
+  const formatTime = (time: number) => {
+    if (isNaN(time)) return "0:00";
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
   return (
     <div className="fixed bottom-6 right-6 z-40">
       <div className={`bg-gradient-to-r from-ancient-stone/95 to-mystic-blue/95 backdrop-blur-md rounded-2xl border border-ethereal-gold/30 shadow-xl transition-all duration-300 ${
         isExpanded ? 'p-6 max-w-sm' : 'p-4 max-w-xs'
       }`}>
         <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={previousTrack}
+              className="text-ethereal-gold hover:bg-ethereal-gold/10"
+              disabled={isLoading}
+              aria-label="Previous track"
+            >
+              <SkipBack className="w-4 h-4" />
+            </Button>
+            
             <Button
               size="sm"
               variant="ghost"
@@ -80,23 +104,23 @@ const AudioControls = () => {
             <Button
               size="sm"
               variant="ghost"
-              onClick={toggleMute}
+              onClick={nextTrack}
               className="text-ethereal-gold hover:bg-ethereal-gold/10"
-              aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+              disabled={isLoading}
+              aria-label="Next track"
             >
-              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+              <SkipForward className="w-4 h-4" />
             </Button>
             
-            <div className="w-20">
-              <Slider
-                value={[volume * 100]}
-                onValueChange={handleVolumeChange}
-                max={100}
-                step={1}
-                className="cursor-pointer"
-                aria-label="Volume control"
-              />
-            </div>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={toggleShuffle}
+              className={`hover:bg-ethereal-gold/10 ${isShuffled ? 'text-ember-flame' : 'text-ethereal-gold'}`}
+              aria-label={isShuffled ? "Turn off shuffle" : "Turn on shuffle"}
+            >
+              <Shuffle className="w-4 h-4" />
+            </Button>
           </div>
           
           <Button
@@ -108,6 +132,44 @@ const AudioControls = () => {
           >
             <Settings className="w-4 h-4" />
           </Button>
+        </div>
+
+        {/* Timestamp and Progress */}
+        <div className="mb-3">
+          <div className="flex items-center justify-between text-xs text-ethereal-gold/70 mb-1">
+            <span>{formatTime(currentTime)}</span>
+            <span>{formatTime(duration)}</span>
+          </div>
+          <div className="w-full bg-ancient-stone/30 rounded-full h-1">
+            <div 
+              className="h-full bg-ethereal-gold rounded-full transition-all duration-300"
+              style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Volume and Mute Controls */}
+        <div className="flex items-center gap-3 mb-3">
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={toggleMute}
+            className="text-ethereal-gold hover:bg-ethereal-gold/10"
+            aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+          >
+            {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+          </Button>
+          
+          <div className="flex-1">
+            <Slider
+              value={[volume * 100]}
+              onValueChange={handleVolumeChange}
+              max={100}
+              step={1}
+              className="cursor-pointer"
+              aria-label="Volume control"
+            />
+          </div>
         </div>
         
         {isExpanded && (
@@ -133,6 +195,7 @@ const AudioControls = () => {
               <span className="text-ethereal-gold/70">
                 Now: {currentTrack ? TRACK_NAMES[currentTrack as keyof typeof TRACK_NAMES] : 'None'}
               </span>
+              {isShuffled && <span className="text-ember-flame">🔀</span>}
             </div>
           </div>
         )}

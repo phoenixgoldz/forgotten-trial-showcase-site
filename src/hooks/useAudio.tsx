@@ -22,6 +22,9 @@ export const useAudio = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [audioError, setAudioError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isShuffled, setIsShuffled] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -72,6 +75,37 @@ export const useAudio = () => {
     }, 50);
   }, [clearFadeInterval]);
 
+  const getRandomTrack = useCallback((excludeCurrent = true): TrackId => {
+    const availableTracks = Object.keys(TRACKS) as TrackId[];
+    const filteredTracks = excludeCurrent && currentTrack 
+      ? availableTracks.filter(track => track !== currentTrack)
+      : availableTracks;
+    
+    return filteredTracks[Math.floor(Math.random() * filteredTracks.length)];
+  }, [currentTrack]);
+
+  const getNextTrack = useCallback((): TrackId => {
+    if (isShuffled) {
+      return getRandomTrack();
+    }
+    
+    const trackKeys = Object.keys(TRACKS) as TrackId[];
+    const currentIndex = currentTrack ? trackKeys.indexOf(currentTrack) : -1;
+    const nextIndex = (currentIndex + 1) % trackKeys.length;
+    return trackKeys[nextIndex];
+  }, [currentTrack, isShuffled, getRandomTrack]);
+
+  const getPreviousTrack = useCallback((): TrackId => {
+    if (isShuffled) {
+      return getRandomTrack();
+    }
+    
+    const trackKeys = Object.keys(TRACKS) as TrackId[];
+    const currentIndex = currentTrack ? trackKeys.indexOf(currentTrack) : -1;
+    const prevIndex = currentIndex <= 0 ? trackKeys.length - 1 : currentIndex - 1;
+    return trackKeys[prevIndex];
+  }, [currentTrack, isShuffled, getRandomTrack]);
+
   const playTrack = useCallback((trackId: TrackId, loop = true, crossfade = true) => {
     if (!audioRef.current) {
       audioRef.current = new Audio();
@@ -87,6 +121,13 @@ export const useAudio = () => {
       
       const handleLoadStart = () => setIsLoading(true);
       const handleCanPlayThrough = () => setIsLoading(false);
+      const handleTimeUpdate = () => {
+        setCurrentTime(audio.currentTime);
+        setDuration(audio.duration || 0);
+      };
+      const handleLoadedMetadata = () => {
+        setDuration(audio.duration || 0);
+      };
       const handleError = () => {
         console.log('Audio playback failed - this is normal if audio files are not uploaded yet');
         setAudioError('Audio files not available yet. Upload audio files to enable sound.');
@@ -98,10 +139,14 @@ export const useAudio = () => {
       // Remove previous event listeners to prevent memory leaks
       audio.removeEventListener('loadstart', handleLoadStart);
       audio.removeEventListener('canplaythrough', handleCanPlayThrough);
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('error', handleError);
       
       audio.addEventListener('loadstart', handleLoadStart);
       audio.addEventListener('canplaythrough', handleCanPlayThrough);
+      audio.addEventListener('timeupdate', handleTimeUpdate);
+      audio.addEventListener('loadedmetadata', handleLoadedMetadata);
       audio.addEventListener('error', handleError);
       
       audio.play().then(() => {
@@ -136,6 +181,7 @@ export const useAudio = () => {
         fadeOut(() => {
           setIsPlaying(false);
           setCurrentTrack(null);
+          setCurrentTime(0);
           setAudioError(null);
         });
       } else {
@@ -143,10 +189,25 @@ export const useAudio = () => {
         audioRef.current.currentTime = 0;
         setIsPlaying(false);
         setCurrentTrack(null);
+        setCurrentTime(0);
         setAudioError(null);
       }
     }
   }, [fadeOut]);
+
+  const nextTrack = useCallback(() => {
+    const next = getNextTrack();
+    playTrack(next, true, true);
+  }, [getNextTrack, playTrack]);
+
+  const previousTrack = useCallback(() => {
+    const prev = getPreviousTrack();
+    playTrack(prev, true, true);
+  }, [getPreviousTrack, playTrack]);
+
+  const toggleShuffle = useCallback(() => {
+    setIsShuffled(prev => !prev);
+  }, []);
 
   const toggleMute = useCallback(() => {
     setIsMuted(prev => {
@@ -204,8 +265,14 @@ export const useAudio = () => {
     volume,
     isMuted,
     audioError,
+    currentTime,
+    duration,
+    isShuffled,
     playTrack,
     stopTrack,
+    nextTrack,
+    previousTrack,
+    toggleShuffle,
     toggleMute,
     changeVolume,
     playContextualAudio,
