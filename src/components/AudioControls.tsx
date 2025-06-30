@@ -8,10 +8,13 @@ import { useState } from "react";
 
 const TRACK_NAMES = {
   ambient: 'Mystical Ambient',
-  battle: 'Battle Theme',
+  battle: 'Battle of Dragons',
   ethereal: 'Ethereal Elves',
   town: 'Market Town',
-  medieval: 'Medieval Adventure'
+  medieval: 'Medieval Adventure',
+  dragonquest: 'Dragon Quest',
+  conquest: 'Jester Dance',
+  wizard: 'Wizard Magic'
 } as const;
 
 const AudioControls = () => {
