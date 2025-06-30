@@ -76,7 +76,7 @@ const About = () => {
           </div>
           
           <h2 className="font-cinzel text-5xl md:text-6xl font-bold text-white mb-8 leading-tight">
-            What is <span className="text-transparent bg-gradient-to-r from-ethereal-gold to-ember-flame bg-clip-text">The Forgotten Trial?</span>
+            What is <span className="text-ethereal-gold">The Forgotten Trial?</span>
           </h2>
           
           <div className="max-w-4xl mx-auto space-y-6">

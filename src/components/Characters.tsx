@@ -109,7 +109,7 @@ const Characters = () => {
           </div>
           
           <h2 className="font-cinzel text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-            🎭 <span className="text-transparent bg-gradient-to-r from-ethereal-gold via-verdant-glyph to-luminous-azure bg-clip-text">The Characters</span> ⚔️
+            🎭 <span className="text-ethereal-gold">The Characters</span> ⚔️
           </h2>
           
           <p className="text-2xl text-gray-100 leading-relaxed font-citizen max-w-4xl mx-auto">
@@ -124,7 +124,7 @@ const Characters = () => {
             return (
               <Card 
                 key={character.name}
-                className="group bg-gradient-to-br from-ancient-stone/40 to-mystic-blue/40 border border-ethereal-gold/20 hover:border-ethereal-gold/50 backdrop-blur-sm transition-all duration-700 hover:-translate-y-4 hover:shadow-2xl animate-fade-in overflow-hidden"
+                className="group bg-black/60 border border-ethereal-gold/40 hover:border-ethereal-gold/60 backdrop-blur-sm transition-all duration-700 hover:-translate-y-4 hover:shadow-2xl animate-fade-in overflow-hidden"
                 style={{ animationDelay: `${0.2 + index * 0.15}s` }}
               >
                 {/* Character glow effect */}
@@ -140,39 +140,40 @@ const Characters = () => {
                     />
                     
                     {/* Character overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                    
+                    {/* Character name overlay */}
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="font-cinzel text-2xl font-bold text-white mb-1 drop-shadow-lg">
+                        {character.name}
+                      </h3>
+                      <p className="font-citizen text-lg font-semibold text-ethereal-gold drop-shadow-md">
+                        {character.title}
+                      </p>
+                    </div>
                     
                     {/* Character badge */}
                     <div className="absolute top-4 left-4">
-                      <Badge className={`px-4 py-2 font-citizen bg-${character.color}/20 border-${character.color}/40 text-${character.color} text-sm font-bold`}>
+                      <Badge className="px-4 py-2 font-citizen bg-black/60 border-ethereal-gold/60 text-ethereal-gold text-sm font-bold backdrop-blur-sm">
                         <Icon className="w-4 h-4 mr-2" />
                         {character.role}
                       </Badge>
                     </div>
                     
                     {/* Character emoji in corner */}
-                    <div className="absolute top-4 right-4 text-4xl animate-pulse">
+                    <div className="absolute top-4 right-4 text-4xl animate-pulse drop-shadow-lg">
                       {character.emoji}
                     </div>
                   </div>
                   
                   {/* Character Info Section */}
-                  <div className="p-8 space-y-6">
-                    <div className="text-center space-y-2">
-                      <h3 className="font-cinzel text-3xl font-bold text-white group-hover:text-ethereal-gold transition-colors duration-300">
-                        {character.name}
-                      </h3>
-                      <p className={`font-citizen text-xl font-semibold text-${character.color}`}>
-                        {character.title}
-                      </p>
-                    </div>
-                    
-                    <p className="text-gray-200 font-citizen text-lg leading-relaxed text-center">
+                  <div className="p-8 space-y-6 bg-black/80">
+                    <p className="text-gray-100 font-citizen text-lg leading-relaxed text-center">
                       {character.description}
                     </p>
                     
                     {/* Whisper quote */}
-                    <div className="bg-black/30 rounded-xl p-6 border border-ethereal-gold/20">
+                    <div className="bg-black/50 rounded-xl p-6 border border-ethereal-gold/30">
                       <p className="text-ethereal-gold font-citizen italic text-center text-lg leading-relaxed">
                         {character.whisper}
                       </p>
@@ -186,7 +187,7 @@ const Characters = () => {
                           <Badge 
                             key={idx}
                             variant="outline" 
-                            className={`px-3 py-1 font-citizen bg-${character.color}/10 border-${character.color}/30 text-${character.color} text-sm`}
+                            className="px-3 py-1 font-citizen bg-ethereal-gold/10 border-ethereal-gold/40 text-ethereal-gold text-sm"
                           >
                             {ability}
                           </Badge>
@@ -196,7 +197,7 @@ const Characters = () => {
                     
                     {/* Personality */}
                     <div className="text-center">
-                      <p className="text-gray-300 font-citizen text-sm leading-relaxed">
+                      <p className="text-gray-200 font-citizen text-sm leading-relaxed">
                         <span className="font-semibold text-white">Personality:</span> {character.personality}
                       </p>
                     </div>
@@ -209,7 +210,7 @@ const Characters = () => {
 
         {/* Mystery Teaser Section */}
         <div className="text-center animate-fade-in" style={{ animationDelay: "0.8s" }}>
-          <div className="bg-gradient-to-r from-black/60 to-black/40 rounded-3xl p-12 backdrop-blur-sm border border-ethereal-gold/30 max-w-5xl mx-auto">
+          <div className="bg-black/80 rounded-3xl p-12 backdrop-blur-sm border border-ethereal-gold/40 max-w-5xl mx-auto">
             <div className="text-6xl mb-6">🌌</div>
             <h3 className="font-cinzel text-4xl font-bold text-white mb-6">
               The <span className="text-ethereal-gold">Mystery</span> Awaits
