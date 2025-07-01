@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 type TrackId = 'ambient' | 'battle' | 'ethereal' | 'town' | 'medieval' | 'dragonquest' | 'conquest' | 'wizard';
@@ -27,6 +26,7 @@ export const useAudio = () => {
   const [isShuffled, setIsShuffled] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const isTransitioning = useRef(false);
 
   const clearFadeInterval = useCallback(() => {
     if (fadeIntervalRef.current) {
@@ -36,13 +36,14 @@ export const useAudio = () => {
   }, []);
 
   const fadeOut = useCallback((callback?: () => void) => {
-    if (!audioRef.current) return;
+    if (!audioRef.current || isTransitioning.current) return;
     
     const audio = audioRef.current;
     const startVolume = audio.volume;
-    const fadeStep = startVolume / 20;
+    const fadeStep = startVolume / 15;
     
     clearFadeInterval();
+    isTransitioning.current = true;
     
     fadeIntervalRef.current = setInterval(() => {
       if (audio.volume > fadeStep) {
@@ -51,17 +52,18 @@ export const useAudio = () => {
         audio.volume = 0;
         audio.pause();
         clearFadeInterval();
+        isTransitioning.current = false;
         callback?.();
       }
     }, 50);
   }, [clearFadeInterval]);
 
   const fadeIn = useCallback((targetVolume: number) => {
-    if (!audioRef.current) return;
+    if (!audioRef.current || isTransitioning.current) return;
     
     const audio = audioRef.current;
     audio.volume = 0;
-    const fadeStep = targetVolume / 20;
+    const fadeStep = targetVolume / 15;
     
     clearFadeInterval();
     
@@ -107,6 +109,12 @@ export const useAudio = () => {
   }, [currentTrack, isShuffled, getRandomTrack]);
 
   const playTrack = useCallback((trackId: TrackId, loop = true, crossfade = true) => {
+    // Prevent multiple simultaneous track changes
+    if (isTransitioning.current) {
+      console.log('Audio transition in progress, ignoring new play request');
+      return;
+    }
+
     if (!audioRef.current) {
       audioRef.current = new Audio();
     }
@@ -116,11 +124,20 @@ export const useAudio = () => {
     setAudioError(null);
     
     const switchTrack = () => {
+      // Clear previous event listeners
+      const events = ['loadstart', 'canplaythrough', 'timeupdate', 'loadedmetadata', 'error', 'ended'];
+      events.forEach(event => {
+        audio.removeEventListener(event, () => {});
+      });
+
       audio.src = TRACKS[trackId];
       audio.loop = loop;
       
       const handleLoadStart = () => setIsLoading(true);
-      const handleCanPlayThrough = () => setIsLoading(false);
+      const handleCanPlayThrough = () => {
+        setIsLoading(false);
+        console.log(`✅ Audio ready to play: ${trackId}`);
+      };
       const handleTimeUpdate = () => {
         setCurrentTime(audio.currentTime);
         setDuration(audio.duration || 0);
@@ -128,20 +145,13 @@ export const useAudio = () => {
       const handleLoadedMetadata = () => {
         setDuration(audio.duration || 0);
       };
-      const handleError = () => {
-        console.log('Audio playback failed - this is normal if audio files are not uploaded yet');
+      const handleError = (e: Event) => {
+        console.log(`Audio file not found: ${trackId} - This is expected if audio files aren't uploaded yet`);
         setAudioError('Audio files not available yet. Upload audio files to enable sound.');
         setIsPlaying(false);
         setCurrentTrack(null);
         setIsLoading(false);
       };
-      
-      // Remove previous event listeners to prevent memory leaks
-      audio.removeEventListener('loadstart', handleLoadStart);
-      audio.removeEventListener('canplaythrough', handleCanPlayThrough);
-      audio.removeEventListener('timeupdate', handleTimeUpdate);
-      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audio.removeEventListener('error', handleError);
       
       audio.addEventListener('loadstart', handleLoadStart);
       audio.addEventListener('canplaythrough', handleCanPlayThrough);
@@ -158,10 +168,10 @@ export const useAudio = () => {
         } else {
           audio.volume = isMuted ? 0 : volume;
         }
-        console.log(`Successfully playing: ${trackId}`);
+        console.log(`🎵 Successfully playing: ${trackId}`);
       }).catch(error => {
-        console.log('Audio playback failed:', error);
-        setAudioError('Audio playback failed. Please check your audio files.');
+        console.log(`Audio playback failed for ${trackId}:`, error.message);
+        setAudioError('Audio playback failed. Click play to try again.');
         setIsPlaying(false);
         setCurrentTrack(null);
         setIsLoading(false);
@@ -255,6 +265,7 @@ export const useAudio = () => {
         audioRef.current = null;
       }
       clearFadeInterval();
+      isTransitioning.current = false;
     };
   }, [clearFadeInterval]);
 

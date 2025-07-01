@@ -16,6 +16,7 @@ import { useAudio } from "@/hooks/useAudio";
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [audioInitialized, setAudioInitialized] = useState(false);
   const { playTrack, availableTracks } = useAudio();
 
   useEffect(() => {
@@ -37,13 +38,6 @@ const Index = () => {
       setLoadingProgress(100);
       setIsLoaded(true);
       clearInterval(progressInterval);
-      
-      // Auto-play random track after page loads
-      setTimeout(() => {
-        const randomTrack = availableTracks[Math.floor(Math.random() * availableTracks.length)];
-        console.log(`🎵 Auto-playing random track: ${randomTrack}`);
-        playTrack(randomTrack, true, false);
-      }, 2000);
     }, 1800);
 
     // Updated image paths to use correct "lovable-uploads" folder
@@ -78,12 +72,15 @@ const Index = () => {
       setTimeout(() => {
         setIsLoaded(true);
         
-        // Auto-play random track after all assets loaded
-        setTimeout(() => {
-          const randomTrack = availableTracks[Math.floor(Math.random() * availableTracks.length)];
-          console.log(`🎵 Auto-playing random track after assets loaded: ${randomTrack}`);
-          playTrack(randomTrack, true, false);
-        }, 1500);
+        // Single audio initialization after everything is loaded
+        if (!audioInitialized && availableTracks.length > 0) {
+          setTimeout(() => {
+            const randomTrack = availableTracks[Math.floor(Math.random() * availableTracks.length)];
+            console.log(`🎵 Initializing audio with track: ${randomTrack}`);
+            playTrack(randomTrack, true, false);
+            setAudioInitialized(true);
+          }, 2000);
+        }
       }, 150);
       console.log('🎮 All game assets loaded successfully!');
     });
@@ -93,7 +90,7 @@ const Index = () => {
       clearTimeout(loadingTimeout);
       clearInterval(progressInterval);
     };
-  }, [playTrack, availableTracks]);
+  }, [playTrack, availableTracks, audioInitialized]);
 
   if (!isLoaded) {
     return (
