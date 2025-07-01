@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -121,8 +120,8 @@ const Characters = () => {
           </p>
         </div>
 
-        {/* Characters Grid - More compact */}
-        <div className="grid lg:grid-cols-2 gap-6 mb-16">
+        {/* Characters Grid - Fixed image display */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-16">
           {characters.map((character, index) => {
             const Icon = character.icon;
             return (
@@ -134,16 +133,17 @@ const Characters = () => {
                 <div className={`absolute inset-0 bg-gradient-to-r ${character.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                 
                 <CardContent className="p-0 relative z-10">
-                  {/* Character Image Section - Optimized sizing */}
-                  <div className="relative overflow-hidden h-80">
+                  {/* Character Image Section - Fixed to show full image */}
+                  <div className="relative overflow-hidden">
                     <img
                       src={character.image}
                       alt={`${character.name} - ${character.title}`}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-auto object-contain object-center group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
+                      style={{ maxHeight: 'none' }}
                     />
                     
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                     
                     <div className="absolute bottom-3 left-3 right-3">
                       <h3 className="font-cinzel text-xl font-bold text-white mb-1">

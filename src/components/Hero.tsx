@@ -1,8 +1,11 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Play, Star, Heart, Users } from "lucide-react";
+import { ArrowDown, Play, Star, Heart, Users, Gamepad2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   const handleKickstarterClick = () => {
     console.log('Redirecting to Kickstarter');
     window.open('https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial', '_blank', 'noopener,noreferrer');
@@ -11,6 +14,11 @@ const Hero = () => {
   const handleKofiClick = () => {
     console.log('Redirecting to Ko-fi');
     window.open('https://ko-fi.com/phoenixgoldzstudios', '_blank', 'noopener,noreferrer');
+  };
+
+  const handleDemoClick = () => {
+    console.log('Navigating to Demo page');
+    navigate('/demo');
   };
 
   const handleScrollToFeatures = () => {
@@ -28,15 +36,21 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue overflow-hidden">
-      {/* Streamlined background effects */}
+      {/* Background with Kickstarter banner image */}
       <div className="absolute inset-0">
+        <img
+          src="/lovable-uploads/KickstarterBannerImage.png"
+          alt="The Forgotten Trial - Mystical dungeon atmosphere"
+          className="w-full h-full object-cover opacity-30"
+          loading="eager"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-mystic-blue/90 via-mystic-blue/50 to-mystic-blue/30"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-mystic-blue/60 via-transparent to-ancient-stone/40"></div>
       </div>
       
       {/* Reduced atmospheric particles */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {Array.from({ length: 15 }, (_, i) => (
+        {Array.from({ length: 12 }, (_, i) => (
           <div
             key={`hero-particle-${i}`}
             className="absolute w-1 h-1 bg-ethereal-gold rounded-full animate-float opacity-50"
@@ -45,18 +59,6 @@ const Hero = () => {
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 4}s`,
               animationDuration: `${3 + Math.random() * 4}s`,
-            }}
-          />
-        ))}
-        {Array.from({ length: 6 }, (_, i) => (
-          <Star
-            key={`hero-star-${i}`}
-            className="absolute text-verdant-glyph opacity-40 animate-pulse"
-            size={6 + Math.random() * 12}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
             }}
           />
         ))}
@@ -92,12 +94,6 @@ const Hero = () => {
               <p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl font-citizen font-medium">
                 Where every <span className="text-ethereal-gold font-bold">memory is a clue</span>—and every playthrough is a <span className="text-verdant-glyph font-bold">new mystery</span>.
               </p>
-              
-              <p className="text-lg text-gray-100 leading-relaxed max-w-2xl font-citizen">
-                ✨ Awaken in a cursed dungeon with no memory<br/>
-                ⚔️ Master tactical combat with unique abilities<br/>
-                📜 Discover your identity through hand-crafted stories
-              </p>
             </div>
 
             {/* Call-to-action buttons */}
@@ -125,8 +121,8 @@ const Hero = () => {
               </Button>
             </div>
 
-            {/* Discovery button */}
-            <div className="animate-fade-in" style={{ animationDelay: "0.6s" }}>
+            {/* Discovery and Demo buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: "0.6s" }}>
               <Button 
                 variant="outline" 
                 size="story" 
@@ -138,10 +134,21 @@ const Hero = () => {
                 Discover the Mystery 
                 <ArrowDown className="ml-2 h-5 w-5 animate-bounce" />
               </Button>
+
+              <Button 
+                variant="outline" 
+                size="story" 
+                onClick={handleDemoClick}
+                className="font-citizen bg-transparent border-2 border-verdant-glyph text-verdant-glyph hover:bg-verdant-glyph hover:text-white transition-all duration-300 shadow-lg shadow-verdant-glyph/20 hover:shadow-verdant-glyph/40 px-6 py-3"
+                aria-label="Try the interactive demo"
+              >
+                <Gamepad2 className="mr-2 h-5 w-5" />
+                Try the Demo
+              </Button>
             </div>
           </div>
 
-          {/* Right side - Game Poster with corrected image path */}
+          {/* Right side - Game Poster with Phoenix Gold Studios logo */}
           <div className="flex justify-center lg:justify-end animate-fade-in" style={{ animationDelay: "0.3s" }}>
             <div className="relative group">
               <div className="absolute -inset-4 bg-gradient-to-r from-ethereal-gold/20 via-luminous-azure/20 to-verdant-glyph/20 rounded-2xl blur-xl opacity-60 group-hover:opacity-80 transition-all duration-500"></div>
@@ -154,18 +161,22 @@ const Hero = () => {
                   loading="eager"
                 />
                 
+                {/* Phoenix Gold Studios Logo */}
+                <div className="absolute bottom-3 left-3">
+                  <img
+                    src="/lovable-uploads/CompanyLogo.png"
+                    alt="Phoenix Gold Studios"
+                    className="w-16 h-16 opacity-90 hover:opacity-100 transition-opacity duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                
                 {/* Character highlight dots */}
                 <div className="absolute top-4 right-4 flex space-x-2">
                   <div className="w-3 h-3 bg-luminous-azure rounded-full animate-pulse shadow-lg border border-white/20"></div>
                   <div className="w-3 h-3 bg-ember-flame rounded-full animate-pulse shadow-lg border border-white/20" style={{ animationDelay: "0.5s" }}></div>
                   <div className="w-3 h-3 bg-ethereal-gold rounded-full animate-pulse shadow-lg border border-white/20" style={{ animationDelay: "1s" }}></div>
                   <div className="w-3 h-3 bg-verdant-glyph rounded-full animate-pulse shadow-lg border border-white/20" style={{ animationDelay: "1.5s" }}></div>
-                </div>
-                
-                {/* Game title overlay */}
-                <div className="absolute bottom-3 left-3 right-3 bg-gradient-to-r from-black/70 to-black/50 rounded-lg p-3 backdrop-blur-sm border border-ethereal-gold/20">
-                  <h3 className="font-cinzel text-ethereal-gold font-bold mb-1">Four Heroes. One Mystery.</h3>
-                  <p className="font-citizen text-white text-sm">Discover their secrets in tactical RPG combat</p>
                 </div>
               </div>
             </div>

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -134,10 +133,10 @@ const Index = () => {
         {/* Reduced background effects for cleaner look */}
         <div className="fixed inset-0 pointer-events-none z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-mystic-blue/90 via-ancient-stone/80 to-mystic-blue/90"></div>
-          {Array.from({ length: 15 }, (_, i) => (
+          {Array.from({ length: 10 }, (_, i) => (
             <div
               key={`bg-particle-${i}`}
-              className="absolute w-1 h-1 bg-ethereal-gold/20 rounded-full animate-float"
+              className="absolute w-1 h-1 bg-ethereal-gold/15 rounded-full animate-float"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -148,15 +147,14 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Main content - reorganized for better flow */}
+        {/* Main content - streamlined organization */}
         <div className="relative z-10">
           <Navigation />
           <div className="pt-16">
-            <NewsTicker />
             <Hero />
             <About />
-            <Characters />
             <Features />
+            <Characters />
             <MysteryQuotes />
             <Newsletter />
           </div>
