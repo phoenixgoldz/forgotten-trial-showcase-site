@@ -38,13 +38,13 @@ const Index = () => {
       clearInterval(progressInterval);
     }, 1800);
 
-    // Updated image paths to use "Images" folder
+    // Updated image paths to use correct "lovable-uploads" folder
     const criticalImages = [
-      '/Images/Solari.png',
-      '/Images/Tarrin.png',
-      '/Images/Wisp.png',
-      '/Images/Kael.png',
-      '/Images/TitlePosterImage.png'
+      '/lovable-uploads/Solari.png',
+      '/lovable-uploads/Tarrin.png',
+      '/lovable-uploads/Wisp.png',
+      '/lovable-uploads/Kael.png',
+      '/lovable-uploads/TitlePosterImage.png'
     ];
     
     const preloadPromises = criticalImages.map((src, index) => {
