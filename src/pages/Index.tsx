@@ -11,10 +11,12 @@ import Navigation from "@/components/Navigation";
 import AudioControls from "@/components/AudioControls";
 import ContextualAudio from "@/components/ContextualAudio";
 import ImprovedErrorBoundary from "@/components/ImprovedErrorBoundary";
+import { useAudio } from "@/hooks/useAudio";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const { playTrack, availableTracks } = useAudio();
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -35,6 +37,13 @@ const Index = () => {
       setLoadingProgress(100);
       setIsLoaded(true);
       clearInterval(progressInterval);
+      
+      // Auto-play random track after page loads
+      setTimeout(() => {
+        const randomTrack = availableTracks[Math.floor(Math.random() * availableTracks.length)];
+        console.log(`🎵 Auto-playing random track: ${randomTrack}`);
+        playTrack(randomTrack, true, false);
+      }, 2000);
     }, 1800);
 
     // Updated image paths to use correct "lovable-uploads" folder
@@ -66,7 +75,16 @@ const Index = () => {
       clearTimeout(loadingTimeout);
       clearInterval(progressInterval);
       setLoadingProgress(100);
-      setTimeout(() => setIsLoaded(true), 150);
+      setTimeout(() => {
+        setIsLoaded(true);
+        
+        // Auto-play random track after all assets loaded
+        setTimeout(() => {
+          const randomTrack = availableTracks[Math.floor(Math.random() * availableTracks.length)];
+          console.log(`🎵 Auto-playing random track after assets loaded: ${randomTrack}`);
+          playTrack(randomTrack, true, false);
+        }, 1500);
+      }, 150);
       console.log('🎮 All game assets loaded successfully!');
     });
 
@@ -75,7 +93,7 @@ const Index = () => {
       clearTimeout(loadingTimeout);
       clearInterval(progressInterval);
     };
-  }, []);
+  }, [playTrack, availableTracks]);
 
   if (!isLoaded) {
     return (

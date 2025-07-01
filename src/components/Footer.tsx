@@ -1,4 +1,3 @@
-
 import { Heart, ExternalLink, Coffee, Zap, Sparkles, Star } from "lucide-react";
 import { memo } from "react";
 
@@ -57,12 +56,12 @@ const Footer = memo(() => {
 
       <div className="container mx-auto px-4 relative z-10 py-20">
         <div className="text-center max-w-6xl mx-auto">
-          {/* Enhanced Studio Logo Section - Fixed text colors */}
+          {/* Enhanced Studio Logo Section - Fixed image path */}
           <div className="mb-12 flex flex-col items-center">
             <div className="relative mb-8 group">
               <div className="absolute inset-0 bg-gradient-to-r from-ethereal-gold/30 to-ember-flame/30 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500" aria-hidden="true"></div>
               <img 
-                src="/lovable-uploads/965e98d3-fb85-40c6-9263-e357de40fd59.png" 
+                src="/lovable-uploads/CompanyLogo.png" 
                 alt="PhoenixGold Game Studios Logo"
                 className="w-40 h-40 mx-auto animate-float relative z-10 group-hover:scale-110 transition-transform duration-500"
                 loading="lazy"
