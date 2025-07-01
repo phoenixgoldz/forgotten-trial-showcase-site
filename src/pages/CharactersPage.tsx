@@ -14,18 +14,18 @@ const CharactersPage = () => {
 
   return (
     <div className="min-h-screen relative overflow-x-hidden">
-      {/* Global background effects */}
+      {/* Reduced background effects for cleaner look */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-mystic-blue/90 via-ancient-stone/80 to-mystic-blue/90"></div>
-        {Array.from({ length: 20 }).map((_, i) => (
+        <div className="absolute inset-0 bg-gradient-to-br from-mystic-blue/85 via-ancient-stone/75 to-mystic-blue/85"></div>
+        {Array.from({ length: 12 }).map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-ethereal-gold/20 rounded-full animate-float"
+            className="absolute w-1 h-1 bg-ethereal-gold/15 rounded-full animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 10}s`,
-              animationDuration: `${10 + Math.random() * 5}s`,
+              animationDelay: `${Math.random() * 8}s`,
+              animationDuration: `${8 + Math.random() * 4}s`,
             }}
           />
         ))}
