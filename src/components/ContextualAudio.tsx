@@ -4,28 +4,24 @@ import { useAudio } from '@/hooks/useAudio';
 import { useLocation } from 'react-router-dom';
 
 const ContextualAudio = () => {
-  const { playContextualAudio, isPlaying } = useAudio();
+  const { playContextualAudio, isPlaying, currentTrack } = useAudio();
   const location = useLocation();
 
   useEffect(() => {
-    // Don't auto-play audio until user has interacted with audio controls at least once
-    if (!isPlaying) return;
+    // Only start contextual audio if no track is currently playing
+    if (isPlaying && currentTrack) {
+      console.log(`🎵 Audio already playing: ${currentTrack}, skipping contextual audio`);
+      return;
+    }
 
     const path = location.pathname;
     
-    // Map routes to audio contexts
-    if (path === '/') {
+    // Only play contextual audio on initial load for the home page
+    if (path === '/' && !currentTrack) {
+      console.log('🎵 Starting contextual audio for home page');
       playContextualAudio('hero');
-    } else if (path === '/characters') {
-      playContextualAudio('characters');
-    } else if (path === '/demo') {
-      playContextualAudio('demo');
-    } else if (path === '/support') {
-      playContextualAudio('support');
-    } else if (path === '/features') {
-      playContextualAudio('features');
     }
-  }, [location.pathname, playContextualAudio, isPlaying]);
+  }, [location.pathname, playContextualAudio, isPlaying, currentTrack]);
 
   // This component doesn't render anything, it just handles context-aware audio
   return null;

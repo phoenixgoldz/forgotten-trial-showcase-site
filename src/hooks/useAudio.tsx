@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 type TrackId = 'ambient' | 'battle' | 'ethereal' | 'town' | 'medieval' | 'dragonquest' | 'conquest' | 'wizard';
@@ -15,6 +14,10 @@ const TRACKS: Record<TrackId, string> = {
   wizard: '/audio/walen-wizard-magic.mp3'
 };
 
+// Global audio instance to prevent multiple instances
+let globalAudio: HTMLAudioElement | null = null;
+let isGlobalTransitioning = false;
+
 export const useAudio = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<TrackId | null>(null);
@@ -25,49 +28,63 @@ export const useAudio = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isShuffled, setIsShuffled] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const isTransitioning = useRef(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Clear and cleanup audio
+  // Cleanup function
   const cleanup = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      audioRef.current.src = '';
-      audioRef.current = null;
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    if (globalAudio) {
+      globalAudio.pause();
+      globalAudio.currentTime = 0;
+      globalAudio.src = '';
+      globalAudio = null;
     }
     setIsPlaying(false);
     setCurrentTime(0);
     setDuration(0);
-    isTransitioning.current = false;
+    isGlobalTransitioning = false;
   }, []);
 
   const playTrack = useCallback((trackId: TrackId, loop = true, crossfade = true) => {
     // Prevent multiple simultaneous calls
-    if (isTransitioning.current) {
-      console.log(`Transition in progress, ignoring ${trackId}`);
+    if (isGlobalTransitioning) {
+      console.log(`🎵 Transition in progress, ignoring ${trackId}`);
       return;
     }
 
-    isTransitioning.current = true;
+    // If the same track is already playing, don't restart it
+    if (currentTrack === trackId && isPlaying && globalAudio) {
+      console.log(`🎵 Track ${trackId} is already playing`);
+      return;
+    }
+
+    isGlobalTransitioning = true;
     setIsLoading(true);
     setAudioError(null);
 
     console.log(`🎵 Starting playback: ${trackId}`);
 
-    // Stop any existing audio immediately
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.src = '';
+    // Stop and cleanup any existing audio
+    if (globalAudio) {
+      globalAudio.pause();
+      globalAudio.currentTime = 0;
+      globalAudio.src = '';
+    }
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
 
     // Create new audio element
-    audioRef.current = new Audio();
-    const audio = audioRef.current;
-    
-    audio.src = TRACKS[trackId];
-    audio.loop = loop;
-    audio.volume = isMuted ? 0 : volume;
+    globalAudio = new Audio();
+    globalAudio.src = TRACKS[trackId];
+    globalAudio.loop = loop;
+    globalAudio.volume = isMuted ? 0 : volume;
+    globalAudio.preload = 'auto';
 
     // Set up event listeners
     const handleLoadStart = () => {
@@ -80,39 +97,43 @@ export const useAudio = () => {
       setIsLoading(false);
     };
 
-    const handleTimeUpdate = () => {
-      setCurrentTime(audio.currentTime);
-    };
-
     const handleLoadedMetadata = () => {
-      setDuration(audio.duration || 0);
+      if (globalAudio) {
+        setDuration(globalAudio.duration || 0);
+      }
     };
 
-    const handleError = () => {
-      console.error(`Failed to load ${trackId}`);
+    const handleError = (error: Event) => {
+      console.error(`Failed to load ${trackId}:`, error);
       setAudioError(`Failed to load ${trackId}`);
       setIsPlaying(false);
       setCurrentTrack(null);
       setIsLoading(false);
-      isTransitioning.current = false;
+      isGlobalTransitioning = false;
     };
 
     const handleEnded = () => {
-      if (!audio.loop) {
+      if (!globalAudio?.loop) {
         setIsPlaying(false);
         setCurrentTime(0);
       }
     };
 
-    audio.addEventListener('loadstart', handleLoadStart);
-    audio.addEventListener('canplaythrough', handleCanPlay);
-    audio.addEventListener('timeupdate', handleTimeUpdate);
-    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-    audio.addEventListener('error', handleError);
-    audio.addEventListener('ended', handleEnded);
+    globalAudio.addEventListener('loadstart', handleLoadStart);
+    globalAudio.addEventListener('canplaythrough', handleCanPlay);
+    globalAudio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    globalAudio.addEventListener('error', handleError);
+    globalAudio.addEventListener('ended', handleEnded);
+
+    // Start time tracking interval
+    intervalRef.current = setInterval(() => {
+      if (globalAudio && !globalAudio.paused) {
+        setCurrentTime(globalAudio.currentTime);
+      }
+    }, 1000);
 
     // Attempt to play
-    const playPromise = audio.play();
+    const playPromise = globalAudio.play();
     
     if (playPromise !== undefined) {
       playPromise.then(() => {
@@ -120,27 +141,31 @@ export const useAudio = () => {
         setIsPlaying(true);
         setCurrentTrack(trackId);
         setIsLoading(false);
-        isTransitioning.current = false;
+        isGlobalTransitioning = false;
       }).catch(error => {
         console.error(`Playback failed for ${trackId}:`, error);
         setAudioError(`Playback failed: ${error.message}`);
         setIsPlaying(false);
         setCurrentTrack(null);
         setIsLoading(false);
-        isTransitioning.current = false;
+        isGlobalTransitioning = false;
       });
     }
-  }, [volume, isMuted]);
+  }, [volume, isMuted, currentTrack, isPlaying]);
 
   const stopTrack = useCallback(() => {
     console.log('🛑 Stopping current track');
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+    if (globalAudio) {
+      globalAudio.pause();
+      globalAudio.currentTime = 0;
+    }
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
     setIsPlaying(false);
     setCurrentTime(0);
-    isTransitioning.current = false;
+    isGlobalTransitioning = false;
   }, []);
 
   const getRandomTrack = useCallback((): TrackId => {
@@ -194,8 +219,8 @@ export const useAudio = () => {
   const toggleMute = useCallback(() => {
     setIsMuted(prev => {
       const newMuted = !prev;
-      if (audioRef.current) {
-        audioRef.current.volume = newMuted ? 0 : volume;
+      if (globalAudio) {
+        globalAudio.volume = newMuted ? 0 : volume;
       }
       console.log(`🔇 ${newMuted ? 'Muted' : 'Unmuted'}`);
       return newMuted;
@@ -205,8 +230,8 @@ export const useAudio = () => {
   const changeVolume = useCallback((newVolume: number) => {
     const clampedVolume = Math.max(0, Math.min(1, newVolume));
     setVolume(clampedVolume);
-    if (audioRef.current && !isMuted) {
-      audioRef.current.volume = clampedVolume;
+    if (globalAudio && !isMuted) {
+      globalAudio.volume = clampedVolume;
     }
   }, [isMuted]);
 

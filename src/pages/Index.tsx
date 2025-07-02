@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -11,13 +12,10 @@ import Navigation from "@/components/Navigation";
 import AudioControls from "@/components/AudioControls";
 import ContextualAudio from "@/components/ContextualAudio";
 import ImprovedErrorBoundary from "@/components/ImprovedErrorBoundary";
-import { useAudio } from "@/hooks/useAudio";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [audioInitialized, setAudioInitialized] = useState(false);
-  const { playTrack, availableTracks } = useAudio();
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -81,20 +79,6 @@ const Index = () => {
       clearInterval(progressInterval);
     };
   }, []);
-
-  // Separate effect for audio initialization to prevent conflicts
-  useEffect(() => {
-    if (isLoaded && !audioInitialized && availableTracks.length > 0) {
-      const audioTimeout = setTimeout(() => {
-        const randomTrack = availableTracks[Math.floor(Math.random() * availableTracks.length)];
-        console.log(`🎵 Initializing audio with track: ${randomTrack}`);
-        playTrack(randomTrack, true, false);
-        setAudioInitialized(true);
-      }, 2000);
-
-      return () => clearTimeout(audioTimeout);
-    }
-  }, [isLoaded, audioInitialized, availableTracks, playTrack]);
 
   if (!isLoaded) {
     return (
