@@ -22,7 +22,7 @@ const Index = () => {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
     
-    // Streamlined loading with better progress tracking
+    // Single loading process to prevent conflicts
     const progressInterval = setInterval(() => {
       setLoadingProgress(prev => {
         if (prev >= 90) {
@@ -33,27 +33,27 @@ const Index = () => {
       });
     }, 100);
     
-    // Faster loading for better UX
     const loadingTimeout = setTimeout(() => {
       setLoadingProgress(100);
-      setIsLoaded(true);
+      setTimeout(() => setIsLoaded(true), 150);
       clearInterval(progressInterval);
     }, 1800);
 
-    // Updated image paths to use correct "lovable-uploads" folder
+    // Preload critical images
     const criticalImages = [
       '/lovable-uploads/Solari.png',
       '/lovable-uploads/Tarrin.png',
       '/lovable-uploads/Wisp.png',
       '/lovable-uploads/Kael.png',
-      '/lovable-uploads/TitlePosterImage.png'
+      '/lovable-uploads/TitlePosterImage.png',
+      '/lovable-uploads/KickstarterBannerImage.png'
     ];
     
     const preloadPromises = criticalImages.map((src, index) => {
       return new Promise((resolve) => {
         const img = new Image();
         img.onload = () => {
-          setLoadingProgress(prev => Math.min(prev + 15, 95));
+          setLoadingProgress(prev => Math.min(prev + 10, 95));
           console.log(`✅ Image ${index + 1} loaded: ${src.split('/').pop()}`);
           resolve(src);
         };
@@ -71,18 +71,8 @@ const Index = () => {
       setLoadingProgress(100);
       setTimeout(() => {
         setIsLoaded(true);
-        
-        // Single audio initialization after everything is loaded
-        if (!audioInitialized && availableTracks.length > 0) {
-          setTimeout(() => {
-            const randomTrack = availableTracks[Math.floor(Math.random() * availableTracks.length)];
-            console.log(`🎵 Initializing audio with track: ${randomTrack}`);
-            playTrack(randomTrack, true, false);
-            setAudioInitialized(true);
-          }, 2000);
-        }
+        console.log('🎮 All game assets loaded successfully!');
       }, 150);
-      console.log('🎮 All game assets loaded successfully!');
     });
 
     return () => {
@@ -90,12 +80,25 @@ const Index = () => {
       clearTimeout(loadingTimeout);
       clearInterval(progressInterval);
     };
-  }, [playTrack, availableTracks, audioInitialized]);
+  }, []);
+
+  // Separate effect for audio initialization to prevent conflicts
+  useEffect(() => {
+    if (isLoaded && !audioInitialized && availableTracks.length > 0) {
+      const audioTimeout = setTimeout(() => {
+        const randomTrack = availableTracks[Math.floor(Math.random() * availableTracks.length)];
+        console.log(`🎵 Initializing audio with track: ${randomTrack}`);
+        playTrack(randomTrack, true, false);
+        setAudioInitialized(true);
+      }, 2000);
+
+      return () => clearTimeout(audioTimeout);
+    }
+  }, [isLoaded, audioInitialized, availableTracks, playTrack]);
 
   if (!isLoaded) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue flex items-center justify-center relative overflow-hidden">
-        {/* Reduced loading particles for cleaner look */}
         <div className="absolute inset-0 pointer-events-none">
           {Array.from({ length: 8 }, (_, i) => (
             <div
@@ -145,7 +148,6 @@ const Index = () => {
   return (
     <ImprovedErrorBoundary>
       <div className="min-h-screen relative overflow-x-hidden">
-        {/* Reduced background effects for cleaner look */}
         <div className="fixed inset-0 pointer-events-none z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-mystic-blue/90 via-ancient-stone/80 to-mystic-blue/90"></div>
           {Array.from({ length: 10 }, (_, i) => (
@@ -162,7 +164,7 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Main content - streamlined organization */}
+        {/* Main content */}
         <div className="relative z-10">
           <Navigation />
           <div className="pt-16">

@@ -27,6 +27,7 @@ export const useAudio = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const isTransitioning = useRef(false);
+  const playRequestRef = useRef<string | null>(null);
 
   const clearFadeInterval = useCallback(() => {
     if (fadeIntervalRef.current) {
@@ -35,12 +36,26 @@ export const useAudio = () => {
     }
   }, []);
 
+  const cleanup = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.removeEventListener('timeupdate', () => {});
+      audioRef.current.removeEventListener('loadedmetadata', () => {});
+      audioRef.current.removeEventListener('error', () => {});
+      audioRef.current.removeEventListener('ended', () => {});
+      audioRef.current.src = '';
+    }
+    clearFadeInterval();
+    isTransitioning.current = false;
+    playRequestRef.current = null;
+  }, [clearFadeInterval]);
+
   const fadeOut = useCallback((callback?: () => void) => {
     if (!audioRef.current || isTransitioning.current) return;
     
     const audio = audioRef.current;
     const startVolume = audio.volume;
-    const fadeStep = startVolume / 15;
+    const fadeStep = startVolume / 10;
     
     clearFadeInterval();
     isTransitioning.current = true;
@@ -55,7 +70,7 @@ export const useAudio = () => {
         isTransitioning.current = false;
         callback?.();
       }
-    }, 50);
+    }, 100);
   }, [clearFadeInterval]);
 
   const fadeIn = useCallback((targetVolume: number) => {
@@ -63,7 +78,7 @@ export const useAudio = () => {
     
     const audio = audioRef.current;
     audio.volume = 0;
-    const fadeStep = targetVolume / 15;
+    const fadeStep = targetVolume / 10;
     
     clearFadeInterval();
     
@@ -74,8 +89,106 @@ export const useAudio = () => {
         audio.volume = targetVolume;
         clearFadeInterval();
       }
-    }, 50);
+    }, 100);
   }, [clearFadeInterval]);
+
+  const playTrack = useCallback((trackId: TrackId, loop = true, crossfade = true) => {
+    // Prevent multiple simultaneous requests
+    if (playRequestRef.current === trackId || isTransitioning.current) {
+      console.log(`Already playing or transitioning to ${trackId}, ignoring request`);
+      return;
+    }
+
+    playRequestRef.current = trackId;
+    console.log(`🎵 Play request for: ${trackId}`);
+
+    // Initialize audio element if needed
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+    }
+
+    const audio = audioRef.current;
+    setIsLoading(true);
+    setAudioError(null);
+    
+    const switchTrack = () => {
+      // Clear any existing event listeners
+      audio.onloadstart = null;
+      audio.oncanplaythrough = null;
+      audio.ontimeupdate = null;
+      audio.onloadedmetadata = null;
+      audio.onerror = null;
+      audio.onended = null;
+
+      // Stop current track completely
+      audio.pause();
+      audio.currentTime = 0;
+      audio.src = TRACKS[trackId];
+      audio.loop = loop;
+      
+      audio.onloadstart = () => setIsLoading(true);
+      
+      audio.oncanplaythrough = () => {
+        setIsLoading(false);
+        console.log(`✅ Audio ready: ${trackId}`);
+      };
+      
+      audio.ontimeupdate = () => {
+        setCurrentTime(audio.currentTime);
+        setDuration(audio.duration || 0);
+      };
+      
+      audio.onloadedmetadata = () => {
+        setDuration(audio.duration || 0);
+      };
+      
+      audio.onerror = () => {
+        console.log(`Audio file not found: ${trackId}`);
+        setAudioError('Audio files not available yet');
+        setIsPlaying(false);
+        setCurrentTrack(null);
+        setIsLoading(false);
+        playRequestRef.current = null;
+      };
+      
+      // Attempt to play
+      const playPromise = audio.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          // Only update state if this is still the current request
+          if (playRequestRef.current === trackId) {
+            setIsPlaying(true);
+            setCurrentTrack(trackId);
+            setIsLoading(false);
+            
+            if (crossfade) {
+              fadeIn(isMuted ? 0 : volume);
+            } else {
+              audio.volume = isMuted ? 0 : volume;
+            }
+            
+            console.log(`🎵 Successfully playing: ${trackId}`);
+          }
+          playRequestRef.current = null;
+        }).catch(error => {
+          console.log(`Playback failed for ${trackId}:`, error.message);
+          setAudioError('Audio playback failed');
+          setIsPlaying(false);
+          setCurrentTrack(null);
+          setIsLoading(false);
+          playRequestRef.current = null;
+        });
+      }
+    };
+
+    // Handle track switching
+    if (isPlaying && crossfade && currentTrack !== trackId) {
+      fadeOut(switchTrack);
+    } else {
+      switchTrack();
+    }
+  }, [volume, isMuted, isPlaying, currentTrack, fadeOut, fadeIn]);
 
   const getRandomTrack = useCallback((excludeCurrent = true): TrackId => {
     const availableTracks = Object.keys(TRACKS) as TrackId[];
@@ -108,87 +221,15 @@ export const useAudio = () => {
     return trackKeys[prevIndex];
   }, [currentTrack, isShuffled, getRandomTrack]);
 
-  const playTrack = useCallback((trackId: TrackId, loop = true, crossfade = true) => {
-    // Prevent multiple simultaneous track changes
-    if (isTransitioning.current) {
-      console.log('Audio transition in progress, ignoring new play request');
-      return;
-    }
-
-    if (!audioRef.current) {
-      audioRef.current = new Audio();
-    }
-
-    const audio = audioRef.current;
-    setIsLoading(true);
-    setAudioError(null);
-    
-    const switchTrack = () => {
-      // Clear previous event listeners
-      const events = ['loadstart', 'canplaythrough', 'timeupdate', 'loadedmetadata', 'error', 'ended'];
-      events.forEach(event => {
-        audio.removeEventListener(event, () => {});
-      });
-
-      audio.src = TRACKS[trackId];
-      audio.loop = loop;
-      
-      const handleLoadStart = () => setIsLoading(true);
-      const handleCanPlayThrough = () => {
-        setIsLoading(false);
-        console.log(`✅ Audio ready to play: ${trackId}`);
-      };
-      const handleTimeUpdate = () => {
-        setCurrentTime(audio.currentTime);
-        setDuration(audio.duration || 0);
-      };
-      const handleLoadedMetadata = () => {
-        setDuration(audio.duration || 0);
-      };
-      const handleError = (e: Event) => {
-        console.log(`Audio file not found: ${trackId} - This is expected if audio files aren't uploaded yet`);
-        setAudioError('Audio files not available yet. Upload audio files to enable sound.');
-        setIsPlaying(false);
-        setCurrentTrack(null);
-        setIsLoading(false);
-      };
-      
-      audio.addEventListener('loadstart', handleLoadStart);
-      audio.addEventListener('canplaythrough', handleCanPlayThrough);
-      audio.addEventListener('timeupdate', handleTimeUpdate);
-      audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-      audio.addEventListener('error', handleError);
-      
-      audio.play().then(() => {
-        setIsPlaying(true);
-        setCurrentTrack(trackId);
-        setIsLoading(false);
-        if (crossfade) {
-          fadeIn(isMuted ? 0 : volume);
-        } else {
-          audio.volume = isMuted ? 0 : volume;
-        }
-        console.log(`🎵 Successfully playing: ${trackId}`);
-      }).catch(error => {
-        console.log(`Audio playback failed for ${trackId}:`, error.message);
-        setAudioError('Audio playback failed. Click play to try again.');
-        setIsPlaying(false);
-        setCurrentTrack(null);
-        setIsLoading(false);
-      });
-    };
-
-    if (isPlaying && crossfade && currentTrack !== trackId) {
-      fadeOut(switchTrack);
-    } else {
-      switchTrack();
-    }
-  }, [volume, isMuted, isPlaying, currentTrack, fadeOut, fadeIn]);
-
   const stopTrack = useCallback((smooth = true) => {
+    playRequestRef.current = null;
+    
     if (audioRef.current) {
       if (smooth) {
         fadeOut(() => {
+          if (audioRef.current) {
+            audioRef.current.currentTime = 0;
+          }
           setIsPlaying(false);
           setCurrentTrack(null);
           setCurrentTime(0);
@@ -257,17 +298,8 @@ export const useAudio = () => {
   }, [currentTrack, playTrack]);
 
   useEffect(() => {
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.src = '';
-        audioRef.current.load();
-        audioRef.current = null;
-      }
-      clearFadeInterval();
-      isTransitioning.current = false;
-    };
-  }, [clearFadeInterval]);
+    return cleanup;
+  }, [cleanup]);
 
   return {
     isPlaying,

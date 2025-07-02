@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Play, Star, Heart, Users, Gamepad2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -36,19 +35,23 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue overflow-hidden">
-      {/* Background with Kickstarter banner image */}
+      {/* Background with Kickstarter banner image - FIXED PATH */}
       <div className="absolute inset-0">
         <img
           src="/lovable-uploads/KickstarterBannerImage.png"
           alt="The Forgotten Trial - Mystical dungeon atmosphere"
           className="w-full h-full object-cover opacity-30"
           loading="eager"
+          onError={(e) => {
+            console.error('Failed to load Kickstarter banner image');
+            e.currentTarget.style.display = 'none';
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-mystic-blue/90 via-mystic-blue/50 to-mystic-blue/30"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-mystic-blue/60 via-transparent to-ancient-stone/40"></div>
       </div>
       
-      {/* Reduced atmospheric particles */}
+      {/* Atmospheric particles */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {Array.from({ length: 12 }, (_, i) => (
           <div
@@ -121,7 +124,7 @@ const Hero = () => {
               </Button>
             </div>
 
-            {/* Discovery and Demo buttons */}
+            {/* Discovery and Demo buttons - FIXED DEMO BUTTON */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: "0.6s" }}>
               <Button 
                 variant="outline" 
@@ -161,7 +164,6 @@ const Hero = () => {
                   loading="eager"
                 />
                 
-                {/* Phoenix Gold Studios Logo */}
                 <div className="absolute bottom-3 left-3">
                   <img
                     src="/lovable-uploads/CompanyLogo.png"
@@ -171,7 +173,6 @@ const Hero = () => {
                   />
                 </div>
                 
-                {/* Character highlight dots */}
                 <div className="absolute top-4 right-4 flex space-x-2">
                   <div className="w-3 h-3 bg-luminous-azure rounded-full animate-pulse shadow-lg border border-white/20"></div>
                   <div className="w-3 h-3 bg-ember-flame rounded-full animate-pulse shadow-lg border border-white/20" style={{ animationDelay: "0.5s" }}></div>
