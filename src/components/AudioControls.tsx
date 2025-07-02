@@ -41,23 +41,20 @@ const AudioControls = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handlePlayPause = () => {
+    console.log(`Play/Pause clicked. Currently playing: ${isPlaying}, current track: ${currentTrack}`);
+    
     if (isPlaying) {
       stopTrack();
-    } else if (currentTrack) {
-      // Resume current track
-      playTrack(currentTrack);
     } else {
-      // Start with ambient track
-      playTrack('ambient');
+      // If no track is selected, start with ambient
+      const trackToPlay = currentTrack || 'ambient';
+      playTrack(trackToPlay);
     }
   };
 
   const handleTrackSelect = (trackId: string) => {
+    console.log(`Track selected: ${trackId}`);
     if (availableTracks.includes(trackId as any)) {
-      // Always stop current track first, then play new one
-      if (isPlaying) {
-        stopTrack(false); // Stop immediately without fade
-      }
       playTrack(trackId as any);
     }
   };
@@ -81,6 +78,7 @@ const AudioControls = () => {
       <div className={`bg-gradient-to-r from-ancient-stone/95 to-mystic-blue/95 backdrop-blur-md rounded-2xl border border-ethereal-gold/30 shadow-xl transition-all duration-300 ${
         isExpanded ? 'p-6 max-w-sm' : 'p-4 max-w-xs'
       }`}>
+        {/* Main Controls */}
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <Button
@@ -88,7 +86,7 @@ const AudioControls = () => {
               variant="ghost"
               onClick={previousTrack}
               className="text-ethereal-gold hover:bg-ethereal-gold/10"
-              disabled={isLoading || !currentTrack}
+              disabled={isLoading}
               aria-label="Previous track"
             >
               <SkipBack className="w-4 h-4" />
@@ -116,7 +114,7 @@ const AudioControls = () => {
               variant="ghost"
               onClick={nextTrack}
               className="text-ethereal-gold hover:bg-ethereal-gold/10"
-              disabled={isLoading || !currentTrack}
+              disabled={isLoading}
               aria-label="Next track"
             >
               <SkipForward className="w-4 h-4" />
@@ -144,8 +142,17 @@ const AudioControls = () => {
           </Button>
         </div>
 
-        {/* Timestamp and Progress - Only show when we have a current track */}
-        {currentTrack && (
+        {/* Current Track Display */}
+        <div className="flex items-center gap-2 text-xs mb-3">
+          <Music className="w-3 h-3 text-ethereal-gold animate-pulse" />
+          <span className="text-ethereal-gold/90 font-medium">
+            {isPlaying ? 'Now Playing' : 'Ready'}: {currentTrackName || 'Select a track'}
+          </span>
+          {isShuffled && <span className="text-ember-flame">🔀</span>}
+        </div>
+
+        {/* Progress Bar - Only show when playing */}
+        {isPlaying && currentTrack && (
           <div className="mb-3">
             <div className="flex items-center justify-between text-xs text-ethereal-gold/70 mb-1">
               <span>{formatTime(currentTime)}</span>
@@ -160,7 +167,7 @@ const AudioControls = () => {
           </div>
         )}
 
-        {/* Volume and Mute Controls */}
+        {/* Volume Controls */}
         <div className="flex items-center gap-3 mb-3">
           <Button
             size="sm"
@@ -184,6 +191,7 @@ const AudioControls = () => {
           </div>
         </div>
         
+        {/* Expanded Controls */}
         {isExpanded && (
           <div className="space-y-3 animate-fade-in">
             <div className="space-y-2">
@@ -201,25 +209,18 @@ const AudioControls = () => {
                 </SelectContent>
               </Select>
             </div>
-            
-            <div className="flex items-center gap-2 text-xs">
-              <Music className="w-3 h-3 text-ethereal-gold animate-pulse" />
-              <span className="text-ethereal-gold/70">
-                {isPlaying ? 'Playing' : 'Ready'}: {currentTrackName || 'Select a track'}
-              </span>
-              {isShuffled && <span className="text-ember-flame">🔀</span>}
-            </div>
           </div>
         )}
         
+        {/* Status/Error Display */}
         {audioError ? (
           <div className="flex items-center gap-2 text-xs text-amber-400 mt-2">
             <AlertCircle className="w-3 h-3" />
-            <span className="text-center leading-tight">Audio ready to play!</span>
+            <span className="text-center leading-tight">{audioError}</span>
           </div>
         ) : (
           <div className="text-xs text-ethereal-gold/70 mt-2 text-center">
-            {currentTrackName || 'Mystical Ambience Ready'}
+            🎵 Audio System Ready
           </div>
         )}
       </div>
