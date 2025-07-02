@@ -29,7 +29,8 @@ const AudioControls = () => {
     duration,
     isShuffled,
     playTrack, 
-    stopTrack, 
+    pauseTrack,
+    resumeTrack,
     toggleMute, 
     changeVolume,
     nextTrack,
@@ -44,11 +45,12 @@ const AudioControls = () => {
     console.log(`Play/Pause clicked. Currently playing: ${isPlaying}, current track: ${currentTrack}`);
     
     if (isPlaying) {
-      stopTrack();
+      pauseTrack();
+    } else if (currentTrack) {
+      resumeTrack();
     } else {
-      // If no track is selected, start with ambient
-      const trackToPlay = currentTrack || 'ambient';
-      playTrack(trackToPlay);
+      // Start with ethereal track if nothing is playing
+      playTrack('ethereal');
     }
   };
 
@@ -146,13 +148,13 @@ const AudioControls = () => {
         <div className="flex items-center gap-2 text-xs mb-3">
           <Music className="w-3 h-3 text-ethereal-gold animate-pulse" />
           <span className="text-ethereal-gold/90 font-medium">
-            {isPlaying ? 'Now Playing' : 'Ready'}: {currentTrackName || 'Select a track'}
+            {currentTrack ? `${isPlaying ? 'Now Playing' : 'Paused'}: ${currentTrackName}` : 'Ready to Play'}
           </span>
           {isShuffled && <span className="text-ember-flame">🔀</span>}
         </div>
 
-        {/* Progress Bar - Only show when playing */}
-        {isPlaying && currentTrack && (
+        {/* Progress Bar - Only show when track is loaded */}
+        {currentTrack && duration > 0 && (
           <div className="mb-3">
             <div className="flex items-center justify-between text-xs text-ethereal-gold/70 mb-1">
               <span>{formatTime(currentTime)}</span>
