@@ -1,9 +1,5 @@
-
 import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Features from "@/components/Features";
-import Characters from "@/components/Characters";
 import NewsTicker from "@/components/NewsTicker";
 import MysteryQuotes from "@/components/MysteryQuotes";
 import Newsletter from "@/components/Newsletter";
@@ -148,14 +144,11 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Main content */}
+        {/* Main content - removed duplicate sections */}
         <div className="relative z-10">
           <Navigation />
           <div className="pt-16">
             <Hero />
-            <About />
-            <Features />
-            <Characters />
             <MysteryQuotes />
             <Newsletter />
           </div>
