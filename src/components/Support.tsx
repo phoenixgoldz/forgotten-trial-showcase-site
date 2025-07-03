@@ -1,114 +1,130 @@
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Heart, Zap, Coffee } from "lucide-react";
+import { Heart, Coffee, Users, Star, ExternalLink } from "lucide-react";
 
 const Support = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-mystic-blue via-verdant-glyph/20 to-luminous-azure/30 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 right-20 w-40 h-40 bg-verdant-glyph/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 left-20 w-32 h-32 bg-ember-flame/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
+    <section id="support" className="py-20 bg-gradient-to-br from-ember-flame/20 to-ethereal-gold/30 relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({ length: 12 }, (_, i) => (
+          <div
+            key={`support-particle-${i}`}
+            className="absolute w-1 h-1 bg-ethereal-gold/25 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 10}s`,
+              animationDuration: `${10 + Math.random() * 8}s`,
+            }}
+          />
+        ))}
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-block mb-4">
-            <span className="px-4 py-2 bg-gradient-to-r from-verdant-glyph/20 to-luminous-azure/20 rounded-full text-verdant-glyph text-sm font-medium border border-verdant-glyph/30">
-              Support Our Dream
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Help Us <span className="gradient-text">Create Magic</span>
+          <h2 className="text-4xl md:text-5xl font-cinzel text-ethereal-gold mb-6 animate-fade-in">
+            💖 Support the <span className="gradient-text">Project</span>
           </h2>
-          <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            We're a passionate indie team crafting something truly unique. Every contribution brings us closer to our vision!
+          <div className="w-24 h-1 bg-gradient-to-r from-ethereal-gold to-ember-flame mx-auto mb-8"></div>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto font-citizen">
+            Love what we're building? Help us bring this magical world to life.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
-          <Card className="bg-gradient-to-br from-verdant-glyph/20 to-luminous-azure/20 border-verdant-glyph/50 hover:border-verdant-glyph transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-verdant-glyph/5 to-luminous-azure/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <CardHeader className="text-center relative z-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r from-verdant-glyph to-luminous-azure mb-4 mx-auto shadow-lg group-hover:shadow-verdant-glyph/25 transition-all duration-300">
-                <Zap className="w-8 h-8 text-white" />
-              </div>
-              <CardTitle className="text-2xl font-bold text-white group-hover:text-verdant-glyph transition-colors duration-300">
-                Kickstarter Campaign
-              </CardTitle>
-              <CardDescription className="text-verdant-glyph text-lg">
-                Back our main funding journey
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="text-center relative z-10">
-              <p className="text-slate-300 mb-6 leading-relaxed">
-                Help us reach our funding goal and unlock exciting stretch goals including additional characters, 
-                expanded storylines, and enhanced gameplay features that will make the experience even more magical.
-              </p>
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-verdant-glyph to-luminous-azure hover:from-verdant-glyph/90 hover:to-luminous-azure/90 text-white font-semibold px-8 py-4 w-full rounded-xl button-shine hover-scale shadow-lg hover:shadow-verdant-glyph/25 transition-all duration-300"
-                onClick={() => window.open('https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial', '_blank')}
-              >
-                <Zap className="w-5 h-5 mr-2" />
-                Back on Kickstarter
-              </Button>
-            </CardContent>
-          </Card>
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+          <div className="glass-effect rounded-2xl p-8 text-center hover-scale interactive-card group">
+            <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <Star className="w-10 h-10 text-white" />
+            </div>
+            <h3 className="text-2xl font-cinzel text-ethereal-gold mb-4 group-hover:text-ember-flame transition-colors">
+              Back on Kickstarter
+            </h3>
+            <p className="text-gray-300 font-citizen mb-6 leading-relaxed">
+              Join our campaign and help us reach our funding goals. Every backer gets exclusive 
+              rewards and early access to the game.
+            </p>
+            <a
+              href="https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-600 hover:to-emerald-700 transition-all duration-300 button-shine mystical-glow"
+            >
+              🎮 Back on Kickstarter
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
 
-          <Card className="bg-gradient-to-br from-ember-flame/20 to-ethereal-gold/20 border-ember-flame/50 hover:border-ember-flame transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-ember-flame/5 to-ethereal-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <CardHeader className="text-center relative z-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r from-ember-flame to-ethereal-gold mb-4 mx-auto shadow-lg group-hover:shadow-ember-flame/25 transition-all duration-300">
-                <Coffee className="w-8 h-8 text-white" />
-              </div>
-              <CardTitle className="text-2xl font-bold text-white group-hover:text-ember-flame transition-colors duration-300">
-                Ko-fi Support
-              </CardTitle>
-              <CardDescription className="text-ember-flame text-lg">
-                Ongoing development fuel
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="text-center relative z-10">
-              <p className="text-slate-300 mb-6 leading-relaxed">
-                Support our daily development with coffee and encouragement. Follow our dev blog for behind-the-scenes 
-                updates, concept art, development insights, and exclusive sneak peeks at upcoming features.
-              </p>
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-ember-flame to-ethereal-gold hover:from-ember-flame/90 hover:to-ethereal-gold/90 text-white font-semibold px-8 py-4 w-full rounded-xl button-shine hover-scale shadow-lg hover:shadow-ember-flame/25 transition-all duration-300"
-                onClick={() => window.open('https://ko-fi.com/phoenixgoldzstudios', '_blank')}
-              >
-                <Coffee className="w-5 h-5 mr-2" />
-                Support on Ko-fi
-              </Button>
-            </CardContent>
-          </Card>
+          <div className="glass-effect rounded-2xl p-8 text-center hover-scale interactive-card group">
+            <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <Coffee className="w-10 h-10 text-white" />
+            </div>
+            <h3 className="text-2xl font-cinzel text-ethereal-gold mb-4 group-hover:text-ember-flame transition-colors">
+              Support on Ko-fi
+            </h3>
+            <p className="text-gray-300 font-citizen mb-6 leading-relaxed">
+              Buy us a coffee and support ongoing development. Get behind-the-scenes content 
+              and exclusive developer updates.
+            </p>
+            <a
+              href="https://ko-fi.com/phoenixgoldzstudios"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-amber-600 hover:to-orange-700 transition-all duration-300 button-shine mystical-glow"
+            >
+              ☕ Support on Ko-fi
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="glass-effect rounded-xl p-6 text-center">
+            <Heart className="w-12 h-12 mx-auto mb-4 text-ember-flame" />
+            <h4 className="text-lg font-cinzel text-ethereal-gold mb-2">Every Donation Counts</h4>
+            <p className="text-gray-300 font-citizen text-sm">
+              Every contribution, no matter the size, helps us create something magical.
+            </p>
+          </div>
+
+          <div className="glass-effect rounded-xl p-6 text-center">
+            <Users className="w-12 h-12 mx-auto mb-4 text-luminous-azure" />
+            <h4 className="text-lg font-cinzel text-ethereal-gold mb-2">Join Our Community</h4>
+            <p className="text-gray-300 font-citizen text-sm">
+              Follow development updates and connect with fellow adventurers.
+            </p>
+          </div>
+
+          <div className="glass-effect rounded-xl p-6 text-center">
+            <Star className="w-12 h-12 mx-auto mb-4 text-verdant-glyph" />
+            <h4 className="text-lg font-cinzel text-ethereal-gold mb-2">Share the Adventure</h4>
+            <p className="text-gray-300 font-citizen text-sm">
+              Tell your friends about The Forgotten Trial and help us grow.
+            </p>
+          </div>
         </div>
 
         <div className="text-center">
-          <div className="bg-gradient-to-r from-ancient-stone/60 to-mystic-blue/60 rounded-2xl p-8 max-w-4xl mx-auto border border-ancient-stone/50 glass-effect backdrop-blur-sm">
-            <div className="flex items-center justify-center mb-6">
-              <Heart className="w-8 h-8 text-ember-flame mr-3 animate-pulse" />
-              <h3 className="text-xl md:text-2xl font-semibold text-white">Every Contribution Helps Us:</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-slate-300">
-              <div className="flex flex-col items-center p-4 bg-ancient-stone/30 rounded-xl hover:bg-ancient-stone/50 transition-colors duration-300">
-                <div className="text-3xl mb-3">📝</div>
-                <h4 className="font-semibold text-white mb-2">Craft Stories</h4>
-                <p className="text-sm text-center">Write more compelling narratives and character development</p>
-              </div>
-              <div className="flex flex-col items-center p-4 bg-ancient-stone/30 rounded-xl hover:bg-ancient-stone/50 transition-colors duration-300">
-                <div className="text-3xl mb-3">🗺️</div>
-                <h4 className="font-semibold text-white mb-2">Build Worlds</h4>
-                <p className="text-sm text-center">Create more diverse maps and atmospheric environments</p>
-              </div>
-              <div className="flex flex-col items-center p-4 bg-ancient-stone/30 rounded-xl hover:bg-ancient-stone/50 transition-colors duration-300">
-                <div className="text-3xl mb-3">✨</div>
-                <h4 className="font-semibold text-white mb-2">Polish Magic</h4>
-                <p className="text-sm text-center">Add those special touches that make games unforgettable</p>
-              </div>
+          <div className="glass-effect rounded-2xl p-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl font-cinzel text-ethereal-gold mb-4">
+              Help This Dream Come True
+            </h3>
+            <p className="text-lg text-gray-200 font-citizen leading-relaxed mb-6">
+              Every donation, follow, and share helps this dream dungeon adventure come true! 
+              Together, we can create something truly special that will captivate players 
+              for years to come.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <span className="px-4 py-2 bg-ethereal-gold/20 rounded-full text-ethereal-gold font-citizen text-sm">
+                🎮 Tactical RPG
+              </span>
+              <span className="px-4 py-2 bg-ember-flame/20 rounded-full text-ember-flame font-citizen text-sm">
+                📖 Hand-Crafted Story
+              </span>
+              <span className="px-4 py-2 bg-luminous-azure/20 rounded-full text-luminous-azure font-citizen text-sm">
+                🎭 Character-Driven
+              </span>
+              <span className="px-4 py-2 bg-verdant-glyph/20 rounded-full text-verdant-glyph font-citizen text-sm">
+                🧩 Procedural Adventures
+              </span>
             </div>
           </div>
         </div>
