@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Play, Star, Heart, Users, Gamepad2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -35,18 +36,8 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue overflow-hidden">
-      {/* Background with Kickstarter banner image - FIXED PATH */}
+      {/* Clean gradient background without image */}
       <div className="absolute inset-0">
-        <img
-          src="/lovable-uploads/KickstarterBannerImage.png"
-          alt="The Forgotten Trial - Mystical dungeon atmosphere"
-          className="w-full h-full object-cover opacity-30"
-          loading="eager"
-          onError={(e) => {
-            console.error('Failed to load Kickstarter banner image');
-            e.currentTarget.style.display = 'none';
-          }}
-        />
         <div className="absolute inset-0 bg-gradient-to-t from-mystic-blue/90 via-mystic-blue/50 to-mystic-blue/30"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-mystic-blue/60 via-transparent to-ancient-stone/40"></div>
       </div>
@@ -124,7 +115,7 @@ const Hero = () => {
               </Button>
             </div>
 
-            {/* Discovery and Demo buttons - FIXED DEMO BUTTON */}
+            {/* Discovery and Demo buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: "0.6s" }}>
               <Button 
                 variant="outline" 
