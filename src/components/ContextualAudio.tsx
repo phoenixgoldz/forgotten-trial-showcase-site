@@ -4,13 +4,15 @@ import { useAudio } from '@/hooks/useAudio';
 import { useLocation } from 'react-router-dom';
 
 const ContextualAudio = () => {
-  const { playContextualAudio } = useAudio();
+  const { playContextualAudio, isPlaying, currentTrack } = useAudio();
   const location = useLocation();
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const [hasTriedAutoPlay, setHasTriedAutoPlay] = useState(false);
 
   // Listen for user interactions to enable audio
   useEffect(() => {
     const handleUserInteraction = () => {
+      console.log('🎵 User interaction detected');
       setHasUserInteracted(true);
       // Remove listeners after first interaction
       document.removeEventListener('click', handleUserInteraction);
@@ -32,15 +34,17 @@ const ContextualAudio = () => {
   useEffect(() => {
     const path = location.pathname;
     
-    // Only attempt contextual audio after user interaction and on initial home page load
-    if (path === '/' && hasUserInteracted) {
-      console.log('🎵 User has interacted, attempting contextual audio for home page');
+    // Only attempt contextual audio after user interaction, on home page, and if no audio is playing
+    if (path === '/' && hasUserInteracted && !hasTriedAutoPlay && !isPlaying && !currentTrack) {
+      console.log('🎵 Attempting contextual audio for home page');
+      setHasTriedAutoPlay(true);
+      
       // Small delay to ensure audio context is ready
       setTimeout(() => {
         playContextualAudio('hero');
-      }, 100);
+      }, 500);
     }
-  }, [location.pathname, hasUserInteracted, playContextualAudio]);
+  }, [location.pathname, hasUserInteracted, hasTriedAutoPlay, isPlaying, currentTrack, playContextualAudio]);
 
   return null;
 };

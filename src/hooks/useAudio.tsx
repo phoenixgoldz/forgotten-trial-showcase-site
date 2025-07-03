@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 type TrackId = 'ambient' | 'battle' | 'ethereal' | 'town' | 'medieval' | 'dragonquest' | 'conquest' | 'wizard';
@@ -5,7 +6,7 @@ type AudioContext = 'hero' | 'characters' | 'demo' | 'support' | 'features';
 
 const TRACKS: Record<TrackId, string> = {
   ambient: '/audio/fantasy-song-363806.mp3',
-  battle: '/audio/battle-of-the-dragons-8037.mp3',
+  battle: '/audio/battle-of-the-dragons-8037.mp3', 
   ethereal: '/audio/elves-song-ethereal-fantasy-elf-music-363281.mp3',
   town: '/audio/market-town-of-turelli-135459.mp3',
   medieval: '/audio/rpg-medieval-animated-music-320583.mp3',
@@ -56,52 +57,61 @@ class AudioManager {
       this.audio = new Audio();
       this.audio.src = TRACKS[trackId];
       this.audio.loop = true;
-      this.audio.preload = 'auto';
+      this.audio.preload = 'metadata';
       
       // Set up event listeners
       this.audio.addEventListener('loadstart', callbacks.onLoadStart);
-      this.audio.addEventListener('canplaythrough', callbacks.onCanPlay);
+      this.audio.addEventListener('canplay', callbacks.onCanPlay);
       this.audio.addEventListener('loadedmetadata', () => {
-        if (this.audio) callbacks.onLoadedMetadata(this.audio.duration || 0);
+        if (this.audio && !isNaN(this.audio.duration)) {
+          callbacks.onLoadedMetadata(this.audio.duration);
+        }
       });
       this.audio.addEventListener('error', (e) => {
         console.error(`Audio error for ${trackId}:`, e);
-        callbacks.onError(`Failed to load ${trackId}. Please check your connection.`);
+        const errorMsg = `Failed to load ${trackId}. Audio file may be missing or corrupt.`;
+        callbacks.onError(errorMsg);
         this.isTransitioning = false;
       });
       this.audio.addEventListener('ended', callbacks.onEnded);
       
       // Start time tracking
       this.timeUpdateInterval = setInterval(() => {
-        if (this.audio && !this.audio.paused) {
+        if (this.audio && !this.audio.paused && !isNaN(this.audio.currentTime)) {
           callbacks.onTimeUpdate(this.audio.currentTime);
         }
-      }, 1000);
+      }, 500);
       
-      // Wait for audio to be ready before playing
+      // Wait for audio to be ready
       await new Promise<void>((resolve, reject) => {
         if (!this.audio) {
           reject(new Error('Audio element not available'));
           return;
         }
         
+        const timeoutId = setTimeout(() => {
+          reject(new Error(`Timeout loading ${trackId}`));
+        }, 10000);
+        
         const onCanPlay = () => {
-          this.audio?.removeEventListener('canplaythrough', onCanPlay);
+          clearTimeout(timeoutId);
+          this.audio?.removeEventListener('canplay', onCanPlay);
           this.audio?.removeEventListener('error', onError);
           resolve();
         };
         
-        const onError = () => {
-          this.audio?.removeEventListener('canplaythrough', onCanPlay);
+        const onError = (e: Event) => {
+          clearTimeout(timeoutId);
+          this.audio?.removeEventListener('canplay', onCanPlay);
           this.audio?.removeEventListener('error', onError);
-          reject(new Error(`Failed to load ${trackId}`));
+          reject(new Error(`Failed to load ${trackId}: ${(e as any).message || 'Unknown error'}`));
         };
         
-        this.audio.addEventListener('canplaythrough', onCanPlay);
+        this.audio.addEventListener('canplay', onCanPlay);
         this.audio.addEventListener('error', onError);
         
         // If already ready, resolve immediately
-        if (this.audio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+        if (this.audio.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
           onCanPlay();
         }
       });
@@ -113,7 +123,7 @@ class AudioManager {
       
     } catch (error) {
       console.error(`Playback failed for ${trackId}:`, error);
-      callbacks.onError(`Playback failed for ${trackId}. Please try again.`);
+      callbacks.onError(`Playback failed for ${trackId}. ${(error as Error).message}`);
     } finally {
       this.isTransitioning = false;
     }
@@ -130,12 +140,14 @@ class AudioManager {
   
   pause(): void {
     if (this.audio && !this.audio.paused) {
+      console.log('⏸️ Pausing audio');
       this.audio.pause();
     }
   }
   
   resume(): void {
     if (this.audio && this.audio.paused) {
+      console.log('▶️ Resuming audio');
       this.audio.play().catch(error => {
         console.error('Failed to resume playback:', error);
       });
@@ -158,12 +170,17 @@ class AudioManager {
       this.audio.pause();
       this.audio.currentTime = 0;
       this.audio.src = '';
+      this.audio.remove();
       this.audio = null;
     }
   }
   
   getCurrentAudio(): HTMLAudioElement | null {
     return this.audio;
+  }
+  
+  isPlaying(): boolean {
+    return this.audio ? !this.audio.paused : false;
   }
 }
 
@@ -190,6 +207,7 @@ export const useAudio = () => {
     setIsLoading(true);
     setAudioError(null);
     setCurrentTime(0);
+    setDuration(0);
 
     try {
       await audioManager.current.playTrack(trackId, {
@@ -202,17 +220,20 @@ export const useAudio = () => {
           setIsLoading(false);
         },
         onLoadedMetadata: (dur) => {
+          console.log(`Duration loaded: ${dur}s`);
           setDuration(dur);
         },
         onTimeUpdate: (time) => {
           setCurrentTime(time);
         },
         onError: (error) => {
-          console.error(error);
+          console.error('Audio error:', error);
           setAudioError(error);
           setIsPlaying(false);
           setCurrentTrack(null);
           setIsLoading(false);
+          setCurrentTime(0);
+          setDuration(0);
         },
         onEnded: () => {
           if (!loop) {
@@ -232,6 +253,8 @@ export const useAudio = () => {
       console.error(`Failed to play ${trackId}:`, error);
       setAudioError(`Failed to play ${trackId}. Please check your connection.`);
       setIsLoading(false);
+      setIsPlaying(false);
+      setCurrentTrack(null);
     }
   }, [currentTrack, isPlaying, volume, isMuted]);
 
@@ -240,6 +263,7 @@ export const useAudio = () => {
     setIsPlaying(false);
     setCurrentTrack(null);
     setCurrentTime(0);
+    setDuration(0);
     setAudioError(null);
   }, []);
 
@@ -249,9 +273,11 @@ export const useAudio = () => {
   }, []);
 
   const resumeTrack = useCallback(() => {
-    audioManager.current.resume();
-    setIsPlaying(true);
-  }, []);
+    if (currentTrack) {
+      audioManager.current.resume();
+      setIsPlaying(true);
+    }
+  }, [currentTrack]);
 
   const getRandomTrack = useCallback((): TrackId => {
     const availableTracks = Object.keys(TRACKS) as TrackId[];

@@ -80,6 +80,7 @@ const AudioControls = () => {
   };
 
   const currentTrackName = currentTrack ? TRACK_NAMES[currentTrack as keyof typeof TRACK_NAMES] : null;
+  const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
     <div className="fixed bottom-6 right-6 z-40">
@@ -163,24 +164,33 @@ const AudioControls = () => {
 
         {/* Current Track Display */}
         <div className="flex items-center gap-2 text-xs mb-3">
-          <Music className="w-3 h-3 text-ethereal-gold animate-pulse" />
-          <span className="text-ethereal-gold/90 font-medium">
-            {currentTrack ? `${isPlaying ? 'Now Playing' : 'Paused'}: ${currentTrackName}` : 'Ready to Play'}
+          <Music className={`w-3 h-3 text-ethereal-gold ${isPlaying ? 'animate-pulse' : ''}`} />
+          <span className="text-ethereal-gold/90 font-medium flex-1">
+            {currentTrack ? (
+              <span className="block">
+                <span className="text-ethereal-gold font-semibold">
+                  {isPlaying ? '▶️ Playing' : '⏸️ Paused'}: 
+                </span>
+                <span className="text-ethereal-gold/80 ml-1">{currentTrackName}</span>
+              </span>
+            ) : (
+              'No track selected'
+            )}
           </span>
-          {isShuffled && <span className="text-ember-flame">🔀</span>}
+          {isShuffled && <span className="text-ember-flame text-sm">🔀</span>}
         </div>
 
-        {/* Progress Bar - Only show when track is loaded */}
-        {currentTrack && duration > 0 && (
+        {/* Progress Bar and Time Display */}
+        {currentTrack && (
           <div className="mb-3">
-            <div className="flex items-center justify-between text-xs text-ethereal-gold/70 mb-1">
-              <span>{formatTime(currentTime)}</span>
-              <span>{formatTime(duration)}</span>
+            <div className="flex items-center justify-between text-xs text-ethereal-gold/70 mb-2">
+              <span className="font-mono">{formatTime(currentTime)}</span>
+              <span className="font-mono">{formatTime(duration)}</span>
             </div>
-            <div className="w-full bg-ancient-stone/30 rounded-full h-1">
+            <div className="w-full bg-ancient-stone/30 rounded-full h-2 overflow-hidden border border-ethereal-gold/20">
               <div 
-                className="h-full bg-ethereal-gold rounded-full transition-all duration-300"
-                style={{ width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%` }}
+                className="h-full bg-gradient-to-r from-ethereal-gold to-ember-flame rounded-full transition-all duration-300 ease-out"
+                style={{ width: `${Math.max(0, Math.min(100, progressPercentage))}%` }}
               />
             </div>
           </div>
@@ -200,7 +210,7 @@ const AudioControls = () => {
           
           <div className="flex-1">
             <Slider
-              value={[volume * 100]}
+              value={[isMuted ? 0 : volume * 100]}
               onValueChange={handleVolumeChange}
               max={100}
               step={1}
@@ -210,7 +220,7 @@ const AudioControls = () => {
           </div>
           
           <span className="text-xs text-ethereal-gold/70 font-mono w-8">
-            {Math.round(volume * 100)}%
+            {Math.round(isMuted ? 0 : volume * 100)}%
           </span>
         </div>
         
@@ -243,7 +253,7 @@ const AudioControls = () => {
           </div>
         ) : (
           <div className="text-xs text-ethereal-gold/70 mt-2 text-center">
-            🎵 Audio System Ready • Click to play music
+            🎵 Audio System Ready • {currentTrack ? 'Controls available' : 'Click to play music'}
           </div>
         )}
       </div>
