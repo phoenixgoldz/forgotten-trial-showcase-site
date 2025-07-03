@@ -1,5 +1,5 @@
 
-import { Volume2, VolumeX, Play, Pause, AlertCircle, Music, Settings, SkipBack, SkipForward, Shuffle } from "lucide-react";
+import { Volume2, VolumeX, Play, Pause, AlertCircle, Music, Settings, SkipBack, SkipForward, Shuffle, Square } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -31,6 +31,7 @@ const AudioControls = () => {
     playTrack, 
     pauseTrack,
     resumeTrack,
+    stopTrack,
     toggleMute, 
     changeVolume,
     nextTrack,
@@ -52,6 +53,11 @@ const AudioControls = () => {
       // Start with ethereal track if nothing is playing
       playTrack('ethereal');
     }
+  };
+
+  const handleStop = () => {
+    console.log('Stop clicked');
+    stopTrack();
   };
 
   const handleTrackSelect = (trackId: string) => {
@@ -109,6 +115,17 @@ const AudioControls = () => {
               ) : (
                 <Play className="w-4 h-4" />
               )}
+            </Button>
+
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={handleStop}
+              className="text-ember-flame hover:bg-ember-flame/10"
+              disabled={isLoading || !currentTrack}
+              aria-label="Stop audio"
+            >
+              <Square className="w-4 h-4" />
             </Button>
             
             <Button
@@ -191,6 +208,10 @@ const AudioControls = () => {
               aria-label="Volume control"
             />
           </div>
+          
+          <span className="text-xs text-ethereal-gold/70 font-mono w-8">
+            {Math.round(volume * 100)}%
+          </span>
         </div>
         
         {/* Expanded Controls */}
@@ -216,13 +237,13 @@ const AudioControls = () => {
         
         {/* Status/Error Display */}
         {audioError ? (
-          <div className="flex items-center gap-2 text-xs text-amber-400 mt-2">
-            <AlertCircle className="w-3 h-3" />
+          <div className="flex items-center gap-2 text-xs text-amber-400 mt-2 p-2 bg-amber-900/20 rounded-lg border border-amber-600/30">
+            <AlertCircle className="w-3 h-3 flex-shrink-0" />
             <span className="text-center leading-tight">{audioError}</span>
           </div>
         ) : (
           <div className="text-xs text-ethereal-gold/70 mt-2 text-center">
-            🎵 Audio System Ready
+            🎵 Audio System Ready • Click to play music
           </div>
         )}
       </div>

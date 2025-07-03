@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 type TrackId = 'ambient' | 'battle' | 'ethereal' | 'town' | 'medieval' | 'dragonquest' | 'conquest' | 'wizard';
@@ -65,8 +64,9 @@ class AudioManager {
       this.audio.addEventListener('loadedmetadata', () => {
         if (this.audio) callbacks.onLoadedMetadata(this.audio.duration || 0);
       });
-      this.audio.addEventListener('error', () => {
-        callbacks.onError(`Failed to load ${trackId}`);
+      this.audio.addEventListener('error', (e) => {
+        console.error(`Audio error for ${trackId}:`, e);
+        callbacks.onError(`Failed to load ${trackId}. Please check your connection.`);
         this.isTransitioning = false;
       });
       this.audio.addEventListener('ended', callbacks.onEnded);
@@ -78,6 +78,34 @@ class AudioManager {
         }
       }, 1000);
       
+      // Wait for audio to be ready before playing
+      await new Promise<void>((resolve, reject) => {
+        if (!this.audio) {
+          reject(new Error('Audio element not available'));
+          return;
+        }
+        
+        const onCanPlay = () => {
+          this.audio?.removeEventListener('canplaythrough', onCanPlay);
+          this.audio?.removeEventListener('error', onError);
+          resolve();
+        };
+        
+        const onError = () => {
+          this.audio?.removeEventListener('canplaythrough', onCanPlay);
+          this.audio?.removeEventListener('error', onError);
+          reject(new Error(`Failed to load ${trackId}`));
+        };
+        
+        this.audio.addEventListener('canplaythrough', onCanPlay);
+        this.audio.addEventListener('error', onError);
+        
+        // If already ready, resolve immediately
+        if (this.audio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+          onCanPlay();
+        }
+      });
+      
       // Attempt to play
       await this.audio.play();
       console.log(`✅ Successfully playing: ${trackId}`);
@@ -85,7 +113,7 @@ class AudioManager {
       
     } catch (error) {
       console.error(`Playback failed for ${trackId}:`, error);
-      callbacks.onError(`Playback failed: ${error}`);
+      callbacks.onError(`Playback failed for ${trackId}. Please try again.`);
     } finally {
       this.isTransitioning = false;
     }
@@ -108,7 +136,9 @@ class AudioManager {
   
   resume(): void {
     if (this.audio && this.audio.paused) {
-      this.audio.play().catch(console.error);
+      this.audio.play().catch(error => {
+        console.error('Failed to resume playback:', error);
+      });
     }
   }
   
@@ -200,7 +230,7 @@ export const useAudio = () => {
       });
     } catch (error) {
       console.error(`Failed to play ${trackId}:`, error);
-      setAudioError(`Failed to play ${trackId}`);
+      setAudioError(`Failed to play ${trackId}. Please check your connection.`);
       setIsLoading(false);
     }
   }, [currentTrack, isPlaying, volume, isMuted]);
@@ -210,6 +240,7 @@ export const useAudio = () => {
     setIsPlaying(false);
     setCurrentTrack(null);
     setCurrentTime(0);
+    setAudioError(null);
   }, []);
 
   const pauseTrack = useCallback(() => {
@@ -306,6 +337,13 @@ export const useAudio = () => {
     console.log(`🎵 Starting contextual audio: ${trackToPlay} for ${context}`);
     playTrack(trackToPlay, true);
   }, [isPlaying, currentTrack, playTrack]);
+
+  // Clear errors when switching tracks
+  useEffect(() => {
+    if (currentTrack && audioError) {
+      setAudioError(null);
+    }
+  }, [currentTrack, audioError]);
 
   // Cleanup on unmount
   useEffect(() => {
