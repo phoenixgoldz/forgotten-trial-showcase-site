@@ -50,7 +50,7 @@ const EnhancedFundingProgress = () => {
   const kofiProgress = Math.round((kofiSupporters / kofiGoal) * 100);
 
   return (
-    <section className="py-16 bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue relative overflow-hidden">
+    <section className="py-16 bg-mystic-blue relative overflow-hidden">
       {/* Enhanced background effects */}
       <div className="absolute inset-0">
         <div className="absolute top-20 right-20 w-32 h-32 bg-verdant-glyph/10 rounded-full blur-3xl animate-float"></div>
@@ -73,7 +73,7 @@ const EnhancedFundingProgress = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <div className="inline-block mb-4">
-            <span className="px-6 py-3 bg-gradient-to-r from-verdant-glyph/20 to-ember-flame/20 rounded-full text-verdant-glyph text-sm font-medium border border-verdant-glyph/30 backdrop-blur-md glass-effect animate-pulse-glow">
+            <span className="px-6 py-3 bg-verdant-glyph/20 rounded-full text-verdant-glyph text-sm font-medium border border-verdant-glyph/30 backdrop-blur-md glass-effect animate-pulse-glow">
               ⚡ Live Campaign Progress
             </span>
           </div>
@@ -83,7 +83,7 @@ const EnhancedFundingProgress = () => {
           
           {/* Campaign Countdown */}
           <div className="flex justify-center items-center gap-6 mb-8">
-            <div className="bg-gradient-to-r from-ember-flame/20 to-ethereal-gold/20 rounded-xl p-4 border border-ember-flame/30 backdrop-blur-sm">
+            <div className="bg-ember-flame/20 rounded-xl p-4 border border-ember-flame/30 backdrop-blur-sm">
               <div className="flex items-center gap-2 text-ember-flame mb-2">
                 <Calendar className="w-4 h-4" />
                 <span className="text-sm font-medium">Campaign Ends In</span>
@@ -108,11 +108,11 @@ const EnhancedFundingProgress = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12">
           {/* Enhanced Kickstarter Progress */}
-          <Card className="bg-gradient-to-br from-mystic-blue/90 to-ancient-stone/70 border-2 border-ethereal-gold/30 hover:border-ethereal-gold/60 transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-ethereal-gold/10 via-transparent to-luminous-azure/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <Card className="bg-mystic-blue/90 border-2 border-ethereal-gold/30 hover:border-ethereal-gold/60 transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm relative overflow-hidden">
+            <div className="absolute inset-0 bg-ethereal-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
             <CardHeader className="text-center relative z-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-ethereal-gold/20 to-luminous-azure/20 mb-4 mx-auto border border-ethereal-gold/30 backdrop-blur-sm">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-ethereal-gold/20 mb-4 mx-auto border border-ethereal-gold/30 backdrop-blur-sm">
                 <Zap className="w-8 h-8 text-ethereal-gold animate-pulse" />
               </div>
               <CardTitle className="text-2xl font-bold text-white group-hover:text-ethereal-gold transition-colors font-cinzel">
@@ -139,7 +139,7 @@ const EnhancedFundingProgress = () => {
                     <div className="absolute right-0 top-0 w-2 h-full bg-white/50 blur-sm"></div>
                   </div>
                 </div>
-                <div className="absolute inset-0 h-4 bg-gradient-to-r from-ethereal-gold/20 to-luminous-azure/20 rounded-full blur-md opacity-60"></div>
+                <div className="absolute inset-0 h-4 bg-ethereal-gold/20 rounded-full blur-md opacity-60"></div>
               </div>
               
               <div className="flex justify-between items-center text-sm">
@@ -152,7 +152,7 @@ const EnhancedFundingProgress = () => {
 
               <Button 
                 size="lg" 
-                className="w-full bg-gradient-to-r from-ethereal-gold to-luminous-azure hover:from-ethereal-gold/90 hover:to-luminous-azure/90 text-white font-semibold px-8 py-4 rounded-xl button-shine hover-scale shadow-lg hover:shadow-ethereal-gold/25 transition-all duration-300"
+                className="w-full bg-ethereal-gold hover:bg-ethereal-gold/90 text-white font-semibold px-8 py-4 rounded-xl button-shine hover-scale shadow-lg hover:shadow-ethereal-gold/25 transition-all duration-300"
                 onClick={() => window.open('https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial', '_blank')}
               >
                 <Zap className="w-5 h-5 mr-2" />
@@ -162,11 +162,11 @@ const EnhancedFundingProgress = () => {
           </Card>
 
           {/* Enhanced Ko-fi Progress */}
-          <Card className="bg-gradient-to-br from-mystic-blue/90 to-ancient-stone/70 border-2 border-ember-flame/30 hover:border-ember-flame/60 transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-ember-flame/10 via-transparent to-ethereal-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <Card className="bg-mystic-blue/90 border-2 border-ember-flame/30 hover:border-ember-flame/60 transition-all duration-500 hover-scale group glass-effect backdrop-blur-sm relative overflow-hidden">
+            <div className="absolute inset-0 bg-ember-flame/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
             <CardHeader className="text-center relative z-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-ember-flame/20 to-ethereal-gold/20 mb-4 mx-auto border border-ember-flame/30 backdrop-blur-sm">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-ember-flame/20 mb-4 mx-auto border border-ember-flame/30 backdrop-blur-sm">
                 <Coffee className="w-8 h-8 text-ember-flame animate-pulse" />
               </div>
               <CardTitle className="text-2xl font-bold text-white group-hover:text-ember-flame transition-colors font-cinzel">
@@ -193,7 +193,7 @@ const EnhancedFundingProgress = () => {
                     <div className="absolute right-0 top-0 w-2 h-full bg-white/50 blur-sm"></div>
                   </div>
                 </div>
-                <div className="absolute inset-0 h-4 bg-gradient-to-r from-ember-flame/20 to-ethereal-gold/20 rounded-full blur-md opacity-60"></div>
+                <div className="absolute inset-0 h-4 bg-ember-flame/20 rounded-full blur-md opacity-60"></div>
               </div>
               
               <div className="flex justify-between items-center text-sm">
@@ -206,7 +206,7 @@ const EnhancedFundingProgress = () => {
 
               <Button 
                 size="lg" 
-                className="w-full bg-gradient-to-r from-ember-flame to-ethereal-gold hover:from-ember-flame/90 hover:to-ethereal-gold/90 text-white font-semibold px-8 py-4 rounded-xl button-shine hover-scale shadow-lg hover:shadow-ember-flame/25 transition-all duration-300"
+                className="w-full bg-ember-flame hover:bg-ember-flame/90 text-white font-semibold px-8 py-4 rounded-xl button-shine hover-scale shadow-lg hover:shadow-ember-flame/25 transition-all duration-300"
                 onClick={() => window.open('https://ko-fi.com/phoenixgoldzstudios', '_blank')}
               >
                 <Coffee className="w-5 h-5 mr-2" />
@@ -219,7 +219,7 @@ const EnhancedFundingProgress = () => {
         {/* Recent Backers Social Proof */}
         {recentBackers.length > 0 && (
           <div className="text-center mb-8">
-            <div className="bg-gradient-to-r from-ancient-stone/60 to-mystic-blue/60 rounded-2xl p-6 max-w-2xl mx-auto border border-ancient-stone/50 glass-effect backdrop-blur-sm">
+            <div className="bg-ancient-stone/60 rounded-2xl p-6 max-w-2xl mx-auto border border-ancient-stone/50 glass-effect backdrop-blur-sm">
               <div className="flex items-center justify-center mb-4">
                 <Users className="w-6 h-6 text-verdant-glyph mr-2 animate-pulse" />
                 <h3 className="text-lg font-semibold text-white font-cinzel">Recent Adventurers</h3>
@@ -237,7 +237,7 @@ const EnhancedFundingProgress = () => {
 
         {/* Enhanced Call to Action */}
         <div className="text-center">
-          <div className="max-w-3xl mx-auto bg-gradient-to-r from-mystic-blue/40 to-ancient-stone/40 rounded-xl p-8 border border-ethereal-gold/20 backdrop-blur-md glass-effect">
+          <div className="max-w-3xl mx-auto bg-mystic-blue/40 rounded-xl p-8 border border-ethereal-gold/20 backdrop-blur-md glass-effect">
             <div className="flex items-center justify-center mb-6">
               <Target className="w-8 h-8 text-ember-flame mr-3 animate-pulse" />
               <h3 className="text-xl md:text-2xl font-semibold text-white font-cinzel">Your Support Unlocks:</h3>

@@ -40,7 +40,7 @@ const Characters = () => {
   ];
 
   return (
-    <section id="characters" className="py-20 bg-gradient-to-br from-ancient-stone/30 to-mystic-blue/40 relative overflow-hidden">
+    <section id="characters" className="py-20 bg-ancient-stone/30 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         {Array.from({ length: 10 }, (_, i) => (
           <div
@@ -61,7 +61,7 @@ const Characters = () => {
           <h2 className="text-4xl md:text-5xl font-cinzel text-ethereal-gold mb-6 animate-fade-in">
             🎭 Meet the <span className="gradient-text">Characters</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-ethereal-gold to-ember-flame mx-auto mb-8"></div>
+          <div className="w-24 h-1 bg-ethereal-gold mx-auto mb-8"></div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto font-citizen">
             Each companion carries secrets, memories, and powers that shape your journey
           </p>
@@ -80,12 +80,12 @@ const Characters = () => {
                   alt={character.name}
                   className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-mystic-blue/60 via-transparent to-transparent group-hover:from-mystic-blue/40 transition-all duration-500"></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-ethereal-gold/10 to-ember-flame/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-mystic-blue/60 group-hover:bg-mystic-blue/40 transition-all duration-500"></div>
+                <div className="absolute inset-0 bg-ethereal-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute top-4 right-4 text-3xl drop-shadow-lg animate-bounce">
                   {character.emoji}
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-mystic-blue/90 to-transparent">
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-mystic-blue/90">
                   <h3 className="text-2xl font-cinzel text-ethereal-gold mb-1 group-hover:text-ember-flame transition-colors duration-300">
                     {character.name}
                   </h3>
@@ -95,7 +95,7 @@ const Characters = () => {
                 </div>
               </div>
               
-              <div className="p-6 bg-gradient-to-br from-mystic-blue/20 to-ancient-stone/30">
+              <div className="p-6 bg-mystic-blue/20">
                 <p className="text-gray-200 font-citizen mb-4 leading-relaxed text-sm">
                   {character.description}
                 </p>

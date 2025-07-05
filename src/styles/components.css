@@ -12,7 +12,7 @@
   height: 3px;
   bottom: -4px;
   left: 0;
-  background: linear-gradient(90deg, var(--ethereal-gold), var(--ember-flame), var(--verdant-glyph));
+  background: var(--ethereal-gold);
   transform: scaleY(0);
   transform-origin: bottom;
   transition: transform 0.4s ease;
@@ -24,11 +24,7 @@
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--ethereal-gold), var(--ember-flame), var(--luminous-azure), var(--verdant-glyph));
-  background-size: 100% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--ethereal-gold);
   position: static;
 }
 
@@ -47,7 +43,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212, 181, 106, 0.6), transparent);
+  background: rgba(212, 181, 106, 0.6);
 }
 
 .button-shine {
@@ -77,15 +73,9 @@
   position: absolute;
   inset: 0;
   padding: 1px;
-  background: linear-gradient(45deg, 
-    transparent, 
-    rgba(212, 181, 106, 0.5), 
-    rgba(233, 127, 60, 0.3),
-    rgba(126, 200, 80, 0.3),
-    transparent
-  );
+  background: rgba(212, 181, 106, 0.3);
   border-radius: inherit;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: none;
   mask-composite: xor;
   -webkit-mask-composite: xor;
   opacity: 0;

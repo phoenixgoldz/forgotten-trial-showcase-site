@@ -30,7 +30,7 @@ const queryClient = new QueryClient({
 
 // Loading fallback component
 const PageLoadingFallback = () => (
-  <div className="min-h-screen bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue flex items-center justify-center">
+  <div className="min-h-screen bg-mystic-blue flex items-center justify-center">
     <div className="text-center space-y-4">
       <div className="w-16 h-16 border-4 border-ethereal-gold/30 border-t-ethereal-gold rounded-full animate-spin mx-auto"></div>
       <p className="text-ethereal-gold font-cinzel text-xl animate-pulse">Loading mystical realm...</p>

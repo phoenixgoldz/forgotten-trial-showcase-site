@@ -15,7 +15,7 @@ const Footer = memo(() => {
 
   return (
     <footer 
-      className="bg-gradient-to-br from-black via-ancient-stone/20 to-mystic-blue relative overflow-hidden"
+      className="bg-black relative overflow-hidden"
       role="contentinfo"
       aria-labelledby="footer-heading"
     >
@@ -26,7 +26,7 @@ const Footer = memo(() => {
       {/* Animated Background Layers */}
       <div className="absolute inset-0" aria-hidden="true">
         {/* Dynamic gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-ethereal-gold/5 via-transparent to-verdant-glyph/5 animate-pulse" style={{ animationDuration: '6s' }}></div>
+        <div className="absolute inset-0 bg-ethereal-gold/5 animate-pulse" style={{ animationDuration: '6s' }}></div>
         
         {/* Floating particles */}
         {Array.from({ length: 20 }).map((_, i) => (
@@ -44,13 +44,7 @@ const Footer = memo(() => {
         
         {/* Mystical grid pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `
-              radial-gradient(circle at 2px 2px, rgba(212, 181, 106, 0.4) 1px, transparent 0),
-              linear-gradient(45deg, transparent 25%, rgba(212, 181, 106, 0.1) 25%, rgba(212, 181, 106, 0.1) 50%, transparent 50%)
-            `,
-            backgroundSize: '60px 60px, 40px 40px'
-          }}></div>
+          <div className="absolute inset-0 bg-ethereal-gold/5"></div>
         </div>
       </div>
 
@@ -59,7 +53,7 @@ const Footer = memo(() => {
           {/* Enhanced Studio Logo Section - Fixed image path */}
           <div className="mb-12 flex flex-col items-center">
             <div className="relative mb-8 group">
-              <div className="absolute inset-0 bg-gradient-to-r from-ethereal-gold/30 to-ember-flame/30 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500" aria-hidden="true"></div>
+              <div className="absolute inset-0 bg-ethereal-gold/30 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500" aria-hidden="true"></div>
               <img 
                 src="/lovable-uploads/CompanyLogo.png" 
                 alt="PhoenixGold Game Studios Logo"
@@ -80,7 +74,7 @@ const Footer = memo(() => {
               
               <h4 className="font-cinzel text-2xl md:text-3xl font-semibold text-ethereal-gold mb-6 relative" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
                 The Forgotten Trial
-                <div className="absolute -inset-2 bg-gradient-to-r from-transparent via-ethereal-gold/10 to-transparent animate-pulse" aria-hidden="true"></div>
+                <div className="absolute -inset-2 bg-ethereal-gold/10 animate-pulse" aria-hidden="true"></div>
               </h4>
               
               <p className="text-gray-100 text-xl leading-relaxed max-w-3xl mx-auto relative font-citizen" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
@@ -101,35 +95,35 @@ const Footer = memo(() => {
               target="_blank" 
               rel="noopener noreferrer"
               onClick={() => handleExternalLink("https://ko-fi.com/phoenixgoldzstudios", "Ko-fi")}
-              className="group flex items-center bg-gradient-to-r from-ember-flame/20 to-ethereal-gold/20 hover:from-ember-flame/40 hover:to-ethereal-gold/40 px-8 py-4 rounded-2xl border border-ember-flame/30 hover:border-ember-flame/60 transition-all duration-300 hover:scale-110 backdrop-blur-sm font-citizen focus:outline-none focus:ring-2 focus:ring-ember-flame/50 relative"
+              className="group flex items-center bg-ember-flame/20 hover:bg-ember-flame/40 px-8 py-4 rounded-2xl border border-ember-flame/30 hover:border-ember-flame/60 transition-all duration-300 hover:scale-110 backdrop-blur-sm font-citizen focus:outline-none focus:ring-2 focus:ring-ember-flame/50 relative"
               aria-label="Visit our Ko-fi page for development updates and support options"
             >
               <Coffee className="w-6 h-6 mr-3 text-ember-flame group-hover:animate-bounce" aria-hidden="true" />
               <span className="text-white text-lg font-semibold">Ko-fi Dev Blog</span>
               <ExternalLink className="w-4 h-4 ml-2 text-ember-flame/60 group-hover:text-ember-flame" aria-hidden="true" />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" aria-hidden="true"></div>
+              <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" aria-hidden="true"></div>
             </a>
             
-            <div className="hidden lg:block w-2 h-2 bg-gradient-to-r from-ethereal-gold to-verdant-glyph rounded-full animate-pulse" aria-hidden="true"></div>
+            <div className="hidden lg:block w-2 h-2 bg-ethereal-gold rounded-full animate-pulse" aria-hidden="true"></div>
             
             <a 
               href="https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial" 
               target="_blank" 
               rel="noopener noreferrer"
               onClick={() => handleExternalLink("https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial", "Kickstarter")}
-              className="group flex items-center bg-gradient-to-r from-verdant-glyph/20 to-luminous-azure/20 hover:from-verdant-glyph/40 hover:to-luminous-azure/40 px-8 py-4 rounded-2xl border border-verdant-glyph/30 hover:border-verdant-glyph/60 transition-all duration-300 hover:scale-110 backdrop-blur-sm relative overflow-hidden font-citizen focus:outline-none focus:ring-2 focus:ring-verdant-glyph/50"
+              className="group flex items-center bg-verdant-glyph/20 hover:bg-verdant-glyph/40 px-8 py-4 rounded-2xl border border-verdant-glyph/30 hover:border-verdant-glyph/60 transition-all duration-300 hover:scale-110 backdrop-blur-sm relative overflow-hidden font-citizen focus:outline-none focus:ring-2 focus:ring-verdant-glyph/50"
               aria-label="Support The Forgotten Trial on Kickstarter"
             >
               <Zap className="w-6 h-6 mr-3 text-verdant-glyph group-hover:animate-pulse" aria-hidden="true" />
               <span className="text-white text-lg font-semibold">Kickstarter Campaign</span>
               <ExternalLink className="w-4 h-4 ml-2 text-verdant-glyph/60 group-hover:text-verdant-glyph" aria-hidden="true" />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" aria-hidden="true"></div>
+              <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" aria-hidden="true"></div>
             </a>
           </div>
 
           {/* Enhanced Platform Info */}
           <div className="bg-black/70 rounded-3xl p-10 border border-ancient-stone/40 glass-effect backdrop-blur-md mb-12 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-ethereal-gold/5 via-transparent to-verdant-glyph/5" aria-hidden="true"></div>
+            <div className="absolute inset-0 bg-ethereal-gold/5" aria-hidden="true"></div>
             <div className="relative z-10">
               <h4 className="text-2xl font-bold text-white mb-8 flex items-center justify-center font-cinzel" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
                 <Star className="w-6 h-6 mr-3 text-ethereal-gold animate-pulse" aria-hidden="true" />
@@ -161,7 +155,7 @@ const Footer = memo(() => {
           
           {/* Copyright Section with 2025 */}
           <div className="pt-8 border-t border-ancient-stone/30 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-ethereal-gold/5 to-transparent" aria-hidden="true"></div>
+            <div className="absolute inset-0 bg-ethereal-gold/5" aria-hidden="true"></div>
             <p className="text-gray-300 text-lg flex items-center justify-center flex-wrap gap-2 relative z-10 font-citizen" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
               <span className="flex items-center">
                 © 2025 PhoenixGold Game Studios. All rights reserved.

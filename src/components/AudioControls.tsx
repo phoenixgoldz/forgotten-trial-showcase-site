@@ -84,7 +84,7 @@ const AudioControls = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-40">
-      <div className={`bg-gradient-to-r from-ancient-stone/95 to-mystic-blue/95 backdrop-blur-md rounded-2xl border border-ethereal-gold/30 shadow-xl transition-all duration-300 ${
+      <div className={`bg-ancient-stone/95 backdrop-blur-md rounded-2xl border border-ethereal-gold/30 shadow-xl transition-all duration-300 ${
         isExpanded ? 'p-6 max-w-sm' : 'p-4 max-w-xs'
       }`}>
         {/* Main Controls */}
@@ -189,7 +189,7 @@ const AudioControls = () => {
             </div>
             <div className="w-full bg-ancient-stone/30 rounded-full h-2 overflow-hidden border border-ethereal-gold/20">
               <div 
-                className="h-full bg-gradient-to-r from-ethereal-gold to-ember-flame rounded-full transition-all duration-300 ease-out"
+                className="h-full bg-ethereal-gold rounded-full transition-all duration-300 ease-out"
                 style={{ width: `${Math.max(0, Math.min(100, progressPercentage))}%` }}
               />
             </div>

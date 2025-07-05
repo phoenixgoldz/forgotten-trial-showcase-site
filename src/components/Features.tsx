@@ -7,42 +7,42 @@ const Features = () => {
       icon: Puzzle,
       title: "Procedural Dungeon Layouts",
       description: "Every playthrough offers a new map, new encounters, and new memories to discover.",
-      gradient: "from-ethereal-gold to-amber-400"
+      bgColor: "bg-ethereal-gold"
     },
     {
       icon: Brain,
       title: "Hand-Written Narrative Fragments",
       description: "Letters, journal entries, and ghostly whispers reveal who you were—and who you might become.",
-      gradient: "from-luminous-azure to-blue-400"
+      bgColor: "bg-luminous-azure"
     },
     {
       icon: Sword,
       title: "Tactical Turn-Based Combat",
       description: "Command your party on a grid in rich, strategic battles with unique abilities.",
-      gradient: "from-ember-flame to-red-400"
+      bgColor: "bg-ember-flame"
     },
     {
       icon: MessageCircle,
       title: "Dynamic Trust System",
       description: "Your actions shape your party's trust in you. Will you lead with kindness, neutrality, or ruthlessness?",
-      gradient: "from-verdant-glyph to-green-400"
+      bgColor: "bg-verdant-glyph"
     },
     {
       icon: Drama,
       title: "Character-Driven Storytelling",
       description: "Each companion has secrets, personalities, and reactions that change with your choices.",
-      gradient: "from-purple-500 to-pink-400"
+      bgColor: "bg-ancient-stone"
     },
     {
       icon: Sparkles,
       title: "Unique Every Time",
       description: "No two adventures are the same. Discover new story paths and character interactions each run.",
-      gradient: "from-ethereal-gold to-ember-flame"
+      bgColor: "bg-ethereal-gold"
     }
   ];
 
   return (
-    <section id="features" className="py-20 bg-gradient-to-br from-mystic-blue/40 to-ancient-stone/60 relative overflow-hidden">
+    <section id="features" className="py-20 bg-mystic-blue/40 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         {Array.from({ length: 8 }, (_, i) => (
           <div
@@ -63,7 +63,7 @@ const Features = () => {
           <h2 className="text-4xl md:text-5xl font-cinzel text-ethereal-gold mb-6 animate-fade-in">
             🧠 Core <span className="gradient-text">Features</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-ethereal-gold to-ember-flame mx-auto mb-8"></div>
+          <div className="w-24 h-1 bg-ethereal-gold mx-auto mb-8"></div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto font-citizen">
             Discover the magical systems that make every adventure unique and memorable
           </p>
@@ -78,7 +78,7 @@ const Features = () => {
                 className="glass-effect rounded-2xl p-8 hover-scale interactive-card group"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className={`w-16 h-16 mx-auto mb-6 bg-gradient-to-br ${feature.gradient} rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-16 h-16 mx-auto mb-6 ${feature.bgColor} rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
                 

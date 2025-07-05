@@ -3,7 +3,7 @@ import { Shield, Scroll, Users, Sparkles } from "lucide-react";
 
 const About = () => {
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-ancient-stone/20 to-mystic-blue/30 relative overflow-hidden">
+    <section id="about" className="py-20 bg-ancient-stone/20 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         {Array.from({ length: 6 }, (_, i) => (
           <div
@@ -24,7 +24,7 @@ const About = () => {
           <h2 className="text-4xl md:text-5xl font-cinzel text-ethereal-gold mb-6 animate-fade-in">
             What is <span className="gradient-text">The Forgotten Trial</span>?
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-ethereal-gold to-ember-flame mx-auto mb-8"></div>
+          <div className="w-24 h-1 bg-ethereal-gold mx-auto mb-8"></div>
         </div>
 
         <div className="max-w-4xl mx-auto mb-16">
@@ -46,7 +46,7 @@ const About = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="glass-effect rounded-xl p-6 text-center hover-scale interactive-card">
-            <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-ethereal-gold to-ember-flame rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-4 bg-ethereal-gold rounded-full flex items-center justify-center">
               <Shield className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-xl font-cinzel text-ethereal-gold mb-3">Tactical Combat</h3>
@@ -56,7 +56,7 @@ const About = () => {
           </div>
 
           <div className="glass-effect rounded-xl p-6 text-center hover-scale interactive-card">
-            <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-luminous-azure to-verdant-glyph rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-4 bg-luminous-azure rounded-full flex items-center justify-center">
               <Scroll className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-xl font-cinzel text-ethereal-gold mb-3">Hand-Written Stories</h3>
@@ -66,7 +66,7 @@ const About = () => {
           </div>
 
           <div className="glass-effect rounded-xl p-6 text-center hover-scale interactive-card">
-            <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-ember-flame to-ethereal-gold rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-4 bg-ember-flame rounded-full flex items-center justify-center">
               <Users className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-xl font-cinzel text-ethereal-gold mb-3">Dynamic Trust</h3>
@@ -76,7 +76,7 @@ const About = () => {
           </div>
 
           <div className="glass-effect rounded-xl p-6 text-center hover-scale interactive-card">
-            <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-verdant-glyph to-luminous-azure rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-4 bg-verdant-glyph rounded-full flex items-center justify-center">
               <Sparkles className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-xl font-cinzel text-ethereal-gold mb-3">Procedural Dungeons</h3>
