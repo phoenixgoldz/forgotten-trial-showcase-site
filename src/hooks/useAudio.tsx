@@ -360,7 +360,7 @@ export const useAudio = () => {
     };
     
     const trackToPlay = contextMap[context];
-    console.log(`🎵 Starting contextual audio: ${trackToPlay} for ${context}`);
+      console.log(`🎵 Starting contextual audio: ${trackToPlay} for ${context}`);
     playTrack(trackToPlay, true);
   }, [isPlaying, currentTrack, playTrack]);
 

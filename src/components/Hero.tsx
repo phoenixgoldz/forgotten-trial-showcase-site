@@ -7,17 +7,17 @@ const Hero = () => {
   const navigate = useNavigate();
 
   const handleKickstarterClick = () => {
-    console.log('Redirecting to Kickstarter');
+    // Analytics tracking in production would go here
     window.open('https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial', '_blank', 'noopener,noreferrer');
   };
 
   const handleKofiClick = () => {
-    console.log('Redirecting to Ko-fi');
+    // Analytics tracking in production would go here
     window.open('https://ko-fi.com/phoenixgoldzstudios', '_blank', 'noopener,noreferrer');
   };
 
   const handleDemoClick = () => {
-    console.log('Navigating to Demo page');
+    // Navigation tracking in production would go here
     navigate('/demo');
   };
 
