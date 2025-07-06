@@ -1,11 +1,7 @@
 
 import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Features from "@/components/Features";
-import Characters from "@/components/Characters";
-import Support from "@/components/Support";
-import NewsTicker from "@/components/NewsTicker";
+import InteractiveDemo from "@/components/InteractiveDemo";
 import MysteryQuotes from "@/components/MysteryQuotes";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
@@ -154,10 +150,7 @@ const Index = () => {
           <Navigation />
           <div className="pt-16">
             <Hero />
-            <About />
-            <Features />
-            <Characters />
-            <Support />
+            <InteractiveDemo />
             <MysteryQuotes />
             <Newsletter />
           </div>
