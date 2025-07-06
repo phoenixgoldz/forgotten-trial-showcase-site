@@ -42,7 +42,6 @@ const SupportPage = () => {
         <div className="pt-16">
           <EnhancedFundingProgress />
           <RealTimeEngagement />
-          <Gamification />
           <SocialSharing />
         </div>
         <Footer />

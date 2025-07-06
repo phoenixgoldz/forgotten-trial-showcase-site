@@ -14,15 +14,10 @@ const EnhancedFundingProgress = () => {
   // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
-      // Simulate gradual progress increase
-      setKicksarterProgress(prev => Math.min(prev + Math.random() * 0.1, 15));
-      setKofiSupporters(prev => Math.min(prev + Math.floor(Math.random() * 2), 25));
-      
-      // Add random backer names for social proof
-      if (Math.random() > 0.9) {
-        const backerNames = ['Alex M.', 'Sarah K.', 'David L.', 'Emma R.', 'Chris P.', 'Maya S.'];
-        setRecentBackers(prev => [backerNames[Math.floor(Math.random() * backerNames.length)], ...prev.slice(0, 4)]);
-      }
+      // Keep progress at 0
+      setKicksarterProgress(0);
+      setKofiSupporters(0);
+      // Remove random backer functionality since we have 0 supporters
     }, 5000);
 
     // Campaign countdown
@@ -45,9 +40,9 @@ const EnhancedFundingProgress = () => {
   }, []);
 
   const kickstarterGoal = "$50,000";
-  const kickstarterRaised = `$${Math.floor(kickstarterProgress * 500)}`;
+  const kickstarterRaised = "$0.00";
   const kofiGoal = 200;
-  const kofiProgress = Math.round((kofiSupporters / kofiGoal) * 100);
+  const kofiProgress = 0;
 
   return (
     <section className="py-16 bg-mystic-blue relative overflow-hidden">
@@ -133,7 +128,7 @@ const EnhancedFundingProgress = () => {
                 <div className="h-4 bg-ancient-stone/60 rounded-full border border-ancient-stone/80 overflow-hidden backdrop-blur-sm">
                   <div 
                     className="h-full bg-gradient-to-r from-ethereal-gold via-luminous-azure to-verdant-glyph transition-all duration-1000 ease-out relative"
-                    style={{ width: `${kickstarterProgress}%` }}
+                    style={{ width: `0%` }}
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
                     <div className="absolute right-0 top-0 w-2 h-full bg-white/50 blur-sm"></div>
@@ -143,7 +138,7 @@ const EnhancedFundingProgress = () => {
               </div>
               
               <div className="flex justify-between items-center text-sm">
-                <span className="text-ethereal-gold font-bold text-lg">{kickstarterProgress.toFixed(1)}% funded</span>
+                <span className="text-ethereal-gold font-bold text-lg">0.0% funded</span>
                 <div className="flex items-center gap-1 text-verdant-glyph">
                   <TrendingUp className="w-3 h-3" />
                   <span className="text-xs">Growing</span>
@@ -187,7 +182,7 @@ const EnhancedFundingProgress = () => {
                 <div className="h-4 bg-ancient-stone/60 rounded-full border border-ancient-stone/80 overflow-hidden backdrop-blur-sm">
                   <div 
                     className="h-full bg-gradient-to-r from-ember-flame via-ethereal-gold to-verdant-glyph transition-all duration-1000 ease-out relative"
-                    style={{ width: `${kofiProgress}%` }}
+                    style={{ width: `0%` }}
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
                     <div className="absolute right-0 top-0 w-2 h-full bg-white/50 blur-sm"></div>
@@ -197,10 +192,10 @@ const EnhancedFundingProgress = () => {
               </div>
               
               <div className="flex justify-between items-center text-sm">
-                <span className="text-ember-flame font-bold text-lg">{kofiProgress}% complete</span>
+                <span className="text-ember-flame font-bold text-lg">0% complete</span>
                 <div className="flex items-center gap-1 text-verdant-glyph">
                   <Users className="w-3 h-3" />
-                  <span className="text-xs">+{Math.floor(Math.random() * 3) + 1} today</span>
+                  <span className="text-xs">+0 today</span>
                 </div>
               </div>
 
