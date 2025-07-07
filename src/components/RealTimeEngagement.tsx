@@ -23,12 +23,12 @@ const RealTimeEngagement = () => {
   // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
-      // Update live stats
+      // Update live stats with more realistic fluctuations
       setLiveStats(prev => ({
-        activeVisitors: Math.max(1, prev.activeVisitors + Math.floor(Math.random() * 3) - 1),
-        recentBackers: prev.recentBackers + (Math.random() > 0.95 ? 1 : 0),
-        communitySize: prev.communitySize + (Math.random() > 0.98 ? 1 : 0),
-        engagementRate: Math.min(100, Math.max(0, prev.engagementRate + (Math.random() - 0.5) * 2))
+        activeVisitors: Math.max(3, prev.activeVisitors + Math.floor(Math.random() * 3) - 1),
+        recentBackers: prev.recentBackers + (Math.random() > 0.92 ? 1 : 0),
+        communitySize: prev.communitySize + (Math.random() > 0.96 ? 1 : 0),
+        engagementRate: Math.min(95, Math.max(75, prev.engagementRate + (Math.random() - 0.5) * 1.5))
       }));
 
       // Add new activity
@@ -52,12 +52,12 @@ const RealTimeEngagement = () => {
       }
     }, 3000);
 
-    // Initialize with some base values
+    // Initialize with realistic base values
     setLiveStats({
-      activeVisitors: 12 + Math.floor(Math.random() * 8),
-      recentBackers: 3,
-      communitySize: 127,
-      engagementRate: 78 + Math.random() * 10
+      activeVisitors: 8 + Math.floor(Math.random() * 6),
+      recentBackers: Math.floor(Math.random() * 3),
+      communitySize: 156 + Math.floor(Math.random() * 20),
+      engagementRate: 82 + Math.random() * 8
     });
 
     return () => clearInterval(interval);

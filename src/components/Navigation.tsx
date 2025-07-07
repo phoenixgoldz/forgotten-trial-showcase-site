@@ -17,15 +17,6 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleScrollToSection = (sectionId: string) => {
-    if (location.pathname === '/') {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-    setIsMobileMenuOpen(false);
-  };
 
   const navItems = [
     { 
@@ -36,9 +27,9 @@ const Navigation = () => {
     },
     { 
       label: 'About', 
-      href: 'about', 
+      href: '/about', 
       icon: Info,
-      type: 'scroll' as const
+      type: 'link' as const
     },
     { 
       label: 'Features', 
@@ -87,19 +78,6 @@ const Navigation = () => {
             {navItems.map((item) => {
               const IconComponent = item.icon;
               
-              if (item.type === 'scroll') {
-                return (
-                  <button
-                    key={item.label}
-                    onClick={() => handleScrollToSection(item.href)}
-                    className="flex items-center space-x-2 text-gray-300 hover:text-ethereal-gold transition-colors duration-200 group"
-                  >
-                    <IconComponent className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span className="font-citizen">{item.label}</span>
-                  </button>
-                );
-              }
-              
               return (
                 <Link
                   key={item.label}
@@ -129,19 +107,6 @@ const Navigation = () => {
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => {
                 const IconComponent = item.icon;
-                
-                if (item.type === 'scroll') {
-                  return (
-                    <button
-                      key={item.label}
-                      onClick={() => handleScrollToSection(item.href)}
-                      className="flex items-center space-x-3 text-gray-300 hover:text-ethereal-gold transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-ethereal-gold/10"
-                    >
-                      <IconComponent className="w-5 h-5" />
-                      <span className="font-citizen">{item.label}</span>
-                    </button>
-                  );
-                }
                 
                 return (
                   <Link
