@@ -81,20 +81,20 @@ const EnhancedFundingProgress = () => {
             <div className="bg-verdant-glyph/20 rounded-xl p-4 border border-verdant-glyph/30 backdrop-blur-sm">
               <div className="flex items-center gap-2 text-verdant-glyph mb-2">
                 <Calendar className="w-4 h-4" />
-                <span className="text-sm font-medium">Development Progress</span>
+                <span className="text-sm font-medium">Early Development</span>
               </div>
               <div className="flex gap-4 text-white">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-ethereal-gold">65</div>
-                  <div className="text-xs text-slate-300">% Complete</div>
+                  <div className="text-2xl font-bold text-ethereal-gold">v0.2.0</div>
+                  <div className="text-xs text-slate-300">Current Build</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-ethereal-gold">Q2</div>
-                  <div className="text-xs text-slate-300">2025 Launch</div>
+                  <div className="text-2xl font-bold text-ethereal-gold">10%</div>
+                  <div className="text-xs text-slate-300">Complete</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-ethereal-gold">Beta</div>
-                  <div className="text-xs text-slate-300">Soon</div>
+                  <div className="text-2xl font-bold text-ethereal-gold">Alpha</div>
+                  <div className="text-xs text-slate-300">Phase</div>
                 </div>
               </div>
             </div>
@@ -235,28 +235,28 @@ const EnhancedFundingProgress = () => {
           <div className="max-w-3xl mx-auto bg-mystic-blue/40 rounded-xl p-8 border border-ethereal-gold/20 backdrop-blur-md glass-effect">
             <div className="flex items-center justify-center mb-6">
               <Target className="w-8 h-8 text-ember-flame mr-3 animate-pulse" />
-              <h3 className="text-xl md:text-2xl font-semibold text-white font-cinzel">Your Support Unlocks:</h3>
+              <h3 className="text-xl md:text-2xl font-semibold text-white font-cinzel">Core Features In Development:</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-slate-300">
               <div className="flex flex-col items-center p-4 bg-ancient-stone/30 rounded-xl hover:bg-ancient-stone/50 transition-colors duration-300 interactive-card">
-                <div className="text-3xl mb-3">📚</div>
-                <h4 className="font-semibold text-white mb-2 font-cinzel">Rich Lore</h4>
-                <p className="text-sm text-center">Deeper character backstories and world building</p>
+                <div className="text-3xl mb-3">📖</div>
+                <h4 className="font-semibold text-white mb-2 font-cinzel">Narrative System</h4>
+                <p className="text-sm text-center">Hand-crafted story fragments and character development</p>
               </div>
               <div className="flex flex-col items-center p-4 bg-ancient-stone/30 rounded-xl hover:bg-ancient-stone/50 transition-colors duration-300 interactive-card">
-                <div className="text-3xl mb-3">🗺️</div>
-                <h4 className="font-semibold text-white mb-2 font-cinzel">New Realms</h4>
-                <p className="text-sm text-center">Additional dungeons and mystical locations</p>
+                <div className="text-3xl mb-3">🏰</div>
+                <h4 className="font-semibold text-white mb-2 font-cinzel">Procedural Dungeons</h4>
+                <p className="text-sm text-center">Dynamic layouts and encounters for endless replayability</p>
               </div>
               <div className="flex flex-col items-center p-4 bg-ancient-stone/30 rounded-xl hover:bg-ancient-stone/50 transition-colors duration-300 interactive-card">
-                <div className="text-3xl mb-3">✨</div>
-                <h4 className="font-semibold text-white mb-2 font-cinzel">Epic Encounters</h4>
-                <p className="text-sm text-center">Legendary bosses and memorable moments</p>
+                <div className="text-3xl mb-3">⚔️</div>
+                <h4 className="font-semibold text-white mb-2 font-cinzel">Tactical Combat</h4>
+                <p className="text-sm text-center">Grid-based strategy with unique character abilities</p>
               </div>
             </div>
             <div className="mt-6 text-center">
               <p className="text-slate-300 text-sm leading-relaxed">
-                <span className="text-ethereal-gold font-semibold">Every contribution creates magic.</span> Together, we're building something truly special.
+                <span className="text-ethereal-gold font-semibold">Help us build these core systems.</span> Your support accelerates development of the features that matter most.
               </p>
             </div>
           </div>
