@@ -39,7 +39,7 @@ const EnhancedFundingProgress = () => {
     };
   }, []);
 
-  const kickstarterGoal = "$50,000";
+  const kickstarterGoal = "$30,000";
   const kickstarterRaised = "$0.00";
   const kofiGoal = 200;
   const kofiProgress = 0;
@@ -68,33 +68,33 @@ const EnhancedFundingProgress = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <div className="inline-block mb-4">
-            <span className="px-6 py-3 bg-verdant-glyph/20 rounded-full text-verdant-glyph text-sm font-medium border border-verdant-glyph/30 backdrop-blur-md glass-effect animate-pulse-glow">
-              ⚡ Live Campaign Progress
+            <span className="px-6 py-3 bg-ember-flame/20 rounded-full text-ember-flame text-sm font-medium border border-ember-flame/30 backdrop-blur-md glass-effect animate-pulse-glow">
+              🚀 Pre-Launch Development
             </span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-cinzel">
-            Join the <span className="gradient-text animate-glow">Mystical Journey</span>
+            Support <span className="gradient-text animate-glow">The Forgotten Trial</span>
           </h2>
           
           {/* Campaign Countdown */}
           <div className="flex justify-center items-center gap-6 mb-8">
-            <div className="bg-ember-flame/20 rounded-xl p-4 border border-ember-flame/30 backdrop-blur-sm">
-              <div className="flex items-center gap-2 text-ember-flame mb-2">
+            <div className="bg-verdant-glyph/20 rounded-xl p-4 border border-verdant-glyph/30 backdrop-blur-sm">
+              <div className="flex items-center gap-2 text-verdant-glyph mb-2">
                 <Calendar className="w-4 h-4" />
-                <span className="text-sm font-medium">Campaign Ends In</span>
+                <span className="text-sm font-medium">Development Progress</span>
               </div>
               <div className="flex gap-4 text-white">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-ethereal-gold">{timeLeft.days}</div>
-                  <div className="text-xs text-slate-300">Days</div>
+                  <div className="text-2xl font-bold text-ethereal-gold">65</div>
+                  <div className="text-xs text-slate-300">% Complete</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-ethereal-gold">{timeLeft.hours}</div>
-                  <div className="text-xs text-slate-300">Hours</div>
+                  <div className="text-2xl font-bold text-ethereal-gold">Q2</div>
+                  <div className="text-xs text-slate-300">2025 Launch</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-ethereal-gold">{timeLeft.minutes}</div>
-                  <div className="text-xs text-slate-300">Min</div>
+                  <div className="text-2xl font-bold text-ethereal-gold">Beta</div>
+                  <div className="text-xs text-slate-300">Soon</div>
                 </div>
               </div>
             </div>
@@ -111,10 +111,10 @@ const EnhancedFundingProgress = () => {
                 <Zap className="w-8 h-8 text-ethereal-gold animate-pulse" />
               </div>
               <CardTitle className="text-2xl font-bold text-white group-hover:text-ethereal-gold transition-colors font-cinzel">
-                Kickstarter Campaign
+                Kickstarter - Coming Soon!
               </CardTitle>
               <CardDescription className="text-ethereal-gold font-medium">
-                Main funding adventure
+                Pre-launch development phase
               </CardDescription>
             </CardHeader>
             
@@ -151,7 +151,7 @@ const EnhancedFundingProgress = () => {
                 onClick={() => window.open('https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial', '_blank')}
               >
                 <Zap className="w-5 h-5 mr-2" />
-                Back the Adventure
+                Follow Our Progress
               </Button>
             </CardContent>
           </Card>
