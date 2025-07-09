@@ -66,25 +66,14 @@ class AudioManager {
       // Clean up existing audio
       this.cleanup();
       
-      // Create new audio element with fallback
+      // Create new audio element
       this.audio = new Audio();
-      this.audio.crossOrigin = 'anonymous';
       this.audio.loop = true;
       this.audio.preload = 'metadata';
       this.audio.volume = 0; // Start silent for fade-in
+      this.audio.src = TRACKS[trackId];
       
-      // Try primary source first, then fallback
-      const trySource = async (src: string): Promise<boolean> => {
-        return new Promise((resolve) => {
-          const testAudio = new Audio();
-          testAudio.addEventListener('canplaythrough', () => resolve(true), { once: true });
-          testAudio.addEventListener('error', () => resolve(false), { once: true });
-          testAudio.src = src;
-        });
-      };
-      
-      const primaryWorks = await trySource(TRACKS[trackId]);
-      this.audio.src = primaryWorks ? TRACKS[trackId] : FALLBACK_TRACKS[trackId];
+      // Remove the duplicate error listener since we handle it below
       
       // Set up event listeners
       this.audio.addEventListener('loadstart', callbacks.onLoadStart);
@@ -96,7 +85,13 @@ class AudioManager {
       });
       this.audio.addEventListener('error', (e) => {
         console.error(`Audio error for ${trackId}:`, e);
-        const errorMsg = `Failed to load ${trackId}. Audio file may be missing or corrupt.`;
+        // Try fallback if we haven't already
+        if (this.audio && this.audio.src.includes(TRACKS[trackId])) {
+          console.log(`🎵 Trying fallback for ${trackId}`);
+          this.audio.src = FALLBACK_TRACKS[trackId];
+          return; // Let it try again with fallback
+        }
+        const errorMsg = `Failed to load ${trackId}. Audio file may be missing.`;
         callbacks.onError(errorMsg);
         this.isTransitioning = false;
       });
@@ -194,6 +189,7 @@ class AudioManager {
   private fadeIn(targetVolume: number, duration = 1000): void {
     if (!this.audio || this.fadeInterval) return;
     
+    this.clearFadeInterval();
     const startVolume = 0;
     const volumeStep = (targetVolume - startVolume) / (duration / 50);
     let currentVolume = startVolume;
@@ -224,6 +220,7 @@ class AudioManager {
       return;
     }
     
+    this.clearFadeInterval();
     const startVolume = this.audio.volume;
     const volumeStep = startVolume / (duration / 50);
     let currentVolume = startVolume;
@@ -461,7 +458,9 @@ export const useAudio = () => {
     
     // Add small delay to ensure smooth transition
     setTimeout(() => {
-      playTrack(trackToPlay, true);
+      playTrack(trackToPlay, true).catch(error => {
+        console.error(`Failed to play contextual audio: ${error}`);
+      });
     }, 200);
   }, [isPlaying, currentTrack, playTrack]);
 
