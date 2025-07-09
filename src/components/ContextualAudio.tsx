@@ -34,15 +34,38 @@ const ContextualAudio = () => {
   useEffect(() => {
     const path = location.pathname;
     
-    // Only attempt contextual audio after user interaction, on home page, and if no audio is playing
-    if (path === '/' && hasUserInteracted && !hasTriedAutoPlay && !isPlaying && !currentTrack) {
-      console.log('🎵 Attempting contextual audio for home page');
-      setHasTriedAutoPlay(true);
+    // Enhanced contextual audio logic
+    if (hasUserInteracted && !hasTriedAutoPlay) {
+      let audioContext: 'hero' | 'characters' | 'demo' | 'support' | 'features' | null = null;
       
-      // Small delay to ensure audio context is ready
-      setTimeout(() => {
-        playContextualAudio('hero');
-      }, 500);
+      switch (path) {
+        case '/':
+          audioContext = 'hero';
+          break;
+        case '/characters':
+          audioContext = 'characters';
+          break;
+        case '/demo':
+          audioContext = 'demo';
+          break;
+        case '/support':
+          audioContext = 'support';
+          break;
+        case '/features':
+          audioContext = 'features';
+          break;
+      }
+      
+      // Only start contextual audio if no audio is currently playing and we have a context
+      if (audioContext && !isPlaying && !currentTrack) {
+        console.log(`🎵 Attempting contextual audio for ${path} -> ${audioContext}`);
+        setHasTriedAutoPlay(true);
+        
+        // Longer delay to ensure smooth page load
+        setTimeout(() => {
+          playContextualAudio(audioContext!);
+        }, 1000);
+      }
     }
   }, [location.pathname, hasUserInteracted, hasTriedAutoPlay, isPlaying, currentTrack, playContextualAudio]);
 

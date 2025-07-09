@@ -15,12 +15,25 @@ const TRACKS: Record<TrackId, string> = {
   wizard: '/audio/walen-wizard-magic.mp3'
 };
 
-// Singleton audio manager to prevent conflicts
+// Fallback to existing audio files if primary ones fail
+const FALLBACK_TRACKS: Record<TrackId, string> = {
+  ambient: '/audio/rpg-medieval-animated-music-320583.mp3',
+  battle: '/audio/battle-of-the-dragons-8037.mp3',
+  ethereal: '/audio/elves-song-ethereal-fantasy-elf-music-363281.mp3', 
+  town: '/audio/market-town-of-turelli-135459.mp3',
+  medieval: '/audio/rpg-medieval-animated-music-320583.mp3',
+  dragonquest: '/audio/alexander-nakarada-dragonquest.mp3',
+  conquest: '/audio/conquest-jester-dance.mp3',
+  wizard: '/audio/walen-wizard-magic.mp3'
+};
+
+// Enhanced singleton audio manager with fade support
 class AudioManager {
   private static instance: AudioManager;
   private audio: HTMLAudioElement | null = null;
   private isTransitioning = false;
   private timeUpdateInterval: NodeJS.Timeout | null = null;
+  private fadeInterval: NodeJS.Timeout | null = null;
   
   private constructor() {}
   
@@ -53,11 +66,25 @@ class AudioManager {
       // Clean up existing audio
       this.cleanup();
       
-      // Create new audio element
+      // Create new audio element with fallback
       this.audio = new Audio();
-      this.audio.src = TRACKS[trackId];
+      this.audio.crossOrigin = 'anonymous';
       this.audio.loop = true;
       this.audio.preload = 'metadata';
+      this.audio.volume = 0; // Start silent for fade-in
+      
+      // Try primary source first, then fallback
+      const trySource = async (src: string): Promise<boolean> => {
+        return new Promise((resolve) => {
+          const testAudio = new Audio();
+          testAudio.addEventListener('canplaythrough', () => resolve(true), { once: true });
+          testAudio.addEventListener('error', () => resolve(false), { once: true });
+          testAudio.src = src;
+        });
+      };
+      
+      const primaryWorks = await trySource(TRACKS[trackId]);
+      this.audio.src = primaryWorks ? TRACKS[trackId] : FALLBACK_TRACKS[trackId];
       
       // Set up event listeners
       this.audio.addEventListener('loadstart', callbacks.onLoadStart);
@@ -116,8 +143,9 @@ class AudioManager {
         }
       });
       
-      // Attempt to play
+      // Attempt to play with fade-in
       await this.audio.play();
+      this.fadeIn(0.3); // Fade in to 30% volume over 1 second
       console.log(`✅ Successfully playing: ${trackId}`);
       callbacks.onSuccess();
       
@@ -131,11 +159,13 @@ class AudioManager {
   
   stop(): void {
     console.log('🛑 Stopping current track');
-    if (this.audio) {
-      this.audio.pause();
-      this.audio.currentTime = 0;
+    if (this.audio && !this.audio.paused) {
+      this.fadeOut(() => {
+        this.cleanup();
+      });
+    } else {
+      this.cleanup();
     }
-    this.cleanup();
   }
   
   pause(): void {
@@ -159,8 +189,75 @@ class AudioManager {
       this.audio.volume = Math.max(0, Math.min(1, volume));
     }
   }
+
+  // Smooth fade-in effect
+  private fadeIn(targetVolume: number, duration = 1000): void {
+    if (!this.audio || this.fadeInterval) return;
+    
+    const startVolume = 0;
+    const volumeStep = (targetVolume - startVolume) / (duration / 50);
+    let currentVolume = startVolume;
+    
+    this.audio.volume = currentVolume;
+    
+    this.fadeInterval = setInterval(() => {
+      if (!this.audio) {
+        this.clearFadeInterval();
+        return;
+      }
+      
+      currentVolume += volumeStep;
+      if (currentVolume >= targetVolume) {
+        currentVolume = targetVolume;
+        this.audio.volume = currentVolume;
+        this.clearFadeInterval();
+      } else {
+        this.audio.volume = currentVolume;
+      }
+    }, 50);
+  }
+
+  // Smooth fade-out effect
+  private fadeOut(onComplete?: () => void, duration = 800): void {
+    if (!this.audio || this.fadeInterval) {
+      onComplete?.();
+      return;
+    }
+    
+    const startVolume = this.audio.volume;
+    const volumeStep = startVolume / (duration / 50);
+    let currentVolume = startVolume;
+    
+    this.fadeInterval = setInterval(() => {
+      if (!this.audio) {
+        this.clearFadeInterval();
+        onComplete?.();
+        return;
+      }
+      
+      currentVolume -= volumeStep;
+      if (currentVolume <= 0) {
+        currentVolume = 0;
+        this.audio.volume = currentVolume;
+        this.audio.pause();
+        this.clearFadeInterval();
+        onComplete?.();
+      } else {
+        this.audio.volume = currentVolume;
+      }
+    }, 50);
+  }
+
+  private clearFadeInterval(): void {
+    if (this.fadeInterval) {
+      clearInterval(this.fadeInterval);
+      this.fadeInterval = null;
+    }
+  }
   
   private cleanup(): void {
+    this.clearFadeInterval();
+    
     if (this.timeUpdateInterval) {
       clearInterval(this.timeUpdateInterval);
       this.timeUpdateInterval = null;
@@ -353,15 +450,19 @@ export const useAudio = () => {
     
     const contextMap: Record<AudioContext, TrackId> = {
       hero: 'ethereal',
-      characters: 'medieval',
+      characters: 'medieval', 
       demo: 'ambient',
-      support: 'ambient',
+      support: 'wizard',
       features: 'town'
     };
     
     const trackToPlay = contextMap[context];
-      console.log(`🎵 Starting contextual audio: ${trackToPlay} for ${context}`);
-    playTrack(trackToPlay, true);
+    console.log(`🎵 Starting contextual audio: ${trackToPlay} for ${context}`);
+    
+    // Add small delay to ensure smooth transition
+    setTimeout(() => {
+      playTrack(trackToPlay, true);
+    }, 200);
   }, [isPlaying, currentTrack, playTrack]);
 
   // Clear errors when switching tracks

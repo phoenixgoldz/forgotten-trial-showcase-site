@@ -41,6 +41,7 @@ const AudioControls = () => {
   } = useAudio();
   
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const handlePlayPause = () => {
     console.log(`Play/Pause clicked. Currently playing: ${isPlaying}, current track: ${currentTrack}`);
@@ -83,10 +84,24 @@ const AudioControls = () => {
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="fixed bottom-6 right-6 z-40">
-      <div className={`bg-ancient-stone/95 backdrop-blur-md rounded-2xl border border-ethereal-gold/30 shadow-xl transition-all duration-300 ${
+    <div className={`fixed bottom-6 right-6 z-40 transition-all duration-300 ${
+      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+    }`}>
+      <div className={`bg-ancient-stone/95 backdrop-blur-md rounded-2xl border border-ethereal-gold/30 shadow-xl transition-all duration-300 hover:shadow-2xl hover:shadow-ethereal-gold/20 ${
         isExpanded ? 'p-6 max-w-sm' : 'p-4 max-w-xs'
       }`}>
+        {/* Toggle Visibility Button */}
+        <button
+          onClick={() => setIsVisible(!isVisible)}
+          className="absolute -top-2 -left-2 bg-ethereal-gold/20 hover:bg-ethereal-gold/30 text-ethereal-gold rounded-full p-1 transition-colors duration-200"
+          aria-label="Toggle audio controls"
+        >
+          {isVisible ? (
+            <div className="w-3 h-3 border border-current rounded-full" />
+          ) : (
+            <Music className="w-3 h-3" />
+          )}
+        </button>
         {/* Main Controls */}
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
@@ -247,9 +262,19 @@ const AudioControls = () => {
         
         {/* Status/Error Display */}
         {audioError ? (
-          <div className="flex items-center gap-2 text-xs text-amber-400 mt-2 p-2 bg-amber-900/20 rounded-lg border border-amber-600/30">
-            <AlertCircle className="w-3 h-3 flex-shrink-0" />
-            <span className="text-center leading-tight">{audioError}</span>
+          <div className="flex items-center gap-2 text-xs text-amber-400 mt-2 p-2 bg-amber-900/20 rounded-lg border border-amber-600/30 animate-fade-in">
+            <AlertCircle className="w-3 h-3 flex-shrink-0 animate-pulse" />
+            <span className="leading-tight">{audioError}</span>
+            <button 
+              onClick={() => window.location.reload()}
+              className="ml-auto text-amber-300 hover:text-amber-100 underline text-xs"
+            >
+              Retry
+            </button>
+          </div>
+        ) : isLoading ? (
+          <div className="text-xs text-ethereal-gold/70 mt-2 text-center animate-pulse">
+            🎵 Loading audio magic...
           </div>
         ) : (
           <div className="text-xs text-ethereal-gold/70 mt-2 text-center">
