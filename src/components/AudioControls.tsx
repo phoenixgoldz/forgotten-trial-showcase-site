@@ -1,9 +1,11 @@
-import { Volume2, VolumeX, Play, Pause, AlertCircle, Music, Settings, SkipBack, SkipForward, Shuffle, Square } from "lucide-react";
+import { Volume2, VolumeX, Play, Pause, AlertCircle, Music, Settings, SkipBack, SkipForward, Shuffle, Square, RotateCcw, Clock, Loader2, Wifi, WifiOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useAudio } from "@/hooks/useAudio";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TRACK_NAMES = {
   ambient: 'Mystical Ambient',
@@ -20,6 +22,7 @@ const AudioControls = () => {
   const { 
     isPlaying, 
     isLoading,
+    isBuffering,
     volume, 
     isMuted, 
     audioError, 
@@ -27,6 +30,8 @@ const AudioControls = () => {
     currentTime,
     duration,
     isShuffled,
+    audioQuality,
+    playHistory,
     playTrack, 
     pauseTrack,
     resumeTrack,
@@ -36,11 +41,36 @@ const AudioControls = () => {
     nextTrack,
     previousTrack,
     toggleShuffle,
+    toggleAudioQuality,
     availableTracks
   } = useAudio();
   
   const [isExpanded, setIsExpanded] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [showRecentTracks, setShowRecentTracks] = useState(false);
+  const [connectionQuality, setConnectionQuality] = useState<'good' | 'poor' | 'offline'>('good');
+
+  // Monitor connection quality
+  useEffect(() => {
+    const updateConnectionStatus = () => {
+      if (!navigator.onLine) {
+        setConnectionQuality('offline');
+      } else if (isBuffering) {
+        setConnectionQuality('poor');
+      } else {
+        setConnectionQuality('good');
+      }
+    };
+
+    updateConnectionStatus();
+    window.addEventListener('online', updateConnectionStatus);
+    window.addEventListener('offline', updateConnectionStatus);
+
+    return () => {
+      window.removeEventListener('online', updateConnectionStatus);
+      window.removeEventListener('offline', updateConnectionStatus);
+    };
+  }, [isBuffering]);
 
   const handlePlayPause = () => {
     console.log(`Play/Pause clicked. Currently playing: ${isPlaying}, current track: ${currentTrack}`);
@@ -111,68 +141,147 @@ const AudioControls = () => {
               <div className="w-3 h-3 border border-current rounded-full" />
             </button>
 
+            {/* Enhanced Status Row */}
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                {/* Connection indicator */}
+                <Tooltip>
+                  <TooltipTrigger>
+                    <div className="flex items-center gap-1">
+                      {connectionQuality === 'offline' ? (
+                        <WifiOff className="w-3 h-3 text-red-400" />
+                      ) : connectionQuality === 'poor' ? (
+                        <Wifi className="w-3 h-3 text-yellow-400" />
+                      ) : (
+                        <Wifi className="w-3 h-3 text-green-400" />
+                      )}
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Connection: {connectionQuality}</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                {/* Audio quality indicator */}
+                <Badge variant="outline" className="text-xs px-2 py-0.5">
+                  {audioQuality.toUpperCase()}
+                </Badge>
+
+                {/* Buffering indicator */}
+                {isBuffering && (
+                  <Loader2 className="w-3 h-3 text-ethereal-gold animate-spin" />
+                )}
+              </div>
+
+              <div className="flex items-center gap-1">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => setShowRecentTracks(!showRecentTracks)}
+                  className="text-ethereal-gold hover:bg-ethereal-gold/10 p-1"
+                  aria-label="Recent tracks"
+                >
+                  <Clock className="w-3 h-3" />
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={toggleAudioQuality}
+                  className="text-ethereal-gold hover:bg-ethereal-gold/10 p-1"
+                  aria-label="Toggle audio quality"
+                >
+                  <Settings className="w-3 h-3" />
+                </Button>
+              </div>
+            </div>
+
             {/* Main Controls */}
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={previousTrack}
-                  className="text-ethereal-gold hover:bg-ethereal-gold/10"
-                  disabled={isLoading}
-                  aria-label="Previous track"
-                >
-                  <SkipBack className="w-4 h-4" />
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={previousTrack}
+                      className="text-ethereal-gold hover:bg-ethereal-gold/10"
+                      disabled={isLoading}
+                      aria-label="Previous track"
+                    >
+                      <SkipBack className="w-4 h-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Previous Track</TooltipContent>
+                </Tooltip>
                 
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={handlePlayPause}
-                  className="text-ethereal-gold hover:bg-ethereal-gold/10"
-                  disabled={isLoading}
-                  aria-label={isPlaying ? "Pause audio" : "Play audio"}
-                >
-                  {isLoading ? (
-                    <div className="w-4 h-4 border-2 border-ethereal-gold/30 border-t-ethereal-gold rounded-full animate-spin" />
-                  ) : isPlaying ? (
-                    <Pause className="w-4 h-4" />
-                  ) : (
-                    <Play className="w-4 h-4" />
-                  )}
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={handlePlayPause}
+                      className="text-ethereal-gold hover:bg-ethereal-gold/10"
+                      disabled={isLoading || connectionQuality === 'offline'}
+                      aria-label={isPlaying ? "Pause audio" : "Play audio"}
+                    >
+                      {isLoading || isBuffering ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : isPlaying ? (
+                        <Pause className="w-4 h-4" />
+                      ) : (
+                        <Play className="w-4 h-4" />
+                      )}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>{isPlaying ? 'Pause' : 'Play'}</TooltipContent>
+                </Tooltip>
 
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={handleStop}
-                  className="text-ember-flame hover:bg-ember-flame/10"
-                  disabled={isLoading || !currentTrack}
-                  aria-label="Stop audio"
-                >
-                  <Square className="w-4 h-4" />
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={handleStop}
+                      className="text-ember-flame hover:bg-ember-flame/10"
+                      disabled={isLoading || !currentTrack}
+                      aria-label="Stop audio"
+                    >
+                      <Square className="w-4 h-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Stop</TooltipContent>
+                </Tooltip>
                 
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={nextTrack}
-                  className="text-ethereal-gold hover:bg-ethereal-gold/10"
-                  disabled={isLoading}
-                  aria-label="Next track"
-                >
-                  <SkipForward className="w-4 h-4" />
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={nextTrack}
+                      className="text-ethereal-gold hover:bg-ethereal-gold/10"
+                      disabled={isLoading}
+                      aria-label="Next track"
+                    >
+                      <SkipForward className="w-4 h-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Next Track</TooltipContent>
+                </Tooltip>
                 
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={toggleShuffle}
-                  className={`hover:bg-ethereal-gold/10 ${isShuffled ? 'text-ember-flame' : 'text-ethereal-gold'}`}
-                  aria-label={isShuffled ? "Turn off shuffle" : "Turn on shuffle"}
-                >
-                  <Shuffle className="w-4 h-4" />
-                </Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={toggleShuffle}
+                      className={`hover:bg-ethereal-gold/10 ${isShuffled ? 'text-ember-flame' : 'text-ethereal-gold'}`}
+                      aria-label={isShuffled ? "Turn off shuffle" : "Turn on shuffle"}
+                    >
+                      <Shuffle className="w-4 h-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>{isShuffled ? 'Shuffle Off' : 'Shuffle On'}</TooltipContent>
+                </Tooltip>
               </div>
               
               <Button
@@ -248,6 +357,26 @@ const AudioControls = () => {
               </span>
             </div>
             
+            {/* Recent Tracks Quick Access */}
+            {showRecentTracks && playHistory.length > 0 && (
+              <div className="mb-3 p-3 bg-ancient-stone/30 rounded-lg border border-ethereal-gold/20 animate-fade-in">
+                <p className="text-xs text-ethereal-gold/70 font-medium mb-2">Recent Tracks</p>
+                <div className="flex flex-wrap gap-1">
+                  {playHistory.map((trackId, index) => (
+                    <Button
+                      key={`${trackId}-${index}`}
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => handleTrackSelect(trackId)}
+                      className="text-xs p-1 h-6 text-ethereal-gold/80 hover:text-ethereal-gold hover:bg-ethereal-gold/10"
+                    >
+                      {TRACK_NAMES[trackId as keyof typeof TRACK_NAMES]?.slice(0, 8)}...
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Expanded Controls */}
             {isExpanded && (
               <div className="space-y-3 animate-fade-in">
@@ -266,28 +395,66 @@ const AudioControls = () => {
                     </SelectContent>
                   </Select>
                 </div>
+
+                {/* Audio Quality Controls */}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-ethereal-gold/70 font-medium">Audio Quality</span>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={toggleAudioQuality}
+                    className="text-xs text-ethereal-gold hover:bg-ethereal-gold/10"
+                  >
+                    {audioQuality.toUpperCase()} →
+                  </Button>
+                </div>
+
+                {/* Connection Status */}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-ethereal-gold/70 font-medium">Connection</span>
+                  <div className="flex items-center gap-2">
+                    {connectionQuality === 'offline' ? (
+                      <Badge variant="destructive" className="text-xs">Offline</Badge>
+                    ) : connectionQuality === 'poor' ? (
+                      <Badge variant="outline" className="text-xs text-yellow-400">Poor</Badge>
+                    ) : (
+                      <Badge variant="outline" className="text-xs text-green-400">Good</Badge>
+                    )}
+                  </div>
+                </div>
               </div>
             )}
             
-            {/* Status/Error Display */}
+            {/* Enhanced Status/Error Display */}
             {audioError ? (
-              <div className="flex items-center gap-2 text-xs text-amber-400 mt-2 p-2 bg-amber-900/20 rounded-lg border border-amber-600/30 animate-fade-in">
-                <AlertCircle className="w-3 h-3 flex-shrink-0 animate-pulse" />
-                <span className="leading-tight">{audioError}</span>
-                <button 
-                  onClick={() => window.location.reload()}
-                  className="ml-auto text-amber-300 hover:text-amber-100 underline text-xs"
+              <div className="flex items-center gap-2 text-xs text-amber-400 mt-2 p-3 bg-amber-900/20 rounded-lg border border-amber-600/30 animate-fade-in">
+                <AlertCircle className="w-4 h-4 flex-shrink-0 animate-pulse" />
+                <div className="flex-1">
+                  <p className="font-medium">Audio Error</p>
+                  <p className="leading-tight opacity-80">{audioError}</p>
+                </div>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => currentTrack && playTrack(currentTrack)}
+                  className="text-amber-300 hover:text-amber-100 p-1"
                 >
-                  Retry
-                </button>
+                  <RotateCcw className="w-3 h-3" />
+                </Button>
               </div>
-            ) : isLoading ? (
-              <div className="text-xs text-ethereal-gold/70 mt-2 text-center animate-pulse">
-                🎵 Loading audio magic...
+            ) : connectionQuality === 'offline' ? (
+              <div className="text-xs text-red-400 mt-2 text-center animate-pulse flex items-center justify-center gap-2">
+                <WifiOff className="w-3 h-3" />
+                🔌 No internet connection
+              </div>
+            ) : isLoading || isBuffering ? (
+              <div className="text-xs text-ethereal-gold/70 mt-2 text-center animate-pulse flex items-center justify-center gap-2">
+                <Loader2 className="w-3 h-3 animate-spin" />
+                🎵 {isBuffering ? 'Buffering audio...' : 'Loading audio magic...'}
               </div>
             ) : (
               <div className="text-xs text-ethereal-gold/70 mt-2 text-center">
-                🎵 Audio System Ready • {currentTrack ? 'Controls available' : 'Click to play music'}
+                🎵 Audio System {audioQuality.toUpperCase()} • {currentTrack ? `${playHistory.length > 0 ? `${playHistory.length} tracks in history` : 'Controls available'}` : 'Click to play music'}
               </div>
             )}
           </>

@@ -1,8 +1,19 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useToast } from "@/hooks/use-toast";
 
 type TrackId = 'ambient' | 'battle' | 'ethereal' | 'town' | 'medieval' | 'dragonquest' | 'conquest' | 'wizard';
 type AudioContext = 'hero' | 'characters' | 'demo' | 'support' | 'features';
+
+// Enhanced audio quality settings
+const AUDIO_QUALITY_SETTINGS = {
+  preload: 'metadata' as const,
+  crossOrigin: 'anonymous' as const,
+  defaultVolume: 0.3,
+  fadeInDuration: 1200,
+  fadeOutDuration: 800,
+  crossfadeDuration: 1000
+};
 
 const TRACKS: Record<TrackId, string> = {
   ambient: '/audio/fantasy-song-363806.mp3',
@@ -52,6 +63,8 @@ class AudioManager {
     onError: (error: string) => void;
     onEnded: () => void;
     onSuccess: () => void;
+    onBuffering?: (isBuffering: boolean) => void;
+    onQualityChange?: (quality: string) => void;
   }): Promise<void> {
     // Prevent concurrent operations
     if (this.isTransitioning) {
@@ -66,12 +79,17 @@ class AudioManager {
       // Clean up existing audio
       this.cleanup();
       
-      // Create new audio element
+      // Create new audio element with enhanced settings
       this.audio = new Audio();
       this.audio.loop = true;
-      this.audio.preload = 'metadata';
+      this.audio.preload = AUDIO_QUALITY_SETTINGS.preload;
+      this.audio.crossOrigin = AUDIO_QUALITY_SETTINGS.crossOrigin;
       this.audio.volume = 0; // Start silent for fade-in
       this.audio.src = TRACKS[trackId];
+      
+      // Enhanced buffering detection
+      this.audio.addEventListener('waiting', () => callbacks.onBuffering?.(true));
+      this.audio.addEventListener('canplaythrough', () => callbacks.onBuffering?.(false));
       
       // Remove the duplicate error listener since we handle it below
       
@@ -138,11 +156,12 @@ class AudioManager {
         }
       });
       
-      // Attempt to play with fade-in
+      // Attempt to play with enhanced fade-in
       await this.audio.play();
-      this.fadeIn(0.3); // Fade in to 30% volume over 1 second
+      this.fadeIn(AUDIO_QUALITY_SETTINGS.defaultVolume, AUDIO_QUALITY_SETTINGS.fadeInDuration);
       console.log(`✅ Successfully playing: ${trackId}`);
       callbacks.onSuccess();
+      callbacks.onQualityChange?.('High Quality Audio Active');
       
     } catch (error) {
       console.error(`Playback failed for ${trackId}:`, error);
@@ -185,8 +204,8 @@ class AudioManager {
     }
   }
 
-  // Smooth fade-in effect
-  private fadeIn(targetVolume: number, duration = 1000): void {
+  // Enhanced smooth fade-in effect
+  private fadeIn(targetVolume: number, duration = AUDIO_QUALITY_SETTINGS.fadeInDuration): void {
     if (!this.audio || this.fadeInterval) return;
     
     this.clearFadeInterval();
@@ -213,8 +232,8 @@ class AudioManager {
     }, 50);
   }
 
-  // Smooth fade-out effect
-  private fadeOut(onComplete?: () => void, duration = 800): void {
+  // Enhanced smooth fade-out effect
+  private fadeOut(onComplete?: () => void, duration = AUDIO_QUALITY_SETTINGS.fadeOutDuration): void {
     if (!this.audio || this.fadeInterval) {
       onComplete?.();
       return;
@@ -279,15 +298,19 @@ class AudioManager {
 }
 
 export const useAudio = () => {
+  const { toast } = useToast();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<TrackId | null>(null);
-  const [volume, setVolume] = useState(0.3);
+  const [volume, setVolume] = useState(AUDIO_QUALITY_SETTINGS.defaultVolume);
   const [isMuted, setIsMuted] = useState(false);
   const [audioError, setAudioError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isShuffled, setIsShuffled] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(false);
+  const [playHistory, setPlayHistory] = useState<TrackId[]>([]);
+  const [audioQuality, setAudioQuality] = useState<'high' | 'medium' | 'low'>('high');
   
   const audioManager = useRef(AudioManager.getInstance());
 
@@ -302,16 +325,19 @@ export const useAudio = () => {
     setAudioError(null);
     setCurrentTime(0);
     setDuration(0);
+    setIsBuffering(false);
 
     try {
       await audioManager.current.playTrack(trackId, {
         onLoadStart: () => {
           console.log(`Loading ${trackId}...`);
           setIsLoading(true);
+          setIsBuffering(true);
         },
         onCanPlay: () => {
           console.log(`Can play ${trackId}`);
           setIsLoading(false);
+          setIsBuffering(false);
         },
         onLoadedMetadata: (dur) => {
           console.log(`Duration loaded: ${dur}s`);
@@ -320,27 +346,73 @@ export const useAudio = () => {
         onTimeUpdate: (time) => {
           setCurrentTime(time);
         },
+        onBuffering: (buffering) => {
+          setIsBuffering(buffering);
+        },
+        onQualityChange: (quality) => {
+          console.log(`Audio quality: ${quality}`);
+        },
         onError: (error) => {
           console.error('Audio error:', error);
           setAudioError(error);
           setIsPlaying(false);
           setCurrentTrack(null);
           setIsLoading(false);
+          setIsBuffering(false);
           setCurrentTime(0);
           setDuration(0);
+          
+          // Enhanced error feedback
+          toast({
+            title: "Audio Error",
+            description: "Unable to play audio. Trying alternative track...",
+            variant: "destructive",
+          });
         },
         onEnded: () => {
           if (!loop) {
             setIsPlaying(false);
             setCurrentTime(0);
+            
+            // Auto-play next track when current ends (if not looping)
+            if (isShuffled || playHistory.length > 0) {
+              setTimeout(() => {
+                nextTrack();
+              }, 500);
+            }
           }
         },
         onSuccess: () => {
           setIsPlaying(true);
           setCurrentTrack(trackId);
           setIsLoading(false);
+          setIsBuffering(false);
+          
+          // Add to play history
+          setPlayHistory(prev => {
+            const updated = [trackId, ...prev.filter(t => t !== trackId)];
+            return updated.slice(0, 10); // Keep last 10 tracks
+          });
+          
           // Apply current volume settings
           audioManager.current.setVolume(isMuted ? 0 : volume);
+          
+          // Success notification
+          const trackNames = {
+            ambient: 'Mystical Ambient',
+            battle: 'Battle of Dragons',
+            ethereal: 'Ethereal Elves',
+            town: 'Market Town',
+            medieval: 'Medieval Adventure',
+            dragonquest: 'Dragon Quest',
+            conquest: 'Jester Dance',
+            wizard: 'Wizard Magic'
+          };
+          
+          toast({
+            title: "🎵 Now Playing",
+            description: `${trackNames[trackId]} is now playing`,
+          });
         }
       });
     } catch (error) {
@@ -478,9 +550,53 @@ export const useAudio = () => {
     };
   }, []);
 
+  // Enhanced volume control with better UX
+  const changeVolumeWithFeedback = useCallback((newVolume: number) => {
+    const clampedVolume = Math.max(0, Math.min(1, newVolume));
+    setVolume(clampedVolume);
+    if (!isMuted) {
+      audioManager.current.setVolume(clampedVolume);
+    }
+    
+    // Visual feedback for volume changes
+    if (clampedVolume === 0) {
+      toast({
+        title: "🔇 Volume Muted",
+        description: "Audio volume set to 0%",
+      });
+    } else if (clampedVolume === 1) {
+      toast({
+        title: "🔊 Maximum Volume",
+        description: "Audio volume set to 100%",
+      });
+    }
+  }, [isMuted, toast]);
+
+  // Enhanced audio quality toggle
+  const toggleAudioQuality = useCallback(() => {
+    setAudioQuality(prev => {
+      const qualities = ['high', 'medium', 'low'] as const;
+      const currentIndex = qualities.indexOf(prev);
+      const nextQuality = qualities[(currentIndex + 1) % qualities.length];
+      
+      toast({
+        title: "🎧 Audio Quality",
+        description: `Switched to ${nextQuality} quality`,
+      });
+      
+      return nextQuality;
+    });
+  }, [toast]);
+
+  // Get recently played tracks
+  const getRecentTracks = useCallback(() => {
+    return playHistory.slice(0, 5);
+  }, [playHistory]);
+
   return {
     isPlaying,
     isLoading,
+    isBuffering,
     currentTrack,
     volume,
     isMuted,
@@ -488,6 +604,8 @@ export const useAudio = () => {
     currentTime,
     duration,
     isShuffled,
+    audioQuality,
+    playHistory: getRecentTracks(),
     playTrack,
     stopTrack,
     pauseTrack,
@@ -496,7 +614,8 @@ export const useAudio = () => {
     previousTrack,
     toggleShuffle,
     toggleMute,
-    changeVolume,
+    changeVolume: changeVolumeWithFeedback,
+    toggleAudioQuality,
     playContextualAudio,
     availableTracks: Object.keys(TRACKS) as TrackId[]
   };
