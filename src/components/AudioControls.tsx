@@ -295,31 +295,37 @@ const AudioControls = () => {
               </Button>
             </div>
 
-            {/* Current Track Display */}
-            <div className="flex items-center gap-2 text-xs mb-3">
-              <Music className={`w-3 h-3 text-ethereal-gold ${isPlaying ? 'animate-pulse' : ''}`} />
-              <span className="text-ethereal-gold/90 font-medium flex-1">
-                {currentTrack ? (
-                  <span className="block">
-                    <span className="text-ethereal-gold font-semibold">
-                      {isPlaying ? '▶️ Playing' : '⏸️ Paused'}: 
-                    </span>
-                    <span className="text-ethereal-gold/80 ml-1">{currentTrackName}</span>
-                  </span>
-                ) : (
-                  'No track selected'
-                )}
-              </span>
-              {isShuffled && <span className="text-ember-flame text-sm">🔀</span>}
+            {/* Enhanced Current Track Display */}
+            <div className="bg-ancient-stone/20 rounded-lg p-3 mb-3 border border-ethereal-gold/20">
+              <div className="flex items-center gap-2 mb-2">
+                <Music className={`w-4 h-4 text-ethereal-gold ${isPlaying ? 'animate-pulse' : ''}`} />
+                <span className="text-ethereal-gold font-semibold text-sm">
+                  {isPlaying ? '▶️ Now Playing' : currentTrack ? '⏸️ Paused' : '⏹️ No Track'}
+                </span>
+                {isShuffled && <span className="text-ember-flame">🔀</span>}
+              </div>
+              
+              {currentTrack ? (
+                <div className="space-y-1">
+                  <div className="text-ethereal-gold/90 font-medium text-sm truncate">
+                    {currentTrackName}
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-ethereal-gold/70">
+                    <span className="font-mono">{formatTime(currentTime)}</span>
+                    <span className="text-ethereal-gold/50">/</span>
+                    <span className="font-mono">{formatTime(duration)}</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-ethereal-gold/60 text-xs italic">
+                  Select a track to start playing
+                </div>
+              )}
             </div>
 
-            {/* Progress Bar and Time Display */}
+            {/* Progress Bar */}
             {currentTrack && (
               <div className="mb-3">
-                <div className="flex items-center justify-between text-xs text-ethereal-gold/70 mb-2">
-                  <span className="font-mono">{formatTime(currentTime)}</span>
-                  <span className="font-mono">{formatTime(duration)}</span>
-                </div>
                 <div className="w-full bg-ancient-stone/30 rounded-full h-2 overflow-hidden border border-ethereal-gold/20">
                   <div 
                     className="h-full bg-ethereal-gold rounded-full transition-all duration-300 ease-out"
