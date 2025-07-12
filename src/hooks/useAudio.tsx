@@ -297,6 +297,14 @@ class AudioManager {
   }
 }
 
+// Utility function for formatting time
+const formatTime = (time: number): string => {
+  if (isNaN(time) || time === 0) return "0:00";
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+};
+
 export const useAudio = () => {
   const { toast } = useToast();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -362,11 +370,19 @@ export const useAudio = () => {
           setCurrentTime(0);
           setDuration(0);
           
-          // Enhanced error feedback
+          // Enhanced error feedback with retry mechanism
           toast({
             title: "Audio Error",
-            description: "Unable to play audio. Trying alternative track...",
+            description: "Unable to play audio. Click to retry.",
             variant: "destructive",
+            action: (
+              <button 
+                onClick={() => playTrack(trackId, true)}
+                className="text-xs px-2 py-1 bg-red-500/20 hover:bg-red-500/30 rounded text-red-200 transition-colors"
+              >
+                Retry
+              </button>
+            ),
           });
         },
         onEnded: () => {
@@ -397,7 +413,7 @@ export const useAudio = () => {
           // Apply current volume settings
           audioManager.current.setVolume(isMuted ? 0 : volume);
           
-          // Success notification
+          // Success notification with track info
           const trackNames = {
             ambient: 'Mystical Ambient',
             battle: 'Battle of Dragons',
@@ -411,7 +427,7 @@ export const useAudio = () => {
           
           toast({
             title: "🎵 Now Playing",
-            description: `${trackNames[trackId]} is now playing`,
+            description: `${trackNames[trackId]} • ${formatTime(duration || 0)}`,
           });
         }
       });

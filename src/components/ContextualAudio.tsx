@@ -11,6 +11,7 @@ const ContextualAudio = () => {
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const [hasTriedAutoPlay, setHasTriedAutoPlay] = useState(false);
   const [lastRoute, setLastRoute] = useState<string>('');
+  const [isContextualAudioEnabled, setIsContextualAudioEnabled] = useState(true);
 
   // Listen for user interactions to enable audio
   useEffect(() => {
@@ -37,8 +38,8 @@ const ContextualAudio = () => {
   useEffect(() => {
     const path = location.pathname;
     
-    // Enhanced contextual audio logic
-    if (hasUserInteracted && !hasTriedAutoPlay) {
+    // Enhanced contextual audio logic with user preference
+    if (hasUserInteracted && !hasTriedAutoPlay && isContextualAudioEnabled) {
       let audioContext: 'hero' | 'characters' | 'demo' | 'support' | 'features' | null = null;
       
       switch (path) {
@@ -65,7 +66,7 @@ const ContextualAudio = () => {
         setHasTriedAutoPlay(true);
         setLastRoute(path);
         
-        // Show contextual audio notification
+        // Show contextual audio notification with dismiss option
         const pageNames = {
           '/': 'Home',
           '/characters': 'Characters',
@@ -77,15 +78,34 @@ const ContextualAudio = () => {
         toast({
           title: "🎵 Atmospheric Audio",
           description: `Playing ambient sounds for ${pageNames[path as keyof typeof pageNames] || 'this page'}`,
+          action: (
+            <button 
+              onClick={() => {
+                setIsContextualAudioEnabled(false);
+                localStorage.setItem('forgottenTrialContextualAudio', 'disabled');
+              }}
+              className="text-xs px-2 py-1 bg-amber-500/20 hover:bg-amber-500/30 rounded text-amber-200 transition-colors"
+            >
+              Disable Auto-play
+            </button>
+          ),
         });
         
-        // Longer delay to ensure smooth page load
+        // Shorter delay for better responsiveness
         setTimeout(() => {
           playContextualAudio(audioContext!);
-        }, 1200);
+        }, 800);
       }
     }
-  }, [location.pathname, hasUserInteracted, hasTriedAutoPlay, isPlaying, currentTrack, playContextualAudio, lastRoute, toast]);
+  }, [location.pathname, hasUserInteracted, hasTriedAutoPlay, isPlaying, currentTrack, playContextualAudio, lastRoute, toast, isContextualAudioEnabled]);
+
+  // Load user preference for contextual audio
+  useEffect(() => {
+    const savedPreference = localStorage.getItem('forgottenTrialContextualAudio');
+    if (savedPreference === 'disabled') {
+      setIsContextualAudioEnabled(false);
+    }
+  }, []);
 
   return null;
 };

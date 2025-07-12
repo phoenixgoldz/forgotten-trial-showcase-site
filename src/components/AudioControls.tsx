@@ -49,6 +49,8 @@ const AudioControls = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [showRecentTracks, setShowRecentTracks] = useState(false);
   const [connectionQuality, setConnectionQuality] = useState<'good' | 'poor' | 'offline'>('good');
+  const [showEqualizer, setShowEqualizer] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
 
   // Monitor connection quality
   useEffect(() => {
@@ -117,7 +119,7 @@ const AudioControls = () => {
       isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
     }`}>
       <div className={`bg-ancient-stone/95 backdrop-blur-md rounded-2xl border border-ethereal-gold/30 shadow-xl transition-all duration-300 hover:shadow-2xl hover:shadow-ethereal-gold/20 ${
-        isExpanded ? 'p-6 max-w-sm' : 'p-4 max-w-xs'
+        isMinimized ? 'p-3 max-w-xs' : isExpanded ? 'p-6 max-w-md' : 'p-4 max-w-sm'
       }`}>
         {/* Toggle Visibility Button */}
         {!isVisible && (
@@ -177,11 +179,33 @@ const AudioControls = () => {
                 <Button
                   size="sm"
                   variant="ghost"
+                  onClick={() => setIsMinimized(!isMinimized)}
+                  className="text-ethereal-gold hover:bg-ethereal-gold/10 p-1"
+                  aria-label="Toggle mini mode"
+                >
+                  <div className={`w-3 h-3 border border-current transition-transform ${isMinimized ? 'rotate-45' : ''}`} />
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
                   onClick={() => setShowRecentTracks(!showRecentTracks)}
                   className="text-ethereal-gold hover:bg-ethereal-gold/10 p-1"
                   aria-label="Recent tracks"
                 >
                   <Clock className="w-3 h-3" />
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => setShowEqualizer(!showEqualizer)}
+                  className="text-ethereal-gold hover:bg-ethereal-gold/10 p-1"
+                  aria-label="Audio visualizer"
+                >
+                  <div className="flex gap-0.5">
+                    <div className={`w-0.5 h-2 bg-current ${isPlaying ? 'animate-pulse' : ''}`} />
+                    <div className={`w-0.5 h-3 bg-current ${isPlaying ? 'animate-pulse' : ''}`} style={{ animationDelay: '0.1s' }} />
+                    <div className={`w-0.5 h-2 bg-current ${isPlaying ? 'animate-pulse' : ''}`} style={{ animationDelay: '0.2s' }} />
+                  </div>
                 </Button>
                 <Button
                   size="sm"
@@ -195,105 +219,141 @@ const AudioControls = () => {
               </div>
             </div>
 
-            {/* Main Controls */}
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={previousTrack}
-                      className="text-ethereal-gold hover:bg-ethereal-gold/10"
-                      disabled={isLoading}
-                      aria-label="Previous track"
-                    >
-                      <SkipBack className="w-4 h-4" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Previous Track</TooltipContent>
-                </Tooltip>
-                
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={handlePlayPause}
-                      className="text-ethereal-gold hover:bg-ethereal-gold/10"
-                      disabled={isLoading || connectionQuality === 'offline'}
-                      aria-label={isPlaying ? "Pause audio" : "Play audio"}
-                    >
-                      {isLoading || isBuffering ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : isPlaying ? (
-                        <Pause className="w-4 h-4" />
-                      ) : (
-                        <Play className="w-4 h-4" />
-                      )}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>{isPlaying ? 'Pause' : 'Play'}</TooltipContent>
-                </Tooltip>
+            {/* Conditionally show content based on minimized state */}
+            {!isMinimized && (
+              <>
+                {/* Main Controls */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={previousTrack}
+                          className="text-ethereal-gold hover:bg-ethereal-gold/10"
+                          disabled={isLoading}
+                          aria-label="Previous track"
+                        >
+                          <SkipBack className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>Previous Track</TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={handlePlayPause}
+                          className="text-ethereal-gold hover:bg-ethereal-gold/10"
+                          disabled={isLoading || connectionQuality === 'offline'}
+                          aria-label={isPlaying ? "Pause audio" : "Play audio"}
+                        >
+                          {isLoading || isBuffering ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : isPlaying ? (
+                            <Pause className="w-4 h-4" />
+                          ) : (
+                            <Play className="w-4 h-4" />
+                          )}
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>{isPlaying ? 'Pause' : 'Play'}</TooltipContent>
+                    </Tooltip>
 
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={handleStop}
-                      className="text-ember-flame hover:bg-ember-flame/10"
-                      disabled={isLoading || !currentTrack}
-                      aria-label="Stop audio"
-                    >
-                      <Square className="w-4 h-4" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Stop</TooltipContent>
-                </Tooltip>
-                
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={nextTrack}
-                      className="text-ethereal-gold hover:bg-ethereal-gold/10"
-                      disabled={isLoading}
-                      aria-label="Next track"
-                    >
-                      <SkipForward className="w-4 h-4" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Next Track</TooltipContent>
-                </Tooltip>
-                
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={toggleShuffle}
-                      className={`hover:bg-ethereal-gold/10 ${isShuffled ? 'text-ember-flame' : 'text-ethereal-gold'}`}
-                      aria-label={isShuffled ? "Turn off shuffle" : "Turn on shuffle"}
-                    >
-                      <Shuffle className="w-4 h-4" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>{isShuffled ? 'Shuffle Off' : 'Shuffle On'}</TooltipContent>
-                </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={handleStop}
+                          className="text-ember-flame hover:bg-ember-flame/10"
+                          disabled={isLoading || !currentTrack}
+                          aria-label="Stop audio"
+                        >
+                          <Square className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>Stop</TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={nextTrack}
+                          className="text-ethereal-gold hover:bg-ethereal-gold/10"
+                          disabled={isLoading}
+                          aria-label="Next track"
+                        >
+                          <SkipForward className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>Next Track</TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={toggleShuffle}
+                          className={`hover:bg-ethereal-gold/10 ${isShuffled ? 'text-ember-flame' : 'text-ethereal-gold'}`}
+                          aria-label={isShuffled ? "Turn off shuffle" : "Turn on shuffle"}
+                        >
+                          <Shuffle className="w-4 h-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>{isShuffled ? 'Shuffle Off' : 'Shuffle On'}</TooltipContent>
+                    </Tooltip>
+                  </div>
+                  
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="text-ethereal-gold hover:bg-ethereal-gold/10"
+                    aria-label={isExpanded ? "Collapse audio controls" : "Expand audio controls"}
+                  >
+                    <Settings className="w-4 h-4" />
+                  </Button>
+                </div>
+              </>
+            )}
+
+            {/* Minimized controls - show only essential buttons */}
+            {isMinimized && (
+              <div className="flex items-center justify-center gap-2">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={handlePlayPause}
+                  className="text-ethereal-gold hover:bg-ethereal-gold/10"
+                  disabled={isLoading || connectionQuality === 'offline'}
+                  aria-label={isPlaying ? "Pause audio" : "Play audio"}
+                >
+                  {isLoading || isBuffering ? (
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                  ) : isPlaying ? (
+                    <Pause className="w-3 h-3" />
+                  ) : (
+                    <Play className="w-3 h-3" />
+                  )}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={toggleMute}
+                  className="text-ethereal-gold hover:bg-ethereal-gold/10"
+                  aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+                >
+                  {isMuted ? <VolumeX className="w-3 h-3" /> : <Volume2 className="w-3 h-3" />}
+                </Button>
               </div>
-              
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="text-ethereal-gold hover:bg-ethereal-gold/10"
-                aria-label={isExpanded ? "Collapse audio controls" : "Expand audio controls"}
-              >
-                <Settings className="w-4 h-4" />
-              </Button>
-            </div>
+            )}
 
             {/* Enhanced Current Track Display */}
             <div className="bg-ancient-stone/20 rounded-lg p-3 mb-3 border border-ethereal-gold/20">
@@ -324,9 +384,9 @@ const AudioControls = () => {
             </div>
 
             {/* Progress Bar */}
-            {currentTrack && (
+            {currentTrack && !isMinimized && (
               <div className="mb-3">
-                <div className="w-full bg-ancient-stone/30 rounded-full h-2 overflow-hidden border border-ethereal-gold/20">
+                <div className="w-full bg-ancient-stone/30 rounded-full h-2 overflow-hidden border border-ethereal-gold/20 cursor-pointer">
                   <div 
                     className="h-full bg-ethereal-gold rounded-full transition-all duration-300 ease-out"
                     style={{ width: `${Math.max(0, Math.min(100, progressPercentage))}%` }}
@@ -335,33 +395,55 @@ const AudioControls = () => {
               </div>
             )}
 
-            {/* Volume Controls */}
-            <div className="flex items-center gap-3 mb-3">
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={toggleMute}
-                className="text-ethereal-gold hover:bg-ethereal-gold/10"
-                aria-label={isMuted ? "Unmute audio" : "Mute audio"}
-              >
-                {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-              </Button>
-              
-              <div className="flex-1">
-                <Slider
-                  value={[isMuted ? 0 : volume * 100]}
-                  onValueChange={handleVolumeChange}
-                  max={100}
-                  step={1}
-                  className="cursor-pointer"
-                  aria-label="Volume control"
-                />
+            {/* Audio Visualizer */}
+            {showEqualizer && isPlaying && !isMinimized && (
+              <div className="mb-3 p-3 bg-ancient-stone/20 rounded-lg border border-ethereal-gold/20">
+                <div className="flex items-end justify-center gap-1 h-8">
+                  {Array.from({ length: 12 }, (_, i) => (
+                    <div
+                      key={i}
+                      className="bg-ethereal-gold/60 rounded-full animate-pulse"
+                      style={{
+                        width: '3px',
+                        height: `${20 + Math.random() * 20}px`,
+                        animationDelay: `${i * 100}ms`,
+                        animationDuration: `${800 + Math.random() * 400}ms`
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
-              
-              <span className="text-xs text-ethereal-gold/70 font-mono w-8">
-                {Math.round(isMuted ? 0 : volume * 100)}%
-              </span>
-            </div>
+            )}
+
+            {/* Volume Controls */}
+            {!isMinimized && (
+              <div className="flex items-center gap-3 mb-3">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={toggleMute}
+                  className="text-ethereal-gold hover:bg-ethereal-gold/10"
+                  aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+                >
+                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                </Button>
+                
+                <div className="flex-1">
+                  <Slider
+                    value={[isMuted ? 0 : volume * 100]}
+                    onValueChange={handleVolumeChange}
+                    max={100}
+                    step={1}
+                    className="cursor-pointer"
+                    aria-label="Volume control"
+                  />
+                </div>
+                
+                <span className="text-xs text-ethereal-gold/70 font-mono w-8">
+                  {Math.round(isMuted ? 0 : volume * 100)}%
+                </span>
+              </div>
+            )}
             
             {/* Recent Tracks Quick Access */}
             {showRecentTracks && playHistory.length > 0 && (
