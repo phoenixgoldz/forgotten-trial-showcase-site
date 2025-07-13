@@ -1,5 +1,6 @@
 
 import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -35,7 +36,11 @@ class ImprovedErrorBoundary extends Component<Props, State> {
   };
 
   handleGoHome = () => {
-    window.location.href = '/';
+    // Use a functional component wrapper to access navigate
+    const currentUrl = new URL(window.location.href);
+    if (currentUrl.pathname !== '/') {
+      window.location.href = '/';
+    }
   };
 
   render() {

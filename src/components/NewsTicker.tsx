@@ -1,8 +1,10 @@
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Bell, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 
 const NewsTicker = () => {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   
@@ -60,7 +62,7 @@ const NewsTicker = () => {
         window.open(link, '_blank', 'noopener,noreferrer');
       } else if (link.startsWith('/')) {
         console.log('Navigating to internal route:', link);
-        window.location.href = link;
+        navigate(link);
       } else if (link.startsWith('#')) {
         console.log('Scrolling to anchor:', link);
         const element = document.querySelector(link);

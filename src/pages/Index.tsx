@@ -7,6 +7,9 @@ import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import AudioControls from "@/components/AudioControls";
+import EnhancedAudioControls from "@/components/EnhancedAudioControls";
+import AudioStatusIndicator from "@/components/AudioStatusIndicator";
+import AudioTrackNotification from "@/components/AudioTrackNotification";
 import ContextualAudio from "@/components/ContextualAudio";
 import ImprovedErrorBoundary from "@/components/ImprovedErrorBoundary";
 
@@ -157,9 +160,11 @@ const Index = () => {
           <Footer />
         </div>
 
-        {/* Audio Components */}
+        {/* Enhanced Audio Components */}
+        <AudioStatusIndicator />
+        <AudioTrackNotification />
         <ContextualAudio />
-        <AudioControls />
+        <EnhancedAudioControls />
       </div>
     </ImprovedErrorBoundary>
   );
