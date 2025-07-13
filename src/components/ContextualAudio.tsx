@@ -66,7 +66,7 @@ const ContextualAudio = () => {
         setHasTriedAutoPlay(true);
         setLastRoute(path);
         
-        // Show contextual audio notification with dismiss option
+        // Contextual audio notification with disable option
         const pageNames = {
           '/': 'Home',
           '/characters': 'Characters',
@@ -77,7 +77,7 @@ const ContextualAudio = () => {
         
         toast({
           title: "🎵 Atmospheric Audio",
-          description: `Playing ambient sounds for ${pageNames[path as keyof typeof pageNames] || 'this page'}`,
+          description: `Ambient sounds for ${pageNames[path as keyof typeof pageNames] || 'this page'}`,
           action: (
             <button 
               onClick={() => {

@@ -413,22 +413,8 @@ export const useAudio = () => {
           // Apply current volume settings
           audioManager.current.setVolume(isMuted ? 0 : volume);
           
-          // Success notification with track info
-          const trackNames = {
-            ambient: 'Mystical Ambient',
-            battle: 'Battle of Dragons',
-            ethereal: 'Ethereal Elves',
-            town: 'Market Town',
-            medieval: 'Medieval Adventure',
-            dragonquest: 'Dragon Quest',
-            conquest: 'Jester Dance',
-            wizard: 'Wizard Magic'
-          };
-          
-          toast({
-            title: "🎵 Now Playing",
-            description: `${trackNames[trackId]} • ${formatTime(duration || 0)}`,
-          });
+          // Track info is now displayed in the AudioControls component
+          console.log(`✅ Now playing: ${trackId}`);
         }
       });
     } catch (error) {
