@@ -1,6 +1,5 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useToast } from "@/hooks/use-toast";
 
 type TrackId = 'ambient' | 'battle' | 'ethereal' | 'town' | 'medieval' | 'dragonquest' | 'conquest' | 'wizard';
 type AudioContext = 'hero' | 'characters' | 'demo' | 'support' | 'features';
@@ -306,7 +305,6 @@ const formatTime = (time: number): string => {
 };
 
 export const useAudio = () => {
-  const { toast } = useToast();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<TrackId | null>(null);
   const [volume, setVolume] = useState(AUDIO_QUALITY_SETTINGS.defaultVolume);
@@ -370,20 +368,8 @@ export const useAudio = () => {
           setCurrentTime(0);
           setDuration(0);
           
-          // Enhanced error feedback with retry mechanism
-          toast({
-            title: "Audio Error",
-            description: "Unable to play audio. Click to retry.",
-            variant: "destructive",
-            action: (
-              <button 
-                onClick={() => playTrack(trackId, true)}
-                className="text-xs px-2 py-1 bg-red-500/20 hover:bg-red-500/30 rounded text-red-200 transition-colors"
-              >
-                Retry
-              </button>
-            ),
-          });
+          // Enhanced error feedback
+          console.error("Audio Error:", error);
         },
         onEnded: () => {
           if (!loop) {
@@ -559,20 +545,7 @@ export const useAudio = () => {
     if (!isMuted) {
       audioManager.current.setVolume(clampedVolume);
     }
-    
-    // Visual feedback for volume changes
-    if (clampedVolume === 0) {
-      toast({
-        title: "🔇 Volume Muted",
-        description: "Audio volume set to 0%",
-      });
-    } else if (clampedVolume === 1) {
-      toast({
-        title: "🔊 Maximum Volume",
-        description: "Audio volume set to 100%",
-      });
-    }
-  }, [isMuted, toast]);
+  }, [isMuted]);
 
   // Enhanced audio quality toggle
   const toggleAudioQuality = useCallback(() => {
@@ -581,14 +554,11 @@ export const useAudio = () => {
       const currentIndex = qualities.indexOf(prev);
       const nextQuality = qualities[(currentIndex + 1) % qualities.length];
       
-      toast({
-        title: "🎧 Audio Quality",
-        description: `Switched to ${nextQuality} quality`,
-      });
+      console.log(`Audio quality switched to ${nextQuality}`);
       
       return nextQuality;
     });
-  }, [toast]);
+  }, []);
 
   // Get recently played tracks
   const getRecentTracks = useCallback(() => {

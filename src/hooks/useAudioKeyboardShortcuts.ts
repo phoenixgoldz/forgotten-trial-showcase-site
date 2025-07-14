@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useToast } from "@/hooks/use-toast";
 
 interface AudioKeyboardShortcutsProps {
   isPlaying: boolean;
@@ -26,7 +25,6 @@ export const useAudioKeyboardShortcuts = ({
   stopTrack,
   currentTrack
 }: AudioKeyboardShortcutsProps) => {
-  const { toast } = useToast();
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -46,18 +44,8 @@ export const useAudioKeyboardShortcuts = ({
           e.preventDefault();
           if (isPlaying) {
             pauseTrack();
-            toast({
-              title: "⏸️ Paused",
-              description: "Audio paused",
-              duration: 1500,
-            });
           } else if (currentTrack) {
             resumeTrack();
-            toast({
-              title: "▶️ Playing",
-              description: "Audio resumed",
-              duration: 1500,
-            });
           }
           break;
           
@@ -65,11 +53,6 @@ export const useAudioKeyboardShortcuts = ({
           if (ctrlKey || metaKey) {
             e.preventDefault();
             previousTrack();
-            toast({
-              title: "⏮️ Previous Track",
-              description: "Skipped to previous track",
-              duration: 1500,
-            });
           }
           break;
           
@@ -77,11 +60,6 @@ export const useAudioKeyboardShortcuts = ({
           if (ctrlKey || metaKey) {
             e.preventDefault();
             nextTrack();
-            toast({
-              title: "⏭️ Next Track", 
-              description: "Skipped to next track",
-              duration: 1500,
-            });
           }
           break;
           
@@ -89,11 +67,6 @@ export const useAudioKeyboardShortcuts = ({
           if (ctrlKey || metaKey) {
             e.preventDefault();
             toggleMute();
-            toast({
-              title: isMuted ? "🔊 Unmuted" : "🔇 Muted",
-              description: `Audio ${isMuted ? 'unmuted' : 'muted'}`,
-              duration: 1500,
-            });
           }
           break;
           
@@ -101,11 +74,6 @@ export const useAudioKeyboardShortcuts = ({
           if (ctrlKey || metaKey) {
             e.preventDefault();
             toggleShuffle();
-            toast({
-              title: "🔀 Shuffle",
-              description: "Shuffle mode toggled",
-              duration: 1500,
-            });
           }
           break;
           
@@ -113,22 +81,13 @@ export const useAudioKeyboardShortcuts = ({
           e.preventDefault();
           if (currentTrack) {
             stopTrack();
-            toast({
-              title: "⏹️ Stopped",
-              description: "Audio stopped",
-              duration: 1500,
-            });
           }
           break;
           
         case '?':
           if (!modifierPressed) {
             e.preventDefault();
-            toast({
-              title: "🎹 Keyboard Shortcuts",
-              description: "Space: Play/Pause • Ctrl+←/→: Skip • Ctrl+M: Mute • Ctrl+S: Shuffle • Esc: Stop",
-              duration: 5000,
-            });
+            console.log("Keyboard Shortcuts: Space: Play/Pause • Ctrl+←/→: Skip • Ctrl+M: Mute • Ctrl+S: Shuffle • Esc: Stop");
           }
           break;
       }
@@ -139,6 +98,6 @@ export const useAudioKeyboardShortcuts = ({
   }, [
     isPlaying, isMuted, currentTrack,
     pauseTrack, resumeTrack, previousTrack, nextTrack,
-    toggleMute, toggleShuffle, stopTrack, toast
+    toggleMute, toggleShuffle, stopTrack
   ]);
 };
