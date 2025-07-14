@@ -8,7 +8,7 @@ import RealTimeEngagement from "@/components/RealTimeEngagement";
 import AudioControls from "@/components/AudioControls";
 import EnhancedAudioControls from "@/components/EnhancedAudioControls";
 import AudioStatusIndicator from "@/components/AudioStatusIndicator";
-import AudioTrackNotification from "@/components/AudioTrackNotification";
+
 import ContextualAudio from "@/components/ContextualAudio";
 import Footer from "@/components/Footer";
 
@@ -52,7 +52,7 @@ const SupportPage = () => {
 
       {/* Enhanced Audio Components */}
       <AudioStatusIndicator />
-      <AudioTrackNotification />
+      
       <ContextualAudio />
       <EnhancedAudioControls />
     </div>

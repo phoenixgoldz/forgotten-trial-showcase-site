@@ -9,7 +9,7 @@ import Navigation from "@/components/Navigation";
 import AudioControls from "@/components/AudioControls";
 import EnhancedAudioControls from "@/components/EnhancedAudioControls";
 import AudioStatusIndicator from "@/components/AudioStatusIndicator";
-import AudioTrackNotification from "@/components/AudioTrackNotification";
+
 import ContextualAudio from "@/components/ContextualAudio";
 import ImprovedErrorBoundary from "@/components/ImprovedErrorBoundary";
 
@@ -39,12 +39,12 @@ const Index = () => {
 
     // Preload critical images
     const criticalImages = [
-      '/lovable-uploads/Solari.png',
-      '/lovable-uploads/Tarrin.png',
-      '/lovable-uploads/Wisp.png',
-      '/lovable-uploads/Kael.png',
-      '/lovable-uploads/TitlePosterImage.png',
-      '/lovable-uploads/KickstarterBannerImage.png'
+      '/Solari.png',
+      '/Tarrin.png',
+      '/Wisp.png',
+      '/Kael.png',
+      '/TitlePosterImage.png',
+      '/KickstarterBannerImage.png'
     ];
     
     const preloadPromises = criticalImages.map((src, index) => {
@@ -162,7 +162,7 @@ const Index = () => {
 
         {/* Enhanced Audio Components */}
         <AudioStatusIndicator />
-        <AudioTrackNotification />
+        
         <ContextualAudio />
         <EnhancedAudioControls />
       </div>
