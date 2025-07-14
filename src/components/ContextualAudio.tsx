@@ -2,11 +2,9 @@
 import { useEffect, useState } from 'react';
 import { useAudio } from '@/hooks/useAudio';
 import { useLocation } from 'react-router-dom';
-import { useToast } from "@/hooks/use-toast";
 
 const ContextualAudio = () => {
   const { playContextualAudio, isPlaying, currentTrack, audioQuality } = useAudio();
-  const { toast } = useToast();
   const location = useLocation();
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const [hasTriedAutoPlay, setHasTriedAutoPlay] = useState(false);
@@ -66,38 +64,14 @@ const ContextualAudio = () => {
         setHasTriedAutoPlay(true);
         setLastRoute(path);
         
-        // Contextual audio notification with disable option
-        const pageNames = {
-          '/': 'Home',
-          '/characters': 'Characters',
-          '/demo': 'Demo',
-          '/support': 'Support',
-          '/features': 'Features'
-        };
+        console.log(`🎵 Starting contextual audio for ${path} -> ${audioContext}`);
         
-        toast({
-          title: "🎵 Atmospheric Audio",
-          description: `Ambient sounds for ${pageNames[path as keyof typeof pageNames] || 'this page'}`,
-          action: (
-            <button 
-              onClick={() => {
-                setIsContextualAudioEnabled(false);
-                localStorage.setItem('forgottenTrialContextualAudio', 'disabled');
-              }}
-              className="text-xs px-2 py-1 bg-amber-500/20 hover:bg-amber-500/30 rounded text-amber-200 transition-colors"
-            >
-              Disable Auto-play
-            </button>
-          ),
-        });
-        
-        // Shorter delay for better responsiveness
         setTimeout(() => {
           playContextualAudio(audioContext!);
-        }, 800);
+        }, 300);
       }
     }
-  }, [location.pathname, hasUserInteracted, hasTriedAutoPlay, isPlaying, currentTrack, playContextualAudio, lastRoute, toast, isContextualAudioEnabled]);
+  }, [location.pathname, hasUserInteracted, hasTriedAutoPlay, isPlaying, currentTrack, playContextualAudio, lastRoute, isContextualAudioEnabled]);
 
   // Load user preference for contextual audio
   useEffect(() => {
