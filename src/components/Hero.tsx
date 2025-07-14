@@ -149,7 +149,7 @@ const Hero = () => {
               
               <div className="relative bg-gradient-to-br from-ancient-stone/20 to-mystic-blue/20 rounded-2xl p-2 backdrop-blur-sm border border-ethereal-gold/30 shadow-xl group-hover:border-ethereal-gold/50 transition-all duration-300">
                 <img
-                  src="/TitlePosterImage.png"
+                  src="/lovable-uploads/TitlePosterImage.png"
                   alt="The Forgotten Trial - Featuring the four main characters: Solari the Sunweaver, Tarrin the Stormblade, Wisp the Chronobard, and Kael the Runic Warden"
                   className="w-full max-w-lg h-auto rounded-xl shadow-xl transition-transform duration-500 group-hover:scale-105"
                   loading="eager"
@@ -157,7 +157,7 @@ const Hero = () => {
                 
                 <div className="absolute bottom-3 left-3">
                   <img
-                    src="/CompanyLogo.png"
+                    src="/lovable-uploads/CompanyLogo.png"
                     alt="Phoenix Gold Studios"
                     className="w-16 h-16 opacity-90 hover:opacity-100 transition-opacity duration-300"
                     loading="lazy"

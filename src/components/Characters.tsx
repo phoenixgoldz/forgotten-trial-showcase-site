@@ -7,7 +7,7 @@ const Characters = () => {
       emoji: "☀️",
       description: "Healer, light mage, and gentle soul with a flickering past.",
       quote: "You once burned the sky, the whispers say.",
-      image: "/Solari.png",
+      image: "/lovable-uploads/Solari.png",
       colors: "from-ethereal-gold to-ember-flame"
     },
     {
@@ -16,7 +16,7 @@ const Characters = () => {
       emoji: "⚡",
       description: "A lion warrior with shattered memories and lightning-fast reflexes.",
       quote: "What was he sworn to protect?",
-      image: "/Tarrin.png",
+      image: "/lovable-uploads/Tarrin.png",
       colors: "from-luminous-azure to-mystic-blue"
     },
     {
@@ -25,7 +25,7 @@ const Characters = () => {
       emoji: "🎵",
       description: "A whimsical bard who bends time through music. Her songs echo forgotten truths.",
       quote: "Time dances to her melody.",
-      image: "/Wisp.png",
+      image: "/lovable-uploads/Wisp.png",
       colors: "from-verdant-glyph to-luminous-azure"
     },
     {
@@ -34,7 +34,7 @@ const Characters = () => {
       emoji: "🌿🛡️",
       description: "A silent stone guardian etched with ancient glyphs. Was he carved to protect—or destroy?",
       quote: "Ancient runes hold dangerous secrets.",
-      image: "/Kael.png",
+      image: "/lovable-uploads/Kael.png",
       colors: "from-ancient-stone to-mystic-blue"
     }
   ];

@@ -39,12 +39,12 @@ const Index = () => {
 
     // Preload critical images
     const criticalImages = [
-      '/Solari.png',
-      '/Tarrin.png',
-      '/Wisp.png',
-      '/Kael.png',
-      '/TitlePosterImage.png',
-      '/KickstarterBannerImage.png'
+      '/lovable-uploads/Solari.png',
+      '/lovable-uploads/Tarrin.png',
+      '/lovable-uploads/Wisp.png',
+      '/lovable-uploads/Kael.png',
+      '/lovable-uploads/TitlePosterImage.png',
+      '/lovable-uploads/KickstarterBannerImage.png'
     ];
     
     const preloadPromises = criticalImages.map((src, index) => {
