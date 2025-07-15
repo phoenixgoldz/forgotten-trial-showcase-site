@@ -1,4 +1,11 @@
 
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Zap, Sun, Music, Shield } from "lucide-react";
+import { useRef } from "react";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import AnimatedCounter from "@/components/AnimatedCounter";
+
 const Characters = () => {
   const characters = [
     {

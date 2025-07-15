@@ -51,6 +51,17 @@
     --luminous-azure: #3E92CC;
     --ember-flame: #E97F3C;
     --verdant-glyph: #7EC850;
+    
+    /* Enhanced gradients and effects */
+    --gradient-primary: linear-gradient(135deg, var(--ethereal-gold), var(--ember-flame));
+    --gradient-secondary: linear-gradient(180deg, var(--mystic-blue), var(--ancient-stone));
+    --shadow-glow: 0 0 20px rgba(212, 181, 106, 0.3);
+    --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.15);
+    
+    /* Micro-interaction timing */
+    --transition-fast: 0.15s ease-out;
+    --transition-medium: 0.3s ease-out;
+    --transition-slow: 0.5s ease-out;
   }
 
   .dark {

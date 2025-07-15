@@ -19,14 +19,14 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        // Updated themed variants with proper theme colors
-        primary: "bg-ethereal-gold text-mystic-blue hover:bg-ethereal-gold/90 shadow-lg shadow-ethereal-gold/25 hover:shadow-xl hover:shadow-ethereal-gold/40 border-0 font-bold hover:scale-105 transform transition-all duration-300 button-shine",
-        secondary_trial: "bg-ember-flame text-white hover:bg-ember-flame/90 shadow-lg shadow-ember-flame/25 hover:shadow-xl hover:shadow-ember-flame/40 border border-ember-flame hover:border-ember-flame/90 font-semibold hover:scale-105 transform transition-all duration-300",
-        mystic: "bg-ancient-stone text-ethereal-gold hover:bg-ancient-stone/90 shadow-lg shadow-ancient-stone/25 hover:shadow-xl hover:shadow-ancient-stone/30 border border-ethereal-gold/30 hover:border-ethereal-gold/60 button-shine hover:scale-105 transform",
-        ethereal: "bg-ethereal-gold text-mystic-blue hover:bg-ethereal-gold/90 shadow-lg shadow-ethereal-gold/25 hover:shadow-xl hover:shadow-ethereal-gold/30 border border-ethereal-gold/40 hover:border-ethereal-gold/70 button-shine font-semibold hover:scale-105 transform",
-        azure: "bg-luminous-azure text-white hover:bg-luminous-azure/90 shadow-lg shadow-luminous-azure/25 hover:shadow-xl hover:shadow-luminous-azure/30 border border-luminous-azure/30 hover:border-luminous-azure/60 button-shine hover:scale-105 transform",
-        verdant: "bg-verdant-glyph text-white hover:bg-verdant-glyph/90 shadow-lg shadow-verdant-glyph/25 hover:shadow-xl hover:shadow-verdant-glyph/30 border border-verdant-glyph/30 hover:border-verdant-glyph/60 button-shine hover:scale-105 transform",
-        ember: "bg-ember-flame text-white hover:bg-ember-flame/90 shadow-lg shadow-ember-flame/25 hover:shadow-xl hover:shadow-ember-flame/30 border border-ember-flame/30 hover:border-ember-flame/60 button-shine hover:scale-105 transform"
+        // Enhanced themed variants with micro-interactions
+        primary: "bg-ethereal-gold text-mystic-blue hover:bg-ethereal-gold/90 shadow-lg shadow-ethereal-gold/25 hover:shadow-xl hover:shadow-ethereal-gold/40 border-0 font-bold hover:scale-105 transform transition-all duration-300 button-shine active:scale-95 focus:ring-2 focus:ring-ethereal-gold/50",
+        secondary_trial: "bg-ember-flame text-white hover:bg-ember-flame/90 shadow-lg shadow-ember-flame/25 hover:shadow-xl hover:shadow-ember-flame/40 border border-ember-flame hover:border-ember-flame/90 font-semibold hover:scale-105 transform transition-all duration-300 active:scale-95 focus:ring-2 focus:ring-ember-flame/50",
+        mystic: "bg-ancient-stone text-ethereal-gold hover:bg-ancient-stone/90 shadow-lg shadow-ancient-stone/25 hover:shadow-xl hover:shadow-ancient-stone/30 border border-ethereal-gold/30 hover:border-ethereal-gold/60 button-shine hover:scale-105 transform active:scale-95 focus:ring-2 focus:ring-ethereal-gold/50",
+        ethereal: "bg-transparent border-2 border-ethereal-gold text-ethereal-gold hover:bg-ethereal-gold hover:text-mystic-blue shadow-lg shadow-ethereal-gold/20 hover:shadow-ethereal-gold/40 transform hover:scale-105 backdrop-blur-sm active:scale-95 focus:ring-2 focus:ring-ethereal-gold/50",
+        azure: "bg-luminous-azure text-white hover:bg-luminous-azure/90 shadow-lg shadow-luminous-azure/25 hover:shadow-xl hover:shadow-luminous-azure/30 border border-luminous-azure/30 hover:border-luminous-azure/60 button-shine hover:scale-105 transform active:scale-95 focus:ring-2 focus:ring-luminous-azure/50",
+        verdant: "bg-verdant-glyph text-white hover:bg-verdant-glyph/90 shadow-lg shadow-verdant-glyph/25 hover:shadow-xl hover:shadow-verdant-glyph/30 border border-verdant-glyph/30 hover:border-verdant-glyph/60 button-shine hover:scale-105 transform active:scale-95 focus:ring-2 focus:ring-verdant-glyph/50",
+        ember: "bg-ember-flame text-white hover:bg-ember-flame/90 shadow-lg shadow-ember-flame/25 hover:shadow-xl hover:shadow-ember-flame/30 border border-ember-flame/30 hover:border-ember-flame/60 button-shine hover:scale-105 transform active:scale-95 focus:ring-2 focus:ring-ember-flame/50"
       },
       size: {
         default: "h-10 px-4 py-2 text-base",

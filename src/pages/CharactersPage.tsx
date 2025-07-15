@@ -3,6 +3,10 @@ import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Characters from "@/components/Characters";
 import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import ScrollProgress from "@/components/ScrollProgress";
+import SocialShare from "@/components/SocialShare";
+import InteractiveCursor from "@/components/InteractiveCursor";
 
 const CharactersPage = () => {
   useEffect(() => {
@@ -14,7 +18,11 @@ const CharactersPage = () => {
 
   return (
     <div className="min-h-screen relative overflow-x-hidden">
-      {/* Reduced background effects for cleaner look */}
+      {/* Enhanced UI Components */}
+      <ScrollProgress />
+      <InteractiveCursor />
+      
+      {/* Background effects */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-mystic-blue/85 via-ancient-stone/75 to-mystic-blue/85"></div>
         {Array.from({ length: 12 }).map((_, i) => (
@@ -35,10 +43,14 @@ const CharactersPage = () => {
       <div className="relative z-10">
         <Navigation />
         <div className="pt-16">
+          <Breadcrumbs />
           <Characters />
         </div>
         <Footer />
       </div>
+
+      {/* Enhanced Features */}
+      <SocialShare />
     </div>
   );
 };

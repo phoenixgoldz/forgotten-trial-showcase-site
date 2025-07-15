@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Home, Info, Gamepad2, Users, Heart } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -74,21 +75,30 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => {
               const IconComponent = item.icon;
+              const isActive = location.pathname === item.href;
               
               return (
                 <Link
                   key={item.label}
                   to={item.href}
-                  className="flex items-center space-x-2 text-gray-300 hover:text-ethereal-gold transition-colors duration-200 group"
+                  className={`flex items-center space-x-2 transition-colors duration-200 group relative ${
+                    isActive 
+                      ? 'text-ethereal-gold' 
+                      : 'text-gray-300 hover:text-ethereal-gold'
+                  }`}
                 >
                   <IconComponent className="w-4 h-4 group-hover:scale-110 transition-transform" />
                   <span className="font-citizen">{item.label}</span>
+                  {isActive && (
+                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-ethereal-gold rounded-full" />
+                  )}
                 </Link>
               );
             })}
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}

@@ -9,9 +9,12 @@ import Navigation from "@/components/Navigation";
 import AudioControls from "@/components/AudioControls";
 import EnhancedAudioControls from "@/components/EnhancedAudioControls";
 import AudioStatusIndicator from "@/components/AudioStatusIndicator";
-
 import ContextualAudio from "@/components/ContextualAudio";
 import ImprovedErrorBoundary from "@/components/ImprovedErrorBoundary";
+import ScrollProgress from "@/components/ScrollProgress";
+import ParticleSystem from "@/components/ParticleSystem";
+import SocialShare from "@/components/SocialShare";
+import InteractiveCursor from "@/components/InteractiveCursor";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -83,20 +86,8 @@ const Index = () => {
   if (!isLoaded) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          {Array.from({ length: 8 }, (_, i) => (
-            <div
-              key={`loading-particle-${i}`}
-              className="absolute w-1 h-1 bg-ethereal-gold/30 rounded-full animate-float"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${4 + Math.random() * 3}s`,
-              }}
-            />
-          ))}
-        </div>
+        {/* Enhanced particle system for loading */}
+        <ParticleSystem density={20} interactive={true} />
         
         <div className="text-center max-w-md mx-auto px-4 relative z-10">
           <div className="relative mb-6">
@@ -132,20 +123,13 @@ const Index = () => {
   return (
     <ImprovedErrorBoundary>
       <div className="min-h-screen relative overflow-x-hidden">
+        {/* Enhanced UI Components */}
+        <ScrollProgress />
+        <InteractiveCursor />
+        
         <div className="fixed inset-0 pointer-events-none z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-mystic-blue/90 via-ancient-stone/80 to-mystic-blue/90"></div>
-          {Array.from({ length: 10 }, (_, i) => (
-            <div
-              key={`bg-particle-${i}`}
-              className="absolute w-1 h-1 bg-ethereal-gold/15 rounded-full animate-float"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 10}s`,
-                animationDuration: `${8 + Math.random() * 6}s`,
-              }}
-            />
-          ))}
+          <ParticleSystem density={15} interactive={false} />
         </div>
 
         {/* Main content */}
@@ -160,11 +144,11 @@ const Index = () => {
           <Footer />
         </div>
 
-        {/* Enhanced Audio Components */}
+        {/* Enhanced Audio & Social Components */}
         <AudioStatusIndicator />
-        
         <ContextualAudio />
         <EnhancedAudioControls />
+        <SocialShare />
       </div>
     </ImprovedErrorBoundary>
   );
