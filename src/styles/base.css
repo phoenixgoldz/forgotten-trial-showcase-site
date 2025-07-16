@@ -44,13 +44,13 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* The Forgotten Trial Color Palette */
-    --mystic-blue: #1A1D3C;
-    --ethereal-gold: #D4B56A;
-    --ancient-stone: #44424D;
-    --luminous-azure: #3E92CC;
-    --ember-flame: #E97F3C;
-    --verdant-glyph: #7EC850;
+    /* The Forgotten Trial Color Palette - HSL for browser compatibility */
+    --mystic-blue: 230 41% 18%;
+    --ethereal-gold: 45 52% 62%;
+    --ancient-stone: 250 7% 28%;
+    --luminous-azure: 202 54% 52%;
+    --ember-flame: 17 77% 58%;
+    --verdant-glyph: 92 54% 65%;
     
     /* Enhanced gradients and effects */
     --gradient-primary: linear-gradient(135deg, var(--ethereal-gold), var(--ember-flame));

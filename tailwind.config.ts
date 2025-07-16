@@ -62,13 +62,13 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// The Forgotten Trial Color Palette
-				'mystic-blue': '#1A1D3C',
-				'ethereal-gold': '#D4B56A',
-				'ancient-stone': '#44424D',
-				'luminous-azure': '#3E92CC',
-				'ember-flame': '#E97F3C',
-				'verdant-glyph': '#7EC850'
+				// The Forgotten Trial Color Palette - HSL for compatibility
+				'mystic-blue': 'hsl(var(--mystic-blue))',
+				'ethereal-gold': 'hsl(var(--ethereal-gold))',
+				'ancient-stone': 'hsl(var(--ancient-stone))',
+				'luminous-azure': 'hsl(var(--luminous-azure))',
+				'ember-flame': 'hsl(var(--ember-flame))',
+				'verdant-glyph': 'hsl(var(--verdant-glyph))'
 			},
 			fontFamily: {
 				'cinzel': ['Cinzel Decorative', 'serif'],

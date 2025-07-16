@@ -86,19 +86,25 @@
 .bg-mystic-blue\/85 { background-color: rgba(26, 29, 60, 0.85); }
 .bg-mystic-blue\/95 { background-color: rgba(26, 29, 60, 0.95); }
 
-/* Premium glass effects */
+/* Premium glass effects - Cross-browser compatible */
 .glass-effect {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  -moz-backdrop-filter: blur(12px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Fallback for older browsers */
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .glass-effect-strong {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  -moz-backdrop-filter: blur(20px);
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Fallback for older browsers */
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Premium hover effects */
