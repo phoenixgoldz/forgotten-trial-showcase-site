@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 interface Particle {
   id: number;
@@ -16,13 +16,18 @@ interface ParticleSystemProps {
   interactive?: boolean;
 }
 
+const DEFAULT_COLORS = ['ethereal-gold', 'luminous-azure', 'ember-flame', 'verdant-glyph'];
+
 const ParticleSystem = ({ 
   density = 15, 
-  colors = ['ethereal-gold', 'luminous-azure', 'ember-flame', 'verdant-glyph'],
+  colors = DEFAULT_COLORS,
   interactive = false 
 }: ParticleSystemProps) => {
   const [particles, setParticles] = useState<Particle[]>([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Memoize colors to prevent infinite re-renders
+  const memoizedColors = useMemo(() => colors, [colors.join(',')]);
 
   useEffect(() => {
     const generateParticles = () => {
@@ -35,14 +40,14 @@ const ParticleSystem = ({
           size: Math.random() * 3 + 1,
           duration: Math.random() * 8 + 4,
           delay: Math.random() * 4,
-          color: colors[Math.floor(Math.random() * colors.length)]
+          color: memoizedColors[Math.floor(Math.random() * memoizedColors.length)]
         });
       }
       setParticles(newParticles);
     };
 
     generateParticles();
-  }, [density, colors]);
+  }, [density, memoizedColors]);
 
   useEffect(() => {
     if (!interactive) return;
