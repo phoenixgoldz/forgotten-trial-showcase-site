@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
+    base: mode === 'production' ? '/forgotten-trial-showcase-site/' : '/',
     server: {
       host: "::",
       port: 8080,
@@ -30,6 +31,11 @@ export default defineConfig(({ mode }) => {
       alias: {
         "@": path.resolve(__dirname, "./src"),
       },
+    },
+    build: {
+      outDir: 'dist',
+      assetsDir: 'assets',
+      sourcemap: false,
     },
   };
 });

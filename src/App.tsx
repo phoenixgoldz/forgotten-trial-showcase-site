@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import { useEffect, Suspense, lazy } from "react";
 import Index from "./pages/Index";
 import ImprovedErrorBoundary from "./components/ImprovedErrorBoundary";
@@ -108,7 +108,7 @@ const App = () => {
             theme="dark"
             className="toaster-dark"
           />
-          <BrowserRouter>
+          <HashRouter>
             <Suspense fallback={<PageLoadingFallback />}>
               <Routes>
                 <Route path="/" element={<Index />} />
@@ -121,7 +121,7 @@ const App = () => {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
-          </BrowserRouter>
+          </HashRouter>
         </TooltipProvider>
       </QueryClientProvider>
     </ImprovedErrorBoundary>
