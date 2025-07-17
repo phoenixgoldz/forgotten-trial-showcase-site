@@ -75,8 +75,6 @@ const AudioControls = () => {
   }, [isBuffering]);
 
   const handlePlayPause = () => {
-    console.log(`Play/Pause clicked. Currently playing: ${isPlaying}, current track: ${currentTrack}`);
-    
     if (isPlaying) {
       pauseTrack();
     } else if (currentTrack) {
@@ -88,12 +86,10 @@ const AudioControls = () => {
   };
 
   const handleStop = () => {
-    console.log('Stop clicked');
     stopTrack();
   };
 
   const handleTrackSelect = (trackId: string) => {
-    console.log(`Track selected: ${trackId}`);
     if (availableTracks.includes(trackId as any)) {
       playTrack(trackId as any);
     }

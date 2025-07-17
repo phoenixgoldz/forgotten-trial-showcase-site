@@ -143,7 +143,7 @@ class AudioManager {
           clearTimeout(timeoutId);
           this.audio?.removeEventListener('canplay', onCanPlay);
           this.audio?.removeEventListener('error', onError);
-          reject(new Error(`Failed to load ${trackId}: ${(e as any).message || 'Unknown error'}`));
+          reject(new Error(`Failed to load ${trackId}: ${e instanceof ErrorEvent ? e.message : 'Unknown error'}`));
         };
         
         this.audio.addEventListener('canplay', onCanPlay);
