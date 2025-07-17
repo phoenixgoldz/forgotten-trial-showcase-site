@@ -36,6 +36,12 @@ export default defineConfig(({ mode }) => {
       outDir: 'dist',
       assetsDir: 'assets',
       sourcemap: false,
+      rollupOptions: {
+        output: {
+          manualChunks: undefined,
+        },
+      },
     },
+    assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg', '**/*.mp3', '**/*.wav'],
   };
 });
