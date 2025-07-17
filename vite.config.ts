@@ -36,12 +36,22 @@ export default defineConfig(({ mode }) => {
       outDir: 'dist',
       assetsDir: 'assets',
       sourcemap: false,
+      emptyOutDir: true,
       rollupOptions: {
         output: {
-          manualChunks: undefined,
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
+            router: ['react-router-dom'],
+          },
+          assetFileNames: 'assets/[name]-[hash][extname]',
+          chunkFileNames: 'assets/[name]-[hash].js',
+          entryFileNames: 'assets/[name]-[hash].js',
         },
       },
     },
     assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg', '**/*.mp3', '**/*.wav'],
+    css: {
+      postcss: {},
+    },
   };
 });
