@@ -1,9 +1,13 @@
 
 import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Features from "@/components/Features";
+import Characters from "@/components/Characters";
 import InteractiveDemo from "@/components/InteractiveDemo";
 import MysteryQuotes from "@/components/MysteryQuotes";
 import Newsletter from "@/components/Newsletter";
+import Support from "@/components/Support";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import AudioControls from "@/components/AudioControls";
@@ -15,6 +19,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import ParticleSystem from "@/components/ParticleSystem";
 import SocialShare from "@/components/SocialShare";
 import InteractiveCursor from "@/components/InteractiveCursor";
+import { GAME_ASSETS } from "@/utils/assetPaths";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -42,12 +47,12 @@ const Index = () => {
 
     // Preload critical images
     const criticalImages = [
-      '/lovable-uploads/Solari.png',
-      '/lovable-uploads/Tarrin.png',
-      '/lovable-uploads/Wisp.png',
-      '/lovable-uploads/Kael.png',
-      '/lovable-uploads/TitlePosterImage.png',
-      '/lovable-uploads/KickstarterBannerImage.png'
+      GAME_ASSETS.characters.solari,
+      GAME_ASSETS.characters.tarrin,
+      GAME_ASSETS.characters.wisp,
+      GAME_ASSETS.characters.kael,
+      GAME_ASSETS.images.titlePoster,
+      GAME_ASSETS.images.kickstarterBanner
     ];
     
     const preloadPromises = criticalImages.map((src, index) => {
@@ -137,8 +142,12 @@ const Index = () => {
           <Navigation />
           <div className="pt-16">
             <Hero />
+            <About />
+            <Features />
+            <Characters />
             <InteractiveDemo />
             <MysteryQuotes />
+            <Support />
             <Newsletter />
           </div>
           <Footer />

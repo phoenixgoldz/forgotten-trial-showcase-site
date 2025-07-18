@@ -1,5 +1,6 @@
 import { Heart, ExternalLink, Coffee, Zap, Sparkles, Star } from "lucide-react";
 import { memo } from "react";
+import { GAME_ASSETS } from "@/utils/assetPaths";
 
 const Footer = memo(() => {
   const handleExternalLink = (url: string, label: string) => {
@@ -55,7 +56,7 @@ const Footer = memo(() => {
             <div className="relative mb-8 group">
               <div className="absolute inset-0 bg-ethereal-gold/30 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500" aria-hidden="true"></div>
               <img 
-                src="/lovable-uploads/CompanyLogo.png" 
+                src={GAME_ASSETS.images.companyLogo} 
                 alt="PhoenixGold Game Studios Logo"
                 className="w-40 h-40 mx-auto animate-float relative z-10 group-hover:scale-110 transition-transform duration-500"
                 loading="lazy"

@@ -5,6 +5,7 @@ import { Zap, Sun, Music, Shield } from "lucide-react";
 import { useRef } from "react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import { GAME_ASSETS } from "@/utils/assetPaths";
 
 const Characters = () => {
   const characters = [
@@ -14,7 +15,7 @@ const Characters = () => {
       emoji: "☀️",
       description: "Healer, light mage, and gentle soul with a flickering past.",
       quote: "You once burned the sky, the whispers say.",
-      image: "/lovable-uploads/Solari.png",
+      image: GAME_ASSETS.characters.solari,
       colors: "from-ethereal-gold to-ember-flame"
     },
     {
@@ -23,7 +24,7 @@ const Characters = () => {
       emoji: "⚡",
       description: "A lion warrior with shattered memories and lightning-fast reflexes.",
       quote: "What was he sworn to protect?",
-      image: "/lovable-uploads/Tarrin.png",
+      image: GAME_ASSETS.characters.tarrin,
       colors: "from-luminous-azure to-mystic-blue"
     },
     {
@@ -32,7 +33,7 @@ const Characters = () => {
       emoji: "🎵",
       description: "A whimsical bard who bends time through music. Her songs echo forgotten truths.",
       quote: "Time dances to her melody.",
-      image: "/lovable-uploads/Wisp.png",
+      image: GAME_ASSETS.characters.wisp,
       colors: "from-verdant-glyph to-luminous-azure"
     },
     {
@@ -41,7 +42,7 @@ const Characters = () => {
       emoji: "🌿🛡️",
       description: "A silent stone guardian etched with ancient glyphs. Was he carved to protect—or destroy?",
       quote: "Ancient runes hold dangerous secrets.",
-      image: "/lovable-uploads/Kael.png",
+      image: GAME_ASSETS.characters.kael,
       colors: "from-ancient-stone to-mystic-blue"
     }
   ];
