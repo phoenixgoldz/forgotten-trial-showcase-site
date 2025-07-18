@@ -35,7 +35,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-mystic-blue via-ancient-stone to-mystic-blue overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-mystic-blue overflow-hidden">
       {/* Clean gradient background without image */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-t from-mystic-blue/90 via-mystic-blue/50 to-mystic-blue/30"></div>

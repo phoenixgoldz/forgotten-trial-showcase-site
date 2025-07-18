@@ -33,9 +33,9 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* The Forgotten Trial Color Palette - HSL for browser compatibility */
+    /* The Forgotten Trial Color Palette - HSL values for CSS variables */
     --mystic-blue: 230 41% 18%;
-    --ethereal-gold: 45 52% 62%;
+    --ethereal-gold: 45 90% 62%;
     --ancient-stone: 250 7% 28%;
     --luminous-azure: 202 54% 52%;
     --ember-flame: 17 77% 58%;
@@ -98,7 +98,7 @@
     @apply bg-background text-foreground;
     margin: 0;
     padding: 0;
-    font-family: 'Citizen OT', 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;

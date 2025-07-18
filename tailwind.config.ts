@@ -72,8 +72,8 @@ export default {
 			},
 			fontFamily: {
 				'cinzel': ['Cinzel Decorative', 'serif'],
-				'citizen': ['Citizen OT', 'sans-serif'],
-				'sans': ['Citizen OT', 'Inter', 'sans-serif']
+				'citizen': ['Inter', 'sans-serif'],
+				'sans': ['Inter', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
