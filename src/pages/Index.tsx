@@ -19,6 +19,9 @@ import ScrollProgress from "@/components/ScrollProgress";
 import ParticleSystem from "@/components/ParticleSystem";
 import SocialShare from "@/components/SocialShare";
 import InteractiveCursor from "@/components/InteractiveCursor";
+import ThemeToggle from "@/components/ThemeToggle";
+import MysticalNotifications from "@/components/MysticalNotifications";
+import FloatingActionWidget from "@/components/FloatingActionWidget";
 import { GAME_ASSETS } from "@/utils/assetPaths";
 
 const Index = () => {
@@ -131,6 +134,8 @@ const Index = () => {
         {/* Enhanced UI Components */}
         <ScrollProgress />
         <InteractiveCursor />
+        <ThemeToggle />
+        <MysticalNotifications />
         
         <div className="fixed inset-0 pointer-events-none z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-mystic-blue/90 via-ancient-stone/80 to-mystic-blue/90"></div>
@@ -158,6 +163,7 @@ const Index = () => {
         <ContextualAudio />
         <EnhancedAudioControls />
         <SocialShare />
+        <FloatingActionWidget />
       </div>
     </ImprovedErrorBoundary>
   );

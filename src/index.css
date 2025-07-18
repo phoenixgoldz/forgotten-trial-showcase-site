@@ -143,8 +143,11 @@
   }
 
   .gradient-text {
-    color: hsl(var(--ethereal-gold));
-    position: static;
+    background: linear-gradient(135deg, hsl(var(--ethereal-gold)), hsl(var(--ember-flame)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
   }
 
   .glass-effect {
@@ -277,6 +280,31 @@
   .interactive-card:hover {
     transform: translateY(-4px) scale(1.01);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 0 20px hsl(var(--ethereal-gold) / 0.1);
+  }
+
+  .hover-scale {
+    transition: transform 0.2s ease-out;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  /* Particle system color classes */
+  .bg-ethereal-gold {
+    background-color: hsl(var(--ethereal-gold));
+  }
+
+  .bg-luminous-azure {
+    background-color: hsl(var(--luminous-azure));
+  }
+
+  .bg-ember-flame {
+    background-color: hsl(var(--ember-flame));
+  }
+
+  .bg-verdant-glyph {
+    background-color: hsl(var(--verdant-glyph));
   }
 
   /* Reduced motion for accessibility */
