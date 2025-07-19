@@ -1,9 +1,8 @@
-// Asset path utility for proper GitHub Pages deployment
+// Asset path utility for proper deployment
 export const getAssetPath = (path: string): string => {
-  const basePath = import.meta.env.BASE_URL || '/';
-  // Remove leading slash from path if it exists
+  // Always use absolute path from root for both custom domain and GitHub Pages
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  return `${basePath}${cleanPath}`;
+  return `/${cleanPath}`;
 };
 
 // Game asset paths
