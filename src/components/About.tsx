@@ -47,7 +47,7 @@ const About = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="glass-effect rounded-xl p-6 text-center hover-scale interactive-card">
             <div className="w-16 h-16 mx-auto mb-4 bg-ethereal-gold rounded-full flex items-center justify-center">
-              <Shield className="w-8 h-8 text-white" />
+              <Shield className="w-8 h-8 text-foreground" />
             </div>
             <h3 className="text-xl font-cinzel text-ethereal-gold mb-3">Tactical Combat</h3>
             <p className="text-gray-300 font-citizen">
@@ -57,7 +57,7 @@ const About = () => {
 
           <div className="glass-effect rounded-xl p-6 text-center hover-scale interactive-card">
             <div className="w-16 h-16 mx-auto mb-4 bg-luminous-azure rounded-full flex items-center justify-center">
-              <Scroll className="w-8 h-8 text-white" />
+              <Scroll className="w-8 h-8 text-foreground" />
             </div>
             <h3 className="text-xl font-cinzel text-ethereal-gold mb-3">Hand-Written Stories</h3>
             <p className="text-gray-300 font-citizen">
@@ -67,7 +67,7 @@ const About = () => {
 
           <div className="glass-effect rounded-xl p-6 text-center hover-scale interactive-card">
             <div className="w-16 h-16 mx-auto mb-4 bg-ember-flame rounded-full flex items-center justify-center">
-              <Users className="w-8 h-8 text-white" />
+              <Users className="w-8 h-8 text-foreground" />
             </div>
             <h3 className="text-xl font-cinzel text-ethereal-gold mb-3">Dynamic Trust</h3>
             <p className="text-gray-300 font-citizen">
@@ -77,7 +77,7 @@ const About = () => {
 
           <div className="glass-effect rounded-xl p-6 text-center hover-scale interactive-card">
             <div className="w-16 h-16 mx-auto mb-4 bg-verdant-glyph rounded-full flex items-center justify-center">
-              <Sparkles className="w-8 h-8 text-white" />
+              <Sparkles className="w-8 h-8 text-foreground" />
             </div>
             <h3 className="text-xl font-cinzel text-ethereal-gold mb-3">Procedural Dungeons</h3>
             <p className="text-gray-300 font-citizen">

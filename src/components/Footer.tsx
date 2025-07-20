@@ -16,7 +16,7 @@ const Footer = memo(() => {
 
   return (
     <footer 
-      className="bg-black relative overflow-hidden"
+      className="bg-mystic-blue relative overflow-hidden"
       role="contentinfo"
       aria-labelledby="footer-heading"
     >
@@ -67,7 +67,7 @@ const Footer = memo(() => {
             </div>
             
             <div className="space-y-4">
-              <h3 className="font-cinzel text-4xl md:text-5xl font-bold text-white mb-2 relative" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9)' }}>
+              <h3 className="font-cinzel text-4xl md:text-5xl font-bold text-foreground mb-2 relative" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9)' }}>
                 <Sparkles className="w-8 h-8 inline-block mr-3 text-ethereal-gold animate-pulse" aria-hidden="true" />
                 <span className="text-ethereal-gold">PhoenixGold Game Studios</span>
                 <Sparkles className="w-8 h-8 inline-block ml-3 text-ethereal-gold animate-pulse" aria-hidden="true" />
@@ -100,7 +100,7 @@ const Footer = memo(() => {
               aria-label="Visit our Ko-fi page for development updates and support options"
             >
               <Coffee className="w-6 h-6 mr-3 text-ember-flame group-hover:animate-bounce" aria-hidden="true" />
-              <span className="text-white text-lg font-semibold">Ko-fi Dev Blog</span>
+              <span className="text-foreground text-lg font-semibold">Ko-fi Dev Blog</span>
               <ExternalLink className="w-4 h-4 ml-2 text-ember-flame/60 group-hover:text-ember-flame" aria-hidden="true" />
               <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" aria-hidden="true"></div>
             </a>
@@ -116,17 +116,17 @@ const Footer = memo(() => {
               aria-label="Support The Forgotten Trial on Kickstarter"
             >
               <Zap className="w-6 h-6 mr-3 text-verdant-glyph group-hover:animate-pulse" aria-hidden="true" />
-              <span className="text-white text-lg font-semibold">Kickstarter Campaign</span>
+              <span className="text-foreground text-lg font-semibold">Kickstarter Campaign</span>
               <ExternalLink className="w-4 h-4 ml-2 text-verdant-glyph/60 group-hover:text-verdant-glyph" aria-hidden="true" />
               <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" aria-hidden="true"></div>
             </a>
           </div>
 
           {/* Enhanced Platform Info */}
-          <div className="bg-black/70 rounded-3xl p-10 border border-ancient-stone/40 glass-effect backdrop-blur-md mb-12 relative overflow-hidden">
+          <div className="bg-ancient-stone/70 rounded-3xl p-10 border border-ancient-stone/40 glass-effect backdrop-blur-md mb-12 relative overflow-hidden">
             <div className="absolute inset-0 bg-ethereal-gold/5" aria-hidden="true"></div>
             <div className="relative z-10">
-              <h4 className="text-2xl font-bold text-white mb-8 flex items-center justify-center font-cinzel" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
+              <h4 className="text-2xl font-bold text-foreground mb-8 flex items-center justify-center font-cinzel" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.8)' }}>
                 <Star className="w-6 h-6 mr-3 text-ethereal-gold animate-pulse" aria-hidden="true" />
                 <span className="text-ethereal-gold">Designed For Everyone</span>
                 <Star className="w-6 h-6 ml-3 text-ethereal-gold animate-pulse" aria-hidden="true" />
@@ -146,7 +146,7 @@ const Footer = memo(() => {
                     aria-label={`${item.title}: ${item.desc}`}
                   >
                     <div className="text-3xl mb-3 group-hover:animate-bounce" aria-hidden="true">{item.icon}</div>
-                    <div className="text-white font-semibold mb-1 font-citizen">{item.title}</div>
+                    <div className="text-foreground font-semibold mb-1 font-citizen">{item.title}</div>
                     <div className="text-gray-300 text-sm font-citizen">{item.desc}</div>
                   </div>
                 ))}
