@@ -7,9 +7,9 @@ import Characters from "@/components/Characters";
 import InteractiveDemo from "@/components/InteractiveDemo";
 import MysteryQuotes from "@/components/MysteryQuotes";
 import Newsletter from "@/components/Newsletter";
-import Support from "@/components/Support";
+import ProfessionalFundingProgress from "@/components/ProfessionalFundingProgress";
 import Footer from "@/components/Footer";
-import Navigation from "@/components/Navigation";
+import ProfessionalNavigation from "@/components/ProfessionalNavigation";
 import AudioControls from "@/components/AudioControls";
 import EnhancedAudioControls from "@/components/EnhancedAudioControls";
 import AudioStatusIndicator from "@/components/AudioStatusIndicator";
@@ -144,7 +144,7 @@ const Index = () => {
 
         {/* Main content */}
         <div className="relative z-10">
-          <Navigation />
+          <ProfessionalNavigation />
           <div className="pt-16">
             <Hero />
             <About />
@@ -152,7 +152,7 @@ const Index = () => {
             <Characters />
             <InteractiveDemo />
             <MysteryQuotes />
-            <Support />
+            <ProfessionalFundingProgress />
             <Newsletter />
           </div>
           <Footer />

@@ -44,13 +44,20 @@
     /* Enhanced gradients and effects */
     --gradient-primary: linear-gradient(135deg, hsl(45 90% 62%), hsl(17 77% 58%));
     --gradient-secondary: linear-gradient(180deg, hsl(230 41% 18%), hsl(250 7% 28%));
+    --gradient-hero: linear-gradient(135deg, hsl(230 41% 18%) 0%, hsl(250 7% 28%) 50%, hsl(230 41% 15%) 100%);
     --shadow-glow: 0 0 20px hsl(45 90% 62% / 0.3);
     --shadow-subtle: 0 4px 20px hsl(0 0% 0% / 0.15);
+    --shadow-professional: 0 8px 32px hsl(0 0% 0% / 0.12);
+    
+    /* Professional spacing */
+    --space-section: 6rem;
+    --space-component: 2rem;
     
     /* Micro-interaction timing */
     --transition-fast: 0.15s ease-out;
     --transition-medium: 0.3s ease-out;
     --transition-slow: 0.5s ease-out;
+    --transition-professional: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
@@ -98,7 +105,7 @@
     @apply bg-mystic-blue text-foreground;
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -106,6 +113,7 @@
     min-height: 100vh;
     color: hsl(var(--foreground));
     background: hsl(var(--mystic-blue));
+    line-height: 1.6;
   }
 
   img {
@@ -291,6 +299,36 @@
 
   .hover-scale:hover {
     transform: scale(1.05);
+  }
+
+  .professional-card {
+    transition: all var(--transition-professional);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .professional-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: var(--shadow-professional), 0 0 20px hsl(var(--ethereal-gold) / 0.1);
+  }
+
+  .studio-branding {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+  }
+
+  .hero-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .professional-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
   }
 
   /* Particle system color classes */
