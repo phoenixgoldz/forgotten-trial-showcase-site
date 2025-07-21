@@ -1,6 +1,6 @@
 
 import { useEffect } from "react";
-import Navigation from "@/components/Navigation";
+import ProfessionalNavigation from "@/components/ProfessionalNavigation";
 import Characters from "@/components/Characters";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -41,7 +41,7 @@ const CharactersPage = () => {
 
       {/* Main content */}
       <div className="relative z-10">
-        <Navigation />
+        <ProfessionalNavigation />
         <div className="pt-16">
           <Breadcrumbs />
           <Characters />

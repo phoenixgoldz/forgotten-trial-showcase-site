@@ -1,6 +1,6 @@
 
 import { useEffect } from "react";
-import Navigation from "@/components/Navigation";
+import ProfessionalNavigation from "@/components/ProfessionalNavigation";
 import EnhancedFundingProgress from "@/components/EnhancedFundingProgress";
 import Gamification from "@/components/Gamification";
 import SocialSharing from "@/components/SocialSharing";
@@ -41,7 +41,7 @@ const SupportPage = () => {
 
       {/* Main content */}
       <div className="relative z-10">
-        <Navigation />
+        <ProfessionalNavigation />
         <div className="pt-16">
           <EnhancedFundingProgress />
           <RealTimeEngagement />

@@ -36,11 +36,9 @@ class ImprovedErrorBoundary extends Component<Props, State> {
   };
 
   handleGoHome = () => {
-    // Use a functional component wrapper to access navigate
-    const currentUrl = new URL(window.location.href);
-    if (currentUrl.pathname !== '/') {
-      window.location.href = '/';
-    }
+    this.setState({ hasError: false, error: null, errorInfo: null });
+    // Navigate to home page
+    window.location.href = '/';
   };
 
   render() {

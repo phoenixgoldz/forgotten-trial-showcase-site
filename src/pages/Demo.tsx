@@ -1,6 +1,6 @@
 
 import { useEffect } from "react";
-import Navigation from "@/components/Navigation";
+import ProfessionalNavigation from "@/components/ProfessionalNavigation";
 import Footer from "@/components/Footer";
 import InteractiveDemo from "@/components/InteractiveDemo";
 import { ArrowLeft } from "lucide-react";
@@ -33,7 +33,7 @@ const Demo = () => {
       </div>
 
       <div className="relative z-10">
-        <Navigation />
+        <ProfessionalNavigation />
         <div className="pt-16">
           <section className="py-8 px-6">
             <div className="max-w-4xl mx-auto text-center mb-8">
