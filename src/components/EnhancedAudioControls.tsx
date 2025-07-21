@@ -107,7 +107,7 @@ const EnhancedAudioControls = () => {
   if (isCollapsed) {
     return (
       <TooltipProvider>
-        <Card className="fixed bottom-6 right-6 z-50 bg-ancient-stone/95 backdrop-blur-md border border-ethereal-gold/30 p-2">
+        <Card className="fixed bottom-6 right-6 z-50 bg-ancient-stone/95 backdrop-blur-md border-2 border-ethereal-gold/40 shadow-3xl shadow-ethereal-gold/20 p-2">
           <div className="flex items-center gap-2">
             <Button
               size="sm"
@@ -141,7 +141,7 @@ const EnhancedAudioControls = () => {
 
   return (
     <TooltipProvider>
-      <Card className={`fixed bottom-6 right-6 z-50 bg-ancient-stone/95 backdrop-blur-md border border-ethereal-gold/30 shadow-2xl transition-all duration-300 ${
+      <Card className={`fixed bottom-6 right-6 z-50 bg-ancient-stone/95 backdrop-blur-md border-2 border-ethereal-gold/40 shadow-3xl shadow-ethereal-gold/20 transition-all duration-300 hover:shadow-glow-intense hover:border-ethereal-gold/60 ${
         isExpanded ? 'p-6 max-w-sm' : 'p-4 max-w-xs'
       }`}>
         {/* Header */}

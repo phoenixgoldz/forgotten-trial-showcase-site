@@ -182,33 +182,72 @@
   .button-shine {
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .button-shine::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
-    background: hsl(255 255% 255% / 0.1);
-    opacity: 0;
-    transition: opacity 0.3s;
+    background: linear-gradient(90deg, transparent, hsl(255 255% 255% / 0.3), transparent);
+    transition: left 0.6s ease;
   }
 
   .button-shine:hover::before {
-    opacity: 1;
+    left: 100%;
   }
 
   .button-shine:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.02);
     filter: brightness(1.1);
   }
 
   .button-shine:active {
-    transform: translateY(0px);
+    transform: translateY(0px) scale(0.98);
     transition: transform 0.1s;
+  }
+
+  /* Professional button enhancements */
+  .professional-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .professional-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, hsl(255 255% 255% / 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .professional-button:hover::before {
+    opacity: 1;
+  }
+
+  .professional-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(255 255% 255% / 0.4), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .professional-button:hover::after {
+    left: 100%;
   }
 
   .mystical-glow {
@@ -216,13 +255,45 @@
       0 0 20px hsl(var(--ethereal-gold) / 0.3),
       0 0 40px hsl(var(--ethereal-gold) / 0.2),
       0 0 60px hsl(var(--ethereal-gold) / 0.1);
+    transition: box-shadow 0.3s ease;
   }
 
   .mystical-glow:hover {
     box-shadow: 
-      0 0 25px hsl(var(--ethereal-gold) / 0.4),
-      0 0 50px hsl(var(--ethereal-gold) / 0.3),
-      0 0 75px hsl(var(--ethereal-gold) / 0.2);
+      0 0 30px hsl(var(--ethereal-gold) / 0.5),
+      0 0 60px hsl(var(--ethereal-gold) / 0.4),
+      0 0 90px hsl(var(--ethereal-gold) / 0.3);
+  }
+
+  /* Professional AAA game studio styling */
+  .aaa-button {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, transparent, hsl(255 255% 255% / 0.05));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(255 255% 255% / 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .aaa-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(255 255% 255% / 0.2), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .aaa-button:hover::before {
+    left: 100%;
+  }
+
+  .aaa-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 20px 40px hsl(0 0% 0% / 0.2);
   }
 }
 

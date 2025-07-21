@@ -111,10 +111,10 @@ const AudioControls = () => {
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className={`fixed bottom-6 right-6 z-40 transition-all duration-300 ${
+    <div className={`fixed bottom-6 right-6 z-50 transition-all duration-300 ${
       isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
     }`}>
-      <div className={`bg-ancient-stone/95 backdrop-blur-md rounded-2xl border border-ethereal-gold/30 shadow-xl transition-all duration-300 hover:shadow-2xl hover:shadow-ethereal-gold/20 ${
+      <div className={`bg-ancient-stone/95 backdrop-blur-md rounded-2xl border-2 border-ethereal-gold/40 shadow-3xl shadow-ethereal-gold/20 transition-all duration-300 hover:shadow-glow-intense hover:border-ethereal-gold/60 ${
         isMinimized ? 'p-3 max-w-xs' : isExpanded ? 'p-6 max-w-md' : 'p-4 max-w-sm'
       }`}>
         {/* Toggle Visibility Button */}

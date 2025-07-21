@@ -127,6 +127,11 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.6s ease-out',
 				'float': 'float 6s ease-in-out infinite'
+			},
+			boxShadow: {
+				'3xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 40px rgba(45, 90, 62, 0.1)',
+				'glow': '0 0 20px hsl(var(--ethereal-gold) / 0.3), 0 0 40px hsl(var(--ethereal-gold) / 0.2)',
+				'glow-intense': '0 0 30px hsl(var(--ethereal-gold) / 0.5), 0 0 60px hsl(var(--ethereal-gold) / 0.3)'
 			}
 		}
 	},
