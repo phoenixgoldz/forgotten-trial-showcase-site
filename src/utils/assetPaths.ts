@@ -1,6 +1,6 @@
-// Asset path utility for proper deployment
+// Asset path utility for proper GitHub Pages deployment
 export const getAssetPath = (path: string): string => {
-  // Always use absolute path from root for both custom domain and GitHub Pages
+  // Use absolute paths for custom domain deployment
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
   return `/${cleanPath}`;
 };
