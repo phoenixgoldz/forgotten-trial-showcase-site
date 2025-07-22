@@ -24,44 +24,44 @@ const CharacterSelection = ({ onCharacterSelect }: CharacterSelectionProps) => {
           onClick={() => onCharacterSelect('Solari')}
           variant="ember"
           size="story"
-          className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110"
+          className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110 text-wrap break-words whitespace-normal leading-tight min-h-[8rem]"
         >
           <span className="text-3xl mb-3 block group-hover:animate-pulse">☀️</span>
-          <span className="font-cinzel text-lg font-bold">Solari</span>
-          <p className="text-sm mt-1 opacity-90 font-normal">The Sunweaver</p>
+          <span className="font-cinzel text-lg font-bold text-center break-words">Solari</span>
+          <p className="text-sm mt-1 opacity-90 font-normal text-center break-words">The Sunweaver</p>
         </Button>
         
         <Button
           onClick={() => onCharacterSelect('Tarrin')}
           variant="azure"
           size="story"
-          className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110"
+          className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110 text-wrap break-words whitespace-normal leading-tight min-h-[8rem]"
         >
           <span className="text-3xl mb-3 block group-hover:animate-pulse">⚡</span>
-          <span className="font-cinzel text-lg font-bold">Tarrin</span>
-          <p className="text-sm mt-1 opacity-90 font-normal">The Stormblade</p>
+          <span className="font-cinzel text-lg font-bold text-center break-words">Tarrin</span>
+          <p className="text-sm mt-1 opacity-90 font-normal text-center break-words">The Stormblade</p>
         </Button>
         
         <Button
           onClick={() => onCharacterSelect('Wisp')}
           variant="verdant"
           size="story"
-          className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110"
+          className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110 text-wrap break-words whitespace-normal leading-tight min-h-[8rem]"
         >
           <span className="text-3xl mb-3 block group-hover:animate-pulse">🎵</span>
-          <span className="font-cinzel text-lg font-bold">Wisp</span>
-          <p className="text-sm mt-1 opacity-90 font-normal">The Chronobard</p>
+          <span className="font-cinzel text-lg font-bold text-center break-words">Wisp</span>
+          <p className="text-sm mt-1 opacity-90 font-normal text-center break-words">The Chronobard</p>
         </Button>
         
         <Button
           onClick={() => onCharacterSelect('Kael')}
           variant="mystic"
           size="story"
-          className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110"
+          className="group flex flex-col items-center justify-center h-auto py-6 hover:scale-110 text-wrap break-words whitespace-normal leading-tight min-h-[8rem]"
         >
           <span className="text-3xl mb-3 block group-hover:animate-pulse">🌿</span>
-          <span className="font-cinzel text-lg font-bold">Kael</span>
-          <p className="text-sm mt-1 opacity-90 font-normal">The Runic Warden</p>
+          <span className="font-cinzel text-lg font-bold text-center break-words">Kael</span>
+          <p className="text-sm mt-1 opacity-90 font-normal text-center break-words">The Runic Warden</p>
         </Button>
       </div>
     </div>

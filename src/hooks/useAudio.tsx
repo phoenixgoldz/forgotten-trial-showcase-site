@@ -15,26 +15,26 @@ const AUDIO_QUALITY_SETTINGS = {
 };
 
 const TRACKS: Record<TrackId, string> = {
-  ambient: '/audio/fantasy-song-363806.mp3',
-  battle: '/audio/battle-of-the-dragons-8037.mp3', 
-  ethereal: '/audio/elves-song-ethereal-fantasy-elf-music-363281.mp3',
-  town: '/audio/market-town-of-turelli-135459.mp3',
-  medieval: '/audio/rpg-medieval-animated-music-320583.mp3',
-  dragonquest: '/audio/alexander-nakarada-dragonquest.mp3',
-  conquest: '/audio/conquest-jester-dance.mp3',
-  wizard: '/audio/walen-wizard-magic.mp3'
+  ambient: './audio/fantasy-song-363806.mp3',
+  battle: './audio/battle-of-the-dragons-8037.mp3', 
+  ethereal: './audio/elves-song-ethereal-fantasy-elf-music-363281.mp3',
+  town: './audio/market-town-of-turelli-135459.mp3',
+  medieval: './audio/rpg-medieval-animated-music-320583.mp3',
+  dragonquest: './audio/alexander-nakarada-dragonquest.mp3',
+  conquest: './audio/conquest-jester-dance.mp3',
+  wizard: './audio/walen-wizard-magic.mp3'
 };
 
 // Fallback to existing audio files if primary ones fail
 const FALLBACK_TRACKS: Record<TrackId, string> = {
-  ambient: '/audio/rpg-medieval-animated-music-320583.mp3',
-  battle: '/audio/battle-of-the-dragons-8037.mp3',
-  ethereal: '/audio/elves-song-ethereal-fantasy-elf-music-363281.mp3', 
-  town: '/audio/market-town-of-turelli-135459.mp3',
-  medieval: '/audio/rpg-medieval-animated-music-320583.mp3',
-  dragonquest: '/audio/alexander-nakarada-dragonquest.mp3',
-  conquest: '/audio/conquest-jester-dance.mp3',
-  wizard: '/audio/walen-wizard-magic.mp3'
+  ambient: './audio/rpg-medieval-animated-music-320583.mp3',
+  battle: './audio/battle-of-the-dragons-8037.mp3',
+  ethereal: './audio/elves-song-ethereal-fantasy-elf-music-363281.mp3', 
+  town: './audio/market-town-of-turelli-135459.mp3',
+  medieval: './audio/rpg-medieval-animated-music-320583.mp3',
+  dragonquest: './audio/alexander-nakarada-dragonquest.mp3',
+  conquest: './audio/conquest-jester-dance.mp3',
+  wizard: './audio/walen-wizard-magic.mp3'
 };
 
 // Enhanced singleton audio manager with fade support

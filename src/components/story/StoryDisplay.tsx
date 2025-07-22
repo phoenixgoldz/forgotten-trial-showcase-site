@@ -43,9 +43,9 @@ const StoryDisplay = ({
             onClick={() => onContinueStory(index)}
             variant="primary"
             size="story"
-            className="font-cinzel hover:scale-110"
+            className="font-cinzel hover:scale-110 text-wrap break-words whitespace-normal leading-tight px-6 py-4 min-h-[3rem] h-auto"
           >
-            ✨ {choice}
+            <span className="text-center break-words">✨ {choice}</span>
           </Button>
         ))}
         
@@ -53,10 +53,10 @@ const StoryDisplay = ({
           onClick={onRestart}
           variant="secondary_trial"
           size="story"
-          className="flex items-center justify-center font-cinzel hover:scale-110"
+          className="flex items-center justify-center font-cinzel hover:scale-110 text-wrap break-words whitespace-normal leading-tight px-6 py-4 min-h-[3rem] h-auto"
         >
-          <RotateCcw className="w-4 h-4 mr-2" />
-          🔄 Begin Anew
+          <RotateCcw className="w-4 h-4 mr-2 flex-shrink-0" />
+          <span className="text-center break-words">🔄 Begin Anew</span>
         </Button>
       </div>
     </div>
