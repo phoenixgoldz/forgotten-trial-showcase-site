@@ -9,7 +9,7 @@ import MysteryQuotes from "@/components/MysteryQuotes";
 import Newsletter from "@/components/Newsletter";
 import ProfessionalFundingProgress from "@/components/ProfessionalFundingProgress";
 import Footer from "@/components/Footer";
-import ProfessionalNavigation from "@/components/ProfessionalNavigation";
+import EnhancedNavigation from "@/components/EnhancedNavigation";
 import AudioControls from "@/components/AudioControls";
 import EnhancedAudioControls from "@/components/EnhancedAudioControls";
 import AudioStatusIndicator from "@/components/AudioStatusIndicator";
@@ -144,7 +144,7 @@ const Index = () => {
 
         {/* Main content */}
         <div className="relative z-10">
-          <ProfessionalNavigation />
+          <EnhancedNavigation />
           <div className="pt-16">
             <Hero />
             <About />

@@ -1,6 +1,6 @@
 
 import { useEffect } from "react";
-import ProfessionalNavigation from "@/components/ProfessionalNavigation";
+import EnhancedNavigation from "@/components/EnhancedNavigation";
 import Features from "@/components/Features";
 import Footer from "@/components/Footer";
 
@@ -33,7 +33,7 @@ const FeaturesPage = () => {
 
       {/* Main content */}
       <div className="relative z-10">
-        <ProfessionalNavigation />
+        <EnhancedNavigation />
         <div className="pt-16">
           <Features />
         </div>
