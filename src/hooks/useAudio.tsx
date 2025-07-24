@@ -317,6 +317,8 @@ export const useAudio = () => {
   const [isBuffering, setIsBuffering] = useState(false);
   const [playHistory, setPlayHistory] = useState<TrackId[]>([]);
   const [audioQuality, setAudioQuality] = useState<'high' | 'medium' | 'low'>('high');
+  const [autoStartupTrack, setAutoStartupTrack] = useState<TrackId | null>(null);
+  const [hasStartedOnce, setHasStartedOnce] = useState(false);
   
   const audioManager = useRef(AudioManager.getInstance());
 
@@ -524,6 +526,35 @@ export const useAudio = () => {
     }, 200);
   }, [isPlaying, currentTrack, playTrack]);
 
+  // Auto-start random track on app startup
+  useEffect(() => {
+    if (!hasStartedOnce) {
+      const startRandomTrack = async () => {
+        try {
+          // Wait a short delay to ensure the app is fully loaded
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          
+          const randomTrack = getRandomTrack();
+          setAutoStartupTrack(randomTrack);
+          
+          console.log(`🎲 Auto-starting random track: ${randomTrack}`);
+          
+          // Add another small delay to show the notification before starting playback
+          setTimeout(async () => {
+            await playTrack(randomTrack, true);
+            setHasStartedOnce(true);
+          }, 1500);
+          
+        } catch (error) {
+          console.error('Failed to auto-start random track:', error);
+          setHasStartedOnce(true);
+        }
+      };
+      
+      startRandomTrack();
+    }
+  }, [hasStartedOnce, getRandomTrack, playTrack]);
+
   // Clear errors when switching tracks
   useEffect(() => {
     if (currentTrack && audioError) {
@@ -589,6 +620,8 @@ export const useAudio = () => {
     changeVolume: changeVolumeWithFeedback,
     toggleAudioQuality,
     playContextualAudio,
-    availableTracks: Object.keys(TRACKS) as TrackId[]
+    availableTracks: Object.keys(TRACKS) as TrackId[],
+    autoStartupTrack,
+    hasStartedOnce
   };
 };
