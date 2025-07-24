@@ -14,27 +14,33 @@ const AUDIO_QUALITY_SETTINGS = {
   crossfadeDuration: 1000
 };
 
+// Use proper paths for GitHub Pages deployment
+const getAudioPath = (filename: string): string => {
+  // Use absolute paths that work with GitHub Pages
+  return `/audio/${filename}`;
+};
+
 const TRACKS: Record<TrackId, string> = {
-  ambient: './audio/fantasy-song-363806.mp3',
-  battle: './audio/battle-of-the-dragons-8037.mp3', 
-  ethereal: './audio/elves-song-ethereal-fantasy-elf-music-363281.mp3',
-  town: './audio/market-town-of-turelli-135459.mp3',
-  medieval: './audio/rpg-medieval-animated-music-320583.mp3',
-  dragonquest: './audio/alexander-nakarada-dragonquest.mp3',
-  conquest: './audio/conquest-jester-dance.mp3',
-  wizard: './audio/walen-wizard-magic.mp3'
+  ambient: getAudioPath('fantasy-song-363806.mp3'),
+  battle: getAudioPath('battle-of-the-dragons-8037.mp3'), 
+  ethereal: getAudioPath('elves-song-ethereal-fantasy-elf-music-363281.mp3'),
+  town: getAudioPath('market-town-of-turelli-135459.mp3'),
+  medieval: getAudioPath('rpg-medieval-animated-music-320583.mp3'),
+  dragonquest: getAudioPath('alexander-nakarada-dragonquest.mp3'),
+  conquest: getAudioPath('conquest-jester-dance.mp3'),
+  wizard: getAudioPath('walen-wizard-magic.mp3')
 };
 
 // Fallback to existing audio files if primary ones fail
 const FALLBACK_TRACKS: Record<TrackId, string> = {
-  ambient: './audio/rpg-medieval-animated-music-320583.mp3',
-  battle: './audio/battle-of-the-dragons-8037.mp3',
-  ethereal: './audio/elves-song-ethereal-fantasy-elf-music-363281.mp3', 
-  town: './audio/market-town-of-turelli-135459.mp3',
-  medieval: './audio/rpg-medieval-animated-music-320583.mp3',
-  dragonquest: './audio/alexander-nakarada-dragonquest.mp3',
-  conquest: './audio/conquest-jester-dance.mp3',
-  wizard: './audio/walen-wizard-magic.mp3'
+  ambient: getAudioPath('rpg-medieval-animated-music-320583.mp3'),
+  battle: getAudioPath('battle-of-the-dragons-8037.mp3'),
+  ethereal: getAudioPath('elves-song-ethereal-fantasy-elf-music-363281.mp3'), 
+  town: getAudioPath('market-town-of-turelli-135459.mp3'),
+  medieval: getAudioPath('rpg-medieval-animated-music-320583.mp3'),
+  dragonquest: getAudioPath('alexander-nakarada-dragonquest.mp3'),
+  conquest: getAudioPath('conquest-jester-dance.mp3'),
+  wizard: getAudioPath('walen-wizard-magic.mp3')
 };
 
 // Enhanced singleton audio manager with fade support
@@ -317,8 +323,6 @@ export const useAudio = () => {
   const [isBuffering, setIsBuffering] = useState(false);
   const [playHistory, setPlayHistory] = useState<TrackId[]>([]);
   const [audioQuality, setAudioQuality] = useState<'high' | 'medium' | 'low'>('high');
-  const [autoStartupTrack, setAutoStartupTrack] = useState<TrackId | null>(null);
-  const [hasStartedOnce, setHasStartedOnce] = useState(false);
   
   const audioManager = useRef(AudioManager.getInstance());
 
@@ -526,35 +530,6 @@ export const useAudio = () => {
     }, 200);
   }, [isPlaying, currentTrack, playTrack]);
 
-  // Auto-start random track on app startup
-  useEffect(() => {
-    if (!hasStartedOnce) {
-      const startRandomTrack = async () => {
-        try {
-          // Wait a short delay to ensure the app is fully loaded
-          await new Promise(resolve => setTimeout(resolve, 2000));
-          
-          const randomTrack = getRandomTrack();
-          setAutoStartupTrack(randomTrack);
-          
-          console.log(`🎲 Auto-starting random track: ${randomTrack}`);
-          
-          // Add another small delay to show the notification before starting playback
-          setTimeout(async () => {
-            await playTrack(randomTrack, true);
-            setHasStartedOnce(true);
-          }, 1500);
-          
-        } catch (error) {
-          console.error('Failed to auto-start random track:', error);
-          setHasStartedOnce(true);
-        }
-      };
-      
-      startRandomTrack();
-    }
-  }, [hasStartedOnce, getRandomTrack, playTrack]);
-
   // Clear errors when switching tracks
   useEffect(() => {
     if (currentTrack && audioError) {
@@ -620,8 +595,6 @@ export const useAudio = () => {
     changeVolume: changeVolumeWithFeedback,
     toggleAudioQuality,
     playContextualAudio,
-    availableTracks: Object.keys(TRACKS) as TrackId[],
-    autoStartupTrack,
-    hasStartedOnce
+    availableTracks: Object.keys(TRACKS) as TrackId[]
   };
 };

@@ -16,7 +16,6 @@ import ParticleSystem from "@/components/ParticleSystem";
 import SocialShare from "@/components/SocialShare";
 import InteractiveCursor from "@/components/InteractiveCursor";
 import MysticalNotifications from "@/components/MysticalNotifications";
-import TrackStartupNotification from "@/components/TrackStartupNotification";
 import FloatingActionWidget from "@/components/FloatingActionWidget";
 import { GAME_ASSETS } from "@/utils/assetPaths";
 
@@ -127,7 +126,6 @@ const Index = () => {
         <ScrollProgress />
         <InteractiveCursor />
         <MysticalNotifications />
-        <TrackStartupNotification />
         
         <div className="fixed inset-0 pointer-events-none z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-mystic-blue/90 via-ancient-stone/80 to-mystic-blue/90"></div>

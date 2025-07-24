@@ -86,7 +86,13 @@ const EnhancedAudioControls = () => {
   const handlePlayPause = () => {
     if (isPlaying) pauseTrack();
     else if (currentTrack) resumeTrack();
-    else playTrack('ethereal');
+    else {
+      // Start a random track when no track is selected
+      const trackKeys = Object.keys(availableTracks) as (keyof typeof availableTracks)[];
+      const randomIndex = Math.floor(Math.random() * trackKeys.length);
+      const randomTrack = availableTracks[randomIndex];
+      playTrack(randomTrack);
+    }
   };
 
   const handleVolumeChange = (values: number[]) => {
@@ -353,6 +359,25 @@ const EnhancedAudioControls = () => {
               </Button>
             </TooltipTrigger>
             <TooltipContent>{isShuffled ? 'Shuffle Off (Ctrl+S)' : 'Shuffle On (Ctrl+S)'}</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => {
+                  const trackKeys = Object.keys(availableTracks) as (keyof typeof availableTracks)[];
+                  const randomIndex = Math.floor(Math.random() * trackKeys.length);
+                  const randomTrack = availableTracks[randomIndex];
+                  playTrack(randomTrack);
+                }}
+                className="text-verdant-glyph hover:bg-verdant-glyph/10"
+              >
+                <RotateCcw className="w-4 h-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Play Random Track</TooltipContent>
           </Tooltip>
 
           <Tooltip>
