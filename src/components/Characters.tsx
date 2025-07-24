@@ -86,18 +86,20 @@ const Characters = () => {
                 <img
                   src={character.image}
                   alt={character.name}
-                  className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 brightness-110 contrast-110"
                 />
-                <div className="absolute inset-0 bg-mystic-blue/60 group-hover:bg-mystic-blue/40 transition-all duration-500"></div>
-                <div className="absolute inset-0 bg-ethereal-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                {/* Lighter overlay for better image visibility */}
+                <div className="absolute inset-0 bg-mystic-blue/30 group-hover:bg-mystic-blue/20 transition-all duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-mystic-blue/80 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-ethereal-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute top-4 right-4 text-3xl drop-shadow-lg animate-bounce">
                   {character.emoji}
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-mystic-blue/90">
-                  <h3 className="text-2xl font-cinzel text-ethereal-gold mb-1 group-hover:text-ember-flame transition-colors duration-300">
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-mystic-blue/95 via-mystic-blue/80 to-transparent">
+                  <h3 className="text-2xl font-cinzel text-ethereal-gold mb-1 group-hover:text-ember-flame transition-colors duration-300 drop-shadow-lg">
                     {character.name}
                   </h3>
-                  <h4 className="text-sm font-citizen text-luminous-azure uppercase tracking-wider opacity-90">
+                  <h4 className="text-sm font-citizen text-luminous-azure uppercase tracking-wider opacity-90 drop-shadow-md">
                     {character.title}
                   </h4>
                 </div>

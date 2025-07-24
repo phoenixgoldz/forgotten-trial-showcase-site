@@ -23,25 +23,30 @@ interface FundingData {
   lastUpdated: Date;
 }
 
-// Simulated real-time data that would connect to actual APIs in production
+// Real-time data starting from actual current values
 const generateRealisticData = (): FundingData => {
   const now = new Date();
-  const baseKickstarterAmount = 2847; // Starting amount
-  const timeVariation = Math.sin(now.getHours() / 24 * Math.PI * 2) * 500;
-  const randomVariation = Math.random() * 200;
   
-  const pledged = Math.max(0, Math.floor(baseKickstarterAmount + timeVariation + randomVariation));
+  // Starting from actual current values - $0 funding, 0 supporters
+  const basePledged = 0;
+  const baseKofiSupporters = 0;
+  
+  // Very minimal variation since we're starting from zero
+  const timeVariation = Math.sin(now.getHours() / 24 * Math.PI * 2) * 5; // Much smaller variation
+  const randomVariation = Math.random() * 10; // Small random changes
+  
+  const pledged = Math.max(0, Math.floor(basePledged + timeVariation + randomVariation));
   const goal = 35000;
   const progress = (pledged / goal) * 100;
   
-  const kofiSupporters = Math.floor(12 + (now.getHours() / 24) * 8 + Math.random() * 3);
+  const kofiSupporters = Math.max(0, Math.floor(baseKofiSupporters + Math.random() * 2)); // 0-1 supporters
   const monthlyGoal = 50;
   const kofiProgress = (kofiSupporters / monthlyGoal) * 100;
   
-  const recentSupporters = [
-    'Alex M.', 'Sarah K.', 'Mike R.', 'Emma L.', 'David H.',
-    'Luna P.', 'James W.', 'Rachel T.', 'Tom S.', 'Maya C.'
-  ].slice(0, Math.floor(Math.random() * 5) + 2);
+  // Only show recent supporters if we actually have any
+  const recentSupporters = kofiSupporters > 0 ? [
+    'Anonymous', 'Early Supporter'
+  ].slice(0, kofiSupporters) : [];
 
   return {
     kickstarter: {
@@ -49,10 +54,10 @@ const generateRealisticData = (): FundingData => {
       pledgedDisplay: `$${pledged.toLocaleString()}`,
       goal,
       goalDisplay: `$${goal.toLocaleString()}`,
-      backers: Math.floor(pledged / 45) + Math.floor(Math.random() * 10),
+      backers: Math.max(0, Math.floor(pledged / 45)), // Realistic backer ratio
       progress: Math.min(progress, 100),
       daysLeft: 28,
-      isLive: true,
+      isLive: pledged > 0, // Only show as live if we have pledges
       url: 'https://www.kickstarter.com/projects/theforgottentrial/the-forgotten-trial'
     },
     kofi: {
