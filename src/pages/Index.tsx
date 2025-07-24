@@ -1,10 +1,6 @@
 
 import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Features from "@/components/Features";
-import Characters from "@/components/Characters";
-import InteractiveDemo from "@/components/InteractiveDemo";
 import MysteryQuotes from "@/components/MysteryQuotes";
 import Newsletter from "@/components/Newsletter";
 import ProfessionalFundingProgress from "@/components/ProfessionalFundingProgress";
@@ -19,7 +15,6 @@ import ScrollProgress from "@/components/ScrollProgress";
 import ParticleSystem from "@/components/ParticleSystem";
 import SocialShare from "@/components/SocialShare";
 import InteractiveCursor from "@/components/InteractiveCursor";
-
 import MysticalNotifications from "@/components/MysticalNotifications";
 import FloatingActionWidget from "@/components/FloatingActionWidget";
 import { GAME_ASSETS } from "@/utils/assetPaths";
@@ -48,12 +43,8 @@ const Index = () => {
       clearInterval(progressInterval);
     }, 1800);
 
-    // Preload critical images
+    // Preload critical images for homepage
     const criticalImages = [
-      GAME_ASSETS.characters.solari,
-      GAME_ASSETS.characters.tarrin,
-      GAME_ASSETS.characters.wisp,
-      GAME_ASSETS.characters.kael,
       GAME_ASSETS.images.titlePoster,
       GAME_ASSETS.images.kickstarterBanner
     ];
@@ -146,10 +137,6 @@ const Index = () => {
           <EnhancedNavigation />
           <div className="pt-16">
             <Hero />
-            <About />
-            <Features />
-            <Characters />
-            <InteractiveDemo />
             <MysteryQuotes />
             <ProfessionalFundingProgress />
             <Newsletter />
