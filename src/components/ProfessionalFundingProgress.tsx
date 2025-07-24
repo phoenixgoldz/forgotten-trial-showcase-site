@@ -286,41 +286,6 @@ const ProfessionalFundingProgress = () => {
           </Card>
         </div>
 
-        {/* Professional development roadmap */}
-        <div className="max-w-4xl mx-auto">
-          <Card className="bg-mystic-blue/40 border border-ethereal-gold/20 glass-effect backdrop-blur-md">
-            <CardHeader className="text-center">
-              <div className="inline-flex items-center justify-center mb-4">
-                <Target className="w-6 h-6 text-verdant-glyph mr-2" />
-                <CardTitle className="text-xl font-bold text-white font-cinzel">
-                  Development Milestones
-                </CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-4 bg-verdant-glyph/10 rounded-xl border border-verdant-glyph/20">
-                  <div className="text-2xl mb-2">🎯</div>
-                  <h4 className="font-bold text-white mb-2">Alpha Build</h4>
-                  <p className="text-sm text-slate-300">Core mechanics & character systems</p>
-                  <Badge className="mt-2 bg-verdant-glyph text-white">In Progress</Badge>
-                </div>
-                <div className="text-center p-4 bg-luminous-azure/10 rounded-xl border border-luminous-azure/20">
-                  <div className="text-2xl mb-2">🏰</div>
-                  <h4 className="font-bold text-white mb-2">Beta Release</h4>
-                  <p className="text-sm text-slate-300">Complete dungeon system & story</p>
-                  <Badge variant="outline" className="mt-2">Q2 2025</Badge>
-                </div>
-                <div className="text-center p-4 bg-ethereal-gold/10 rounded-xl border border-ethereal-gold/20">
-                  <div className="text-2xl mb-2">🎮</div>
-                  <h4 className="font-bold text-white mb-2">Full Launch</h4>
-                  <p className="text-sm text-slate-300">Polished experience & multiplayer</p>
-                  <Badge variant="outline" className="mt-2">Q4 2025</Badge>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
 
         {/* Professional footer message */}
         <div className="text-center mt-12">
