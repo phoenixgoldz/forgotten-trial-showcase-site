@@ -195,93 +195,38 @@ const ProfessionalFundingProgress = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-ember-flame/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
             <CardHeader className="relative z-10">
-              <div className="flex items-center justify-between mb-4">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-ember-flame/20 border border-ember-flame/30">
-                  <Coffee className="w-7 h-7 text-ember-flame" />
+              <div className="flex items-center justify-center mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-ember-flame/20 border border-ember-flame/30">
+                  <Coffee className="w-8 h-8 text-ember-flame" />
                 </div>
-                <Badge variant="outline" className="bg-ember-flame/10 border-ember-flame/30 text-ember-flame">
-                  Monthly Goal
-                </Badge>
               </div>
               
-              <CardTitle className="text-2xl font-bold text-white group-hover:text-ember-flame transition-colors font-cinzel">
-                Ko-fi Support
+              <CardTitle className="text-3xl font-bold text-white group-hover:text-ember-flame transition-colors font-cinzel text-center">
+                Support Our Development
               </CardTitle>
-              <CardDescription className="text-ember-flame/80 font-medium">
-                Monthly development fuel
+              <CardDescription className="text-ember-flame/80 font-medium text-center text-lg mt-4">
+                Help fuel our indie game development with a coffee donation
               </CardDescription>
             </CardHeader>
             
-            <CardContent className="space-y-6 relative z-10">
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white mb-1">
-                    <AnimatedCounter target={data.kofi.supporters} />
-                  </div>
-                  <div className="text-xs text-slate-400 uppercase tracking-wide">Supporters</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-ember-flame mb-1">
-                    <AnimatedCounter target={data.kofi.totalRaised} prefix="$" />
-                  </div>
-                  <div className="text-xs text-slate-400 uppercase tracking-wide">This Month</div>
-                </div>
-              </div>
-              
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span className="text-slate-300">Monthly Progress</span>
-                  <span className="text-ember-flame font-bold">
-                    {data.kofi.progress.toFixed(1)}%
-                  </span>
-                </div>
-                
-                <div className="relative">
-                  <div className="h-3 bg-ancient-stone/40 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-ember-flame via-ethereal-gold to-ember-flame transition-all duration-1000 ease-out relative"
-                      style={{ width: `${Math.min(data.kofi.progress, 100)}%` }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 h-3 bg-ember-flame/10 rounded-full blur-sm"></div>
-                </div>
-                
-                <div className="text-center text-sm text-slate-400">
-                  Goal: <span className="text-ember-flame font-semibold">{data.kofi.monthlyGoal} supporters</span>
-                </div>
-              </div>
-
-              {/* Recent supporters */}
-              {data.kofi.recentSupporters.length > 0 && (
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-xs text-slate-400">
-                    <Heart className="w-3 h-3" />
-                    <span>Recent Champions</span>
-                  </div>
-                  <div className="flex flex-wrap gap-1">
-                    {data.kofi.recentSupporters.slice(0, 4).map((supporter, index) => (
-                      <Badge 
-                        key={index} 
-                        variant="secondary" 
-                        className="text-xs bg-ember-flame/10 text-ember-flame border-ember-flame/20"
-                      >
-                        {supporter}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              )}
+            <CardContent className="space-y-6 relative z-10 text-center">
+              <p className="text-slate-300 leading-relaxed">
+                Every coffee helps us spend more time crafting The Forgotten Trial. 
+                Your support directly funds development and keeps us motivated during late-night coding sessions.
+              </p>
 
               <Button 
                 size="lg" 
-                className="w-full bg-ember-flame hover:bg-ember-flame/90 text-white font-bold py-3 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-ember-flame/25"
+                className="w-full bg-ember-flame hover:bg-ember-flame/90 text-white font-bold py-4 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-ember-flame/25 text-lg"
                 onClick={() => window.open(data.kofi.url, '_blank')}
               >
-                <Coffee className="w-5 h-5 mr-2" />
-                Support on Ko-fi
+                <Coffee className="w-6 h-6 mr-3" />
+                Buy Us a Coffee ☕
               </Button>
+              
+              <p className="text-xs text-slate-400 mt-4">
+                Support indie game development • No account required
+              </p>
             </CardContent>
           </Card>
         </div>
