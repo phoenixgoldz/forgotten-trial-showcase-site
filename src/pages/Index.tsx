@@ -19,7 +19,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import ParticleSystem from "@/components/ParticleSystem";
 import SocialShare from "@/components/SocialShare";
 import InteractiveCursor from "@/components/InteractiveCursor";
-import ThemeToggle from "@/components/ThemeToggle";
+
 import MysticalNotifications from "@/components/MysticalNotifications";
 import FloatingActionWidget from "@/components/FloatingActionWidget";
 import { GAME_ASSETS } from "@/utils/assetPaths";
@@ -134,7 +134,6 @@ const Index = () => {
         {/* Enhanced UI Components */}
         <ScrollProgress />
         <InteractiveCursor />
-        <ThemeToggle />
         <MysticalNotifications />
         
         <div className="fixed inset-0 pointer-events-none z-0">

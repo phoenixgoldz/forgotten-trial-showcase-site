@@ -105,8 +105,7 @@ const App = () => {
           <Toaster />
           <Sonner 
             position="top-center"
-            theme="dark"
-            className="toaster-dark"
+            theme="light"
           />
           <HashRouter>
             <Suspense fallback={<PageLoadingFallback />}>
