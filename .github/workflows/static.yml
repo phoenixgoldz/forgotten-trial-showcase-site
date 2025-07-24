@@ -63,6 +63,12 @@ jobs:
           # Run the GitHub Pages build script
           node scripts/build-for-github-pages.js
           
+          # Verify assets are in place
+          echo "=== Audio files ==="
+          ls -la dist/audio/ || echo "No audio directory"
+          echo "=== Images ==="
+          ls -la dist/lovable-uploads/ || echo "No uploads directory"
+          
           # Verify the final build
           echo "=== Final dist structure ==="
           find dist/ -type f -name "*.html" -o -name "*.css" -o -name "*.js" | head -20

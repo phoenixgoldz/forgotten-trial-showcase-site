@@ -1,8 +1,8 @@
 // Asset path utility for proper GitHub Pages deployment
 export const getAssetPath = (path: string): string => {
-  // Use relative paths for GitHub Pages compatibility
+  // Use absolute paths for better GitHub Pages compatibility
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  return `./${cleanPath}`;
+  return `/${cleanPath}`;
 };
 
 // Game asset paths

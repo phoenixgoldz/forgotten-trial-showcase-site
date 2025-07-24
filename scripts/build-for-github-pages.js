@@ -22,7 +22,8 @@ console.log('Found JS file:', mainJs);
 
 // Update the HTML content to reference the correct files
 if (mainCss) {
-  // Add CSS link before closing head tag
+  // Remove existing CSS links and add new one
+  indexContent = indexContent.replace(/<link[^>]*\.css[^>]*>/g, '');
   indexContent = indexContent.replace(
     '</head>',
     `  <link rel="stylesheet" crossorigin href="./assets/${mainCss}">\n</head>`
@@ -30,10 +31,14 @@ if (mainCss) {
 }
 
 if (mainJs) {
-  // Replace the script tag
+  // Replace the script tag and ensure proper module loading
   indexContent = indexContent.replace(
-    '<script type="module" src="/src/main.tsx"></script>',
-    `<script type="module" crossorigin src="./assets/${mainJs}"></script>`
+    /<script[^>]*src="[^"]*main\.tsx[^"]*"[^>]*><\/script>/g,
+    ''
+  );
+  indexContent = indexContent.replace(
+    '</body>',
+    `  <script type="module" crossorigin src="./assets/${mainJs}"></script>\n</body>`
   );
 }
 

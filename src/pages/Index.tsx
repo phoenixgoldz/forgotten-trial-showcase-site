@@ -6,7 +6,6 @@ import Newsletter from "@/components/Newsletter";
 import ProfessionalFundingProgress from "@/components/ProfessionalFundingProgress";
 import Footer from "@/components/Footer";
 import EnhancedNavigation from "@/components/EnhancedNavigation";
-import AudioControls from "@/components/AudioControls";
 import EnhancedAudioControls from "@/components/EnhancedAudioControls";
 import AudioStatusIndicator from "@/components/AudioStatusIndicator";
 import ContextualAudio from "@/components/ContextualAudio";

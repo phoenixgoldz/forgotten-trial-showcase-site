@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    base: '/',
+    base: mode === 'production' ? './' : '/',
     server: {
       host: "::",
       port: 8080,

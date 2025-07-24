@@ -17,7 +17,7 @@ const AUDIO_QUALITY_SETTINGS = {
 // Use proper paths for GitHub Pages deployment
 const getAudioPath = (filename: string): string => {
   // Use absolute paths that work with GitHub Pages
-  return `/audio/${filename}`;
+  return `./audio/${filename}`;
 };
 
 const TRACKS: Record<TrackId, string> = {

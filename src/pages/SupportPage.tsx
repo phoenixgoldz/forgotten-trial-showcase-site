@@ -5,7 +5,6 @@ import EnhancedFundingProgress from "@/components/EnhancedFundingProgress";
 import Gamification from "@/components/Gamification";
 import SocialSharing from "@/components/SocialSharing";
 import RealTimeEngagement from "@/components/RealTimeEngagement";
-import AudioControls from "@/components/AudioControls";
 import EnhancedAudioControls from "@/components/EnhancedAudioControls";
 import AudioStatusIndicator from "@/components/AudioStatusIndicator";
 
